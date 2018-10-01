@@ -20,7 +20,9 @@ uses
   dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
   dxSkinPumpkin, dxSkinSeven, dxSkinSharp, dxSkinSilver, dxSkinSpringTime,
   dxSkinStardust, dxSkinSummer2008, dxSkinsDefaultPainters,
-  dxSkinValentine, dxSkinXmas2008Blue;
+  dxSkinValentine, dxSkinXmas2008Blue, WinSkinData, WinSkinStore,
+  cxLookAndFeelPainters, dxSkinsdxNavBar2Painter, dxNavBarCollns,
+  dxNavBarBase, dxNavBar, dxNavBarStyles;
 
 type
   TFormPrincipal = class(TForm)
@@ -121,6 +123,13 @@ type
     DBGrid1: TDBGrid;
     N9: TMenuItem;
     ComissoVendas1: TMenuItem;
+    Panel1: TPanel;
+    nbMain: TdxNavBar;
+    bgChancelaria: TdxNavBarGroup;
+    biConfigurar: TdxNavBarItem;
+    dxNavBarNormal: TdxNavBarStyleItem;
+    dxNavBarSelecionado: TdxNavBarStyleItem;
+    nbMainGrupo: TdxNavBarStyleItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Act_Cad_ProdutoExecute(Sender: TObject);

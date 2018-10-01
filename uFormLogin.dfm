@@ -1,6 +1,6 @@
 object FormLogin: TFormLogin
-  Left = 312
-  Top = 208
+  Left = 297
+  Top = 167
   BorderIcons = []
   BorderStyle = bsDialog
   ClientHeight = 170

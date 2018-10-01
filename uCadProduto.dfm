@@ -1,19 +1,18 @@
 inherited FormCadProduto: TFormCadProduto
-  Left = 521
-  Top = 25
+  Top = 169
   Caption = 'Cadastro de Produto'
-  ClientHeight = 462
-  ClientWidth = 584
+  ClientHeight = 561
+  ClientWidth = 784
   OldCreateOrder = True
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel2: TBevel
-    Width = 584
+    Width = 784
     Height = 5
   end
   inherited Bevel3: TBevel
-    Width = 566
+    Width = 759
     Height = 5
   end
   inherited Label1: TLabel
@@ -32,16 +31,16 @@ inherited FormCadProduto: TFormCadProduto
     Caption = 'Nome:'
   end
   inherited StatusBar1: TStatusBar
-    Top = 443
-    Width = 584
+    Top = 542
+    Width = 784
   end
   inherited GroupBox1: TGroupBox
-    Width = 570
+    Width = 770
     Height = 154
     inherited PageControl1: TPageControl
       Left = 6
       Top = 18
-      Width = 558
+      Width = 755
       Height = 129
       inherited TabSheetFicha: TTabSheet
         Caption = 'Dados Cadastrais '
@@ -200,7 +199,7 @@ inherited FormCadProduto: TFormCadProduto
   end
   inherited GroupBox2: TGroupBox
     Top = 256
-    Width = 570
+    Width = 770
     Height = 181
     Caption = '  Lista de Produto  '
     object Label4: TLabel
@@ -213,7 +212,7 @@ inherited FormCadProduto: TFormCadProduto
     object DBGrid1: TDBGrid
       Left = 8
       Top = 30
-      Width = 551
+      Width = 755
       Height = 126
       DataSource = dsConsulta
       Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -287,28 +286,28 @@ inherited FormCadProduto: TFormCadProduto
     end
   end
   inherited ToolBar1: TToolBar
-    Width = 584
+    Width = 784
     TabOrder = 4
     inherited Bevel1: TBevel
-      Width = 84
+      Width = 184
     end
     inherited BtnInserir: TSpeedButton
-      Left = 84
+      Left = 184
     end
     inherited BtnEditar: TSpeedButton
-      Left = 156
+      Left = 256
     end
     inherited BtnExcluir: TSpeedButton
-      Left = 228
+      Left = 328
     end
     inherited BtnGravar: TSpeedButton
-      Left = 300
+      Left = 400
     end
     inherited BtnCancela: TSpeedButton
-      Left = 372
+      Left = 472
     end
     inherited BtnSair: TSpeedButton
-      Left = 444
+      Left = 544
     end
   end
   object Edit1: TEdit [9]

@@ -1,8 +1,8 @@
 object FormPrincipal: TFormPrincipal
-  Left = 392
-  Top = 142
-  Width = 768
-  Height = 560
+  Left = 301
+  Top = 167
+  Width = 800
+  Height = 600
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Sistem de Gest'#227'o'
   Color = clBtnFace
@@ -15,7 +15,6 @@ object FormPrincipal: TFormPrincipal
   Menu = menu
   OldCreateOrder = False
   Position = poScreenCenter
-  WindowState = wsMaximized
   OnKeyDown = FormKeyDown
   OnShow = FormShow
   PixelsPerInch = 96
@@ -23,15 +22,15 @@ object FormPrincipal: TFormPrincipal
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 752
+    Width = 920
     Height = 5
     Align = alTop
     Shape = bsTopLine
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 483
-    Width = 752
+    Top = 978
+    Width = 920
     Height = 19
     Panels = <
       item
@@ -50,14 +49,14 @@ object FormPrincipal: TFormPrincipal
   object APanel: TPanel
     Left = 0
     Top = 5
-    Width = 749
-    Height = 477
+    Width = 784
+    Height = 517
     BevelOuter = bvNone
     TabOrder = 1
     object GroupBox4: TGroupBox
       Left = 6
       Top = 434
-      Width = 741
+      Width = 774
       Height = 35
       Color = clBtnFace
       Font.Charset = DEFAULT_CHARSET
@@ -83,7 +82,7 @@ object FormPrincipal: TFormPrincipal
         Caption = 'Label1'
       end
       object BitBtn1: TBitBtn
-        Left = 616
+        Left = 648
         Top = 8
         Width = 115
         Height = 25
@@ -96,14 +95,14 @@ object FormPrincipal: TFormPrincipal
     object GroupBox1: TGroupBox
       Left = 6
       Top = 196
-      Width = 740
+      Width = 773
       Height = 237
       Caption = '  Or'#231'amentos  '
       TabOrder = 1
       object DBGrid1: TDBGrid
         Left = 10
         Top = 21
-        Width = 721
+        Width = 756
         Height = 209
         DataSource = DMPrincipal.dsViewPedidoManutencao
         Options = [dgTitles, dgIndicator, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -141,7 +140,7 @@ object FormPrincipal: TFormPrincipal
             Expanded = False
             FieldName = 'CLIENTE'
             Title.Caption = 'Cliente'
-            Width = 407
+            Width = 439
             Visible = True
           end>
       end
@@ -149,16 +148,97 @@ object FormPrincipal: TFormPrincipal
     object GroupBox2: TGroupBox
       Left = 6
       Top = 5
-      Width = 739
+      Width = 772
       Height = 189
       TabOrder = 2
       object Image1: TImage
         Left = 2
         Top = 15
-        Width = 735
+        Width = 768
         Height = 172
         Align = alClient
         Center = True
+      end
+    end
+  end
+  object Panel1: TPanel
+    Left = 136
+    Top = 461
+    Width = 784
+    Height = 517
+    TabOrder = 2
+    object nbMain: TdxNavBar
+      Left = 1
+      Top = 1
+      Width = 344
+      Height = 515
+      Align = alLeft
+      Constraints.MinWidth = 10
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -24
+      Font.Name = 'MS Sans Serif'
+      Font.Style = []
+      ActiveGroupIndex = 0
+      TabOrder = 0
+      View = 10
+      OptionsBehavior.Common.AllowSelectLinks = True
+      OptionsBehavior.Common.DragDropFlags = []
+      OptionsBehavior.Common.EachGroupHasSelectedLink = True
+      OptionsStyle.CustomStyles.Background = nbMainGrupo
+      OptionsView.NavigationPane.MaxVisibleGroups = 3
+      OptionsView.NavigationPane.OverflowPanelUseSmallImages = False
+      object bgChancelaria: TdxNavBarGroup
+        Caption = '> Chancelaria'
+        SelectedLinkIndex = -1
+        TopVisibleLinkIndex = 0
+        CustomStyles.Background = nbMainGrupo
+        Links = <>
+      end
+      object biConfigurar: TdxNavBarItem
+        Caption = 'Cadastro de Par'#243'quia / Capela'
+        Hint = 'Tf_Configurar'
+        LargeImageIndex = 0
+        SmallImageIndex = 16
+      end
+      object dxNavBarNormal: TdxNavBarStyleItem
+        Style.AlphaBlending = 200
+        Style.AlphaBlending2 = 50
+        Style.BackColor = 16776176
+        Style.BackColor2 = clTeal
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'MS Sans Serif'
+        Style.Font.Style = []
+        Style.HAlignment = haLeft
+        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
+      end
+      object dxNavBarSelecionado: TdxNavBarStyleItem
+        Style.AlphaBlending = 200
+        Style.AlphaBlending2 = 50
+        Style.BackColor = clWhite
+        Style.BackColor2 = clWhite
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clRed
+        Style.Font.Height = -11
+        Style.Font.Name = 'MS Sans Serif'
+        Style.Font.Style = []
+        Style.HAlignment = haLeft
+        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
+      end
+      object nbMainGrupo: TdxNavBarStyleItem
+        Style.AlphaBlending = 200
+        Style.AlphaBlending2 = 50
+        Style.BackColor = 16776176
+        Style.BackColor2 = clTeal
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clWindowText
+        Style.Font.Height = -11
+        Style.Font.Name = 'MS Sans Serif'
+        Style.Font.Style = []
+        Style.HAlignment = haLeft
+        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
       end
     end
   end

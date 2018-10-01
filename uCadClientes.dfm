@@ -1,12 +1,14 @@
 inherited FormCadCliente: TFormCadCliente
-  Left = 236
-  Top = 173
+  Top = 167
   Caption = 'Cadastro de Clientes'
+  ClientHeight = 561
+  ClientWidth = 784
   OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel2: TBevel
+    Width = 784
     Height = 7
   end
   inherited Bevel3: TBevel
@@ -20,6 +22,10 @@ inherited FormCadCliente: TFormCadCliente
   inherited btn_Localizar: TSpeedButton
     Left = 440
     Top = 55
+  end
+  inherited StatusBar1: TStatusBar
+    Top = 542
+    Width = 784
   end
   inherited GroupBox1: TGroupBox
     Top = 88
@@ -455,6 +461,7 @@ inherited FormCadCliente: TFormCadCliente
     end
   end
   inherited ToolBar1: TToolBar
+    Width = 784
     inherited BtnInserir: TSpeedButton
       Action = Act_Btn_Inserir
     end
