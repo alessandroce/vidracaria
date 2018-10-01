@@ -1,6 +1,6 @@
 object FormPadraoCad2: TFormPadraoCad2
-  Left = 240
-  Top = 146
+  Left = 299
+  Top = 172
   BorderStyle = bsDialog
   Caption = 'FormPadraoCad2'
   ClientHeight = 471
