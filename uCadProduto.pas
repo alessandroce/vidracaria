@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, uFormPadraoCad2, Grids, DBGrids, Mask, DBCtrls, StdCtrls,
   ActnList, ImgList, ToolWin, ComCtrls, Buttons, ExtCtrls, DB, Menus,
-  AppEvnts, FMTBcd, DBClient, MyClientDataSet, Provider, SqlExpr;
+  AppEvnts, FMTBcd, DBClient, MyClientDataSet, Provider, SqlExpr, ExtDlgs;
 
 type
   TFormCadProduto = class(TFormPadraoCad2)
@@ -76,6 +76,41 @@ type
     qryCadastroPROD_LARGURA: TFMTBCDField;
     qryCadastroPROD_ALTURA: TFMTBCDField;
     qryCadastroPROD_MEDIDA_METRO: TFMTBCDField;
+    qryCadastroPROD_SIGLA: TStringField;
+    qryCadastroPROD_DESCRICAO_LONGA: TStringField;
+    qryCadastroPROD_CAMINHOIMAGEM: TStringField;
+    cdsCadastroPROD_SIGLA: TStringField;
+    cdsCadastroPROD_DESCRICAO_LONGA: TStringField;
+    cdsCadastroPROD_CAMINHOIMAGEM: TStringField;
+    qryConsultaPROD_SIGLA: TStringField;
+    qryConsultaPROD_DESCRICAO_LONGA: TStringField;
+    qryConsultaPROD_CAMINHOIMAGEM: TStringField;
+    cdsConsultaPROD_SIGLA: TStringField;
+    cdsConsultaPROD_DESCRICAO_LONGA: TStringField;
+    cdsConsultaPROD_CAMINHOIMAGEM: TStringField;
+    DBLookupComboBox2: TDBLookupComboBox;
+    Label7: TLabel;
+    OpenPictureDialog1: TOpenPictureDialog;
+    qryCadastroPROD_PRL_ID: TIntegerField;
+    cdsCadastroPROD_PRL_ID: TIntegerField;
+    qryConsultaPROD_PRL_ID: TIntegerField;
+    cdsConsultaPROD_PRL_ID: TIntegerField;
+    qryConsultaPRODTP_DESCRICAO: TStringField;
+    qryConsultaPRL_DESCRICAO: TStringField;
+    cdsConsultaPRODTP_DESCRICAO: TStringField;
+    cdsConsultaPRL_DESCRICAO: TStringField;
+    TabSheet1: TTabSheet;
+    Panel1: TPanel;
+    shFoto: TShape;
+    imgFoto: TImage;
+    Label8: TLabel;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
+    DBMemo1: TDBMemo;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    DBEdit3: TDBEdit;
     procedure Edit1Change(Sender: TObject);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure DBGrid1DblClick(Sender: TObject);
@@ -98,8 +133,12 @@ type
     procedure DBEdit1KeyPress(Sender: TObject; var Key: Char);
     procedure DBEdit2KeyPress(Sender: TObject; var Key: Char);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure dsCadastroStateChange(Sender: TObject);
   private
     { Private declarations }
+    FotoSelecionada : String;
   public
     { Public declarations }
     procedure Fnc_BarraTarefasBotaoAtivo(botao:string);
@@ -174,6 +213,7 @@ procedure TFormCadProduto.Fnc_FechaDataSource;
 begin
   DMProduto.cdsViewProduto.Close;
   DMProduto.cdsDadosProduto.Close;
+  DMProduto.cdsViewLookup_LinhaProduto.Close;
 end;
 
 procedure TFormCadProduto.Fnc_LocalizarPorNome_Produto;
@@ -236,6 +276,12 @@ begin
   end;
   cdsCadastroPROD_PRODTP_ID.AsInteger := DBLookupComboBox1.KeyValue;
   cdsCadastroPROD_UNIDMEDIDA.AsString := var_combo;
+
+  if (trim(FotoSelecionada)<>'') then
+    cdsCadastroPROD_CAMINHOIMAGEM.AsString := trim(FotoSelecionada);
+
+
+
   cdsCadastro.ApplyUpdates(-1);
   cdsCadastro.Close;
   Edit1.SetFocus;
@@ -288,6 +334,10 @@ begin
   Fnc_MostraDadosGrid;
   DMProduto.cdsViewLookup_TipoProduto.Close;
   DMProduto.cdsViewLookup_TipoProduto.Open;
+
+  DMProduto.cdsViewLookup_LinhaProduto.Close;
+  DMProduto.cdsViewLookup_LinhaProduto.Open;
+
   Fnc_BarraTarefasBotaoAtivo('GravarCancelar');
   GroupBox1.Caption := '  '+Act_Btn_Novo.Hint+'  ';
 end;
@@ -426,6 +476,49 @@ begin
     Fnc_BarraTarefasBotaoAtivo('GravarCancelar');
   end;
   GroupBox1.Caption := '  '+Act_Btn_Alterar.Hint+'  ';
+end;
+
+procedure TFormCadProduto.BitBtn1Click(Sender: TObject);
+var sDir : String;
+begin
+  inherited;
+  sDir := '';//LerIni('IMAGEM','FOTOCADASTRO',sCaminhoIni,'S');
+  if sDir<>'' then
+    OpenPictureDialog1.InitialDir := sDir;
+  if OpenPictureDialog1.Execute then
+  begin
+    try
+         FotoSelecionada := trim(OpenPictureDialog1.FileName);
+         imgFoto.Picture.LoadFromFile( FotoSelecionada );
+    except
+      on e : Exception do
+      begin
+        MessageBox(Application.Handle,PAnsiChar('Erro '+e.Message), 'Informação', MB_ICONINFORMATION + MB_OK);
+      end;
+    end;
+  end;
+end;
+
+procedure TFormCadProduto.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  FotoSelecionada := '';
+  imgFoto.Picture := Nil;
+  TBlobField(cdsCadastro.FieldByName('PROD_CAMINHOIMAGEM')).Clear;
+end;
+
+procedure TFormCadProduto.dsCadastroStateChange(Sender: TObject);
+begin
+  inherited;
+  if (trim(cdsCadastroPROD_CAMINHOIMAGEM.AsString)<>'') then
+  begin
+    if FileExists(cdsCadastroPROD_CAMINHOIMAGEM.AsString) then
+      imgFoto.Picture.LoadFromFile( trim(cdsCadastroPROD_CAMINHOIMAGEM.AsString) )
+    else
+      imgFoto.Picture := nil;
+  end
+  else
+    imgFoto.Picture := nil;
 end;
 
 end.
