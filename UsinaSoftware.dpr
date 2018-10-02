@@ -14,7 +14,7 @@ uses
   uBuscaProdutos_OrcPedido in 'uBuscaProdutos_OrcPedido.pas' {FormBuscaProdutos_OrcPedido},
   uCadAdiantamentos in 'uCadAdiantamentos.pas' {FormCadAdiantamentos},
   uCadBancos in 'uCadBancos.pas' {FormCadBancos},
-  uCadClientes in 'uCadClientes.pas' {FormCadCliente},
+  uCadObras in 'uCadObras.pas' {FormCadObras},
   uCadEmitente in 'uCadEmitente.pas' {FormCadEmitente},
   uCadOrcamentoPedido in 'uCadOrcamentoPedido.pas' {FormCadOrcamentoPedido},
   uCadOrcamentoPedido_Acessorios in 'uCadOrcamentoPedido_Acessorios.pas' {FormCadOrcamentoPedido_Acessorios},
@@ -66,7 +66,9 @@ uses
   uFormCadOrcamentoTipo in 'uFormCadOrcamentoTipo.pas' {FormCadOrcamentoTipo},
   uFormCadUsuario in 'uFormCadUsuario.pas' {FormCadUsuario},
   uFormConfiguracoes in 'uFormConfiguracoes.pas' {FormConfiguracoes},
-  uFormDuplicata in 'uFormDuplicata.pas' {FormDuplicata};
+  uFormDuplicata in 'uFormDuplicata.pas' {FormDuplicata},
+  uCadLinhaProduto in 'uCadLinhaProduto.pas' {FCadLinhaProd},
+  uCadClientes in 'uCadClientes.pas' {FormCadCliente};
 
 {$R *.res}
 
@@ -114,7 +116,7 @@ begin
   Application.CreateForm(TFormBuscaProdutos_OrcPedido, FormBuscaProdutos_OrcPedido);
   Application.CreateForm(TFormCadAdiantamentos, FormCadAdiantamentos);
   Application.CreateForm(TFormCadBancos, FormCadBancos);
-  Application.CreateForm(TFormCadCliente, FormCadCliente);
+  Application.CreateForm(TFormCadObras, FormCadObras);
   Application.CreateForm(TFormCadEmitente, FormCadEmitente);
   Application.CreateForm(TFormCadOrcamentoPedido, FormCadOrcamentoPedido);
   Application.CreateForm(TFormCadOrcamentoPedido_Acessorios, FormCadOrcamentoPedido_Acessorios);
@@ -136,5 +138,7 @@ begin
   Application.CreateForm(TFormCadUsuario, FormCadUsuario);
   Application.CreateForm(TFormConfiguracoes, FormConfiguracoes);
   Application.CreateForm(TFormDuplicata, FormDuplicata);
+  Application.CreateForm(TFCadLinhaProd, FCadLinhaProd);
+  Application.CreateForm(TFormCadCliente, FormCadCliente);
   Application.Run;
 end.
