@@ -1,9 +1,9 @@
 object DMProduto: TDMProduto
   OldCreateOrder = False
-  Left = 192
-  Top = 107
+  Left = 316
+  Top = 167
   Height = 439
-  Width = 487
+  Width = 572
   object qryDadosProduto: TSQLQuery
     MaxBlobSize = -1
     Params = <
@@ -16,8 +16,8 @@ object DMProduto: TDMProduto
       'SELECT * FROM PRODUTO'
       'WHERE PROD_ID = :ID')
     SQLConnection = DMConnection.SQLConnection
-    Left = 104
-    Top = 32
+    Left = 32
+    Top = 16
     object qryDadosProdutoPROD_ID: TIntegerField
       FieldName = 'PROD_ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
@@ -50,20 +50,20 @@ object DMProduto: TDMProduto
   object dspDadosProduto: TDataSetProvider
     DataSet = qryDadosProduto
     UpdateMode = upWhereKeyOnly
-    Left = 104
-    Top = 80
+    Left = 32
+    Top = 64
   end
   object dsDadosProduto: TDataSource
     DataSet = cdsDadosProduto
-    Left = 104
-    Top = 176
+    Left = 32
+    Top = 160
   end
   object cdsDadosProduto: TMyClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspDadosProduto'
-    Left = 103
-    Top = 128
+    Left = 31
+    Top = 112
     object cdsDadosProdutoPROD_ID: TIntegerField
       FieldName = 'PROD_ID'
       ProviderFlags = [pfInWhere, pfInKey]
@@ -108,8 +108,8 @@ object DMProduto: TDMProduto
       'WHERE PROD_DESCRICAO LIKE :NOME'
       'ORDER BY PROD_DESCRICAO')
     SQLConnection = DMConnection.SQLConnection
-    Left = 215
-    Top = 58
+    Left = 103
+    Top = 42
     object qryViewProdutoPROD_ID: TIntegerField
       FieldName = 'PROD_ID'
       Required = True
@@ -140,20 +140,20 @@ object DMProduto: TDMProduto
   object dspViewProduto: TDataSetProvider
     DataSet = qryViewProduto
     UpdateMode = upWhereKeyOnly
-    Left = 215
-    Top = 106
+    Left = 103
+    Top = 90
   end
   object dsViewProduto: TDataSource
     DataSet = cdsViewProduto
-    Left = 215
-    Top = 202
+    Left = 103
+    Top = 186
   end
   object cdsViewProduto: TMyClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspViewProduto'
-    Left = 214
-    Top = 154
+    Left = 102
+    Top = 138
     object cdsViewProdutoPROD_ID: TIntegerField
       FieldName = 'PROD_ID'
       Required = True
@@ -191,8 +191,8 @@ object DMProduto: TDMProduto
       'ORDER BY PRODTP_DESCRICAO ASC'
       '')
     SQLConnection = DMConnection.SQLConnection
-    Left = 318
-    Top = 31
+    Left = 206
+    Top = 15
     object qryViewLookup_TipoProdutoPRODTP_ID: TIntegerField
       FieldName = 'PRODTP_ID'
       Required = True
@@ -205,20 +205,20 @@ object DMProduto: TDMProduto
   object dspViewLookup_TipoProduto: TDataSetProvider
     DataSet = qryViewLookup_TipoProduto
     UpdateMode = upWhereKeyOnly
-    Left = 318
-    Top = 79
+    Left = 206
+    Top = 63
   end
   object dsViewLookup_TipoProduto: TDataSource
     DataSet = cdsViewLookup_TipoProduto
-    Left = 318
-    Top = 175
+    Left = 206
+    Top = 159
   end
   object cdsViewLookup_TipoProduto: TMyClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspViewLookup_TipoProduto'
-    Left = 317
-    Top = 127
+    Left = 205
+    Top = 111
     object cdsViewLookup_TipoProdutoPRODTP_ID: TIntegerField
       FieldName = 'PRODTP_ID'
       Required = True
@@ -226,6 +226,57 @@ object DMProduto: TDMProduto
     object cdsViewLookup_TipoProdutoPRODTP_DESCRICAO: TStringField
       FieldName = 'PRODTP_DESCRICAO'
       Size = 100
+    end
+  end
+  object qryViewLookup_LinhaProduto: TSQLQuery
+    MaxBlobSize = -1
+    Params = <>
+    SQL.Strings = (
+      'SELECT * FROM PRODUTO_LINHA'
+      'ORDER BY PRL_DESCRICAO ASC'
+      '')
+    SQLConnection = DMConnection.SQLConnection
+    Left = 302
+    Top = 47
+    object qryViewLookup_LinhaProdutoPRL_ID: TIntegerField
+      FieldName = 'PRL_ID'
+      Required = True
+    end
+    object qryViewLookup_LinhaProdutoPRL_DESCRICAO: TStringField
+      FieldName = 'PRL_DESCRICAO'
+      Size = 100
+    end
+    object qryViewLookup_LinhaProdutoPRL_DH_CA: TSQLTimeStampField
+      FieldName = 'PRL_DH_CA'
+    end
+  end
+  object dspViewLookup_LinhaProduto: TDataSetProvider
+    DataSet = qryViewLookup_LinhaProduto
+    UpdateMode = upWhereKeyOnly
+    Left = 302
+    Top = 95
+  end
+  object dsViewLookup_LinhaProduto: TDataSource
+    DataSet = cdsViewLookup_LinhaProduto
+    Left = 302
+    Top = 191
+  end
+  object cdsViewLookup_LinhaProduto: TMyClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspViewLookup_LinhaProduto'
+    Left = 301
+    Top = 143
+    object cdsViewLookup_LinhaProdutoPRL_ID: TIntegerField
+      FieldName = 'PRL_ID'
+      Required = True
+    end
+    object cdsViewLookup_LinhaProdutoPRL_DESCRICAO: TStringField
+      FieldName = 'PRL_DESCRICAO'
+      Size = 100
+    end
+    object cdsViewLookup_LinhaProdutoPRL_DH_CA: TSQLTimeStampField
+      FieldName = 'PRL_DH_CA'
     end
   end
 end

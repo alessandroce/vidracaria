@@ -123,13 +123,12 @@ type
     DBGrid1: TDBGrid;
     N9: TMenuItem;
     ComissoVendas1: TMenuItem;
-    Panel1: TPanel;
-    nbMain: TdxNavBar;
-    bgChancelaria: TdxNavBarGroup;
-    biConfigurar: TdxNavBarItem;
-    dxNavBarNormal: TdxNavBarStyleItem;
-    dxNavBarSelecionado: TdxNavBarStyleItem;
-    nbMainGrupo: TdxNavBarStyleItem;
+    Act_Cad_ProdutoLinha: TAction;
+    LinhaProduto1: TMenuItem;
+    Act_Cad_Obras: TAction;
+    CadastroObras1: TMenuItem;
+    N1: TMenuItem;
+    N2: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Act_Cad_ProdutoExecute(Sender: TObject);
@@ -190,6 +189,8 @@ type
     procedure Sis_ConfigUpdate(Sender: TObject);
     procedure Sis_EmitenteUpdate(Sender: TObject);
     procedure Rel_EtiquetaClientesExecute(Sender: TObject);
+    procedure Act_Cad_ProdutoLinhaExecute(Sender: TObject);
+    procedure Act_Cad_ObrasExecute(Sender: TObject);
   private
     { Private declarations }
     procedure PanelCenter;
@@ -214,7 +215,8 @@ uses uCadProduto, uCadProdutoTipo, uCadClientes, uCadOrcamentoPedido,
   uFormConfiguracoes, uFormRelatorioPedidos, uFormRelatorioOrcamentos,
   uFormRelatorioItensPedido, uFormOrdemServico, uFormBuscaOrdemServico,
   uCadEmitente, uDmMenuPermissao, uFormEtiquetaClientes,
-  uFormEtiquetaClientePrint, uBibliotecaFuncoes;
+  uFormEtiquetaClientePrint, uBibliotecaFuncoes, uCadLinhaProduto,
+  uCadObras;
 
 {$R *.dfm}
 
@@ -227,20 +229,12 @@ end;
 
 procedure TFormPrincipal.Act_Cad_ProdutoExecute(Sender: TObject);
 begin
-//
   try
     FormCadProduto := TFormCadProduto.Create(Self);
     FormCadProduto.ShowModal;
   Finally
     FormCadProduto.Free
   end;
-(*  try
-    Application.CreateForm(TFormCadProduto, FormCadProduto);
-    FormCadProduto.ShowModal;
-  Finally
-    FormCadProduto.Free
-  end;
-*)
 end;
 
 procedure TFormPrincipal.Act_Cad_ProdutoTipoExecute(Sender: TObject);
@@ -729,6 +723,26 @@ procedure TFormPrincipal.PanelCenter;
 begin
   APanel.Left := (FormPrincipal.ClientWidth div 2) - (APanel.Width div 2);
   APanel.Top := (FormPrincipal.ClientHeight div 2) - (APanel.Height div 2);
+end;
+
+procedure TFormPrincipal.Act_Cad_ProdutoLinhaExecute(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TFCadLinhaProd, FCadLinhaProd);
+    FCadLinhaProd.ShowModal;
+  Finally
+    FCadLinhaProd.Free;
+  End;
+end;
+
+procedure TFormPrincipal.Act_Cad_ObrasExecute(Sender: TObject);
+begin
+  Try
+    Application.CreateForm(TFormCadObras, FormCadObras);
+    FormCadObras.ShowModal;
+  Finally
+    FormCadObras.Free;
+  End;
 end;
 
 end.

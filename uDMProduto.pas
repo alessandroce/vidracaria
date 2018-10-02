@@ -48,6 +48,16 @@ type
     cdsViewProdutoPROD_UNIDMEDIDA: TStringField;
     qryDadosProdutoPROD_UNIDMEDIDA: TStringField;
     cdsDadosProdutoPROD_UNIDMEDIDA: TStringField;
+    qryViewLookup_LinhaProduto: TSQLQuery;
+    dspViewLookup_LinhaProduto: TDataSetProvider;
+    dsViewLookup_LinhaProduto: TDataSource;
+    cdsViewLookup_LinhaProduto: TMyClientDataSet;
+    qryViewLookup_LinhaProdutoPRL_ID: TIntegerField;
+    qryViewLookup_LinhaProdutoPRL_DESCRICAO: TStringField;
+    qryViewLookup_LinhaProdutoPRL_DH_CA: TSQLTimeStampField;
+    cdsViewLookup_LinhaProdutoPRL_ID: TIntegerField;
+    cdsViewLookup_LinhaProdutoPRL_DESCRICAO: TStringField;
+    cdsViewLookup_LinhaProdutoPRL_DH_CA: TSQLTimeStampField;
   private
     { Private declarations }
   public

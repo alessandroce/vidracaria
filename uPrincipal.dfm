@@ -22,15 +22,15 @@ object FormPrincipal: TFormPrincipal
   object Bevel1: TBevel
     Left = 0
     Top = 0
-    Width = 920
+    Width = 784
     Height = 5
     Align = alTop
     Shape = bsTopLine
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 978
-    Width = 920
+    Top = 522
+    Width = 784
     Height = 19
     Panels = <
       item
@@ -55,7 +55,7 @@ object FormPrincipal: TFormPrincipal
     TabOrder = 1
     object GroupBox4: TGroupBox
       Left = 6
-      Top = 434
+      Top = 450
       Width = 774
       Height = 35
       Color = clBtnFace
@@ -94,7 +94,7 @@ object FormPrincipal: TFormPrincipal
     end
     object GroupBox1: TGroupBox
       Left = 6
-      Top = 196
+      Top = 204
       Width = 773
       Height = 237
       Caption = '  Or'#231'amentos  '
@@ -158,87 +158,6 @@ object FormPrincipal: TFormPrincipal
         Height = 172
         Align = alClient
         Center = True
-      end
-    end
-  end
-  object Panel1: TPanel
-    Left = 136
-    Top = 461
-    Width = 784
-    Height = 517
-    TabOrder = 2
-    object nbMain: TdxNavBar
-      Left = 1
-      Top = 1
-      Width = 344
-      Height = 515
-      Align = alLeft
-      Constraints.MinWidth = 10
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -24
-      Font.Name = 'MS Sans Serif'
-      Font.Style = []
-      ActiveGroupIndex = 0
-      TabOrder = 0
-      View = 10
-      OptionsBehavior.Common.AllowSelectLinks = True
-      OptionsBehavior.Common.DragDropFlags = []
-      OptionsBehavior.Common.EachGroupHasSelectedLink = True
-      OptionsStyle.CustomStyles.Background = nbMainGrupo
-      OptionsView.NavigationPane.MaxVisibleGroups = 3
-      OptionsView.NavigationPane.OverflowPanelUseSmallImages = False
-      object bgChancelaria: TdxNavBarGroup
-        Caption = '> Chancelaria'
-        SelectedLinkIndex = -1
-        TopVisibleLinkIndex = 0
-        CustomStyles.Background = nbMainGrupo
-        Links = <>
-      end
-      object biConfigurar: TdxNavBarItem
-        Caption = 'Cadastro de Par'#243'quia / Capela'
-        Hint = 'Tf_Configurar'
-        LargeImageIndex = 0
-        SmallImageIndex = 16
-      end
-      object dxNavBarNormal: TdxNavBarStyleItem
-        Style.AlphaBlending = 200
-        Style.AlphaBlending2 = 50
-        Style.BackColor = 16776176
-        Style.BackColor2 = clTeal
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'MS Sans Serif'
-        Style.Font.Style = []
-        Style.HAlignment = haLeft
-        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
-      end
-      object dxNavBarSelecionado: TdxNavBarStyleItem
-        Style.AlphaBlending = 200
-        Style.AlphaBlending2 = 50
-        Style.BackColor = clWhite
-        Style.BackColor2 = clWhite
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clRed
-        Style.Font.Height = -11
-        Style.Font.Name = 'MS Sans Serif'
-        Style.Font.Style = []
-        Style.HAlignment = haLeft
-        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
-      end
-      object nbMainGrupo: TdxNavBarStyleItem
-        Style.AlphaBlending = 200
-        Style.AlphaBlending2 = 50
-        Style.BackColor = 16776176
-        Style.BackColor2 = clTeal
-        Style.Font.Charset = DEFAULT_CHARSET
-        Style.Font.Color = clWindowText
-        Style.Font.Height = -11
-        Style.Font.Name = 'MS Sans Serif'
-        Style.Font.Style = []
-        Style.HAlignment = haLeft
-        Style.AssignedValues = [savAlphaBlending, savAlphaBlending2, savBackColor, savBackColor2, savFont, savHAlignment]
       end
     end
   end
@@ -1099,6 +1018,17 @@ object FormPrincipal: TFormPrincipal
       Hint = 'Etiqueta Clientes'
       OnExecute = Rel_EtiquetaClientesExecute
     end
+    object Act_Cad_ProdutoLinha: TAction
+      Category = 'Cadastro'
+      Caption = 'Linha Produto'
+      Hint = 'Cadastro de Linha de Produto'
+      OnExecute = Act_Cad_ProdutoLinhaExecute
+    end
+    object Act_Cad_Obras: TAction
+      Category = 'Cadastro'
+      Caption = 'Obras'
+      OnExecute = Act_Cad_ObrasExecute
+    end
   end
   object menu: TMainMenu
     Left = 413
@@ -1110,14 +1040,26 @@ object FormPrincipal: TFormPrincipal
       object Clientes1: TMenuItem
         Action = Act_Cad_Clientes
       end
+      object CadastroObras1: TMenuItem
+        Action = Act_Cad_Obras
+      end
+      object Usurio1: TMenuItem
+        Action = Act_Cad_Usuario
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
       object Produto1: TMenuItem
         Action = Act_Cad_Produto
       end
       object ipodeProduto1: TMenuItem
         Action = Act_Cad_ProdutoTipo
       end
-      object Usurio1: TMenuItem
-        Action = Act_Cad_Usuario
+      object LinhaProduto1: TMenuItem
+        Action = Act_Cad_ProdutoLinha
+      end
+      object N2: TMenuItem
+        Caption = '-'
       end
       object Usurio2: TMenuItem
         Action = Act_Cad_OrcTipo

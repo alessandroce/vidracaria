@@ -3,8 +3,8 @@ object FormPadraoCad2: TFormPadraoCad2
   Top = 172
   BorderStyle = bsDialog
   Caption = 'FormPadraoCad2'
-  ClientHeight = 471
-  ClientWidth = 752
+  ClientHeight = 561
+  ClientWidth = 784
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object FormPadraoCad2: TFormPadraoCad2
   object Bevel2: TBevel
     Left = 0
     Top = 53
-    Width = 752
+    Width = 784
     Height = 35
     Align = alTop
     Shape = bsTopLine
@@ -27,7 +27,7 @@ object FormPadraoCad2: TFormPadraoCad2
   object Bevel3: TBevel
     Left = 10
     Top = 84
-    Width = 730
+    Width = 765
     Height = 10
     Align = alCustom
     Shape = bsTopLine
@@ -46,7 +46,7 @@ object FormPadraoCad2: TFormPadraoCad2
     ParentFont = False
   end
   object btn_Localizar: TSpeedButton
-    Left = 456
+    Left = 696
     Top = 57
     Width = 75
     Height = 25
@@ -92,23 +92,23 @@ object FormPadraoCad2: TFormPadraoCad2
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 452
-    Width = 752
+    Top = 542
+    Width = 784
     Height = 19
     Panels = <>
   end
   object GroupBox1: TGroupBox
     Left = 8
     Top = 96
-    Width = 737
-    Height = 209
+    Width = 767
+    Height = 255
     Caption = '  Informe  '
     TabOrder = 1
     object PageControl1: TPageControl
       Left = 12
       Top = 19
-      Width = 711
-      Height = 183
+      Width = 742
+      Height = 224
       ActivePage = TabSheetFicha
       Images = ImageList1
       TabOrder = 0
@@ -120,16 +120,16 @@ object FormPadraoCad2: TFormPadraoCad2
   end
   object GroupBox2: TGroupBox
     Left = 8
-    Top = 312
-    Width = 737
-    Height = 112
+    Top = 360
+    Width = 767
+    Height = 174
     Caption = '  Lista  '
     TabOrder = 2
   end
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 752
+    Width = 784
     Height = 53
     ButtonHeight = 49
     Caption = 'ToolBar1'
@@ -138,12 +138,12 @@ object FormPadraoCad2: TFormPadraoCad2
     object Bevel1: TBevel
       Left = 0
       Top = 2
-      Width = 177
+      Width = 184
       Height = 49
       Shape = bsSpacer
     end
     object BtnInserir: TSpeedButton
-      Left = 177
+      Left = 184
       Top = 2
       Width = 72
       Height = 49
@@ -199,7 +199,7 @@ object FormPadraoCad2: TFormPadraoCad2
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 249
+      Left = 256
       Top = 2
       Width = 72
       Height = 49
@@ -245,7 +245,7 @@ object FormPadraoCad2: TFormPadraoCad2
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 321
+      Left = 328
       Top = 2
       Width = 72
       Height = 49
@@ -299,7 +299,7 @@ object FormPadraoCad2: TFormPadraoCad2
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 393
+      Left = 400
       Top = 2
       Width = 72
       Height = 49
@@ -353,7 +353,7 @@ object FormPadraoCad2: TFormPadraoCad2
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 465
+      Left = 472
       Top = 2
       Width = 72
       Height = 49
@@ -407,7 +407,7 @@ object FormPadraoCad2: TFormPadraoCad2
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 537
+      Left = 544
       Top = 2
       Width = 72
       Height = 49
