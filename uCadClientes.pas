@@ -230,6 +230,7 @@ begin
   DMCadClientes.cdsDadosCadClientes.Open;
   DMCadClientes.cdsDadosCadClientes.Insert;
   DMCadClientes.cdsDadosCadClientesCLI_ID.AsInteger := 0;
+  DMCadClientes.cdsDadosCadClientesCLI_ATIVO.AsBoolean := true;
 
   Fnc_BarraTarefasBotaoAtivo('GravarCancelar');
 end;

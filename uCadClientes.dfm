@@ -1,14 +1,11 @@
 inherited FormCadCliente: TFormCadCliente
   Top = 167
   Caption = 'Cadastro de Clientes'
-  ClientHeight = 561
-  ClientWidth = 784
   OldCreateOrder = True
   OnActivate = FormActivate
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel2: TBevel
-    Width = 784
     Height = 7
   end
   inherited Bevel3: TBevel
@@ -22,10 +19,6 @@ inherited FormCadCliente: TFormCadCliente
   inherited btn_Localizar: TSpeedButton
     Left = 440
     Top = 55
-  end
-  inherited StatusBar1: TStatusBar
-    Top = 542
-    Width = 784
   end
   inherited GroupBox1: TGroupBox
     Top = 88
@@ -398,7 +391,7 @@ inherited FormCadCliente: TFormCadCliente
   end
   inherited GroupBox2: TGroupBox
     Top = 327
-    Height = 129
+    Height = 202
     object Label16: TLabel
       Left = 16
       Top = 16
@@ -410,8 +403,7 @@ inherited FormCadCliente: TFormCadCliente
       Left = 5
       Top = 30
       Width = 729
-      Height = 91
-      DataSource = DMCadClientes.dsViewCadClientes
+      Height = 163
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       PopupMenu = PopupMenu1
       TabOrder = 0
@@ -461,7 +453,6 @@ inherited FormCadCliente: TFormCadCliente
     end
   end
   inherited ToolBar1: TToolBar
-    Width = 784
     inherited BtnInserir: TSpeedButton
       Action = Act_Btn_Inserir
     end
