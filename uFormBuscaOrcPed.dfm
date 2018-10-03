@@ -1,6 +1,6 @@
 object FormBuscaOrcPed: TFormBuscaOrcPed
-  Left = 349
-  Top = 124
+  Left = 118
+  Top = 72
   Width = 800
   Height = 600
   Caption = 'Busca de Or'#231'amento / Pedido'
