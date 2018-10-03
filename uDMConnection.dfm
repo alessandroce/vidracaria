@@ -13,7 +13,7 @@ object DMConnection: TDMConnection
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      'Database=D:\Projetos\Vidracaria\trunk\db\DBUSINASOFTWARE.GDB'
+      'Database=D:\Projetos\AVidracaria\trunk\db\DBUSINASOFTWARE.GDB'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'
