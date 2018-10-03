@@ -142,10 +142,12 @@ Count=2
 Item0=C:\UsinaSoftware
 Item1=C:\UsinaSoftware\Projetos\MovelariaDMarco\marco
 [HistoryLists\hlUnitOutputDirectory]
-Count=1
+Count=2
 Item0=dcu
+Item1=..\dcu
 [HistoryLists\hlOutputDirectorry]
-Count=3
+Count=4
 Item0=bin
-Item1=C:\UsinaSoftware
-Item2=C:\UsinaSoftware\Projetos\MovelariaDMarco\marco
+Item1=..\bin
+Item2=C:\UsinaSoftware
+Item3=C:\UsinaSoftware\Projetos\MovelariaDMarco\marco
