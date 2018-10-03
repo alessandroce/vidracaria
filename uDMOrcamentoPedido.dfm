@@ -1,7 +1,7 @@
 object DMOrcamentoPedido: TDMOrcamentoPedido
   OldCreateOrder = False
-  Left = 362
-  Top = 46
+  Left = 57
+  Top = 48
   Height = 631
   Width = 905
   object qryViewOrcPedido_BuscaProduto: TSQLQuery
@@ -298,6 +298,14 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       Precision = 15
       Size = 2
     end
+    object qryDadosOrcPedidoORCPED_CORALUMINIO: TStringField
+      FieldName = 'ORCPED_CORALUMINIO'
+      Size = 100
+    end
+    object qryDadosOrcPedidoORCPED_CORCOMPONENTE: TStringField
+      FieldName = 'ORCPED_CORCOMPONENTE'
+      Size = 100
+    end
   end
   object dspDadosOrcPedido: TDataSetProvider
     DataSet = qryDadosOrcPedido
@@ -422,6 +430,14 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       FieldName = 'ORCPED_ACRESCIMO'
       Precision = 15
       Size = 2
+    end
+    object cdsDadosOrcPedidoORCPED_CORALUMINIO: TStringField
+      FieldName = 'ORCPED_CORALUMINIO'
+      Size = 100
+    end
+    object cdsDadosOrcPedidoORCPED_CORCOMPONENTE: TStringField
+      FieldName = 'ORCPED_CORCOMPONENTE'
+      Size = 100
     end
   end
   object qryDadosOrcPedido_Itens: TSQLQuery
@@ -1145,6 +1161,11 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       Precision = 15
       Size = 2
     end
+    object qryViewOrcPedido_BuscaORCPED_ACRESCIMO: TFMTBCDField
+      FieldName = 'ORCPED_ACRESCIMO'
+      Precision = 15
+      Size = 2
+    end
     object qryViewOrcPedido_BuscaORCPED_VALORVENDA: TFMTBCDField
       FieldName = 'ORCPED_VALORVENDA'
       Precision = 15
@@ -1171,10 +1192,13 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       FixedChar = True
       Size = 1
     end
-    object qryViewOrcPedido_BuscaORCPED_ACRESCIMO: TFMTBCDField
-      FieldName = 'ORCPED_ACRESCIMO'
-      Precision = 15
-      Size = 2
+    object qryViewOrcPedido_BuscaORCPED_CORALUMINIO: TStringField
+      FieldName = 'ORCPED_CORALUMINIO'
+      Size = 100
+    end
+    object qryViewOrcPedido_BuscaORCPED_CORCOMPONENTE: TStringField
+      FieldName = 'ORCPED_CORCOMPONENTE'
+      Size = 100
     end
   end
   object cdsViewOrcPedido_Busca: TClientDataSet
@@ -1249,6 +1273,11 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       Precision = 15
       Size = 2
     end
+    object cdsViewOrcPedido_BuscaORCPED_ACRESCIMO: TFMTBCDField
+      FieldName = 'ORCPED_ACRESCIMO'
+      Precision = 15
+      Size = 2
+    end
     object cdsViewOrcPedido_BuscaORCPED_VALORVENDA: TFMTBCDField
       FieldName = 'ORCPED_VALORVENDA'
       Precision = 15
@@ -1275,10 +1304,13 @@ object DMOrcamentoPedido: TDMOrcamentoPedido
       FixedChar = True
       Size = 1
     end
-    object cdsViewOrcPedido_BuscaORCPED_ACRESCIMO: TFMTBCDField
-      FieldName = 'ORCPED_ACRESCIMO'
-      Precision = 15
-      Size = 2
+    object cdsViewOrcPedido_BuscaORCPED_CORALUMINIO: TStringField
+      FieldName = 'ORCPED_CORALUMINIO'
+      Size = 100
+    end
+    object cdsViewOrcPedido_BuscaORCPED_CORCOMPONENTE: TStringField
+      FieldName = 'ORCPED_CORCOMPONENTE'
+      Size = 100
     end
   end
   object dsViewClienteCodigo: TDataSource
