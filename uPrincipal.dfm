@@ -29,7 +29,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 522
+    Top = 523
     Width = 784
     Height = 19
     Panels = <
