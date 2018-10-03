@@ -157,6 +157,10 @@ type
     cdsAcabamentoQTDE_ACABAMENTO: TFloatField;
     cdsAcabamentoCOR_ACABAMENTO: TStringField;
     cxGrid1DBTableView1PROD_HANDLE: TcxGridDBColumn;
+    ComboBox1: TComboBox;
+    Label6: TLabel;
+    Label7: TLabel;
+    ComboBox2: TComboBox;
     procedure Act_Btn_GravarExecute(Sender: TObject);
     procedure Act_Btn_InserirExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
@@ -304,6 +308,8 @@ begin
     DMOrcamentoPedido.cdsDadosOrcPedidoORCPED_ACRESCIMO .AsFloat   := StrToFloat(edValorAcrescimo.Text);
     DMOrcamentoPedido.cdsDadosOrcPedidoORCPED_VALORVENDA.AsFloat   := StrToFloat(lblValorVenda.Caption);
 
+    DMOrcamentoPedido.cdsDadosOrcPedidoORCPED_CORALUMINIO.AsString   := ComboBox1.Text;
+    DMOrcamentoPedido.cdsDadosOrcPedidoORCPED_CORCOMPONENTE.AsString := ComboBox2.Text;
 
     DMOrcamentoPedido.cdsDadosOrcPedido.ApplyUpdates(-1);
 
@@ -765,8 +771,11 @@ begin
   edValorAcrescimo.Text          := FormatFloat('0.00', DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_ACRESCIMO.AsFloat);
   lblValorTotalOrcPedido.Caption := FormatFloat('0.00', DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_VALOR_TOTAL.AsFloat);
   lblValorVenda.Caption          := FormatFloat('0.00', DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_VALORVENDA.AsFloat);
+  ComboBox1.Text := DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_CORALUMINIO.asString;
+  ComboBox2.Text := DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_CORCOMPONENTE.asString;
 
-  lblDataOrcPeddido.Caption      := DateTimeToStr(DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_DATA.AsDateTime);
+
+  lblDataOrcPeddido.Caption := DateTimeToStr(DMOrcamentoPedido.cdsViewOrcPedido_BuscaORCPED_DATA.AsDateTime);
   FHandleCliente := DMOrcamentoPedido.cdsViewOrcPedido_Busca.FindField('CLIENTE_ID').AsInteger;
   NomeCliente    := DMOrcamentoPedido.cdsViewOrcPedido_Busca.FindField('CLIENTE').AsString;
   DMOrcamentoPedido.cdsViewOrcPedido_BuscaCliente.Close;

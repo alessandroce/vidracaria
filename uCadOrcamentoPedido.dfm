@@ -1,6 +1,6 @@
 inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
-  Left = 341
-  Top = 12
+  Left = 128
+  Top = 16
   HorzScrollBar.Range = 0
   VertScrollBar.Range = 0
   BorderStyle = bsDialog
@@ -403,14 +403,14 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     TabOrder = 2
     object Bevel4: TBevel
       Left = 646
-      Top = 196
+      Top = 204
       Width = 113
       Height = 5
       Shape = bsTopLine
     end
     object Label3: TLabel
       Left = 648
-      Top = 10
+      Top = 42
       Width = 51
       Height = 13
       Caption = 'Produtos'
@@ -423,7 +423,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object Label4: TLabel
       Left = 648
-      Top = 204
+      Top = 212
       Width = 62
       Height = 13
       Caption = 'Acess'#243'rios'
@@ -434,9 +434,23 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label6: TLabel
+      Left = 8
+      Top = 17
+      Width = 74
+      Height = 13
+      Caption = 'Cor do alum'#237'nio'
+    end
+    object Label7: TLabel
+      Left = 256
+      Top = 17
+      Width = 94
+      Height = 13
+      Caption = 'Cor do Componente'
+    end
     object BitBtn3: TBitBtn
       Left = 650
-      Top = 221
+      Top = 229
       Width = 42
       Height = 25
       Action = Aces_Inserir
@@ -445,7 +459,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object BitBtn5: TBitBtn
       Left = 698
-      Top = 221
+      Top = 229
       Width = 45
       Height = 25
       Action = Aces_Excluir
@@ -454,7 +468,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object BitBtn2: TBitBtn
       Left = 650
-      Top = 27
+      Top = 59
       Width = 42
       Height = 25
       Action = prod_Inserir
@@ -463,7 +477,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object BitBtn7: TBitBtn
       Left = 698
-      Top = 27
+      Top = 59
       Width = 42
       Height = 25
       Action = prod_Excluir
@@ -472,7 +486,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object GroupBox10: TGroupBox
       Left = 652
-      Top = 62
+      Top = 94
       Width = 111
       Height = 41
       Caption = '  Total  '
@@ -506,7 +520,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object GroupBox11: TGroupBox
       Left = 652
-      Top = 255
+      Top = 263
       Width = 111
       Height = 41
       Caption = '  Total  '
@@ -540,9 +554,9 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object cxGrid1: TcxGrid
       Left = 7
-      Top = 15
+      Top = 47
       Width = 630
-      Height = 180
+      Height = 160
       TabOrder = 6
       object cxGrid1DBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
@@ -575,6 +589,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
         OptionsView.GroupByBox = False
         object cxGrid1DBTableView1PROD_HANDLE: TcxGridDBColumn
           DataBinding.FieldName = 'PROD_HANDLE'
+          Visible = False
         end
         object cxGrid1DBTableView1Column1: TcxGridDBColumn
           Caption = 'Quantidade'
@@ -664,9 +679,9 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object cxGrid2: TcxGrid
       Left = 7
-      Top = 198
+      Top = 214
       Width = 630
-      Height = 180
+      Height = 160
       TabOrder = 7
       object cxGridDBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
@@ -740,6 +755,30 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
       object cxGridLevel1: TcxGridLevel
         GridView = cxGridDBTableView1
       end
+    end
+    object ComboBox1: TComboBox
+      Left = 96
+      Top = 13
+      Width = 153
+      Height = 21
+      CharCase = ecUpperCase
+      ItemHeight = 13
+      TabOrder = 8
+      Items.Strings = (
+        ''
+        'PINTURA BRANCO 9010')
+    end
+    object ComboBox2: TComboBox
+      Left = 360
+      Top = 13
+      Width = 153
+      Height = 21
+      CharCase = ecUpperCase
+      ItemHeight = 13
+      TabOrder = 9
+      Items.Strings = (
+        ''
+        'PRETO BRILHANTE')
     end
   end
   object GroupBox6: TGroupBox [12]
