@@ -146,15 +146,16 @@ object FormOrdemServico: TFormOrdemServico
     Caption = 'ToolBar1'
     TabOrder = 5
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 161
+      Width = 160
       Height = 49
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 161
+      Left = 160
       Top = 2
       Width = 72
       Height = 49
@@ -210,7 +211,7 @@ object FormOrdemServico: TFormOrdemServico
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 233
+      Left = 232
       Top = 2
       Width = 72
       Height = 49
@@ -256,7 +257,7 @@ object FormOrdemServico: TFormOrdemServico
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 305
+      Left = 304
       Top = 2
       Width = 72
       Height = 49
@@ -310,7 +311,7 @@ object FormOrdemServico: TFormOrdemServico
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 377
+      Left = 376
       Top = 2
       Width = 72
       Height = 49
@@ -364,7 +365,7 @@ object FormOrdemServico: TFormOrdemServico
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 449
+      Left = 448
       Top = 2
       Width = 72
       Height = 49
@@ -418,7 +419,7 @@ object FormOrdemServico: TFormOrdemServico
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 521
+      Left = 520
       Top = 2
       Width = 72
       Height = 49
@@ -470,6 +471,14 @@ object FormOrdemServico: TFormOrdemServico
       Layout = blGlyphTop
       ParentShowHint = False
       ShowHint = True
+    end
+    object Bevel1: TBevel
+      Left = 592
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object BitBtn7: TBitBtn

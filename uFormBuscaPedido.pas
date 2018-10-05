@@ -52,6 +52,7 @@ type
     Image2: TImage;
     Label4: TLabel;
     ApplicationEvents1: TApplicationEvents;
+    Panel1: TPanel;
     procedure Act_Btn_LocalizarExecute(Sender: TObject);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);

@@ -47,6 +47,7 @@ type
     Excluir1: TMenuItem;
     BitBtn2: TBitBtn;
     ApplicationEvents1: TApplicationEvents;
+    Panel1: TPanel;
     procedure Act_Btn_LocalizarExecute(Sender: TObject);
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);

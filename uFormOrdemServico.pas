@@ -66,6 +66,7 @@ type
     ped_Excluir: TAction;
     BitBtn3: TBitBtn;
     bt_VerPedido: TAction;
+    Panel1: TPanel;
     procedure Act_Btn_GravarExecute(Sender: TObject);
     procedure Act_Btn_InserirExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);

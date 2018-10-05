@@ -4,18 +4,20 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ComCtrls, StdCtrls, Buttons, DBCtrls;
+  Dialogs, ComCtrls, StdCtrls, Buttons, DBCtrls, ExtCtrls;
 
 type
   TFormLogin = class(TForm)
-    StatusBar1: TStatusBar;
-    GroupBox1: TGroupBox;
+    Panel1: TPanel;
+    Panel2: TPanel;
+    Panel3: TPanel;
+    BitBtn2: TBitBtn;
+    BitBtn1: TBitBtn;
     Label1: TLabel;
     Label2: TLabel;
     Edit2: TEdit;
     DBLookupComboBox1: TDBLookupComboBox;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    Edit1: TEdit;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormKeyPress(Sender: TObject; var Key: Char);
@@ -23,8 +25,8 @@ type
     procedure DBLookupComboBox1KeyPress(Sender: TObject; var Key: Char);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
-    procedure BitBtn1KeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
   private
     { Private declarations }
   public
@@ -41,7 +43,7 @@ var
 implementation
 
 uses uPrincipal, uDMUsuario, uDMLogin, DB, uFormMenuPermissao,
-  uDmMenuPermissao;
+  uDmMenuPermissao, uClassAvisos;
 
 {$R *.dfm}
 
@@ -88,8 +90,8 @@ begin
 
 procedure TFormLogin.Edit2KeyPress(Sender: TObject; var Key: Char);
 begin
-  if key = #13 then
-  BitBtn1.SetFocus;
+  if Key = #13 then
+  BitBtn1.Click;
 end;
 
 procedure TFormLogin.DBLookupComboBox1KeyPress(Sender: TObject;
@@ -104,13 +106,21 @@ var
   mensagem : string;
   vVisible : Boolean;
 begin
+(*
   if DBLookupComboBox1.KeyValue = null then
   begin
-    MessageBox(Application.Handle,'Informe o nome do usuário! ', 'Informação', MB_ICONINFORMATION + MB_OK);
+    //MessageBox(Application.Handle,'Informe o nome do usuário! ', 'Informação', MB_ICONINFORMATION + MB_OK);
+    Aviso('Informe o nome do usuário! ');
     DBLookupComboBox1.SetFocus;
     Exit;
   end;
-
+*)
+  if Edit1.Text = '' then
+  begin
+    Aviso('Informe o nome do usuário! ');
+    Edit1.SetFocus;
+    Exit;
+  end;
   if Edit2.Text = '' then
   begin
     MessageBox(Application.Handle,'Informe a senha! ', 'Informação', MB_ICONINFORMATION + MB_OK);
@@ -118,15 +128,15 @@ begin
     Exit;
   end;
 
-  if Fnc_VerificaLoginUsuario(DBLookupComboBox1.Text, Edit2.Text) <> '' then
+  if Fnc_VerificaLoginUsuario(Edit1.Text, Edit2.Text) <> '' then
   begin
-    Application.MessageBox(PAnsiChar(Fnc_VerificaLoginUsuario(DBLookupComboBox1.Text, Edit2.Text)), 'Login não autorizado', MB_OK+mb_IconError);
+    Application.MessageBox(PAnsiChar(Fnc_VerificaLoginUsuario(Edit1.Text, Edit2.Text)), 'Login não autorizado', MB_OK+mb_IconError);
     Edit2.Clear;
     ModalResult := mrNone;
   end
   else
   begin
-    FormPrincipal.Label1.Caption := DBLookupComboBox1.Text;
+    FormPrincipal.Label1.Caption := Edit1.Text;
     FormPrincipal.Fnc_AtualizaGrid_Manutencao();
     vVisible := True;
     //FormPrincipal.menu.Items[0].Visible := vVisible;
@@ -169,17 +179,11 @@ begin
   FormPrincipal.Close;
 end;
 
-procedure TFormLogin.BitBtn1KeyPress(Sender: TObject; var Key: Char);
-begin
-  if Key = #13 then
-  BitBtn1.Click;
-end;
-
 procedure TFormLogin.FormShow(Sender: TObject);
 begin
   DMLogin.cdsViewLogin_Lookup.Close;
   DMLogin.cdsViewLogin_Lookup.Open;
-  DBLookupComboBox1.SetFocus;
+  Edit1.SetFocus;
 end;
 
 procedure TFormLogin.CadastraUsusariosPermissaoAcesso;
@@ -190,6 +194,12 @@ begin
   Finally
     FormMenuPermissao.Free;
   End;
+end;
+
+procedure TFormLogin.Edit1KeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+  Edit2.SetFocus;
 end;
 
 end.

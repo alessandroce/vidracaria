@@ -55,6 +55,7 @@ type
     Image2: TImage;
     Label5: TLabel;
     ComboBox1: TComboBox;
+    Panel1: TPanel;
     procedure Edit2Change(Sender: TObject);
     procedure Edit1Change(Sender: TObject);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);
@@ -353,7 +354,7 @@ procedure TFormBuscaOrcPed.DBGrid1DrawColumnCell(Sender: TObject;
 begin
   if (GdSelected in State) then
   begin
-    Dbgrid1.Canvas.Brush.Color := clInactiveCaptionText;
+    Dbgrid1.Canvas.Brush.Color := clGradientInactiveCaption;
     DBGrid1.Canvas.Font.Color  := clBlack;
   end;
   {if (GdSelected in State) then

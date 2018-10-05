@@ -109,7 +109,7 @@ object FormMenuPermissao: TFormMenuPermissao
     Top = 39
     Width = 611
     Height = 197
-    ActivePage = TabSheet1
+    ActivePage = TabSheet2
     BiDiMode = bdLeftToRight
     Images = ImageList1
     ParentBiDiMode = False

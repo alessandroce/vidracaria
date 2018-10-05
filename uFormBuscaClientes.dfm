@@ -32,15 +32,16 @@ object FormBuscaClientes: TFormBuscaClientes
     Caption = 'ToolBar1'
     TabOrder = 1
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 137
+      Width = 136
       Height = 49
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 137
+      Left = 136
       Top = 2
       Width = 72
       Height = 49
@@ -96,7 +97,7 @@ object FormBuscaClientes: TFormBuscaClientes
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 209
+      Left = 208
       Top = 2
       Width = 72
       Height = 49
@@ -142,7 +143,7 @@ object FormBuscaClientes: TFormBuscaClientes
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 281
+      Left = 280
       Top = 2
       Width = 72
       Height = 49
@@ -196,7 +197,7 @@ object FormBuscaClientes: TFormBuscaClientes
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 353
+      Left = 352
       Top = 2
       Width = 72
       Height = 49
@@ -250,7 +251,7 @@ object FormBuscaClientes: TFormBuscaClientes
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 425
+      Left = 424
       Top = 2
       Width = 72
       Height = 49
@@ -304,7 +305,7 @@ object FormBuscaClientes: TFormBuscaClientes
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 497
+      Left = 496
       Top = 2
       Width = 72
       Height = 49
@@ -356,6 +357,14 @@ object FormBuscaClientes: TFormBuscaClientes
       Layout = blGlyphTop
       ParentShowHint = False
       ShowHint = True
+    end
+    object Bevel1: TBevel
+      Left = 568
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object GroupBox1: TGroupBox

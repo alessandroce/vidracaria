@@ -3,6 +3,7 @@ inherited FormCadCliente: TFormCadCliente
   Caption = 'Cadastro de Clientes'
   OldCreateOrder = True
   OnActivate = FormActivate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   inherited Bevel2: TBevel
@@ -121,9 +122,9 @@ inherited FormCadCliente: TFormCadCliente
         object Label10: TLabel
           Left = 15
           Top = 122
-          Width = 58
+          Width = 30
           Height = 13
-          Caption = 'CNPJ/CPF: '
+          Caption = 'CNPJ:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -132,11 +133,11 @@ inherited FormCadCliente: TFormCadCliente
           ParentFont = False
         end
         object Label11: TLabel
-          Left = 222
+          Left = 210
           Top = 122
-          Width = 68
+          Width = 44
           Height = 13
-          Caption = 'Insc. Est./RG:'
+          Caption = 'Insc. Est.'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -145,8 +146,8 @@ inherited FormCadCliente: TFormCadCliente
           ParentFont = False
         end
         object Label12: TLabel
-          Left = 422
-          Top = 122
+          Left = 307
+          Top = 154
           Width = 50
           Height = 13
           Caption = 'Atividade: '
@@ -159,7 +160,7 @@ inherited FormCadCliente: TFormCadCliente
         end
         object Label14: TLabel
           Left = 15
-          Top = 151
+          Top = 154
           Width = 43
           Height = 13
           Caption = 'Contato: '
@@ -171,8 +172,8 @@ inherited FormCadCliente: TFormCadCliente
           ParentFont = False
         end
         object Label15: TLabel
-          Left = 422
-          Top = 151
+          Left = 558
+          Top = 154
           Width = 38
           Height = 13
           Caption = 'Celular: '
@@ -189,6 +190,32 @@ inherited FormCadCliente: TFormCadCliente
           Width = 70
           Height = 13
           Caption = 'Complemento: '
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label18: TLabel
+          Left = 386
+          Top = 122
+          Width = 23
+          Height = 13
+          Caption = 'CPF:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'MS Sans Serif'
+          Font.Style = []
+          ParentFont = False
+        end
+        object Label19: TLabel
+          Left = 554
+          Top = 122
+          Width = 19
+          Height = 13
+          Caption = 'RG:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -214,7 +241,7 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_ENDERECO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 1
+          TabOrder = 2
         end
         object DBEdit3: TDBEdit
           Left = 88
@@ -224,7 +251,7 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_BAIRRO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 2
+          TabOrder = 3
         end
         object DBEdit4: TDBEdit
           Left = 574
@@ -234,7 +261,7 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_CEP'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 3
+          TabOrder = 5
         end
         object DBEdit5: TDBEdit
           Left = 88
@@ -244,7 +271,7 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_MUNICIPIO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 4
+          TabOrder = 6
         end
         object DBEdit6: TDBEdit
           Left = 420
@@ -254,7 +281,7 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_FONE'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 5
+          TabOrder = 7
         end
         object DBEdit7: TDBEdit
           Left = 574
@@ -264,57 +291,57 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_FAX'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 6
+          TabOrder = 8
         end
         object DBEdit8: TDBEdit
           Left = 88
           Top = 120
-          Width = 125
+          Width = 108
           Height = 21
           CharCase = ecUpperCase
           DataField = 'CLI_CNPJ'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 7
+          TabOrder = 9
         end
         object DBEdit9: TDBEdit
-          Left = 295
+          Left = 259
           Top = 120
-          Width = 121
+          Width = 108
           Height = 21
           CharCase = ecUpperCase
           DataField = 'CLI_INSC_EST'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 8
+          TabOrder = 10
         end
         object DBEdit10: TDBEdit
-          Left = 486
-          Top = 120
-          Width = 209
+          Left = 350
+          Top = 150
+          Width = 199
           Height = 21
           CharCase = ecUpperCase
           DataField = 'CLI_ATIVIDADE'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 9
+          TabOrder = 14
         end
         object DBEdit13: TDBEdit
-          Left = 486
-          Top = 149
-          Width = 209
+          Left = 603
+          Top = 150
+          Width = 92
           Height = 21
           CharCase = ecUpperCase
           DataField = 'CLI_CELULAR'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 10
+          TabOrder = 15
         end
         object DBEdit12: TDBEdit
           Left = 88
-          Top = 149
-          Width = 328
+          Top = 150
+          Width = 209
           Height = 21
           CharCase = ecUpperCase
           DataField = 'CLI_CONTATO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 11
+          TabOrder = 13
         end
         object DBCheckBox1: TDBCheckBox
           Left = 648
@@ -324,7 +351,7 @@ inherited FormCadCliente: TFormCadCliente
           Caption = 'Ativo'
           DataField = 'CLI_ATIVO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 12
+          TabOrder = 1
           ValueChecked = 'T'
           ValueUnchecked = 'F'
         end
@@ -336,7 +363,27 @@ inherited FormCadCliente: TFormCadCliente
           CharCase = ecUpperCase
           DataField = 'CLI_COMPLEMENTO'
           DataSource = DMCadClientes.dsDadosCadClientes
-          TabOrder = 13
+          TabOrder = 4
+        end
+        object DBEdit15: TDBEdit
+          Left = 419
+          Top = 120
+          Width = 108
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CLI_CPF'
+          DataSource = DMCadClientes.dsDadosCadClientes
+          TabOrder = 11
+        end
+        object DBEdit16: TDBEdit
+          Left = 587
+          Top = 120
+          Width = 108
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CLI_RG'
+          DataSource = DMCadClientes.dsDadosCadClientes
+          TabOrder = 12
         end
       end
       object TabSheet1: TTabSheet
@@ -404,6 +451,7 @@ inherited FormCadCliente: TFormCadCliente
       Top = 30
       Width = 729
       Height = 163
+      DataSource = DMCadClientes.dsViewCadClientes
       Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       PopupMenu = PopupMenu1
       TabOrder = 0
@@ -464,6 +512,8 @@ inherited FormCadCliente: TFormCadCliente
     Height = 21
     CharCase = ecUpperCase
     TabOrder = 4
+    OnChange = edNomeClienteChange
+    OnKeyPress = edNomeClienteKeyPress
   end
   inherited ImageList1: TImageList
     Left = 336

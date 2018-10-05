@@ -135,12 +135,13 @@ object FormPadraoCad2: TFormPadraoCad2
     Caption = 'ToolBar1'
     TabOrder = 3
     Transparent = False
-    object Bevel1: TBevel
+    object pnBevel: TPanel
       Left = 0
       Top = 2
       Width = 184
       Height = 49
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
       Left = 184
@@ -459,6 +460,14 @@ object FormPadraoCad2: TFormPadraoCad2
       Layout = blGlyphTop
       ParentShowHint = False
       ShowHint = True
+    end
+    object Bevel1: TBevel
+      Left = 616
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object ImageList1: TImageList

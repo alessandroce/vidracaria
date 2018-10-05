@@ -85,6 +85,14 @@ object DMCadClientes: TDMCadClientes
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
     end
+    object cdsDadosCadClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object cdsDadosCadClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
+    end
   end
   object qryDadosCadClientes: TSQLQuery
     MaxBlobSize = -1
@@ -169,6 +177,14 @@ object DMCadClientes: TDMCadClientes
     object qryDadosCadClientesCLI_COMPLEMENTO: TStringField
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
+    end
+    object qryDadosCadClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object qryDadosCadClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
     end
   end
   object dspDadosCadClientes: TDataSetProvider
@@ -258,6 +274,14 @@ object DMCadClientes: TDMCadClientes
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
     end
+    object cdsViewBuscaClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object cdsViewBuscaClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
+    end
   end
   object qryViewBuscaClientes: TSQLQuery
     MaxBlobSize = -1
@@ -344,6 +368,14 @@ object DMCadClientes: TDMCadClientes
     object qryViewBuscaClientesCLI_COMPLEMENTO: TStringField
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
+    end
+    object qryViewBuscaClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object qryViewBuscaClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
     end
   end
   object dspViewBuscaClientes: TDataSetProvider
@@ -609,6 +641,14 @@ object DMCadClientes: TDMCadClientes
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
     end
+    object cdsViewCadClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object cdsViewCadClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
+    end
   end
   object qryViewCadClientes: TSQLQuery
     MaxBlobSize = -1
@@ -620,7 +660,8 @@ object DMCadClientes: TDMCadClientes
       end>
     SQL.Strings = (
       'SELECT * FROM CLIENTES'
-      'WHERE CLI_CLIENTE LIKE  :NOME')
+      'WHERE CLI_CLIENTE LIKE  :NOME'
+      'ORDER BY CLI_CLIENTE')
     SQLConnection = DMConnection.SQLConnection
     Left = 120
     Top = 56
@@ -693,6 +734,14 @@ object DMCadClientes: TDMCadClientes
     object qryViewCadClientesCLI_COMPLEMENTO: TStringField
       FieldName = 'CLI_COMPLEMENTO'
       Size = 100
+    end
+    object qryViewCadClientesCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
+    end
+    object qryViewCadClientesCLI_RG: TStringField
+      FieldName = 'CLI_RG'
+      Size = 30
     end
   end
   object dspViewCadClientes: TDataSetProvider

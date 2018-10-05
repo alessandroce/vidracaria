@@ -1,9 +1,10 @@
 object DMConnection: TDMConnection
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Left = 392
   Top = 241
   Height = 134
-  Width = 154
+  Width = 318
   object SQLConnection: TSQLConnection
     ConnectionName = 'Conn_MovelariaDMarco'
     DriverName = 'Interbase'
@@ -13,7 +14,7 @@ object DMConnection: TDMConnection
     LoginPrompt = False
     Params.Strings = (
       'DriverName=Interbase'
-      'Database=D:\Projetos\AVidracaria\trunk\db\DBUSINASOFTWARE.GDB'
+      'Database=D:\Projetos\Vidracaria\trunk\db\DBUSINASOFTWARE.GDB'
       'RoleName=RoleName'
       'User_Name=sysdba'
       'Password=masterkey'
@@ -27,8 +28,16 @@ object DMConnection: TDMConnection
       'Interbase TransIsolation=ReadCommited'
       'Trim Char=False')
     VendorLib = 'gds32.dll'
-    Connected = True
     Left = 56
+    Top = 24
+  end
+  object IBConexao: TIBDatabase
+    Left = 144
+    Top = 24
+  end
+  object IBTransacao: TIBTransaction
+    DefaultDatabase = IBConexao
+    Left = 192
     Top = 24
   end
 end

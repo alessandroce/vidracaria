@@ -1,6 +1,6 @@
 inherited FormCadProdutoTipo: TFormCadProdutoTipo
-  Left = 611
-  Top = 100
+  Left = 307
+  Top = 173
   Caption = 'Cadastro de Tipo de Produto'
   ClientHeight = 462
   ClientWidth = 584
@@ -203,26 +203,30 @@ inherited FormCadProdutoTipo: TFormCadProdutoTipo
   end
   inherited ToolBar1: TToolBar
     Width = 584
-    inherited Bevel1: TBevel
-      Width = 81
+    inherited pnBevel: TPanel
+      Width = 82
     end
     inherited BtnInserir: TSpeedButton
-      Left = 81
+      Left = 82
     end
     inherited BtnEditar: TSpeedButton
-      Left = 153
+      Left = 154
     end
     inherited BtnExcluir: TSpeedButton
-      Left = 225
+      Left = 226
     end
     inherited BtnGravar: TSpeedButton
-      Left = 297
+      Left = 298
     end
     inherited BtnCancela: TSpeedButton
-      Left = 369
+      Left = 370
     end
     inherited BtnSair: TSpeedButton
-      Left = 441
+      Left = 442
+    end
+    inherited Bevel1: TBevel
+      Left = 514
+      Width = 81
     end
   end
   object Edit1: TEdit [9]

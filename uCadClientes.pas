@@ -51,6 +51,10 @@ type
     DBCheckBox1: TDBCheckBox;
     Label17: TLabel;
     DBEdit14: TDBEdit;
+    DBEdit15: TDBEdit;
+    Label18: TLabel;
+    DBEdit16: TDBEdit;
+    Label19: TLabel;
     procedure FormActivate(Sender: TObject);
     procedure Act_Btn_GravarExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
@@ -67,6 +71,9 @@ type
     procedure dbgClientesDblClick(Sender: TObject);
     procedure dbgClientesDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure edNomeClienteChange(Sender: TObject);
+    procedure edNomeClienteKeyPress(Sender: TObject; var Key: Char);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -149,6 +156,7 @@ begin
   end;
  {--- end ---}
 
+  PageControl1.ActivePage := PageControl1.Pages[0];
   DMCadClientes.cdsDadosCadClientes.ApplyUpdates(-1);
   DMCadClientes.cdsDadosCadClientes.Close;
 
@@ -162,6 +170,7 @@ end;
 
 procedure TFormCadCliente.Act_Btn_AlterarExecute(Sender: TObject);
 begin
+  PageControl1.ActivePage := PageControl1.Pages[0];
  //inherited;
   DBEdit1.Clear;
   DMCadClientes.cdsDadosCadClientes.Close;
@@ -240,12 +249,13 @@ begin
   //inherited;
    //limpa os dados da tela
   DMCadClientes.cdsDadosCadClientes.Close;
-  
+
   //atualiza grid
   FormCadCliente.btn_Localizar.Click;
   //edNomeCliente.SetFocus;
 
   Fnc_BarraTarefasBotaoAtivo('NovoModificarExcluir');
+  PageControl1.ActivePage := PageControl1.Pages[0];
 end;
 
 procedure TFormCadCliente.Act_Btn_LocalizarExecute(Sender: TObject);
@@ -259,7 +269,7 @@ end;
 procedure TFormCadCliente.Act_Btn_InserirExecute(Sender: TObject);
 begin
   //inherited;
-
+  PageControl1.ActivePage := PageControl1.Pages[0];
 end;
 
 procedure TFormCadCliente.bt_AlterarExecute(Sender: TObject);
@@ -326,6 +336,26 @@ begin
     dbgClientes.Canvas.Font.Color:= clBlack;
   end;
   dbgClientes.DefaultDrawDataCell(Rect, dbgClientes.columns[datacol].field, State);
+end;
+
+procedure TFormCadCliente.edNomeClienteChange(Sender: TObject);
+begin
+  inherited;
+  Act_Btn_Localizar.Execute;
+end;
+
+procedure TFormCadCliente.edNomeClienteKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+  inherited;
+  if  Key = #13 then
+  Act_Btn_Localizar.Execute;
+end;
+
+procedure TFormCadCliente.FormShow(Sender: TObject);
+begin
+  inherited;
+  PageControl1.ActivePage := PageControl1.Pages[0];
 end;
 
 end.

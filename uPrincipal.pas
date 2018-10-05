@@ -126,9 +126,10 @@ type
     Act_Cad_ProdutoLinha: TAction;
     LinhaProduto1: TMenuItem;
     Act_Cad_Obras: TAction;
-    CadastroObras1: TMenuItem;
     N1: TMenuItem;
     N2: TMenuItem;
+    SkinData1: TSkinData;
+    SkinStore1: TSkinStore;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Act_Cad_ProdutoExecute(Sender: TObject);

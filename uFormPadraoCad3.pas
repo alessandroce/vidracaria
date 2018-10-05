@@ -35,6 +35,7 @@ type
     SpeedButton1: TSpeedButton;
     StatusBar1: TStatusBar;
     Bevel3: TBevel;
+    Panel1: TPanel;
   private
     { Private declarations }
   public

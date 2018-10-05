@@ -4,7 +4,7 @@ object FormCadEmitente: TFormCadEmitente
   BorderStyle = bsDialog
   Caption = 'Dados do Emitente'
   ClientHeight = 312
-  ClientWidth = 443
+  ClientWidth = 584
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -106,54 +106,54 @@ object FormCadEmitente: TFormCadEmitente
   object GroupBox1: TGroupBox
     Left = 8
     Top = 4
-    Width = 430
+    Width = 561
     Height = 245
     TabOrder = 0
     object Label1: TLabel
       Left = 16
-      Top = 20
+      Top = 43
       Width = 66
       Height = 13
       Caption = 'Raz'#227'o Social:'
     end
     object Label2: TLabel
       Left = 16
-      Top = 44
+      Top = 67
       Width = 65
       Height = 13
       Caption = 'Respons'#225'vel:'
     end
     object Label3: TLabel
       Left = 16
-      Top = 68
+      Top = 91
       Width = 49
       Height = 13
       Caption = 'Endere'#231'o:'
     end
     object Label4: TLabel
       Left = 16
-      Top = 92
+      Top = 115
       Width = 30
       Height = 13
       Caption = 'Bairro:'
     end
     object Label5: TLabel
       Left = 16
-      Top = 116
+      Top = 139
       Width = 50
       Height = 13
       Caption = 'Munic'#237'pio:'
     end
     object Label6: TLabel
-      Left = 16
-      Top = 140
+      Left = 392
+      Top = 139
       Width = 24
       Height = 13
       Caption = 'CEP:'
     end
     object Label7: TLabel
       Left = 272
-      Top = 116
+      Top = 139
       Width = 36
       Height = 13
       Caption = 'Estado:'
@@ -166,30 +166,30 @@ object FormCadEmitente: TFormCadEmitente
       Caption = 'CNPJ:'
     end
     object Label9: TLabel
-      Left = 232
+      Left = 216
       Top = 164
       Width = 13
       Height = 13
       Caption = 'IE:'
     end
     object Label10: TLabel
-      Left = 16
-      Top = 188
+      Left = 376
+      Top = 164
       Width = 45
       Height = 13
       Caption = 'Telefone:'
     end
     object Label11: TLabel
       Left = 16
-      Top = 212
+      Top = 188
       Width = 31
       Height = 13
       Caption = 'E-mail:'
     end
     object DBEdit1: TDBEdit
       Left = 88
-      Top = 16
-      Width = 289
+      Top = 39
+      Width = 459
       Height = 21
       DataField = 'EMIT_RAZAOSOCIAL'
       DataSource = DMEmitente.dsDadosEmitente
@@ -197,8 +197,8 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit2: TDBEdit
       Left = 88
-      Top = 40
-      Width = 289
+      Top = 63
+      Width = 459
       Height = 21
       DataField = 'EMIT_RESPONSAVEL'
       DataSource = DMEmitente.dsDadosEmitente
@@ -206,8 +206,8 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit3: TDBEdit
       Left = 88
-      Top = 64
-      Width = 289
+      Top = 87
+      Width = 459
       Height = 21
       DataField = 'EMIT_ENDERECO'
       DataSource = DMEmitente.dsDadosEmitente
@@ -215,8 +215,8 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit4: TDBEdit
       Left = 88
-      Top = 88
-      Width = 290
+      Top = 111
+      Width = 459
       Height = 21
       DataField = 'EMIT_BAIRRO'
       DataSource = DMEmitente.dsDadosEmitente
@@ -224,7 +224,7 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit5: TDBEdit
       Left = 88
-      Top = 112
+      Top = 135
       Width = 169
       Height = 21
       DataField = 'EMIT_MUNICIPIO'
@@ -232,9 +232,9 @@ object FormCadEmitente: TFormCadEmitente
       TabOrder = 4
     end
     object DBEdit6: TDBEdit
-      Left = 88
-      Top = 136
-      Width = 290
+      Left = 424
+      Top = 135
+      Width = 122
       Height = 21
       DataField = 'EMIT_CEP'
       DataSource = DMEmitente.dsDadosEmitente
@@ -242,7 +242,7 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit7: TDBEdit
       Left = 321
-      Top = 112
+      Top = 135
       Width = 57
       Height = 21
       DataField = 'EMIT_ESTADO'
@@ -259,7 +259,7 @@ object FormCadEmitente: TFormCadEmitente
       TabOrder = 7
     end
     object DBEdit9: TDBEdit
-      Left = 256
+      Left = 240
       Top = 160
       Width = 122
       Height = 21
@@ -268,8 +268,8 @@ object FormCadEmitente: TFormCadEmitente
       TabOrder = 8
     end
     object DBEdit10: TDBEdit
-      Left = 88
-      Top = 184
+      Left = 424
+      Top = 160
       Width = 121
       Height = 21
       DataField = 'EMIT_TELEFONE'
@@ -278,7 +278,7 @@ object FormCadEmitente: TFormCadEmitente
     end
     object DBEdit11: TDBEdit
       Left = 88
-      Top = 208
+      Top = 184
       Width = 290
       Height = 21
       DataField = 'EDIT_EMAIL'
@@ -289,7 +289,7 @@ object FormCadEmitente: TFormCadEmitente
   object StatusBar1: TStatusBar
     Left = 0
     Top = 293
-    Width = 443
+    Width = 584
     Height = 19
     Panels = <>
   end

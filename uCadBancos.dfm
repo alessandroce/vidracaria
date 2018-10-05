@@ -106,26 +106,11 @@ inherited FormCadBancos: TFormCadBancos
   end
   inherited ToolBar1: TToolBar
     Width = 499
-    inherited Bevel1: TBevel
-      Width = 33
+    inherited Bevel1: TBevel [6]
+      Left = 544
     end
-    inherited BtnInserir: TSpeedButton
-      Left = 33
-    end
-    inherited BtnEditar: TSpeedButton
-      Left = 105
-    end
-    inherited BtnExcluir: TSpeedButton
-      Left = 177
-    end
-    inherited BtnGravar: TSpeedButton
-      Left = 249
-    end
-    inherited BtnCancela: TSpeedButton
-      Left = 321
-    end
-    inherited BtnSair: TSpeedButton
-      Left = 393
+    inherited BtnSair: TSpeedButton [7]
+      Left = 616
     end
   end
   object Edit1: TEdit [9]

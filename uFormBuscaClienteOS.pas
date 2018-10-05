@@ -180,7 +180,7 @@ procedure TFormBuscaClienteOS.DBGrid1DrawColumnCell(Sender: TObject;
 begin
   if (GdSelected in State) then
   begin
-    DBGrid1.Canvas.Brush.Color := clInactiveCaptionText;
+    DBGrid1.Canvas.Brush.Color := clGradientInactiveCaption;
     DBGrid1.Canvas.Font.Color  := clblack;
   end;
   DBGrid1.DefaultDrawDataCell(Rect, DBGrid1.columns[datacol].field, State);

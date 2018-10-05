@@ -1,6 +1,6 @@
 object FormBuscaOrcPed: TFormBuscaOrcPed
-  Left = 118
-  Top = 72
+  Left = 297
+  Top = 166
   Width = 800
   Height = 600
   Caption = 'Busca de Or'#231'amento / Pedido'
@@ -61,15 +61,16 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
     Caption = 'ToolBar1'
     TabOrder = 0
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 166
+      Width = 176
       Height = 49
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 166
+      Left = 176
       Top = 2
       Width = 72
       Height = 49
@@ -125,7 +126,7 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 238
+      Left = 248
       Top = 2
       Width = 72
       Height = 49
@@ -171,7 +172,7 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 310
+      Left = 320
       Top = 2
       Width = 72
       Height = 49
@@ -225,7 +226,7 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 382
+      Left = 392
       Top = 2
       Width = 72
       Height = 49
@@ -279,7 +280,7 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 454
+      Left = 464
       Top = 2
       Width = 72
       Height = 49
@@ -333,7 +334,7 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 526
+      Left = 536
       Top = 2
       Width = 72
       Height = 49
@@ -386,10 +387,18 @@ object FormBuscaOrcPed: TFormBuscaOrcPed
       ParentShowHint = False
       ShowHint = True
     end
+    object Bevel1: TBevel
+      Left = 608
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
+    end
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 543
+    Top = 542
     Width = 784
     Height = 19
     Panels = <>

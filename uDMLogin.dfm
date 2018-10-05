@@ -33,8 +33,8 @@ object DMLogin: TDMLogin
       ' usuarios.usu_senha,'
       ' usuarios.usu_login_tipo'
       'FROM USUARIOS'
-      'WHERE USUARIOS.usu_login = :LOGIN'
-      'AND USUARIOS.usu_senha = :SENHA')
+      'WHERE upper(USUARIOS.usu_login) = upper(:LOGIN)'
+      'AND upper(USUARIOS.usu_senha) = upper(:SENHA)')
     SQLConnection = DMConnection.SQLConnection
     Left = 147
     Top = 40
@@ -105,7 +105,7 @@ object DMLogin: TDMLogin
     SQL.Strings = (
       'SELECT *'
       'FROM USUARIOS'
-      'WHERE USUARIOS.usu_login =:LOGIN')
+      'WHERE upper(USUARIOS.usu_login) = upper(:LOGIN)')
     SQLConnection = DMConnection.SQLConnection
     Left = 51
     Top = 32

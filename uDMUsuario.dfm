@@ -4,223 +4,6 @@ object DMUsuario: TDMUsuario
   Top = 107
   Height = 470
   Width = 643
-  object qryDadosUsuario: TSQLQuery
-    MaxBlobSize = -1
-    Params = <
-      item
-        DataType = ftInteger
-        Name = 'ID'
-        ParamType = ptInput
-      end>
-    SQL.Strings = (
-      'SELECT * '
-      'FROM USUARIOS'
-      'WHERE USU_ID = :ID')
-    SQLConnection = DMConnection.SQLConnection
-    Left = 80
-    Top = 48
-    object qryDadosUsuarioUSU_ID: TIntegerField
-      FieldName = 'USU_ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object qryDadosUsuarioUSU_LOGIN: TStringField
-      FieldName = 'USU_LOGIN'
-      Required = True
-      Size = 30
-    end
-    object qryDadosUsuarioUSU_SENHA: TStringField
-      FieldName = 'USU_SENHA'
-      Required = True
-      Size = 15
-    end
-    object qryDadosUsuarioUSU_SENHA_CONF: TStringField
-      FieldName = 'USU_SENHA_CONF'
-      Required = True
-      Size = 15
-    end
-    object qryDadosUsuarioUSU_NOME: TStringField
-      FieldName = 'USU_NOME'
-      Required = True
-      Size = 40
-    end
-    object qryDadosUsuarioUSU_ENDERECO: TStringField
-      FieldName = 'USU_ENDERECO'
-      Size = 40
-    end
-    object qryDadosUsuarioUSU_BAIRRO: TStringField
-      FieldName = 'USU_BAIRRO'
-      Size = 30
-    end
-    object qryDadosUsuarioUSU_CIDADE: TStringField
-      FieldName = 'USU_CIDADE'
-      Size = 30
-    end
-    object qryDadosUsuarioUSU_ESTADO: TStringField
-      FieldName = 'USU_ESTADO'
-      FixedChar = True
-      Size = 2
-    end
-    object qryDadosUsuarioUSU_FONE_RES: TStringField
-      FieldName = 'USU_FONE_RES'
-    end
-    object qryDadosUsuarioUSU_FONE_CEL: TStringField
-      FieldName = 'USU_FONE_CEL'
-    end
-    object qryDadosUsuarioUSU_EMAIL: TStringField
-      FieldName = 'USU_EMAIL'
-      FixedChar = True
-      Size = 40
-    end
-    object qryDadosUsuarioUSU_RG: TStringField
-      FieldName = 'USU_RG'
-    end
-    object qryDadosUsuarioUSU_CPF: TStringField
-      FieldName = 'USU_CPF'
-    end
-    object qryDadosUsuarioUSU_ATIVO: TStringField
-      FieldName = 'USU_ATIVO'
-      FixedChar = True
-      Size = 1
-    end
-    object qryDadosUsuarioUSU_LOGIN_TIPO: TStringField
-      FieldName = 'USU_LOGIN_TIPO'
-      Size = 30
-    end
-    object qryDadosUsuarioUSU_EXCLUIR: TStringField
-      FieldName = 'USU_EXCLUIR'
-      FixedChar = True
-      Size = 1
-    end
-    object qryDadosUsuarioUSU_FUNCAO: TIntegerField
-      FieldName = 'USU_FUNCAO'
-      Required = True
-    end
-    object qryDadosUsuarioUSU_COMISSAO_PEDIDO: TFMTBCDField
-      FieldName = 'USU_COMISSAO_PEDIDO'
-      Precision = 15
-      Size = 2
-    end
-    object qryDadosUsuarioUSU_DESCONTO_PEDIDO: TFMTBCDField
-      FieldName = 'USU_DESCONTO_PEDIDO'
-      Precision = 15
-      Size = 2
-    end
-    object qryDadosUsuarioUSU_DESCONTO_ORCAMENTO: TFMTBCDField
-      FieldName = 'USU_DESCONTO_ORCAMENTO'
-      Precision = 15
-      Size = 2
-    end
-  end
-  object dspDadosUsuario: TDataSetProvider
-    DataSet = qryDadosUsuario
-    Left = 80
-    Top = 96
-  end
-  object cdsDadosUsuario: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'dspDadosUsuario'
-    Left = 80
-    Top = 144
-    object cdsDadosUsuarioUSU_ID: TIntegerField
-      FieldName = 'USU_ID'
-      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
-      Required = True
-    end
-    object cdsDadosUsuarioUSU_LOGIN: TStringField
-      FieldName = 'USU_LOGIN'
-      Required = True
-      Size = 30
-    end
-    object cdsDadosUsuarioUSU_SENHA: TStringField
-      FieldName = 'USU_SENHA'
-      Required = True
-      Size = 15
-    end
-    object cdsDadosUsuarioUSU_SENHA_CONF: TStringField
-      FieldName = 'USU_SENHA_CONF'
-      Required = True
-      Size = 15
-    end
-    object cdsDadosUsuarioUSU_NOME: TStringField
-      FieldName = 'USU_NOME'
-      Required = True
-      Size = 40
-    end
-    object cdsDadosUsuarioUSU_ENDERECO: TStringField
-      FieldName = 'USU_ENDERECO'
-      Size = 40
-    end
-    object cdsDadosUsuarioUSU_BAIRRO: TStringField
-      FieldName = 'USU_BAIRRO'
-      Size = 30
-    end
-    object cdsDadosUsuarioUSU_CIDADE: TStringField
-      FieldName = 'USU_CIDADE'
-      Size = 30
-    end
-    object cdsDadosUsuarioUSU_ESTADO: TStringField
-      FieldName = 'USU_ESTADO'
-      FixedChar = True
-      Size = 2
-    end
-    object cdsDadosUsuarioUSU_FONE_RES: TStringField
-      FieldName = 'USU_FONE_RES'
-    end
-    object cdsDadosUsuarioUSU_FONE_CEL: TStringField
-      FieldName = 'USU_FONE_CEL'
-    end
-    object cdsDadosUsuarioUSU_EMAIL: TStringField
-      FieldName = 'USU_EMAIL'
-      FixedChar = True
-      Size = 40
-    end
-    object cdsDadosUsuarioUSU_RG: TStringField
-      FieldName = 'USU_RG'
-    end
-    object cdsDadosUsuarioUSU_CPF: TStringField
-      FieldName = 'USU_CPF'
-    end
-    object cdsDadosUsuarioUSU_ATIVO: TStringField
-      FieldName = 'USU_ATIVO'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsDadosUsuarioUSU_LOGIN_TIPO: TStringField
-      FieldName = 'USU_LOGIN_TIPO'
-      Size = 30
-    end
-    object cdsDadosUsuarioUSU_EXCLUIR: TStringField
-      FieldName = 'USU_EXCLUIR'
-      FixedChar = True
-      Size = 1
-    end
-    object cdsDadosUsuarioUSU_FUNCAO: TIntegerField
-      FieldName = 'USU_FUNCAO'
-      Required = True
-    end
-    object cdsDadosUsuarioUSU_COMISSAO_PEDIDO: TFMTBCDField
-      FieldName = 'USU_COMISSAO_PEDIDO'
-      Precision = 15
-      Size = 2
-    end
-    object cdsDadosUsuarioUSU_DESCONTO_PEDIDO: TFMTBCDField
-      FieldName = 'USU_DESCONTO_PEDIDO'
-      Precision = 15
-      Size = 2
-    end
-    object cdsDadosUsuarioUSU_DESCONTO_ORCAMENTO: TFMTBCDField
-      FieldName = 'USU_DESCONTO_ORCAMENTO'
-      Precision = 15
-      Size = 2
-    end
-  end
-  object dsDadosUsuario: TDataSource
-    DataSet = cdsDadosUsuario
-    Left = 80
-    Top = 192
-  end
   object qryViewUsuario: TSQLQuery
     MaxBlobSize = -1
     Params = <
@@ -712,5 +495,222 @@ object DMUsuario: TDMUsuario
     DataSet = cdsViewUsuarioFuncao
     Left = 440
     Top = 208
+  end
+  object qryDadosUsuario: TSQLQuery
+    MaxBlobSize = -1
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptInput
+      end>
+    SQL.Strings = (
+      'SELECT * '
+      'FROM USUARIOS'
+      'WHERE USU_ID = :ID')
+    SQLConnection = DMConnection.SQLConnection
+    Left = 80
+    Top = 48
+    object qryDadosUsuarioUSU_ID: TIntegerField
+      FieldName = 'USU_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qryDadosUsuarioUSU_LOGIN: TStringField
+      FieldName = 'USU_LOGIN'
+      Required = True
+      Size = 30
+    end
+    object qryDadosUsuarioUSU_SENHA: TStringField
+      FieldName = 'USU_SENHA'
+      Required = True
+      Size = 15
+    end
+    object qryDadosUsuarioUSU_SENHA_CONF: TStringField
+      FieldName = 'USU_SENHA_CONF'
+      Required = True
+      Size = 15
+    end
+    object qryDadosUsuarioUSU_NOME: TStringField
+      FieldName = 'USU_NOME'
+      Required = True
+      Size = 40
+    end
+    object qryDadosUsuarioUSU_ENDERECO: TStringField
+      FieldName = 'USU_ENDERECO'
+      Size = 40
+    end
+    object qryDadosUsuarioUSU_BAIRRO: TStringField
+      FieldName = 'USU_BAIRRO'
+      Size = 30
+    end
+    object qryDadosUsuarioUSU_CIDADE: TStringField
+      FieldName = 'USU_CIDADE'
+      Size = 30
+    end
+    object qryDadosUsuarioUSU_ESTADO: TStringField
+      FieldName = 'USU_ESTADO'
+      FixedChar = True
+      Size = 2
+    end
+    object qryDadosUsuarioUSU_FONE_RES: TStringField
+      FieldName = 'USU_FONE_RES'
+    end
+    object qryDadosUsuarioUSU_FONE_CEL: TStringField
+      FieldName = 'USU_FONE_CEL'
+    end
+    object qryDadosUsuarioUSU_EMAIL: TStringField
+      FieldName = 'USU_EMAIL'
+      FixedChar = True
+      Size = 40
+    end
+    object qryDadosUsuarioUSU_RG: TStringField
+      FieldName = 'USU_RG'
+    end
+    object qryDadosUsuarioUSU_CPF: TStringField
+      FieldName = 'USU_CPF'
+    end
+    object qryDadosUsuarioUSU_ATIVO: TStringField
+      FieldName = 'USU_ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object qryDadosUsuarioUSU_LOGIN_TIPO: TStringField
+      FieldName = 'USU_LOGIN_TIPO'
+      Size = 30
+    end
+    object qryDadosUsuarioUSU_EXCLUIR: TStringField
+      FieldName = 'USU_EXCLUIR'
+      FixedChar = True
+      Size = 1
+    end
+    object qryDadosUsuarioUSU_FUNCAO: TIntegerField
+      FieldName = 'USU_FUNCAO'
+      Required = True
+    end
+    object qryDadosUsuarioUSU_COMISSAO_PEDIDO: TFMTBCDField
+      FieldName = 'USU_COMISSAO_PEDIDO'
+      Precision = 15
+      Size = 2
+    end
+    object qryDadosUsuarioUSU_DESCONTO_PEDIDO: TFMTBCDField
+      FieldName = 'USU_DESCONTO_PEDIDO'
+      Precision = 15
+      Size = 2
+    end
+    object qryDadosUsuarioUSU_DESCONTO_ORCAMENTO: TFMTBCDField
+      FieldName = 'USU_DESCONTO_ORCAMENTO'
+      Precision = 15
+      Size = 2
+    end
+  end
+  object dspDadosUsuario: TDataSetProvider
+    DataSet = qryDadosUsuario
+    Left = 80
+    Top = 96
+  end
+  object cdsDadosUsuario: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspDadosUsuario'
+    Left = 80
+    Top = 144
+    object cdsDadosUsuarioUSU_ID: TIntegerField
+      FieldName = 'USU_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object cdsDadosUsuarioUSU_LOGIN: TStringField
+      FieldName = 'USU_LOGIN'
+      Required = True
+      Size = 30
+    end
+    object cdsDadosUsuarioUSU_SENHA: TStringField
+      FieldName = 'USU_SENHA'
+      Required = True
+      Size = 15
+    end
+    object cdsDadosUsuarioUSU_SENHA_CONF: TStringField
+      FieldName = 'USU_SENHA_CONF'
+      Required = True
+      Size = 15
+    end
+    object cdsDadosUsuarioUSU_NOME: TStringField
+      FieldName = 'USU_NOME'
+      Required = True
+      Size = 40
+    end
+    object cdsDadosUsuarioUSU_ENDERECO: TStringField
+      FieldName = 'USU_ENDERECO'
+      Size = 40
+    end
+    object cdsDadosUsuarioUSU_BAIRRO: TStringField
+      FieldName = 'USU_BAIRRO'
+      Size = 30
+    end
+    object cdsDadosUsuarioUSU_CIDADE: TStringField
+      FieldName = 'USU_CIDADE'
+      Size = 30
+    end
+    object cdsDadosUsuarioUSU_ESTADO: TStringField
+      FieldName = 'USU_ESTADO'
+      FixedChar = True
+      Size = 2
+    end
+    object cdsDadosUsuarioUSU_FONE_RES: TStringField
+      FieldName = 'USU_FONE_RES'
+    end
+    object cdsDadosUsuarioUSU_FONE_CEL: TStringField
+      FieldName = 'USU_FONE_CEL'
+    end
+    object cdsDadosUsuarioUSU_EMAIL: TStringField
+      FieldName = 'USU_EMAIL'
+      FixedChar = True
+      Size = 40
+    end
+    object cdsDadosUsuarioUSU_RG: TStringField
+      FieldName = 'USU_RG'
+    end
+    object cdsDadosUsuarioUSU_CPF: TStringField
+      FieldName = 'USU_CPF'
+    end
+    object cdsDadosUsuarioUSU_ATIVO: TStringField
+      FieldName = 'USU_ATIVO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsDadosUsuarioUSU_LOGIN_TIPO: TStringField
+      FieldName = 'USU_LOGIN_TIPO'
+      Size = 30
+    end
+    object cdsDadosUsuarioUSU_EXCLUIR: TStringField
+      FieldName = 'USU_EXCLUIR'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsDadosUsuarioUSU_FUNCAO: TIntegerField
+      FieldName = 'USU_FUNCAO'
+      Required = True
+    end
+    object cdsDadosUsuarioUSU_COMISSAO_PEDIDO: TFMTBCDField
+      FieldName = 'USU_COMISSAO_PEDIDO'
+      Precision = 15
+      Size = 2
+    end
+    object cdsDadosUsuarioUSU_DESCONTO_PEDIDO: TFMTBCDField
+      FieldName = 'USU_DESCONTO_PEDIDO'
+      Precision = 15
+      Size = 2
+    end
+    object cdsDadosUsuarioUSU_DESCONTO_ORCAMENTO: TFMTBCDField
+      FieldName = 'USU_DESCONTO_ORCAMENTO'
+      Precision = 15
+      Size = 2
+    end
+  end
+  object dsDadosUsuario: TDataSource
+    DataSet = cdsDadosUsuario
+    Left = 80
+    Top = 192
   end
 end

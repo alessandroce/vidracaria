@@ -68,7 +68,9 @@ uses
   uFormConfiguracoes in 'uFormConfiguracoes.pas' {FormConfiguracoes},
   uFormDuplicata in 'uFormDuplicata.pas' {FormDuplicata},
   uCadLinhaProduto in 'uCadLinhaProduto.pas' {FCadLinhaProd},
-  uCadClientes in 'uCadClientes.pas' {FormCadCliente};
+  uCadClientes in 'uCadClientes.pas' {FormCadCliente},
+  uClassAvisos in 'uClassAvisos.pas',
+  uClassServidorIni in 'uClassServidorIni.pas';
 
 {$R *.res}
 

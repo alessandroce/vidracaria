@@ -1,7 +1,7 @@
 object DMOrcamentoPedido: TDMOrcamentoPedido
   OldCreateOrder = False
-  Left = 57
-  Top = 48
+  Left = 294
+  Top = 163
   Height = 631
   Width = 905
   object qryViewOrcPedido_BuscaProduto: TSQLQuery

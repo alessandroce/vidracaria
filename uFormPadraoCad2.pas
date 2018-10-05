@@ -31,7 +31,6 @@ type
     Act_Btn_Localizar: TAction;
     btn_Localizar: TSpeedButton;
     ToolBar1: TToolBar;
-    Bevel1: TBevel;
     BtnInserir: TSpeedButton;
     BtnEditar: TSpeedButton;
     BtnExcluir: TSpeedButton;
@@ -46,6 +45,8 @@ type
     dspConsulta: TDataSetProvider;
     cdsConsulta: TMyClientDataSet;
     dsConsulta: TDataSource;
+    Bevel1: TBevel;
+    pnBevel: TPanel;
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
   private

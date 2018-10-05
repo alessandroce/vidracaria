@@ -21,7 +21,7 @@ object FormPedido: TFormPedido
   TextHeight = 13
   object Bevel2: TBevel
     Left = 0
-    Top = 50
+    Top = 53
     Width = 752
     Height = 5
     Align = alTop
@@ -92,23 +92,24 @@ object FormPedido: TFormPedido
     Left = 0
     Top = 0
     Width = 752
-    Height = 50
-    ButtonHeight = 45
+    Height = 53
+    ButtonHeight = 49
     Caption = 'ToolBar1'
     TabOrder = 4
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 161
-      Height = 45
-      Shape = bsSpacer
+      Width = 160
+      Height = 49
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 161
+      Left = 160
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Inserir
       BiDiMode = bdLeftToRight
       Flat = True
@@ -153,10 +154,10 @@ object FormPedido: TFormPedido
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 233
+      Left = 232
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Alterar
       Flat = True
       Glyph.Data = {
@@ -199,10 +200,10 @@ object FormPedido: TFormPedido
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 305
+      Left = 304
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Excluir
       Flat = True
       Glyph.Data = {
@@ -253,10 +254,10 @@ object FormPedido: TFormPedido
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 377
+      Left = 376
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Gravar
       Flat = True
       Glyph.Data = {
@@ -307,10 +308,10 @@ object FormPedido: TFormPedido
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 449
+      Left = 448
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Cancelar
       Flat = True
       Glyph.Data = {
@@ -361,10 +362,10 @@ object FormPedido: TFormPedido
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 521
+      Left = 520
       Top = 2
       Width = 72
-      Height = 45
+      Height = 49
       Action = Act_Btn_Sair
       Flat = True
       Glyph.Data = {
@@ -413,6 +414,14 @@ object FormPedido: TFormPedido
       Layout = blGlyphTop
       ParentShowHint = False
       ShowHint = True
+    end
+    object Bevel1: TBevel
+      Left = 592
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object GroupBox2: TGroupBox

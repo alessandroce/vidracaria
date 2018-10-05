@@ -192,6 +192,12 @@ type
     procedure bt_GerarPedidoExecute(Sender: TObject);
     procedure edValorAcrescimoChange(Sender: TObject);
     procedure edValorAcrescimoKeyPress(Sender: TObject; var Key: Char);
+    procedure cxGrid1DBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure cxGridDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
     FEditando : Boolean;
@@ -1162,6 +1168,24 @@ begin
     else
       cdsAcabamento.Next;
   end;
+end;
+
+procedure TFormCadOrcamentoPedido.cxGrid1DBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+  if AViewInfo.GridRecord.Selected then
+    ACanvas.Brush.Color := clGradientActiveCaption;
+end;
+
+procedure TFormCadOrcamentoPedido.cxGridDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+  if AViewInfo.GridRecord.Selected then
+    ACanvas.Brush.Color := clGradientActiveCaption;
 end;
 
 end.

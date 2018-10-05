@@ -140,8 +140,8 @@ object FormBuscaClienteOS: TFormBuscaClienteOS
   end
   object sbBuscaMensalista: TStatusBar
     Left = 0
-    Top = 202
-    Width = 377
+    Top = 198
+    Width = 370
     Height = 16
     BiDiMode = bdLeftToRight
     Panels = <

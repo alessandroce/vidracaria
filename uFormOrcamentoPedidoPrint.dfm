@@ -1,6 +1,6 @@
 object FormOrcamentoPedidoPrint: TFormOrcamentoPedidoPrint
-  Left = 309
-  Top = 52
+  Left = 300
+  Top = 167
   Width = 823
   Height = 650
   VertScrollBar.Position = 118
@@ -347,6 +347,7 @@ object FormOrcamentoPedidoPrint: TFormOrcamentoPedidoPrint
         Top = 25
         Width = 681
         Height = 13
+        Behavior = [beSiteExpander]
         DataField = 'VS_ORCPED_OBSERVACAO'
         DataSource = DMOrcamentoPedidoPrint.dsViewOrcamentoPedidoPrint
         Font.Charset = ANSI_CHARSET

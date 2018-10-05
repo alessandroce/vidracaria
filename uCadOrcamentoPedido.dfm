@@ -1,6 +1,6 @@
 inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
-  Left = 128
-  Top = 16
+  Left = 300
+  Top = 164
   HorzScrollBar.Range = 0
   VertScrollBar.Range = 0
   BorderStyle = bsDialog
@@ -100,29 +100,41 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
   inherited ToolBar2: TToolBar
     Width = 784
     TabOrder = 8
+    inherited Panel1: TPanel
+      Width = 176
+    end
     inherited BtnInserir: TSpeedButton
+      Left = 176
       ParentShowHint = False
       ShowHint = True
     end
     inherited BtnEditar: TSpeedButton
+      Left = 248
       ParentShowHint = False
       ShowHint = True
     end
     inherited BtnExcluir: TSpeedButton
+      Left = 320
       ParentShowHint = False
       ShowHint = True
     end
     inherited BtnGravar: TSpeedButton
+      Left = 392
       ParentShowHint = False
       ShowHint = True
     end
     inherited BtnCancela: TSpeedButton
+      Left = 464
       ParentShowHint = False
       ShowHint = True
     end
     inherited BtnSair: TSpeedButton
+      Left = 536
       ParentShowHint = False
       ShowHint = True
+    end
+    inherited Bevel1: TBevel
+      Left = 608
     end
   end
   object GroupBox2: TGroupBox [7]
@@ -403,7 +415,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     TabOrder = 2
     object Bevel4: TBevel
       Left = 646
-      Top = 204
+      Top = 214
       Width = 113
       Height = 5
       Shape = bsTopLine
@@ -423,7 +435,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object Label4: TLabel
       Left = 648
-      Top = 212
+      Top = 222
       Width = 62
       Height = 13
       Caption = 'Acess'#243'rios'
@@ -450,7 +462,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object BitBtn3: TBitBtn
       Left = 650
-      Top = 229
+      Top = 239
       Width = 42
       Height = 25
       Action = Aces_Inserir
@@ -459,7 +471,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object BitBtn5: TBitBtn
       Left = 698
-      Top = 229
+      Top = 239
       Width = 45
       Height = 25
       Action = Aces_Excluir
@@ -520,7 +532,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
     end
     object GroupBox11: TGroupBox
       Left = 652
-      Top = 263
+      Top = 273
       Width = 111
       Height = 41
       Caption = '  Total  '
@@ -560,6 +572,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
       TabOrder = 6
       object cxGrid1DBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
+        OnCustomDrawCell = cxGrid1DBTableView1CustomDrawCell
         DataController.DataSource = dsTmpProduto
         DataController.DetailKeyFieldNames = 'PROD_HANDLE'
         DataController.Summary.DefaultGroupSummaryItems = <
@@ -685,6 +698,7 @@ inherited FormCadOrcamentoPedido: TFormCadOrcamentoPedido
       TabOrder = 7
       object cxGridDBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
+        OnCustomDrawCell = cxGridDBTableView1CustomDrawCell
         DataController.DataSource = dsTmpAcessorio
         DataController.Summary.DefaultGroupSummaryItems = <
           item

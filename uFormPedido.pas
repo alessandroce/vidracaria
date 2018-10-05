@@ -79,6 +79,7 @@ type
     btnImprimirDadosCliente: TBitBtn;
     Label19: TLabel;
     DBEdit6: TDBEdit;
+    Panel1: TPanel;
     procedure ComboBox1Exit(Sender: TObject);
     procedure ComboBox1Enter(Sender: TObject);
     procedure ComboBox1Change(Sender: TObject);

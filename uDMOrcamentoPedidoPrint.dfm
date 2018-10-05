@@ -283,26 +283,31 @@ object DMOrcamentoPedidoPrint: TDMOrcamentoPedidoPrint
     end
     object cdsViewOrcamentoPedidoPrintVS_ORCPED_VALOR_TOTAL_PORCENT: TFMTBCDField
       FieldName = 'VS_ORCPED_VALOR_TOTAL_PORCENT'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ORCPED_DESCONTO: TFMTBCDField
       FieldName = 'VS_ORCPED_DESCONTO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ORCPED_VALORVENDA: TFMTBCDField
       FieldName = 'VS_ORCPED_VALORVENDA'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ORCPED_VALORPARCELADO: TFMTBCDField
       FieldName = 'VS_ORCPED_VALORPARCELADO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ORCPED_VALORPARCELA: TFMTBCDField
       FieldName = 'VS_ORCPED_VALORPARCELA'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
@@ -358,26 +363,31 @@ object DMOrcamentoPedidoPrint: TDMOrcamentoPedidoPrint
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_VALOR_TOTAL: TFMTBCDField
       FieldName = 'VS_ITENS_VALOR_TOTAL'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_LARGURA: TFMTBCDField
       FieldName = 'VS_ITENS_LARGURA'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_COMPRIMENTO: TFMTBCDField
       FieldName = 'VS_ITENS_COMPRIMENTO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_VALOR_UNIT: TFMTBCDField
       FieldName = 'VS_ITENS_VALOR_UNIT'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_ALTURA: TFMTBCDField
       FieldName = 'VS_ITENS_ALTURA'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
@@ -392,11 +402,13 @@ object DMOrcamentoPedidoPrint: TDMOrcamentoPedidoPrint
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_ESPESSURA: TFMTBCDField
       FieldName = 'VS_ITENS_ESPESSURA'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_ITENS_MEDIDA_METRO: TFMTBCDField
       FieldName = 'VS_ITENS_MEDIDA_METRO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
@@ -411,11 +423,13 @@ object DMOrcamentoPedidoPrint: TDMOrcamentoPedidoPrint
     end
     object cdsViewOrcamentoPedidoPrintVS_MQUADRADO: TFMTBCDField
       FieldName = 'VS_MQUADRADO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end
     object cdsViewOrcamentoPedidoPrintVS_MCORRIDO: TFMTBCDField
       FieldName = 'VS_MCORRIDO'
+      DisplayFormat = '0.00'
       Precision = 15
       Size = 2
     end

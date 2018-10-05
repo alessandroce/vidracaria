@@ -17,8 +17,8 @@ object FormPadraoCad3: TFormPadraoCad3
   TextHeight = 13
   object Bevel2: TBevel
     Left = 0
-    Top = 50
-    Width = 752
+    Top = 53
+    Width = 744
     Height = 40
     Align = alTop
     Shape = bsSpacer
@@ -97,10 +97,10 @@ object FormPadraoCad3: TFormPadraoCad3
   object ToolBar1: TToolBar
     Left = 0
     Top = 0
-    Width = 752
-    Height = 50
+    Width = 744
+    Height = 53
     BorderWidth = 1
-    ButtonHeight = 38
+    ButtonHeight = 49
     ButtonWidth = 60
     Caption = 'ToolBar1'
     EdgeBorders = [ebTop, ebBottom]
@@ -108,18 +108,19 @@ object FormPadraoCad3: TFormPadraoCad3
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 145
-      Height = 38
-      Shape = bsSpacer
+      Width = 164
+      Height = 49
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 145
+      Left = 164
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Inserir
       Flat = True
       Glyph.Data = {
@@ -160,10 +161,10 @@ object FormPadraoCad3: TFormPadraoCad3
       Layout = blGlyphTop
     end
     object BtnEditar: TSpeedButton
-      Left = 217
+      Left = 236
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Alterar
       Flat = True
       Glyph.Data = {
@@ -204,10 +205,10 @@ object FormPadraoCad3: TFormPadraoCad3
       Layout = blGlyphTop
     end
     object BtnExcluir: TSpeedButton
-      Left = 289
+      Left = 308
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Excluir
       Flat = True
       Glyph.Data = {
@@ -248,10 +249,10 @@ object FormPadraoCad3: TFormPadraoCad3
       Layout = blGlyphTop
     end
     object BtnCancela: TSpeedButton
-      Left = 361
+      Left = 380
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Cancelar
       Flat = True
       Glyph.Data = {
@@ -292,10 +293,10 @@ object FormPadraoCad3: TFormPadraoCad3
       Layout = blGlyphTop
     end
     object BtnGravar: TSpeedButton
-      Left = 433
+      Left = 452
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Gravar
       Flat = True
       Glyph.Data = {
@@ -336,10 +337,10 @@ object FormPadraoCad3: TFormPadraoCad3
       Layout = blGlyphTop
     end
     object BtnSair: TSpeedButton
-      Left = 505
+      Left = 524
       Top = 2
       Width = 72
-      Height = 38
+      Height = 49
       Action = Act_Btn_Sair
       Flat = True
       Glyph.Data = {
@@ -379,6 +380,14 @@ object FormPadraoCad3: TFormPadraoCad3
         FF000000FF000000FF000000FF000000FF000000FF000000FF00}
       Layout = blGlyphTop
     end
+    object Bevel1: TBevel
+      Left = 596
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
+    end
   end
   object Edit1: TEdit
     Left = 136
@@ -389,8 +398,8 @@ object FormPadraoCad3: TFormPadraoCad3
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 452
-    Width = 752
+    Top = 447
+    Width = 744
     Height = 19
     Panels = <>
   end

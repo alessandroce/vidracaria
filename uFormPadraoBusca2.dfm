@@ -89,7 +89,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 448
+    Top = 447
     Width = 744
     Height = 19
     Panels = <>
@@ -103,15 +103,16 @@ object FormPadraoBusca2: TFormPadraoBusca2
     Caption = 'ToolBar1'
     TabOrder = 1
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 177
+      Width = 164
       Height = 45
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 177
+      Left = 164
       Top = 2
       Width = 72
       Height = 45
@@ -157,7 +158,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
       ParentBiDiMode = False
     end
     object BtnEditar: TSpeedButton
-      Left = 249
+      Left = 236
       Top = 2
       Width = 72
       Height = 45
@@ -201,7 +202,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
       Layout = blGlyphTop
     end
     object BtnExcluir: TSpeedButton
-      Left = 321
+      Left = 308
       Top = 2
       Width = 72
       Height = 45
@@ -253,7 +254,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
       Layout = blGlyphTop
     end
     object BtnGravar: TSpeedButton
-      Left = 393
+      Left = 380
       Top = 2
       Width = 72
       Height = 45
@@ -305,7 +306,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
       Layout = blGlyphTop
     end
     object BtnCancela: TSpeedButton
-      Left = 465
+      Left = 452
       Top = 2
       Width = 72
       Height = 45
@@ -357,7 +358,7 @@ object FormPadraoBusca2: TFormPadraoBusca2
       Layout = blGlyphTop
     end
     object BtnSair: TSpeedButton
-      Left = 537
+      Left = 524
       Top = 2
       Width = 72
       Height = 45
@@ -407,6 +408,14 @@ object FormPadraoBusca2: TFormPadraoBusca2
         0200000000000002000000000000000000000000000000000000000000000000
         0000000000000000000000000000000000000000000000000000}
       Layout = blGlyphTop
+    end
+    object Bevel1: TBevel
+      Left = 596
+      Top = 2
+      Width = 72
+      Height = 45
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object ImageList1: TImageList

@@ -62,6 +62,7 @@ type
     bt_VizualizarOS: TAction;
     Label9: TLabel;
     Label10: TLabel;
+    Panel1: TPanel;
     procedure DBGrid1KeyPress(Sender: TObject; var Key: Char);
     procedure Edit2KeyPress(Sender: TObject; var Key: Char);
     procedure Edit1KeyPress(Sender: TObject; var Key: Char);
@@ -398,7 +399,7 @@ procedure TFormBuscaOrdemServico.DBGrid1DrawColumnCell(Sender: TObject;
 begin
   if (GdSelected in State) then
   begin
-    DBGrid1.Canvas.Brush.Color := clInactiveCaptionText;
+    DBGrid1.Canvas.Brush.Color := clGradientInactiveCaption;
     DBGrid1.Canvas.Font.Color  := clblack;
   end;
   DBGrid1.DefaultDrawDataCell(Rect, DBGrid1.columns[datacol].field, State);

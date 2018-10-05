@@ -113,7 +113,7 @@ inherited FormCadProduto: TFormCadProduto
           OnKeyPress = DBEdit1KeyPress
         end
         object DBCheckBox1: TDBCheckBox
-          Left = 295
+          Left = 247
           Top = 10
           Width = 50
           Height = 17

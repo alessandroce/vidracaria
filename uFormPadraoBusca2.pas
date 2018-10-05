@@ -33,6 +33,7 @@ type
     BtnGravar: TSpeedButton;
     BtnCancela: TSpeedButton;
     BtnSair: TSpeedButton;
+    Panel1: TPanel;
   private
     { Private declarations }
   public

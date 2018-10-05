@@ -1,6 +1,6 @@
 inherited FormCadUsuario: TFormCadUsuario
-  Left = 219
-  Top = 183
+  Left = 302
+  Top = 166
   Caption = 'Cadastro de Usu'#225'rio'
   ClientHeight = 459
   ClientWidth = 577
@@ -36,7 +36,6 @@ inherited FormCadUsuario: TFormCadUsuario
     inherited PageControl1: TPageControl
       Width = 533
       Height = 166
-      ActivePage = TabSheet2
       inherited TabSheetFicha: TTabSheet
         Caption = 'Dados Cadastrais'
         object Label2: TLabel
@@ -217,7 +216,6 @@ inherited FormCadUsuario: TFormCadUsuario
           Height = 17
           Caption = 'Ativo'
           DataField = 'USU_ATIVO'
-          DataSource = DMUsuario.dsDadosUsuario
           TabOrder = 10
           ValueChecked = 'T'
           ValueUnchecked = 'F'
@@ -438,27 +436,31 @@ inherited FormCadUsuario: TFormCadUsuario
   end
   inherited ToolBar1: TToolBar
     Width = 577
-    inherited Bevel1: TBevel
-      Width = 71
+    inherited pnBevel: TPanel
+      Width = 80
     end
     inherited BtnInserir: TSpeedButton
-      Left = 71
+      Left = 80
     end
     inherited BtnEditar: TSpeedButton
-      Left = 143
+      Left = 152
     end
     inherited BtnExcluir: TSpeedButton
-      Left = 215
+      Left = 224
     end
     inherited BtnGravar: TSpeedButton
-      Left = 287
+      Left = 296
       Width = 71
     end
     inherited BtnCancela: TSpeedButton
-      Left = 358
+      Left = 367
     end
     inherited BtnSair: TSpeedButton
-      Left = 430
+      Left = 439
+    end
+    inherited Bevel1: TBevel
+      Left = 511
+      Width = 71
     end
   end
   object Edit1: TEdit [9]

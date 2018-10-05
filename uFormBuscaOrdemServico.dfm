@@ -1,6 +1,6 @@
 object FormBuscaOrdemServico: TFormBuscaOrdemServico
-  Left = 228
-  Top = 178
+  Left = 308
+  Top = 170
   BorderStyle = bsDialog
   Caption = 'Busca Ordem de Servi'#231'o'
   ClientHeight = 546
@@ -71,15 +71,16 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
     Caption = 'ToolBar1'
     TabOrder = 2
     Transparent = False
-    object Bevel1: TBevel
+    object Panel1: TPanel
       Left = 0
       Top = 2
-      Width = 151
+      Width = 160
       Height = 49
-      Shape = bsSpacer
+      BevelOuter = bvNone
+      TabOrder = 0
     end
     object BtnInserir: TSpeedButton
-      Left = 151
+      Left = 160
       Top = 2
       Width = 72
       Height = 49
@@ -135,7 +136,7 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ShowHint = True
     end
     object BtnEditar: TSpeedButton
-      Left = 223
+      Left = 232
       Top = 2
       Width = 72
       Height = 49
@@ -181,7 +182,7 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ShowHint = True
     end
     object BtnExcluir: TSpeedButton
-      Left = 295
+      Left = 304
       Top = 2
       Width = 72
       Height = 49
@@ -235,7 +236,7 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ShowHint = True
     end
     object BtnGravar: TSpeedButton
-      Left = 367
+      Left = 376
       Top = 2
       Width = 72
       Height = 49
@@ -289,7 +290,7 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ShowHint = True
     end
     object BtnCancela: TSpeedButton
-      Left = 439
+      Left = 448
       Top = 2
       Width = 72
       Height = 49
@@ -343,7 +344,7 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ShowHint = True
     end
     object BtnSair: TSpeedButton
-      Left = 511
+      Left = 520
       Top = 2
       Width = 72
       Height = 49
@@ -395,6 +396,14 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       Layout = blGlyphTop
       ParentShowHint = False
       ShowHint = True
+    end
+    object Bevel1: TBevel
+      Left = 592
+      Top = 2
+      Width = 72
+      Height = 49
+      Shape = bsSpacer
+      Visible = False
     end
   end
   object BitBtn2: TBitBtn
@@ -588,9 +597,9 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
     Height = 36
     TabOrder = 5
     object Label2: TLabel
-      Left = 51
+      Left = 52
       Top = 13
-      Width = 43
+      Width = 42
       Height = 16
       Alignment = taRightJustify
       Caption = 'TOTAL'
@@ -602,9 +611,9 @@ object FormBuscaOrdemServico: TFormBuscaOrdemServico
       ParentFont = False
     end
     object Label3: TLabel
-      Left = 556
+      Left = 557
       Top = 12
-      Width = 69
+      Width = 68
       Height = 15
       Alignment = taRightJustify
       Caption = 'Total OS: R$'

@@ -130,71 +130,76 @@ begin
     MessageBox(Application.Handle,PChar('Preenchimento obrigatório:'+#13+msg), 'Informação', MB_ICONINFORMATION + MB_OK)
   else
   begin
-    if DMUsuario.cdsDadosUsuario.State in [dsInsert] then
-    begin
-        DMUsuario.cdsDadosUsuarioUSU_ID.AsInteger := 0;
-        //identifica se é um novo usuário para entao dar permissões de acessos ao sistema
-        var_novasPermissoes := 'ok';
-    end
-    else
-      var_novasPermissoes := '';
-    DMUsuario.cdsDadosUsuarioUSU_LOGIN_TIPO.AsString := ComboBox1.Text;
-    DMUsuario.cdsDadosUsuario.ApplyUpdates(-1);
-    DMUsuario.cdsDadosUsuario.Close;
-    Fnc_AtualizaGrid();
-    Fnc_MostraDadosGrid();
-    Fnc_BarraTarefasBotaoAtivo('NovoModificarExcluir');
-    PageControl1.ActivePage := PageControl1.Pages[0];
+  PageControl1.ActivePage := PageControl1.Pages[0];
+  {}  if DMUsuario.cdsDadosUsuario.State in [dsInsert] then
+  {}  begin
+  {}      DMUsuario.cdsDadosUsuarioUSU_ID.AsInteger := 0;
+  {}      //identifica se é um novo usuário para entao dar permissões de acessos ao sistema
+  {}      var_novasPermissoes := 'ok';
+  {}  end
+  {}  else
+  {}    var_novasPermissoes := '';
+  {}  if DMUsuario.cdsDadosUsuarioUSU_FUNCAO.IsNull then
+  {}    DMUsuario.cdsDadosUsuarioUSU_FUNCAO.Value := DMUsuario.cdsViewUsuarioFuncaoUSUF_ID.Value;
 
-     {--- formulário de permissões de acesso ao sistema ---}
-      if (var_novasPermissoes = 'ok') then
-      begin
-
-      {--- recupera ultimo cadastro de funcionário ---}
-      //cria uma qry com conexao
-      qryDadosFuncionarioMaxID               := TSQLQuery.Create(Self);
-      qryDadosFuncionarioMaxID.SQLConnection := DMConnection.SQLConnection;
-      with qryDadosFuncionarioMaxID do
-      begin
-        Close;
-        SQL.Clear;
-        SQL.Add('SELECT MAX(USU_ID) AS USU_ID FROM USUARIOS');
-        Open;
-        var_FuncionarioMaxID := FieldByName('USU_ID').AsInteger;
-      end;
-      {--- end / ultimo funcionário ---}
-      {--- cria permissoes para novo usuário ---
-      OBS.: para insersão de dados nesta tabela é necessário informar somente o ID
-      pelo fato de os campos serem do tipo BOOLEAN são atribuidos False (F) como padrão}
-        inc(var_count_reg);
-        DMUsuario.cdsDadosNovasPermissoes.Close;
-        DMUsuario.qryDadosNovasPermissoes.ParamByName('USUARIO').AsInteger := 0;
-        DMUsuario.cdsDadosNovasPermissoes.Open;
-        DMUsuario.cdsDadosNovasPermissoes.Insert;
-        DMUsuario.cdsDadosNovasPermissoesMENUPERM_USUARIO_ID.AsInteger := var_FuncionarioMaxID;
-        DMUsuario.cdsDadosNovasPermissoes.ApplyUpdates(-1);
-      {--- end / cria permissoes ---}
-      {--- formulário de alteração de novas permissões ---}
-        DMUsuario.cdsViewUsuario.Close;
-        DMUsuario.cdsViewUsuario.Open;
-
-        var_msgPermissoes := ' Novo Funcionário cadastrado. '+#13+' Agora defina as permissões de acesso ao sistema! ';
-        MessageBox(Application.Handle,PAnsiChar(var_msgPermissoes), 'Informação', MB_ICONINFORMATION + MB_OK);
-        if FormMenuPermissao.var_origemForm_Permissao = 'FormMenuPermissao' then
-        begin
-          FormCadUsuario.Close;
-        end
-        else
-        begin
-          Try
-          Application.CreateForm(TFormMenuPermissao ,FormMenuPermissao );
-          FormMenuPermissao.ShowModal;
-          Finally
-          FormMenuPermissao.Free;
-          End;
-        end;
-
-      end;
+  {}  DMUsuario.cdsDadosUsuarioUSU_LOGIN_TIPO.AsString := ComboBox1.Text;
+  {}  DMUsuario.cdsDadosUsuario.ApplyUpdates(-1);
+  {}  DMUsuario.cdsDadosUsuario.Close;
+  {}  Fnc_AtualizaGrid();
+  {}  Fnc_MostraDadosGrid();
+  {}  Fnc_BarraTarefasBotaoAtivo('NovoModificarExcluir');
+  {}  PageControl1.ActivePage := PageControl1.Pages[0];
+  {}  (*
+  {}   {--- formulário de permissões de acesso ao sistema ---}
+  {}    if (var_novasPermissoes = 'ok') then
+  {}    begin
+  {}
+  {}    {--- recupera ultimo cadastro de funcionário ---}
+  {}    //cria uma qry com conexao
+  {}    qryDadosFuncionarioMaxID               := TSQLQuery.Create(Self);
+  {}    qryDadosFuncionarioMaxID.SQLConnection := DMConnection.SQLConnection;
+  {}    with qryDadosFuncionarioMaxID do
+  {}    begin
+  {}      Close;
+  {}      SQL.Clear;
+  {}      SQL.Add('SELECT MAX(USU_ID) AS USU_ID FROM USUARIOS');
+  {}      Open;
+  {}      var_FuncionarioMaxID := FieldByName('USU_ID').AsInteger;
+  {}    end;
+  {}    {--- end / ultimo funcionário ---}
+  {}    {--- cria permissoes para novo usuário ---
+  {}    OBS.: para insersão de dados nesta tabela é necessário informar somente o ID
+  {}    pelo fato de os campos serem do tipo BOOLEAN são atribuidos False (F) como padrão}
+  {}      inc(var_count_reg);
+  {}      DMUsuario.cdsDadosNovasPermissoes.Close;
+  {}      DMUsuario.qryDadosNovasPermissoes.ParamByName('USUARIO').AsInteger := 0;
+  {}      DMUsuario.cdsDadosNovasPermissoes.Open;
+  {}      DMUsuario.cdsDadosNovasPermissoes.Insert;
+  {}      DMUsuario.cdsDadosNovasPermissoesMENUPERM_USUARIO_ID.AsInteger := var_FuncionarioMaxID;
+  {}      DMUsuario.cdsDadosNovasPermissoes.ApplyUpdates(-1);
+  {}    {--- end / cria permissoes ---}
+  {}    {--- formulário de alteração de novas permissões ---}
+  {}      DMUsuario.cdsViewUsuario.Close;
+  {}      DMUsuario.cdsViewUsuario.Open;
+  {}
+  {}      var_msgPermissoes := ' Novo Funcionário cadastrado. '+#13+' Agora defina as permissões de acesso ao sistema! ';
+  {}      MessageBox(Application.Handle,PAnsiChar(var_msgPermissoes), 'Informação', MB_ICONINFORMATION + MB_OK);
+  {}
+  {}      if FormMenuPermissao.var_origemForm_Permissao = 'FormMenuPermissao' then
+  {}      begin
+  {}        FormCadUsuario.Close;
+  {}      end
+  {}      else
+  {}      begin
+  {}        Try
+  {}        Application.CreateForm(TFormMenuPermissao ,FormMenuPermissao );
+  {}        FormMenuPermissao.ShowModal;
+  {}        Finally
+  {}        FormMenuPermissao.Free;
+  {}        End;
+  {}      end;
+  {}    end;
+  {}      *)
   end;
 end;
 
@@ -208,7 +213,9 @@ procedure TFormCadUsuario.Act_Btn_AlterarExecute(Sender: TObject);
 begin
 //  inherited;
   {---Altera dados de um Usuário---}
+  PageControl1.ActivePage := PageControl1.Pages[0];
   DMUsuario.cdsViewEstado.Open;
+  DMUsuario.cdsViewUsuarioFuncao.Close;
   DMUsuario.cdsViewUsuarioFuncao.Open;
   DBLookupComboBox1.Enabled := True;
   DBLookupComboBox2.Enabled := true;
@@ -281,11 +288,14 @@ procedure TFormCadUsuario.Act_Btn_NovoExecute(Sender: TObject);
 begin
   //  inherited;
   {--- Insere um Usuario ---}
+  PageControl1.ActivePage := PageControl1.Pages[0];
   DMUsuario.cdsDadosUsuario.Close;
   DMUsuario.qryDadosUsuario.ParamByName('ID').AsInteger := 0;
   DMUsuario.cdsDadosUsuario.Open;
   DMUsuario.cdsDadosUsuario.Insert;
+  DMUsuario.cdsDadosUsuarioUSU_ATIVO.AsBoolean := true;
 
+  DMUsuario.cdsViewUsuarioFuncao.Close;
   DMUsuario.cdsViewUsuarioFuncao.Open;
   ComboBox1.Enabled := true;
   ComboBox1.ItemIndex := 0;
@@ -308,13 +318,13 @@ begin
   begin
     if Fnc_MsgSalvar(DBEdit1.Text,DBEdit10.Text,DBEdit11.Text,DBEdit12.Text)= 'salvar' then
     if MessageBox(Application.Handle,'Deseja salvar as alterações?','Confirmar', MB_ICONQUESTION + MB_YESNO + MB_DEFBUTTON1) = ID_YES then
-    Act_Btn_Gravar.Execute;
+      Act_Btn_Gravar.Execute;
   end;
+  PageControl1.ActivePage := PageControl1.Pages[0];
   Fnc_CancelaOperacao();
-  eDIT1.SetFocus;
+  Edit1.SetFocus;
   Fnc_BarraTarefasBotaoAtivo('NovoModificarExcluir');
   GroupBox1.Caption := '';
-  PageControl1.ActivePage := PageControl1.Pages[0];
 end;
 
 procedure TFormCadUsuario.Act_Btn_LocalizarExecute(Sender: TObject);

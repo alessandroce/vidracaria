@@ -279,6 +279,18 @@ type
     cdsViewLookup_ClientesCLI_INFO_ADICIONAL: TBlobField;
     cdsViewLookup_ClientesCLI_ATIVO: TStringField;
     cdsViewLookup_ClientesCLI_COMPLEMENTO: TStringField;
+    qryDadosCadClientesCLI_CPF: TStringField;
+    qryDadosCadClientesCLI_RG: TStringField;
+    cdsDadosCadClientesCLI_CPF: TStringField;
+    cdsDadosCadClientesCLI_RG: TStringField;
+    qryViewCadClientesCLI_CPF: TStringField;
+    qryViewCadClientesCLI_RG: TStringField;
+    cdsViewCadClientesCLI_CPF: TStringField;
+    cdsViewCadClientesCLI_RG: TStringField;
+    qryViewBuscaClientesCLI_CPF: TStringField;
+    qryViewBuscaClientesCLI_RG: TStringField;
+    cdsViewBuscaClientesCLI_CPF: TStringField;
+    cdsViewBuscaClientesCLI_RG: TStringField;
     procedure cdsViewBuscaClientesBeforeScroll(DataSet: TDataSet);
     procedure cdsViewBuscaClientesAfterScroll(DataSet: TDataSet);
   private
