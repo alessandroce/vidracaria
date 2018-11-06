@@ -1,0 +1,31 @@
+create table cheque(
+chq_id dinteiro not null,
+chq_data ddata,
+chq_cmc7 dtexto30,
+chq_comp dtexto06,
+chq_serie dtexto03,
+chq_banco dtexto15,
+chq_conta dtexto10,
+chq_agencia dtexto06,
+chq_numero dtexto15,
+chq_data_deposito ddata,
+chq_data_vencimento ddata,
+chq_emissor_id dinteiro,
+chq_emissor dtexto100,
+chq_cliente_id dinteiro,
+chq_historico dtexto100,
+chq_valor dvalor,
+chq_situacao dinteiro,
+chq_datacorrentista ddata,
+chq_dh_ca ddatahora)
+
+select cheque.chq_id ID,
+       cheque.*,
+       case
+         when(cheque.chq_situacao=1) then ''
+       emi.cli_cliente,
+       cheque.chq_emissor,
+       cli.cli_cliente
+  from cheque
+ left join clientes emi on (emi.cli_id=cheque.chq_emissor_id)
+ left join clientes cli on (cli.cli_id=cheque.chq_cliente_id)
