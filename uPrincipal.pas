@@ -262,7 +262,7 @@ end;
 procedure TFormPrincipal.ApplicationEvents1Activate(Sender: TObject);
 begin
   StatusBar1.Panels[3].Text := ' '+Application.Hint;
-  //Application.OnMessage := ProcessaMsg;
+  Application.OnMessage := ProcessaMsg;
 end;
 
 procedure TFormPrincipal.Timer1Timer(Sender: TObject);
