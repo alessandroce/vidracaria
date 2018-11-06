@@ -50,12 +50,18 @@ type
     Label3: TLabel;
     DBEdit2: TDBEdit;
     frxDBSubgrupo: TfrxDBDataset;
+    qGetIdGrupo: TIBQuery;
+    dsGetIdGrupo: TDataSource;
+    qGetIdGrupoPSG_PGR_ID: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
+    procedure ibCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
+    function getIdGrupo(pIdSubGrupo:Integer):Integer;
   public
     { Public declarations }
+    FAcao : String;
     function getIdConsulta:Integer;override;
   end;
 
@@ -94,6 +100,21 @@ end;
 function TFCadPlSubgrupo.getIdConsulta: Integer;
 begin
   Result := FId;
+end;
+
+function TFCadPlSubgrupo.getIdGrupo(pIdSubGrupo: Integer): Integer;
+begin
+  qGetIdGrupo.Close;
+  qGetIdGrupo.ParamByName('psg_id').asInteger := pIdSubGrupo;
+  qGetIdGrupo.Open;
+  Result := qGetIdGrupoPSG_PGR_ID.asInteger;
+end;
+
+procedure TFCadPlSubgrupo.ibCadastroNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  if FAcao='N' then
+    ibCadastroPSG_PGR_ID.asInteger := getIdGrupo(FId);
 end;
 
 end.

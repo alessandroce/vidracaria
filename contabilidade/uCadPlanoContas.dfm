@@ -807,51 +807,61 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     SQL.Strings = (
+      'select 0 nivel,'
+      '       0 id,'
+      '       lpad(0,2,'#39'0'#39') codigo,'
+      '       '#39'PLANO DE CONTAS'#39' descricao'
+      '  from rdb$database'
+      'union all'
       'select nivel, id, codigo, descricao'
-      '  from (select 1 nivel,'
-      '               coalesce(pl_grupo.pgr_id,0) id,'
-      '               lpad(pl_grupo.pgr_codigo,2,'#39'0'#39') codigo,'
-      '               pl_grupo.pgr_descricao descricao'
-      '          from pl_grupo'
-      '         where pl_grupo.pgr_id>-1'
-      '        union all'
-      '        select 2 nivel,'
-      '               coalesce(pl_subgrupo.psg_id,0) id,'
+      '  from ('
+      '    select nivel, id, codigo, descricao'
+      '      from ('
+      '            select 1 nivel,'
+      '                   coalesce(pl_grupo.pgr_id,0) id,'
+      '                   lpad(pl_grupo.pgr_codigo,2,'#39'0'#39') codigo,'
+      '                   pl_grupo.pgr_descricao descricao'
+      '              from pl_grupo'
+      '             where pl_grupo.pgr_id>-1'
+      '            union all'
+      '            select 2 nivel,'
+      '                   coalesce(pl_subgrupo.psg_id,0) id,'
       
-        '               lpad(coalesce(pl_grupo.pgr_codigo,'#39'0'#39'),2,'#39'0'#39')||'#39'.' +
-        #39'||'
-      
-        '               lpad(coalesce(pl_subgrupo.psg_codigo,'#39'0'#39'),2,'#39'0'#39') ' +
-        'codigo,'
-      '               '#39'    '#39'||pl_subgrupo.psg_descricao descricao'
-      '          from pl_grupo'
-      
-        '         left join pl_subgrupo on (pl_subgrupo.psg_pgr_id=pl_gru' +
-        'po.pgr_id)'
-      '         where pl_grupo.pgr_id>-1'
-      '        union all'
-      '        select 3 nivel,'
-      '               coalesce(pl_item.pit_id,0) id,'
-      
-        '               lpad(coalesce(pl_grupo.pgr_codigo,'#39'0'#39'),2,'#39'0'#39') ||'#39 +
-        '.'#39'||'
-      
-        '               lpad(coalesce(pl_subgrupo.psg_codigo,'#39'0'#39'),2,'#39'0'#39') ' +
+        '                   lpad(coalesce(pl_grupo.pgr_codigo,'#39'0'#39'),2,'#39'0'#39')' +
         '||'#39'.'#39'||'
       
-        '               lpad(coalesce(pl_item.pit_codigo,'#39'0'#39'),2,'#39'0'#39') codi' +
-        'go,'
-      '               '#39'        '#39'||pl_item.pit_descricao descricao'
-      '          from pl_grupo'
+        '                   lpad(coalesce(pl_subgrupo.psg_codigo,'#39'0'#39'),2,'#39 +
+        '0'#39') codigo,'
+      '                   '#39'    '#39'||pl_subgrupo.psg_descricao descricao'
+      '              from pl_grupo'
       
-        '         left join pl_subgrupo on (pl_subgrupo.psg_pgr_id=pl_gru' +
-        'po.pgr_id)'
+        '             left join pl_subgrupo on (pl_subgrupo.psg_pgr_id=pl' +
+        '_grupo.pgr_id)'
+      '             where pl_grupo.pgr_id>-1'
+      '            union all'
+      '            select 3 nivel,'
+      '                   coalesce(pl_item.pit_id,0) id,'
       
-        '         left join pl_item on (pl_item.pit_psg_id=pl_subgrupo.ps' +
-        'g_id)'
-      '         where pl_grupo.pgr_id>-1)'
-      ' where ID>0'
-      ' order by CODIGO')
+        '                   lpad(coalesce(pl_grupo.pgr_codigo,'#39'0'#39'),2,'#39'0'#39')' +
+        ' ||'#39'.'#39'||'
+      
+        '                   lpad(coalesce(pl_subgrupo.psg_codigo,'#39'0'#39'),2,'#39 +
+        '0'#39') ||'#39'.'#39'||'
+      
+        '                   lpad(coalesce(pl_item.pit_codigo,'#39'0'#39'),2,'#39'0'#39') ' +
+        'codigo,'
+      '                   '#39'        '#39'||pl_item.pit_descricao descricao'
+      '              from pl_grupo'
+      
+        '             left join pl_subgrupo on (pl_subgrupo.psg_pgr_id=pl' +
+        '_grupo.pgr_id)'
+      
+        '             left join pl_item on (pl_item.pit_psg_id=pl_subgrup' +
+        'o.psg_id)'
+      '             where pl_grupo.pgr_id>-1)'
+      '     where ID>0'
+      '     order by CODIGO'
+      ')')
     Left = 400
     Top = 144
     object qConsultaNIVEL: TIntegerField

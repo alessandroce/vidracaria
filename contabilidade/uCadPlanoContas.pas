@@ -191,9 +191,14 @@ end;
 procedure TFCadPlanoContas.Act_Btn_AlterarExecute(Sender: TObject);
 begin
   inherited;
-  AbrirNivel(qConsultaNIVEL.Value,qConsultaID.Value,'A');
-  qConsulta.Close;
-  qConsulta.Open;
+  if (qConsultaNIVEL.Value>0) then
+  begin
+    AbrirNivel(qConsultaNIVEL.Value,qConsultaID.Value,'A');
+    qConsulta.Close;
+    qConsulta.Open;
+  end
+  else
+    Aviso('Impossível alterar este Nível.');
 end;
 
 procedure TFCadPlanoContas.Act_Btn_ExcluirExecute(Sender: TObject);
@@ -256,7 +261,8 @@ begin
   if AViewInfo.GridRecord.Selected then
     ACanvas.Brush.Color := clActiveCaption;
 
-  if(AViewInfo.GridRecord.Values[cxGridDBTableView1NIVEL.Index] = 1) then
+  if ((AViewInfo.GridRecord.Values[cxGridDBTableView1NIVEL.Index] = 0) or
+      (AViewInfo.GridRecord.Values[cxGridDBTableView1NIVEL.Index] = 1)) then
   begin
     ACanvas.Font.Style := [fsBold];
     ACanvas.Font.Color := clBlue;
@@ -288,7 +294,7 @@ end;
 procedure TFCadPlanoContas.Abrir_Grupo(pID:Integer;pAcao:String);
 begin
   FCadPlGrupo := TFCadPlGrupo.Create(nil);
-  if ((pAcao<>'N') and (pID>0)) then
+  if ((pAcao<>'N') or (pID>0)) then
   begin
     FCadPlGrupo.FId := pID;
     if pAcao='N' then
@@ -296,6 +302,7 @@ begin
     else
       FCadPlGrupo.Act_Btn_Alterar.Execute;
   end;
+  FCadPlGrupo.FAcao := pAcao;
   FCadPlGrupo.PnBarraFormCaption := Btn_PlGrupo.Hint;
   FCadPlGrupo.ShowModal;
   FCadPlGrupo.Free;
@@ -304,7 +311,7 @@ end;
 procedure TFCadPlanoContas.Abrir_Subgrupo(pID:Integer;pAcao:String);
 begin
   FCadPlSubgrupo := TFCadPlSubgrupo.Create(nil);
-  if ((pAcao<>'N') and (pID>0)) then
+  if ((pAcao<>'N') or (pID>0)) then
   begin
     FCadPlSubgrupo.FId := pID;
     if pAcao='N' then
@@ -312,6 +319,7 @@ begin
     else
       FCadPlSubgrupo.Act_Btn_Alterar.Execute;
   end;
+  FCadPlSubgrupo.FAcao := pAcao;
   FCadPlSubgrupo.PnBarraFormCaption := Btn_PlSubgrupo.Hint;
   FCadPlSubgrupo.ShowModal;
   FCadPlSubgrupo.Free;

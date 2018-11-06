@@ -1,15 +1,12 @@
 inherited FCadPlSubgrupo: TFCadPlSubgrupo
-  Width = 800
   Caption = 'FCadPlSubgrupo'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Width = 784
     ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Width = 776
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1PSG_CODIGO: TcxGridDBColumn
@@ -30,22 +27,12 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         end
       end
       inherited pnBarraPg: TPanel
-        Width = 776
-        inherited btSair: TSpeedButton
-          Left = 716
-        end
         inherited rgAtivo: TRadioGroup
           Visible = False
         end
       end
-      inherited sbBarraStatus: TStatusBar
-        Width = 776
-      end
     end
     inherited tsCadastro: TTabSheet
-      inherited Bevel1: TBevel
-        Width = 776
-      end
       object Label1: TLabel [1]
         Left = 42
         Top = 82
@@ -68,15 +55,6 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         Height = 13
         Caption = 'Descri'#231#227'o'
         FocusControl = DBEdit2
-      end
-      inherited Panel1: TPanel
-        Width = 776
-        inherited btSalvar: TSpeedButton
-          Left = 716
-        end
-        inherited btCancelar: TSpeedButton
-          Left = 657
-        end
       end
       object DBLookupComboBox1: TDBLookupComboBox
         Left = 42
@@ -110,10 +88,8 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
       end
     end
   end
-  inherited pnBarraForm: TPanel
-    Width = 784
-  end
   inherited ibCadastro: TIBDataSet
+    OnNewRecord = ibCadastroNewRecord
     DeleteSQL.Strings = (
       'delete from pl_subgrupo'
       'where'
@@ -264,7 +240,33 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
       'GRUPO=GRUPO')
     DataSource = dsConsulta
     BCDToCurrency = False
-    Left = 388
-    Top = 135
+    Left = 412
+    Top = 175
+  end
+  object qGetIdGrupo: TIBQuery
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacaoLeitura
+    SQL.Strings = (
+      'select pl_subgrupo.psg_pgr_id'
+      '  from pl_subgrupo'
+      ' where pl_subgrupo.psg_id = :psg_id')
+    Left = 368
+    Top = 112
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'psg_id'
+        ParamType = ptUnknown
+      end>
+    object qGetIdGrupoPSG_PGR_ID: TIntegerField
+      FieldName = 'PSG_PGR_ID'
+      Origin = '"PL_SUBGRUPO"."PSG_PGR_ID"'
+      Required = True
+    end
+  end
+  object dsGetIdGrupo: TDataSource
+    DataSet = qGetIdGrupo
+    Left = 416
+    Top = 112
   end
 end
