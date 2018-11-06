@@ -1,0 +1,4 @@
+1) criar campo ATIVO, ajustar todas as telas para considerar este campo
+2) criar campo EX_DH, ajustar botao excluir de todas as telas
+3) criar relatorio para todas as telas de cadastro
+4)

@@ -1,0 +1,79 @@
+OUTRAS RECEITAS
+
+Ajuste Caixa						Outras Receitas Não Operacionais
+Devolução de adiantamento				Outras Receitas Não Operacionais
+
+RECEITAS DE VENDAS
+Vendas							Receita de Vendas
+
+RECEITAS FINANCEIRAS
+Aplicações Financeiras					Receitas e Rendimentos Financeiros
+
+DESPESAS ADMINISTRATIVAS E COMERCIAIS 
+Água							Despesas Administrativas 
+Aluguel							Despesas Administrativas 
+Assessorias e Associações				Despesas Administrativas 
+Cartório						Despesas Administrativas 
+Combustivel e Translados				Despesas Administrativas 
+Confraternizações					Despesas Administrativas 
+Contabilidade						Despesas Administrativas 
+Correios						Despesas Administrativas 
+Cursos e Treinamentos					Despesas Administrativas 
+Distribuição de Lucros					Outras Despesas Não Operacionais 
+Empréstimos						Empréstimos e Dívidas 
+Encargos - Rescisões Trabalhistas			Despesas Administrativas 
+Encargos Funcionários - 13o Salário			Despesas Administrativas 
+Encargos Funcionários - Alimentação			Despesas Administrativas 
+Encargos Funcionários - Assist. Médica e Odontol.	Despesas Administrativas 
+Encargos Funcionários - Exames Pré e Demissionais	Despesas Administrativas 
+Encargos Funcionários - FGTS				Despesas Administrativas 
+Encargos Funcionarios - Horas Extras			Despesas Administrativas 
+Encargos Funcionários - INSS				Despesas Administrativas 
+Encargos Funcionários - Vale Transporte			Despesas Administrativas 
+Energia Elétrica					Despesas Administrativas 
+Impostos - Alvará					Despesas Administrativas 
+Impostos - Coleta de Lixo				Despesas Administrativas 
+Impostos - IPTU						Despesas Administrativas 
+Impostos - PIS						Impostos Sobre Vendas 
+Internet						Despesas Administrativas 
+Licença ou Aluguel de Softwares				Despesas Administrativas 
+Limpeza							Despesas Administrativas 
+Manutenção Equipamentos					Despesas Administrativas 
+Marketing e Publicidade					Despesas Comerciais 
+Material de Escritório					Despesas Administrativas 
+Material Reforma					Despesas Administrativas 
+Remuneração Funcionários				Despesas Administrativas 
+Segurança						Despesas Administrativas 
+Supermercado						Despesas Administrativas 
+Telefonia						Despesas Administrativas 
+Transportadora 						Custo das Vendas de Produtos 
+Viagens							Despesas Comerciais 
+
+DESPESAS DE PRODUTOS VENDIDOS 
+Comissão Vendedores					Comissões Sobre Vendas 
+Fornecedor						Custo das Vendas de Produtos 
+Impostos - Cofins 					Impostos Sobre Vendas 
+Impostos - CSSL						Impostos Sobre Vendas 
+Impostos - ICMS						Impostos Sobre Vendas 
+Impostos - Importação IPI				Impostos Sobre Vendas 
+Impostos - IRPJ						Despesas Administrativas 
+Impostos - ISS						Impostos Sobre Vendas 
+
+DESPESAS FINANCEIRAS 
+Despesas Bancárias					Despesas Financeiras 
+
+INVESTIMENTOS 
+Aquisição de Equipamentos				Investimentos em Imobilizado 
+
+OUTRAS DESPESAS 
+Adiantamento - Funcionários				Despesas Administrativas 
+Ajuste Caixa						Outras Despezas Não Operacionais
+
+
+
+
+
+
+
+
+

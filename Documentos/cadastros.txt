@@ -1,0 +1,16 @@
+create table perfis(		xx
+create table componentes(	xx
+create table vidros(		xx
+create table tipo_vidros(	xx
+create table variaveis_vidro(	xx
+create table grupo_perfil(	xx
+create table grau_perfil(	xx
+
+
+create table orcamentos(
+create table orcamento_itens(
+create table orcamento_itens_perf(
+create table orcamento_itens_comp(
+create table orcamento_itens_vidr(
+create table orcamento_itens_vari(
+create table orcamento_itens_grperfil(

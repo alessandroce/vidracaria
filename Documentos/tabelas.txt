@@ -1,0 +1,126 @@
+create table produto(
+prod_id dinteiro not null,
+prod_codigointerno dtexto30,
+prod_descricao dtexto100,
+prod_imagem dblobtxt,
+prod_dh_ca ddatahora)
+
+create table orcamentos(
+orc_id dinteiro,
+orc_datahora ddatahora,
+orc_cli_id dinteiro, --cliente
+orc_usu_id dinteiro, --usuario
+orc_tipo_id dinteiro, --tipo
+orc_corferragem_id dinteiro,
+orc_coraluminio_id dinteiro,
+orc_observacao dtexto255,
+orc_dh_ca ddatahora
+)
+
+create table orcamento_itens(
+ori_id dinteiro,
+ori_prod_id dinteiro, --produto
+ori_orpi_id dinteiro, --perfil
+ori_orco_id dinteiro, --componente
+ori_orvi_Id dinteiro, --vidro
+ori_dh_ca ddatahora
+)
+
+create table orcamento_itens_perf(
+orpi_id dinteiro,
+orpi_ori_id dinteiro,
+orpi_orpi_id dinteiro --perfil
+orpi_medida dtexto50, 
+orpi_mbarra dinteiro, 
+orpi_qtdade dinteiro, 
+orpi_grap_id dinteiro, --grau_perfil
+orpi_dh_ca ddatahora
+)
+
+create table perfis(
+per_id dinteiro
+per_imagem dblobtxt,
+per_codigointerno dtexto30,
+per_descricao dtexto100,
+per_dh_ca ddatahora
+)
+
+create table orcamento_itens_comp(
+orco_id dinteiro,
+orco_ori_id dinteiro,
+orco_orco_id dinteiro, --componente
+orco_medida dtexto50, --livre
+orco_qtdade dinteiro,
+orco_dh_ca ddatahora
+)
+
+create table componentes(
+com_id dinteiro
+com_imagem dblobtxt,
+com_codigointerno dtexto30,
+com_descricao dtexto100,
+com_dh_ca ddatahora
+)
+
+create table orcamento_itens_vidr(
+orvi_id dinteiro,
+orvi_ori_id dinteiro,
+orvi_orvi_Id dinteiro, --vidro
+orvi_descricao dtexto100, --livre
+orvi_largura dvalor, 
+orvi_altura dvalor,
+orvi_qtde dinteiro, 
+orvi_dh_ca ddatahora
+)
+
+create table vidros(
+vid_id dinteiro
+vid_tvid_id dinteiro, --tipo_vidro
+vid_descricao dtexto100,
+vid_dh_ca ddatahora
+)
+
+create table tipo_vidros(
+tvid_id dinteiro
+tvid_descricao dtexto100,
+tvid_dh_ca ddatahora
+)
+
+create table orcamento_itens_vari(
+orva_id dinteiro,
+orva_ori_id dinteiro,
+orva_vavi_Id dinteiro,
+orva_valorvariavel dtexto50, 
+orva_dh_ca ddatahora
+)
+
+create table variaveis_vidro(
+vavi_id dinteiro,
+vavi_descricao dtexto100,
+vavi_dh_ca ddatahora
+)
+
+create table orcamento_itens_grperfil(
+orge_id dinteiro,
+orge_ori_id dinteiro,
+orge_grpe_Id dinteiro,
+orge_dh_ca ddatahora
+)
+
+create table grupo_perfil(
+grpe_id dinteiro,
+grpe_descricao dtexto100,
+grpe_dh_ca ddatahora
+)
+
+create table grau_perfil(
+grap_id dinteiro,
+grap_descricao dtexto100,
+grap_dh_ca ddatahora
+)
+
+
+
+
+
+

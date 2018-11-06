@@ -1,0 +1,57 @@
+receber (cliente) -> entradas previstas, vendas (venda produtos e serviços)
+pagar (fornecedor) -> saidas previstas, compras (fornecedores, quitação conta consumo) garante quitação sem atraso sem juros e multas
+
+dre gerencial -> 
+dre contabil -> regime de tributação (lucro real)
+
+operações financeiras periodo
+operacional -> receita venda produto ou serviço
+não operacional -> despesas (material limpeza)
+
+toma como base contas pagar/receber pela data competencia
+
+categoria - grupo dre
+
+[---------------------]
+(=) receitas operacionais
+ (+) receitas de vendas
+ (+) receitas de fretes e entregas
+
+(=) receita bruta de vendas
+ deduções receita bruta
+  (-) impostos sobre vendas
+  (-) comissões sobre vendas
+  (-) descontos incondicionais
+  (-) devolução de vendas
+
+receita liquida de vendas
+ custos operacionais
+  (-) custo dos produtos vendidos
+  (-) custo das vendas de produtos
+  (-) custo dos serviços prestados
+
+(=) lucro bruto
+ despesas operacionais
+  (-) despesas comerciais
+  (-) despesas administrativas
+  (-) despesas operacionais
+
+(=) lucro / prejuizo operacional
+ receitas e despesas financeiras
+  (+) receitas e rendimentos financeiras
+  (-) despesas financeiras
+
+ outras receitas e despesas não operacionais
+  (+) outras receitas não operacionais
+  (-) outras despesas não operacionais
+
+(=) lucro / prejuizo liquido
+ despesas com investimentos e emprestimos
+  (-) investimentos em imobilizado
+  (-) empréstimos e dívidas
+
+lucro / prejuizo final
+
+
+
+
