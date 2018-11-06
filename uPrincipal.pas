@@ -22,20 +22,13 @@ uses
   dxSkinStardust, dxSkinSummer2008, dxSkinsDefaultPainters,
   dxSkinValentine, dxSkinXmas2008Blue, WinSkinData, WinSkinStore,
   cxLookAndFeelPainters, dxSkinsdxNavBar2Painter, dxNavBarCollns,
-  dxNavBarBase, dxNavBar, dxNavBarStyles;
+  dxNavBarBase, dxNavBar, dxNavBarStyles, dxSkinscxPCPainter, frxClass;
 
 type
   TFormPrincipal = class(TForm)
     StatusBar1: TStatusBar;
     Bevel1: TBevel;
     APanel: TPanel;
-    GroupBox4: TGroupBox;
-    Label12: TLabel;
-    Label1: TLabel;
-    BitBtn1: TBitBtn;
-    GroupBox1: TGroupBox;
-    GroupBox2: TGroupBox;
-    Image1: TImage;
     ImageList1: TImageList;
     Timer1: TTimer;
     ApplicationEvents1: TApplicationEvents;
@@ -44,18 +37,16 @@ type
     Logoff: TAction;
     Sair: TAction;
     Sis_Config: TAction;
-    Act_Cad_Produto: TAction;
-    Act_Cad_ProdutoTipo: TAction;
+    Est_Produto: TAction;
+    Est_TipoProduto: TAction;
     Lanc_Orcamento: TAction;
-    Act_Cad_Bancos: TAction;
     Cons_Produto: TAction;
     Cons_TipoProduto: TAction;
     Cons_Clientes: TAction;
-    Act_Cad_Clientes: TAction;
-    Act_Cad_Usuario: TAction;
+    Cad_Clientes: TAction;
+    Cad_Usuario: TAction;
     Lanc_Pedido: TAction;
     Cons_Pedido: TAction;
-    Act_Cad_OrcTipo: TAction;
     Cons_Orcamento: TAction;
     Finc_Duplicatas: TAction;
     Finc_Recibo: TAction;
@@ -67,37 +58,7 @@ type
     Sis_Emitente: TAction;
     Rel_EtiquetaClientes: TAction;
     menu: TMainMenu;
-    Cadastro1: TMenuItem;
-    Clientes1: TMenuItem;
-    Produto1: TMenuItem;
-    ipodeProduto1: TMenuItem;
-    Usurio1: TMenuItem;
-    Usurio2: TMenuItem;
-    Consulta1: TMenuItem;
-    Cliente1: TMenuItem;
-    N4: TMenuItem;
-    BuscaOramentopedido1: TMenuItem;
-    Pedido2: TMenuItem;
-    ItensPedido1: TMenuItem;
-    N7: TMenuItem;
-    OrdemdeServico1: TMenuItem;
-    Vendas1: TMenuItem;
-    Oramentopedido1: TMenuItem;
-    Pedido1: TMenuItem;
-    N3: TMenuItem;
-    OrdemServio1: TMenuItem;
-    Relatrios1: TMenuItem;
-    Oramentos1: TMenuItem;
-    Pedido3: TMenuItem;
-    N8: TMenuItem;
-    EtiquetaClientes1: TMenuItem;
-    Ajuda1: TMenuItem;
-    Duplicatas1: TMenuItem;
-    Recibo1: TMenuItem;
     Sistema1: TMenuItem;
-    Configuraes2: TMenuItem;
-    Sobre2: TMenuItem;
-    N5: TMenuItem;
     Sair1: TMenuItem;
     PopupMenu1: TPopupMenu;
     Produto2: TMenuItem;
@@ -120,81 +81,145 @@ type
     bt_Visualizar: TAction;
     bt_ManutEfetuada: TAction;
     cxLookAndFeelController1: TcxLookAndFeelController;
-    DBGrid1: TDBGrid;
-    N9: TMenuItem;
-    ComissoVendas1: TMenuItem;
-    Act_Cad_ProdutoLinha: TAction;
-    LinhaProduto1: TMenuItem;
-    Act_Cad_Obras: TAction;
-    N1: TMenuItem;
-    N2: TMenuItem;
-    SkinData1: TSkinData;
     SkinStore1: TSkinStore;
+    Est_TipoVidro: TAction;
+    Est_Vidro: TAction;
+    mn_Estoque: TAction;
+    Estoque1: TMenuItem;
+    mn_Consulta: TAction;
+    mn_Lancamento: TAction;
+    mn_Relatorio: TAction;
+    mn_Financeiro: TAction;
+    mn_Sistema: TAction;
+    smn_Auxiliares: TAction;
+    Produtos1: TMenuItem;
+    Vidros1: TMenuItem;
+    Auxiliares1: TMenuItem;
+    ipoVidros1: TMenuItem;
+    Est_Perfis: TAction;
+    Perfis1: TMenuItem;
+    Est_Componente: TAction;
+    Componentes1: TMenuItem;
+    mn_Cadastro: TAction;
+    Cadastro1: TMenuItem;
+    Clientes1: TMenuItem;
+    Est_VariaveisVidro: TAction;
+    Est_GrupoPerfil: TAction;
+    GrupoPerfil1: TMenuItem;
+    Est_GrauPerfil: TAction;
+    GrauPerfil1: TMenuItem;
+    VariveisVidro1: TMenuItem;
+    N1: TMenuItem;
+    Usurio1: TMenuItem;
+    Financeiro1: TMenuItem;
+    Auxiliares2: TMenuItem;
+    Recibo1: TMenuItem;
+    N2: TMenuItem;
+    CadastrodeEmitente1: TMenuItem;
+    Edit1: TEdit;
+    BitBtn1: TBitBtn;
+    OpenDialog1: TOpenDialog;
+    ListBox1: TListBox;
+    BitBtn2: TBitBtn;
+    Est_CoresFerragem: TAction;
+    N3: TMenuItem;
+    CoresFerragem1: TMenuItem;
+    Est_LinhaProduto: TAction;
+    LinhadeProduto1: TMenuItem;
+    SkinData1: TSkinData;
+    ImageList3: TImageList;
+    ActionList3: TActionList;
+    ata_Estoque: TAction;
+    ata_Financeiro: TAction;
+    ata_Cadastro: TAction;
+    Fin_ContasPagar: TAction;
+    Fin_ContasReceber: TAction;
+    ContasPagar1: TMenuItem;
+    ContasReceber1: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    Cad_Fornecedores: TAction;
+    Fornecedores1: TMenuItem;
+    Duplicatas1: TMenuItem;
+    N6: TMenuItem;
+    Fin_FormaPgto: TAction;
+    Fin_Bancos: TAction;
+    Bancos1: TMenuItem;
+    FormadePagamento1: TMenuItem;
+    Cont_PlanoContas: TAction;
+    mn_Contabilidade: TAction;
+    Contabilidade1: TMenuItem;
+    PlanodeContas1: TMenuItem;
+    Fin_ControleCheque: TAction;
+    ContasaPagar1: TMenuItem;
+    Fin_Cheque: TAction;
+    Rel_Fin_ExtratoContasPagar: TAction;
+    smn_RelatorioFinanceiro: TAction;
+    RelatorioFinanceiro1: TMenuItem;
+    ContasaPagar2: TMenuItem;
+    frxReport1: TfrxReport;
+    Rel_Fin_Pagar_Vencimento: TAction;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    ContasaPagarVencimentos1: TMenuItem;
+    Rel_Fin_Pagar_Pagamento: TAction;
+    ContasaPagarPagamentos1: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure Act_Cad_ProdutoExecute(Sender: TObject);
-    procedure Act_Cad_ProdutoTipoExecute(Sender: TObject);
     procedure ApplicationEvents1Activate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure Sair2Click(Sender: TObject);
-    procedure Lanc_OrcamentoExecute(Sender: TObject);
-    procedure Cons_ProdutoExecute(Sender: TObject);
-    procedure Cons_TipoProdutoExecute(Sender: TObject);
-    procedure Cons_ClientesExecute(Sender: TObject);
-    procedure Cons_BancoExecute(Sender: TObject);
-    procedure Act_Cad_ClientesExecute(Sender: TObject);
     procedure LogoffExecute(Sender: TObject);
-    procedure Act_Cad_UsuarioExecute(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure Lanc_PedidoExecute(Sender: TObject);
-    procedure Cons_PedidoExecute(Sender: TObject);
-    procedure Act_Cad_OrcTipoExecute(Sender: TObject);
     procedure ApplicationEvents2Message(var Msg: tagMSG;
       var Handled: Boolean);
-    procedure bt_ManutEfetuadaExecute(Sender: TObject);
-    procedure Cons_OrcamentoExecute(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure Finc_DuplicatasExecute(Sender: TObject);
-    procedure Finc_ReciboExecute(Sender: TObject);
-    procedure Sis_ConfigExecute(Sender: TObject);
-    procedure Rel_PedidoExecute(Sender: TObject);
-    procedure Rel_OrcamentoExecute(Sender: TObject);
-    procedure Rel_ItensPedidoExecute(Sender: TObject);
-    procedure Lanc_OrdemServicoExecute(Sender: TObject);
-    procedure Cons_OrdemServicoExecute(Sender: TObject);
-    procedure Sis_EmitenteExecute(Sender: TObject);
-    procedure Act_Cad_ProdutoUpdate(Sender: TObject);
-    procedure Act_Cad_ProdutoTipoUpdate(Sender: TObject);
-    procedure Act_Cad_BancosUpdate(Sender: TObject);
-    procedure Act_Cad_ClientesUpdate(Sender: TObject);
-    procedure Act_Cad_UsuarioUpdate(Sender: TObject);
-    procedure Act_Cad_OrcTipoUpdate(Sender: TObject);
-    procedure Cons_ProdutoUpdate(Sender: TObject);
-    procedure Cons_TipoProdutoUpdate(Sender: TObject);
-    procedure Cons_ClientesUpdate(Sender: TObject);
-    procedure Cons_BancoUpdate(Sender: TObject);
-    procedure Cons_PedidoUpdate(Sender: TObject);
-    procedure Cons_OrcamentoUpdate(Sender: TObject);
-    procedure Cons_OrdemServicoUpdate(Sender: TObject);
-    procedure Finc_DuplicatasUpdate(Sender: TObject);
-    procedure Finc_ReciboUpdate(Sender: TObject);
-    procedure Lanc_OrcamentoUpdate(Sender: TObject);
-    procedure Lanc_PedidoUpdate(Sender: TObject);
-    procedure Lanc_OrdemServicoUpdate(Sender: TObject);
-    procedure Rel_PedidoUpdate(Sender: TObject);
-    procedure Rel_OrcamentoUpdate(Sender: TObject);
-    procedure Rel_ItensPedidoUpdate(Sender: TObject);
     procedure SairExecute(Sender: TObject);
-    procedure Sis_ConfigUpdate(Sender: TObject);
-    procedure Sis_EmitenteUpdate(Sender: TObject);
-    procedure Rel_EtiquetaClientesExecute(Sender: TObject);
-    procedure Act_Cad_ProdutoLinhaExecute(Sender: TObject);
-    procedure Act_Cad_ObrasExecute(Sender: TObject);
+    procedure Est_ProdutoExecute(Sender: TObject);
+    procedure Est_TipoVidroExecute(Sender: TObject);
+    procedure Est_VidroExecute(Sender: TObject);
+    procedure mn_EstoqueExecute(Sender: TObject);
+    procedure smn_AuxiliaresExecute(Sender: TObject);
+    procedure Est_PerfisExecute(Sender: TObject);
+    procedure Est_ComponenteExecute(Sender: TObject);
+    procedure mn_CadastroExecute(Sender: TObject);
+    procedure Cad_ClientesExecute(Sender: TObject);
+    procedure Est_VariaveisVidroExecute(Sender: TObject);
+    procedure Est_GrupoPerfilExecute(Sender: TObject);
+    procedure Est_GrauPerfilExecute(Sender: TObject);
+    procedure Cad_UsuarioExecute(Sender: TObject);
+    procedure Sis_EmitenteExecute(Sender: TObject);
+    procedure mn_FinanceiroExecute(Sender: TObject);
+    procedure Finc_DuplicatasExecute(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
+    procedure ListBox1Click(Sender: TObject);
+    procedure Est_CoresFerragemExecute(Sender: TObject);
+    procedure Est_LinhaProdutoExecute(Sender: TObject);
+    procedure ata_EstoqueExecute(Sender: TObject);
+    procedure ata_FinanceiroExecute(Sender: TObject);
+    procedure ata_CadastroExecute(Sender: TObject);
+    procedure Fin_BancosExecute(Sender: TObject);
+    procedure Fin_FormaPgtoExecute(Sender: TObject);
+    procedure Fin_ContasPagarExecute(Sender: TObject);
+    procedure Fin_ContasReceberExecute(Sender: TObject);
+    procedure Cad_FornecedoresExecute(Sender: TObject);
+    procedure mn_ContabilidadeExecute(Sender: TObject);
+    procedure Cont_PlanoContasExecute(Sender: TObject);
+    procedure Fin_ControleChequeExecute(Sender: TObject);
+    procedure Fin_ChequeExecute(Sender: TObject);
+    procedure smn_RelatorioFinanceiroExecute(Sender: TObject);
+    procedure Rel_Fin_ExtratoContasPagarExecute(Sender: TObject);
+    procedure Rel_Fin_Pagar_VencimentoExecute(Sender: TObject);
+    procedure Rel_Fin_Pagar_PagamentoExecute(Sender: TObject);
   private
     { Private declarations }
+    CaminhoDasSkins : String;
+    ss : String;
     procedure PanelCenter;
+    procedure getContaPagarReceber(pConta: Integer);
+    procedure getCliente(pTipo: Integer);
+    procedure ProcessaMsg(var Msg: TMsg; var Handler: Boolean);
+
   public
     { Public declarations }
     var_principal : string;
@@ -205,19 +230,25 @@ type
 var
   FormPrincipal: TFormPrincipal;
 
+const
+  cContasReceber = 1;
+  cContasPagar   = 2;
+  cCliente       = 1;
+  cFornecedor    = 2;
+
+
+
 implementation
 
-uses uCadProduto, uCadProdutoTipo, uCadClientes, uCadOrcamentoPedido,
-  uCadBancos, uRelatorioProduto, uRelatorioTipoProduto, uRelatorioCliente,
-  uRelatorioBanco, uFormBuscaOrcPed, uFormLogin, uFormCadUsuario, uDMLogin,
-  uFormOrcamentoPedidoPrint, uFormBuscaClientes, uFormPedido,
-  uFormBuscaPedido, uFormCadOrcamentoTipo, uDMOrcamentoPedido,
-  uDMPrincipal, UDMPedido, uFormDuplicata, uFormRecibo_ContasReceber,
-  uFormConfiguracoes, uFormRelatorioPedidos, uFormRelatorioOrcamentos,
-  uFormRelatorioItensPedido, uFormOrdemServico, uFormBuscaOrdemServico,
-  uCadEmitente, uDmMenuPermissao, uFormEtiquetaClientes,
-  uFormEtiquetaClientePrint, uBibliotecaFuncoes, uCadLinhaProduto,
-  uCadObras;
+uses
+  uDMPrincipal, uCadEmitente,
+  uCadProduto, uFerramentas, uCadTipoVidro, uCadVidros, uCadPerfis,
+  uCadComponente, uClassServidorIni, uCadVariavelVidro,
+  uCadGrupoPerfil, uCadGrauPerfil, uCadUsuario, uDuplicata, uFormLogin,
+  uCadClientes, uCadCoresFerragem, uCadLinhaProduto, uCadBancos,
+  uFormaPgto, uCadPagarReceber, uCadPlanoContas, uCadCheque,
+  uRelExtratoContasPagar, uRelVencimentoContasPagar,
+  uRelPagamentoContasPagar;
 
 {$R *.dfm}
 
@@ -228,30 +259,10 @@ begin
   ShowMessage('F2 pressionada');
 end;
 
-procedure TFormPrincipal.Act_Cad_ProdutoExecute(Sender: TObject);
-begin
-  try
-    FormCadProduto := TFormCadProduto.Create(Self);
-    FormCadProduto.ShowModal;
-  Finally
-    FormCadProduto.Free
-  end;
-end;
-
-procedure TFormPrincipal.Act_Cad_ProdutoTipoExecute(Sender: TObject);
-begin
-//
-  try
-    FormCadProdutoTipo := TFormCadProdutoTipo.Create(Self);
-    FormCadProdutoTipo.ShowModal;
-  Finally
-    FormCadProdutoTipo.Free
-  end;
-end;
-
 procedure TFormPrincipal.ApplicationEvents1Activate(Sender: TObject);
 begin
   StatusBar1.Panels[3].Text := ' '+Application.Hint;
+  //Application.OnMessage := ProcessaMsg;
 end;
 
 procedure TFormPrincipal.Timer1Timer(Sender: TObject);
@@ -269,68 +280,6 @@ begin
   end;
 end;
 
-procedure TFormPrincipal.Lanc_OrcamentoExecute(Sender: TObject);
-begin
-  try
-    FormCadOrcamentoPedido := TFormCadOrcamentoPedido.Create(Self);
-    FormCadOrcamentoPedido.FTipoOrcPedido := 'O';
-    FormCadOrcamentoPedido.ShowModal;
-  Finally
-    FormCadOrcamentoPedido.Free
-  end;
-//  Fnc_AtualizaGrid_Manutencao;
-end;
-
-procedure TFormPrincipal.Cons_ProdutoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormRelatorioProduto, FormRelatorioProduto);
-    FormRelatorioProduto.ShowModal;
-  Finally
-    FormRelatorioProduto.Free
-  end;
-end;
-
-procedure TFormPrincipal.Cons_TipoProdutoExecute(Sender: TObject);
-begin
-  Try
-    Application.CreateForm(TFormRelatorioTipoProduto, FormRelatorioTipoProduto);
-    FormRelatorioTipoProduto.ShowModal;
-  Finally
-    FormRelatorioTipoProduto.Free;
-  End;
-end;
-
-procedure TFormPrincipal.Cons_ClientesExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormBuscaClientes, FormBuscaClientes);
-    FormBuscaClientes.ShowModal;
-  Finally
-    FormBuscaClientes.Free
-  end;
-end;
-
-procedure TFormPrincipal.Cons_BancoExecute(Sender: TObject);
-begin
-  Try
-    Application.CreateForm(TFormRelatorioBanco, FormRelatorioBanco);
-    FormRelatorioBanco.ShowModal;
-  Finally
-    FormRelatorioBanco.Free;
-  End;
-end;
-
-procedure TFormPrincipal.Act_Cad_ClientesExecute(Sender: TObject);
-begin
- try
-    Application.CreateForm(TFormCadCliente, FormCadCliente);
-    FormCadCliente.ShowModal;
-  Finally
-    FormCadCliente.Free
-  end;
-end;
-
 procedure TFormPrincipal.LogoffExecute(Sender: TObject);
 begin
   Application.CreateForm(TFormLogin, FormLogin);
@@ -338,19 +287,24 @@ begin
   FormLogin.Destroy;
 end;
 
-procedure TFormPrincipal.Act_Cad_UsuarioExecute(Sender: TObject);
-begin
- try
-    Application.CreateForm(TFormCadUsuario, FormCadUsuario);
-    FormCadUsuario.ShowModal;
-  Finally
-    FormCadUsuario.Free
-  end;
-end;
-
 procedure TFormPrincipal.FormShow(Sender: TObject);
+var Ini : TServidorIni;
 begin
-  Caption := ':: Sistema de Gestão Comercial - VERSÃO '+AppVersion(Application.ExeName);
+  Ini               := TServidorIni.create(SkinData1);
+  _SERVIDORINI      := Ini.Ler_ArquivoIni('SERVIDORINI','ARQUIVO');
+  _PATH_SERVIDORINI := Ini.Ler_ArquivoIni('SERVIDORINI','CAMINHO');
+  _PATH_IMAGEM      := Ini.Ler_ArquivoIni('SERVIDORINI','IMAGEM');
+  _PATH_SKIN        := Ini.Ler_ArquivoIni('SERVIDORINI','SKIN');
+  _SERVER_NAME      := Ini.Ler_ArquivoIni('SERVIDORINI','BASE');
+  ServidorIni.Relatorios := Ini.Ler_ArquivoIni('SISTEMA','Relatorios')+'\';
+  ServidorIni.Skin       := Ini.Ler_ArquivoIni('SISTEMA','Skin');
+
+  Ini.Path_Skin := _PATH_SKIN;
+  Ini.CarregarSkin(ServidorIni.Skin);
+  Ini.Free;
+  Sistema.LayoutRel := Ini.Ler_ArquivoIni('SISTEMA','LAYOUTREL');
+  Sistema.Caption := ':: Sistema de Gestão Comercial :: Usina Software ::';
+  Caption := sistema.Caption;
   PanelCenter;
   try
     Application.CreateForm(TFormLogin, FormLogin);
@@ -358,47 +312,8 @@ begin
   Finally
     FormLogin.Free
   end;
-
-  DMLogin.cdsDadosPrin.Open;
   StatusBar1.Panels[0].Text := FormatDateTime('  hh:nn:ss',Now);
   StatusBar1.Panels[1].Text := FormatDateTime('  dddd" , "dd" de "mmmmm" de "yyyyy',Now);
-end;
-
-procedure TFormPrincipal.Lanc_PedidoExecute(Sender: TObject);
-begin
-  try
-    FormCadOrcamentoPedido := TFormCadOrcamentoPedido.Create(Self);
-    FormCadOrcamentoPedido.FTipoOrcPedido := 'P';
-    FormCadOrcamentoPedido.ShowModal;
-  Finally
-    FormCadOrcamentoPedido.Free
-  end;
-(*  try
-    Application.CreateForm(TFormPedido, FormPedido);
-    FormPedido.ShowModal;
-  Finally
-    FormPedido.Free
-  end; *)
-end;
-
-procedure TFormPrincipal.Cons_PedidoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormBuscaPedido, FormBuscaPedido);
-    FormBuscaPedido.ShowModal;
-  Finally
-    FormBuscaPedido.Free
-  end;
-end;
-
-procedure TFormPrincipal.Act_Cad_OrcTipoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormCadOrcamentoTipo, FormCadOrcamentoTipo);
-    FormCadOrcamentoTipo.ShowModal;
-  Finally
-    FormCadOrcamentoTipo.Free
-  end;
 end;
 
 procedure TFormPrincipal.ApplicationEvents2Message(var Msg: tagMSG;
@@ -425,299 +340,17 @@ begin
   end;
 end;
 
-procedure TFormPrincipal.bt_ManutEfetuadaExecute(Sender: TObject);
-var
-tipo : string;
-begin
-  if DMPrincipal.cdsViewPedidoManutencao.RecordCount > 0 then
-  begin
-      DMPedido.cdsDadosPedido.Close;
-      DMPedido.qryDadosPedido.ParamByName('ID').AsInteger := DMPrincipal.cdsViewPedidoManutencao.FindField('ID').AsInteger;
-      DMPedido.cdsDadosPedido.Open;
-      DMPedido.cdsDadosPedido.Edit;
-      DMPedido.cdsDadosPedidoPED_MANUT_EFETUADA.AsBoolean := True;
-      DMPedido.cdsDadosPedido.ApplyUpdates(-1);
-      Fnc_AtualizaGrid_Manutencao;
-  end
-  else
-  begin
-    MessageBox(Application.Handle,'É necessário selecionar um registro! ', 'Informação', MB_ICONINFORMATION + MB_OK);
-  end;
-end;
-
 procedure TFormPrincipal.Fnc_AtualizaGrid_Manutencao;
 begin
   DMPrincipal.cdsViewPedidoManutencao.Close;
   DMPrincipal.cdsViewPedidoManutencao.Open;
 end;
 
-procedure TFormPrincipal.Cons_OrcamentoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormBuscaOrcPed, FormBuscaOrcPed);
-    FormBuscaOrcPed.ShowModal;
-  Finally
-    FormBuscaOrcPed.Free
-  end;
-  Fnc_AtualizaGrid_Manutencao;
-end;
-
-procedure TFormPrincipal.BitBtn1Click(Sender: TObject);
-begin
-  Fnc_AtualizaGrid_Manutencao;
-end;
-
-procedure TFormPrincipal.DBGrid1DrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
-begin
-  if (GdSelected in State) then
-  begin
-    Dbgrid1.Canvas.Brush.Color := clGradientInactiveCaption;
-
-    if (DMPrincipal.cdsViewManutencaoProdutoMANUT_EFETUADA.AsBoolean = false) and
-       (DMPrincipal.cdsViewManutencaoProdutoDATA_MANUT.AsDateTime <= Date) then
-    DBGrid1.Canvas.Font.Color:= clRed
-    else
-    DBGrid1.Canvas.Font.Color  := clBlack;//clHighlight;
-    //DBGrid1.Canvas.Font.Style  := [fsBold];
-  end
-  else
-  begin
-
-    if (DMPrincipal.cdsViewManutencaoProdutoMANUT_EFETUADA.AsBoolean = false) and
-       (DMPrincipal.cdsViewManutencaoProdutoDATA_MANUT.AsDateTime <= Date) then
-    DBGrid1.Canvas.Font.Color:= clRed
-    else
-    DBGrid1.Canvas.Font.Color := clDefault;
-
-  end;
-    DBGrid1.DefaultDrawDataCell(Rect, DBGrid1.columns[datacol].field, State);
-end;
-
-procedure TFormPrincipal.Finc_DuplicatasExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormDuplicata, FormDuplicata);
-    FormDuplicata.ShowModal;
-  Finally
-    FormDuplicata.Free
-  end;
-end;
-
-procedure TFormPrincipal.Finc_ReciboExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormRecibo_ContasReceber, FormRecibo_ContasReceber);
-    FormRecibo_ContasReceber.ShowModal;
-  Finally
-    FormRecibo_ContasReceber.Free
-  end;
-end;
-
-procedure TFormPrincipal.Sis_ConfigExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormConfiguracoes, FormConfiguracoes);
-    FormConfiguracoes.ShowModal;
-  Finally
-    FormConfiguracoes.Free;
-  end;
-end;
-
-procedure TFormPrincipal.Rel_PedidoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormRelatorioPedidos, FormRelatorioPedidos);
-    FormRelatorioPedidos.ShowModal;
-  Finally
-    FormRelatorioPedidos.Free;
-  end;
-end;
-
-procedure TFormPrincipal.Rel_OrcamentoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormRelatorioOrcamentos, FormRelatorioOrcamentos);
-    FormRelatorioOrcamentos.ShowModal;
-  Finally
-    FormRelatorioOrcamentos.Free;
-  end;
-end;
-
-procedure TFormPrincipal.Rel_ItensPedidoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormRelatorioItensPedido, FormRelatorioItensPedido);
-    FormRelatorioItensPedido.ShowModal;
-  Finally
-    FormRelatorioItensPedido.Free;
-  end;
-end;
-
-procedure TFormPrincipal.Lanc_OrdemServicoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormOrdemServico, FormOrdemServico);
-    FormOrdemServico.ShowModal;
-  Finally
-    FormOrdemServico.Free
-  end;
-end;
-
-procedure TFormPrincipal.Cons_OrdemServicoExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormBuscaOrdemServico, FormBuscaOrdemServico);
-    FormBuscaOrdemServico.ShowModal;
-  Finally
-    FormBuscaOrdemServico.Free
-  end;
-end;
-
-procedure TFormPrincipal.Sis_EmitenteExecute(Sender: TObject);
-begin
-  try
-    Application.CreateForm(TFormCadEmitente, FormCadEmitente);
-    FormCadEmitente.ShowModal;
-  Finally
-    FormCadEmitente.Free
-  end;
-end;
-
-procedure TFormPrincipal.Act_Cad_ProdutoUpdate(Sender: TObject);
-begin
-  //Act_Cad_Produto.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CAD_PRODUTOS.AsBoolean);
-end;
-
-procedure TFormPrincipal.Act_Cad_ProdutoTipoUpdate(Sender: TObject);
-begin
-  //Act_Cad_ProdutoTipo.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CAD_TIPOPRODUTO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Act_Cad_BancosUpdate(Sender: TObject);
-begin
-  //Act_Cad_Bancos.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CAD_BANCOS.AsBoolean);
-end;
-
-procedure TFormPrincipal.Act_Cad_ClientesUpdate(Sender: TObject);
-begin
-  //Act_Cad_Clientes.Visible := (DMMenuPermissao.cdsDados3Permissoes.FindField('MENUPERM_CAD_CLIENTES').AsBoolean);
-end;
-
-procedure TFormPrincipal.Act_Cad_UsuarioUpdate(Sender: TObject);
-begin
-  //Act_Cad_Usuario.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CAD_USUARIOS.AsBoolean);
-end;
-
-procedure TFormPrincipal.Act_Cad_OrcTipoUpdate(Sender: TObject);
-begin
-  Act_Cad_OrcTipo.Visible := false;//(DMMenuPermissao.cdsDados3PermissoesMENUPERM_CAD_TIPOORCAMENTO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_ProdutoUpdate(Sender: TObject);
-begin
-  //Cons_Produto.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_PEDIDO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_TipoProdutoUpdate(Sender: TObject);
-begin
-  Cons_TipoProduto.Visible := false;//(DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_PEDIDO.AsBoolean );
-end;
-
-procedure TFormPrincipal.Cons_ClientesUpdate(Sender: TObject);
-begin
-  //Cons_Clientes.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_CLIENTES.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_BancoUpdate(Sender: TObject);
-begin
-//  Cons_Banco.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_CLIENTES.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_PedidoUpdate(Sender: TObject);
-begin
-  Cons_Pedido.Visible := false;//(DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_PEDIDO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_OrcamentoUpdate(Sender: TObject);
-begin
-  //Cons_Orcamento.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_ORCAMENTOS.AsBoolean);
-end;
-
-procedure TFormPrincipal.Cons_OrdemServicoUpdate(Sender: TObject);
-begin
-  Cons_OrdemServico.Visible := false;(DMMenuPermissao.cdsDados3PermissoesMENUPERM_CONS_ORDEMSERVICO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Finc_DuplicatasUpdate(Sender: TObject);
-begin
-  //Finc_Duplicatas.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_FIN_DUPLICATA.AsBoolean);
-end;
-
-procedure TFormPrincipal.Finc_ReciboUpdate(Sender: TObject);
-begin
-  //Finc_Recibo.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_FIN_RECIBO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Lanc_OrcamentoUpdate(Sender: TObject);
-begin
-  //Lanc_Orcamento.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_LAN_ORCAMENTO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Lanc_PedidoUpdate(Sender: TObject);
-begin
-  Lanc_Pedido.Visible := true;//(DMMenuPermissao.cdsDados3PermissoesMENUPERM_LAN_PEDIDO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Lanc_OrdemServicoUpdate(Sender: TObject);
-begin
-  Lanc_OrdemServico.Visible := false;//(DMMenuPermissao.cdsDados3PermissoesMENUPERM_LAN_PRDEMSERVICO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Rel_PedidoUpdate(Sender: TObject);
-begin
-  //Rel_Pedido.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_REL_PEDIDO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Rel_OrcamentoUpdate(Sender: TObject);
-begin
-  //Rel_Orcamento.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_REL_ORCAMENTO.AsBoolean);
-end;
-
-procedure TFormPrincipal.Rel_ItensPedidoUpdate(Sender: TObject);
-begin
-//  Rel_ItensPedido.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_REL_PEDIDO.AsBoolean);
-end;
-
 procedure TFormPrincipal.SairExecute(Sender: TObject);
 begin
-  try
-    Application.CreateForm(TFormLogin, FormLogin);
+    FormLogin := TFormLogin.Create(nil);
     FormLogin.ShowModal;
-  Finally
     FormLogin.Free;
-  end;
-end;
-
-procedure TFormPrincipal.Sis_ConfigUpdate(Sender: TObject);
-begin
-  Sis_Config.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_SIS_CONFIGURACOES.AsBoolean);
-end;
-
-procedure TFormPrincipal.Sis_EmitenteUpdate(Sender: TObject);
-begin
-  Sis_Emitente.Visible := (DMMenuPermissao.cdsDados3PermissoesMENUPERM_SIS_CADASTROEMITENTE.AsBoolean);
-end;
-
-procedure TFormPrincipal.Rel_EtiquetaClientesExecute(Sender: TObject);
-begin
-  Try
-    Application.CreateForm(TFormEtiquetaClientes, FormEtiquetaClientes);
-    FormEtiquetaClientes.ShowModal;
-  Finally
-    FormEtiquetaClientes.Free;
-  End;
 end;
 
 procedure TFormPrincipal.PanelCenter;
@@ -726,24 +359,321 @@ begin
   APanel.Top := (FormPrincipal.ClientHeight div 2) - (APanel.Height div 2);
 end;
 
-procedure TFormPrincipal.Act_Cad_ProdutoLinhaExecute(Sender: TObject);
+procedure TFormPrincipal.Est_ProdutoExecute(Sender: TObject);
 begin
-  Try
-    Application.CreateForm(TFCadLinhaProd, FCadLinhaProd);
-    FCadLinhaProd.ShowModal;
-  Finally
-    FCadLinhaProd.Free;
-  End;
+  FCadProduto := TFCadProduto.Create(nil);
+  FCadProduto.PnBarraFormCaption := Est_Produto.Hint;
+  FCadProduto.ShowModal;
+  FCadProduto.Free;
 end;
 
-procedure TFormPrincipal.Act_Cad_ObrasExecute(Sender: TObject);
+procedure TFormPrincipal.Est_TipoVidroExecute(Sender: TObject);
 begin
-  Try
-    Application.CreateForm(TFormCadObras, FormCadObras);
-    FormCadObras.ShowModal;
-  Finally
-    FormCadObras.Free;
-  End;
+  FCadTipoVidro := TFCadTipoVidro.Create(nil);
+  FCadTipoVidro.PnBarraFormCaption := Est_TipoVidro.Hint;
+  FCadTipoVidro.ShowModal;
+  FCadTipoVidro.Free;
+end;
+
+procedure TFormPrincipal.Est_VidroExecute(Sender: TObject);
+begin
+  FCadVidros := TFCadVidros.Create(nil);
+  FCadVidros.PnBarraFormCaption := Est_Vidro.Hint;
+  FCadVidros.ShowModal;
+  FCadVidros.Free;
+end;
+
+procedure TFormPrincipal.mn_EstoqueExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.smn_AuxiliaresExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Est_PerfisExecute(Sender: TObject);
+begin
+  FCadPerfis := TFCadPerfis.Create(nil);
+  FCadPerfis.PnBarraFormCaption := Est_Perfis.Hint;
+  FCadPerfis.ShowModal;
+  FCadPerfis.Free;
+end;
+
+procedure TFormPrincipal.Est_ComponenteExecute(Sender: TObject);
+begin
+  FCadComponente := TFCadComponente.Create(nil);
+  FCadComponente.PnBarraFormCaption := Est_Componente.Hint;
+  FCadComponente.ShowModal;
+  FCadComponente.Free;
+end;
+
+procedure TFormPrincipal.mn_CadastroExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.getCliente(pTipo:Integer);
+begin
+  FCadClientes := TFCadClientes.Create(nil);
+  FCadClientes.FTipoCli := pTipo;
+  FCadClientes.ShowModal;
+  FCadClientes.Free;
+end;
+
+procedure TFormPrincipal.Cad_ClientesExecute(Sender: TObject);
+begin
+  getCliente(cCliente);
+end;
+
+procedure TFormPrincipal.Est_VariaveisVidroExecute(Sender: TObject);
+begin
+  FCadVariavelVidro := TFCadVariavelVidro.Create(nil);
+  FCadVariavelVidro.PnBarraFormCaption := Est_VariaveisVidro.Hint;
+  FCadVariavelVidro.ShowModal;
+  FCadVariavelVidro.Free;
+end;
+
+procedure TFormPrincipal.Est_GrupoPerfilExecute(Sender: TObject);
+begin
+  FCadGrupoPerfil := TFCadGrupoPerfil.Create(nil);
+  FCadGrupoPerfil.PnBarraFormCaption := Est_GrupoPerfil.Hint;
+  FCadGrupoPerfil.ShowModal;
+  FCadGrupoPerfil.Free;
+end;
+
+procedure TFormPrincipal.Est_GrauPerfilExecute(Sender: TObject);
+begin
+  FCadGrauPerfil := TFCadGrauPerfil.Create(nil);
+  FCadGrauPerfil.PnBarraFormCaption := Est_GrauPerfil.Hint;
+  FCadGrauPerfil.ShowModal;
+  FCadGrauPerfil.Free;
+end;
+
+procedure TFormPrincipal.Cad_UsuarioExecute(Sender: TObject);
+begin
+  FCadUsuario := TFCadUsuario.Create(nil);
+  FCadUsuario.PnBarraFormCaption := Cad_Usuario.Hint;
+  FCadUsuario.ShowModal;
+  FCadUsuario.Free;
+end;
+
+procedure TFormPrincipal.Sis_EmitenteExecute(Sender: TObject);
+begin
+  FCadEmitente := TFCadEmitente.Create(nil);
+  FCadEmitente.PnBarraFormCaption := Sis_Emitente.Hint;
+  FCadEmitente.ShowModal;
+  FCadEmitente.Free;
+end;
+
+procedure TFormPrincipal.mn_FinanceiroExecute(Sender: TObject);
+begin
+//habilitado
+end;
+
+procedure TFormPrincipal.Finc_DuplicatasExecute(Sender: TObject);
+begin
+  FDuplicata := TFDuplicata.Create(nil);
+  FDuplicata.ShowModal;
+  FDuplicata.Free;
+end;
+
+procedure TFormPrincipal.BitBtn1Click(Sender: TObject);
+begin
+  if OpenDialog1.Execute then
+  begin
+    Edit1.Text := OpenDialog1.FileName;
+    SkinData1.SkinFile := Edit1.Text;
+    SkinData1.Active := true;
+  end;
+end;
+
+procedure TFormPrincipal.BitBtn2Click(Sender: TObject);
+//Isto irá carregar as skins dentro do listbox
+var
+  Procurar : TSearchRec;
+  Arquivos: Integer;
+begin
+  ListBox1.Items.Clear;
+  CaminhoDasSkins := ExtractFilePath(Application.ExeName) + '..\Skins\*.skn';
+  Arquivos := 0;
+  Arquivos := Arquivos + faDirectory;
+  Arquivos := Arquivos + faArchive;
+  Arquivos := Arquivos + faAnyFile;
+  if FindFirst(CaminhoDasSkins, Arquivos, Procurar) = 0 then
+  begin
+    repeat
+    if (Procurar.Attr and Arquivos) = Procurar.Attr then
+      ListBox1.Items.Add(Procurar.Name);
+    until FindNext(Procurar) <> 0;
+    FindClose(Procurar);
+  end;
+end;
+
+procedure TFormPrincipal.ListBox1Click(Sender: TObject);
+var
+ i: integer;
+begin
+  i := ListBox1.ItemIndex;
+  ss := Copy(CaminhoDasSkins,1,Pos('*.skn',CaminhoDasSkins)-2)+'\'+ListBox1.items.strings[i];
+  SkinData1.SkinFile := ss;
+  if not SkinData1.Active then
+    SkinData1.Active := True;end;
+procedure TFormPrincipal.Est_CoresFerragemExecute(Sender: TObject);
+begin
+  FCadCoresFerragem := TFCadCoresFerragem.Create(nil);
+  FCadCoresFerragem.PnBarraFormCaption := Est_CoresFerragem.Hint;
+  FCadCoresFerragem.ShowModal;
+  FCadCoresFerragem.Free;
+end;
+
+procedure TFormPrincipal.Est_LinhaProdutoExecute(Sender: TObject);
+begin
+  FCadLinhaProduto := TFCadLinhaProduto.Create(nil);
+  FCadLinhaProduto.PnBarraFormCaption := Est_LinhaProduto.Hint;
+  FCadLinhaProduto.ShowModal;
+  FCadLinhaProduto.Free;
+end;
+
+procedure TFormPrincipal.ata_EstoqueExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.ata_FinanceiroExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.ata_CadastroExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Fin_BancosExecute(Sender: TObject);
+begin
+  FCadBancos := TFCadBancos.Create(nil);
+  FCadBancos.PnBarraFormCaption := Fin_Bancos.Hint;
+  FCadBancos.ShowModal;
+  FCadBancos.Free;
+end;
+
+procedure TFormPrincipal.Fin_FormaPgtoExecute(Sender: TObject);
+begin
+  FCadFormaPgto := TFCadFormaPgto.Create(nil);
+  FCadFormaPgto.PnBarraFormCaption := Fin_FormaPgto.Hint;
+  FCadFormaPgto.ShowModal;
+  FCadFormaPgto.Free;
+end;
+
+procedure TFormPrincipal.getContaPagarReceber(pConta:Integer);
+begin
+  FCadPagarReceber := TFCadPagarReceber.Create(nil);
+  //FCadFormaPgto.PnBarraFormCaption := Fin_FormaPgto.Hint;
+  FCadPagarReceber.FTipoPagRec := pConta;
+  FCadPagarReceber.ShowModal;
+  FCadPagarReceber.Free;
+end;
+
+procedure TFormPrincipal.Fin_ContasPagarExecute(Sender: TObject);
+begin
+  getContaPagarReceber(cContasPagar);
+end;
+
+procedure TFormPrincipal.Fin_ContasReceberExecute(Sender: TObject);
+begin
+  getContaPagarReceber(cContasReceber);
+end;
+
+procedure TFormPrincipal.Cad_FornecedoresExecute(Sender: TObject);
+begin
+  getCliente(cFornecedor);
+end;
+
+procedure TFormPrincipal.ProcessaMsg(var Msg: TMsg; var Handler: Boolean);
+begin
+     if (Msg.message = WM_KEYDOWN) then
+        if not (Screen.ActiveControl is TCustomMemo) and
+           not (Screen.ActiveControl is TButtonControl) then begin
+             if not (Screen.ActiveControl is TCustomControl) then begin
+                if (Msg.wParam = VK_Down) and
+                   not(Screen.ActiveControl is TListBox) and
+                   not(Screen.ActiveControl is TComboBox) then
+                   Msg.wParam:= VK_Tab;
+                if (Msg.wParam = VK_UP) and
+                   not(Screen.ActiveControl is TListBox) and
+                   not(Screen.ActiveControl is TComboBox) then begin
+                   Msg.wParam:= VK_CLEAR;
+                   Screen.ActiveForm.Perform(WM_NextDlgCtl,1,0);
+                end;
+                //if (Msg.wParam = VK_Escape) and
+                //  not (Screen.ActiveForm is TFormPrincipal) then
+                //   Screen.ActiveForm.Close;
+             end;
+             if (Msg.wParam = VK_Return) then
+                Msg.wParam:= VK_Tab;
+        end;
+end;
+
+procedure TFormPrincipal.mn_ContabilidadeExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Cont_PlanoContasExecute(Sender: TObject);
+begin
+  FCadPlanoContas := TFCadPlanoContas.Create(nil);
+  FCadPlanoContas.PnBarraFormCaption := Cont_PlanoContas.Hint;
+  FCadPlanoContas.ShowModal;
+  FCadPlanoContas.Free;
+end;
+
+procedure TFormPrincipal.Fin_ControleChequeExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Fin_ChequeExecute(Sender: TObject);
+begin
+  FCadCheque := TFCadCheque.Create(nil);
+  FCadCheque.PnBarraFormCaption := Fin_Cheque.Hint;
+  FCadCheque.ShowModal;
+  FCadCheque.Free;
+end;
+
+procedure TFormPrincipal.smn_RelatorioFinanceiroExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Rel_Fin_ExtratoContasPagarExecute(Sender: TObject);
+begin
+  FRelExtratoContasPagar := TFRelExtratoContasPagar.Create(nil);
+  FRelExtratoContasPagar.FTipoCli := cContasPagar;
+  FRelExtratoContasPagar.pnBarraForm.Caption := Rel_Fin_ExtratoContasPagar.Hint;
+  FRelExtratoContasPagar.ShowModal;
+  FRelExtratoContasPagar.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_Pagar_VencimentoExecute(Sender: TObject);
+begin
+  FRelVencimentoContasPagar := TFRelVencimentoContasPagar.Create(nil);
+  FRelVencimentoContasPagar.FTipoCli := cContasPagar;
+  FRelVencimentoContasPagar.pnBarraForm.Caption := Rel_Fin_Pagar_Vencimento.Hint;
+  FRelVencimentoContasPagar.ShowModal;
+  FRelVencimentoContasPagar.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_Pagar_PagamentoExecute(Sender: TObject);
+begin
+  FRelPagamentoContasPagar := TFRelPagamentoContasPagar.Create(nil);
+  FRelPagamentoContasPagar.FTipoCli := cContasPagar;
+  FRelPagamentoContasPagar.pnBarraForm.Caption := Rel_Fin_Pagar_Pagamento.Hint;
+  FRelPagamentoContasPagar.ShowModal;
+  FRelPagamentoContasPagar.Free;
 end;
 
 end.
+
+

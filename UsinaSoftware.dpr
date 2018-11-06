@@ -3,144 +3,65 @@ program UsinaSoftware;
 uses
   Forms,
   uPrincipal in 'uPrincipal.pas' {FormPrincipal},
-  uFormPadraoBusca2 in 'uFormPadraoBusca2.pas' {FormPadraoBusca2},
-  uFormPadraoCad in 'uFormPadraoCad.pas' {Form1},
-  uFormPadraoCad2 in 'uFormPadraoCad2.pas' {FormPadraoCad2},
-  uFormPadraoCad3 in 'uFormPadraoCad3.pas' {FormPadraoCad3},
-  uFormPadraoRel in 'uFormPadraoRel.pas' {FormPadraoRel},
-  Extens in 'Extens.pas',
-  uBibliotecaFuncoes in 'uBibliotecaFuncoes.pas' {FormBibliotecaFuncoes},
-  uBuscaCliente_OrcPedido in 'uBuscaCliente_OrcPedido.pas' {FormBuscaCliente_OrcPedido},
-  uBuscaProdutos_OrcPedido in 'uBuscaProdutos_OrcPedido.pas' {FormBuscaProdutos_OrcPedido},
-  uCadAdiantamentos in 'uCadAdiantamentos.pas' {FormCadAdiantamentos},
-  uCadBancos in 'uCadBancos.pas' {FormCadBancos},
-  uCadObras in 'uCadObras.pas' {FormCadObras},
-  uCadEmitente in 'uCadEmitente.pas' {FormCadEmitente},
-  uCadOrcamentoPedido in 'uCadOrcamentoPedido.pas' {FormCadOrcamentoPedido},
-  uCadOrcamentoPedido_Acessorios in 'uCadOrcamentoPedido_Acessorios.pas' {FormCadOrcamentoPedido_Acessorios},
-  uCadOrcamentoPedido_Produtos in 'uCadOrcamentoPedido_Produtos.pas' {FormCadOrcamentoPedido_Produtos},
-  uCadProduto in 'uCadProduto.pas' {FormCadProduto},
-  uCadProdutoTipo in 'uCadProdutoTipo.pas' {FormCadProdutoTipo},
-  uDMAdiantamentos in 'uDMAdiantamentos.pas' {DMAdiantamentos: TDataModule},
-  uDMAdiantamentosOrcPedido in 'uDMAdiantamentosOrcPedido.pas' {DMAdiantamentoOrcPedido: TDataModule},
-  uDMAdiantamentosPedido in 'uDMAdiantamentosPedido.pas' {DMAdiantamentosPedido: TDataModule},
-  uDMBancos in 'uDMBancos.pas' {DMBancos: TDataModule},
-  uDMClientes in 'uDMClientes.pas' {DMCadClientes: TDataModule},
-  uDMConfig in 'uDMConfig.pas' {DMConfig: TDataModule},
-  uDMConfiguracoes in 'uDMConfiguracoes.pas' {DMConfiguracoes: TDataModule},
   uDMConnection in 'uDMConnection.pas' {DMConnection: TDataModule},
-  UDMDuplicata in 'UDMDuplicata.pas' {DMDuplicata: TDataModule},
-  uDMEmitente in 'uDMEmitente.pas' {DMEmitente: TDataModule},
-  uDMLogin in 'uDMLogin.pas' {DMLogin: TDataModule},
-  uDmMenuPermissao in 'uDmMenuPermissao.pas' {DMMenuPermissao: TDataModule},
-  uDMOrcamentoPedido in 'uDMOrcamentoPedido.pas' {DMOrcamentoPedido: TDataModule},
-  uDMOrcamentoPedidoPrint in 'uDMOrcamentoPedidoPrint.pas' {DMOrcamentoPedidoPrint: TDataModule},
-  uDMOrcamentoPedidoRevisao in 'uDMOrcamentoPedidoRevisao.pas' {DMOrcamentoPedidoRevisao: TDataModule},
-  uDMOrcamentoTipo in 'uDMOrcamentoTipo.pas' {DMOrcamentoTipo: TDataModule},
-  uDMOrdemServico in 'uDMOrdemServico.pas' {DMOrdemServico: TDataModule},
-  UDMPedido in 'UDMPedido.pas' {DMPedido: TDataModule},
-  uDMPedidoPrint in 'uDMPedidoPrint.pas' {DMPedidoPrint: TDataModule},
   uDMPrincipal in 'uDMPrincipal.pas' {DMPrincipal: TDataModule},
-  uDMProduto in 'uDMProduto.pas' {DMProduto: TDataModule},
-  uDMProdutoTipo in 'uDMProdutoTipo.pas' {DMProdutoTipo: TDataModule},
-  uDMRelatorioBanco in 'uDMRelatorioBanco.pas' {DMRelatorioBanco: TDataModule},
-  uDMRelatorioClientes in 'uDMRelatorioClientes.pas' {DMRelatorioClientes: TDataModule},
-  uDMRelatorioItensPedido in 'uDMRelatorioItensPedido.pas' {DMRelatorioItensPedido: TDataModule},
-  uDMRelatorioOrcamento in 'uDMRelatorioOrcamento.pas' {DMRelatorioOrcamento: TDataModule},
-  udmRelatorioOrdemServico in 'udmRelatorioOrdemServico.pas' {DMRelatorioOrdemServico: TDataModule},
-  uDMRelatorioPedido in 'uDMRelatorioPedido.pas' {DMRelatorioPedido: TDataModule},
-  uDMRelatorioProduto in 'uDMRelatorioProduto.pas' {DMRelatorioProduto: TDataModule},
-  uDMRelatorioTipoProduto in 'uDMRelatorioTipoProduto.pas' {DMRelatorioTipoProduto: TDataModule},
-  uDMUsuario in 'uDMUsuario.pas' {DMUsuario: TDataModule},
-  uFormAdiantamentos in 'uFormAdiantamentos.pas' {FormAdiantamentos},
-  uFormAdiantamentos_Edit in 'uFormAdiantamentos_Edit.pas' {FormAdiantamento_Edit},
-  uFormadiantamentosPedido in 'uFormadiantamentosPedido.pas' {FormAdiantamentosPedido},
-  uFormBuscaClienteOS in 'uFormBuscaClienteOS.pas' {FormBuscaClienteOS},
-  uFormBuscaClientes in 'uFormBuscaClientes.pas' {FormBuscaClientes},
-  uFormBuscaOrcPed in 'uFormBuscaOrcPed.pas' {FormBuscaOrcPed},
-  uFormBuscaOrdemServico in 'uFormBuscaOrdemServico.pas' {FormBuscaOrdemServico},
-  uFormBuscaOrdemServicoFiltro in 'uFormBuscaOrdemServicoFiltro.pas' {FormBuscaOrdemServico_Filtro},
-  uFormBuscaPedido in 'uFormBuscaPedido.pas' {FormBuscaPedido},
-  uFormBuscaPedidoOS in 'uFormBuscaPedidoOS.pas' {FormBuscaPedidoOS},
-  uFormBuscaTipo_OrcPed in 'uFormBuscaTipo_OrcPed.pas' {FormBuscaTipo_OrcPed},
-  uFormCadOrcamentoTipo in 'uFormCadOrcamentoTipo.pas' {FormCadOrcamentoTipo},
-  uFormCadUsuario in 'uFormCadUsuario.pas' {FormCadUsuario},
-  uFormConfiguracoes in 'uFormConfiguracoes.pas' {FormConfiguracoes},
-  uFormDuplicata in 'uFormDuplicata.pas' {FormDuplicata},
-  uCadLinhaProduto in 'uCadLinhaProduto.pas' {FCadLinhaProd},
-  uCadClientes in 'uCadClientes.pas' {FormCadCliente},
-  uClassAvisos in 'uClassAvisos.pas',
-  uClassServidorIni in 'uClassServidorIni.pas';
+  uDMConexao in 'database\uDMConexao.pas' {DMConexao: TDataModule},
+  uClassAvisos in 'biblioteca\uClassAvisos.pas',
+  uClassServidorIni in 'biblioteca\uClassServidorIni.pas',
+  uBibliotecaFuncoes in 'biblioteca\uBibliotecaFuncoes.pas' {FormBibliotecaFuncoes},
+  Extens in 'biblioteca\Extens.pas',
+  uFerramentas in 'biblioteca\uFerramentas.pas',
+  Udesign in 'biblioteca\Udesign.pas' {Fdesign},
+  uimprelat in 'biblioteca\uimprelat.pas' {Fimprel},
+  uRelatorio in 'biblioteca\uRelatorio.pas' {FRelatorio},
+  uCadTipoVidro in 'cadastro\uCadTipoVidro.pas' {FCadTipoVidro},
+  uCadVidros in 'cadastro\uCadVidros.pas' {FCadVidros},
+  uCadProduto in 'estoque\uCadProduto.pas' {FCadProduto},
+  uCadPerfis in 'estoque\uCadPerfis.pas' {FCadPerfis},
+  uCadComponente in 'estoque\uCadComponente.pas' {FCadComponente},
+  uCadVariavelVidro in 'estoque\uCadVariavelVidro.pas' {FCadVariavelVidro},
+  uCadGrupoPerfil in 'estoque\uCadGrupoPerfil.pas' {FCadGrupoPerfil},
+  uCadGrauPerfil in 'estoque\uCadGrauPerfil.pas' {FCadGrauPerfil},
+  uPadrao in 'biblioteca\uPadrao.pas' {FPadrao},
+  uCadUsuario in 'cadastro\uCadUsuario.pas' {FCadUsuario},
+  uCadEmitente in 'cadastro\uCadEmitente.pas' {FCadEmitente},
+  uCadPadrao in 'biblioteca\uCadPadrao.pas' {FCadPadrao},
+  uDuplicata in 'financeiro\uDuplicata.pas' {FDuplicata},
+  uCadClientes in 'cadastro\uCadClientes.pas' {FCadClientes},
+  uFormLogin in 'biblioteca\uFormLogin.pas' {FormLogin},
+  uCadCoresFerragem in 'estoque\uCadCoresFerragem.pas' {FCadCoresFerragem},
+  uCadLinhaProduto in 'estoque\uCadLinhaProduto.pas' {FCadLinhaProduto},
+  uCadBancos in 'financeiro\uCadBancos.pas' {FCadBancos},
+  uFormaPgto in 'financeiro\uFormaPgto.pas' {FCadFormaPgto},
+  uCadPagarReceber in 'financeiro\uCadPagarReceber.pas' {FCadPagarReceber},
+  uSelecionarCheque in 'financeiro\uSelecionarCheque.pas' {FSelecionarCheque},
+  uCadPlanoContas in 'contabilidade\uCadPlanoContas.pas' {FCadPlanoContas},
+  uCadPlGrupo in 'contabilidade\uCadPlGrupo.pas' {FCadPlGrupo},
+  uCadPlSubgrupo in 'contabilidade\uCadPlSubgrupo.pas' {FCadPlSubgrupo},
+  uCadPlItem in 'contabilidade\uCadPlItem.pas' {FCadPlItem},
+  uCadPlCategoria in 'contabilidade\uCadPlCategoria.pas' {FCadPlCategoria},
+  uCadCheque in 'financeiro\uCadCheque.pas' {FCadCheque},
+  uSelecionarPadrao in 'biblioteca\uSelecionarPadrao.pas' {FSelecionarPadrao},
+  uSelecionarCliente in 'cadastro\uSelecionarCliente.pas' {FSelecionarCli},
+  uSelecionarBanco in 'financeiro\uSelecionarBanco.pas' {FSelecionarBanco},
+  uRelatorioPadrao in 'biblioteca\uRelatorioPadrao.pas' {FRelatorioPadrao},
+  uRelPagamentoContasPagar in 'financeiro\uRelPagamentoContasPagar.pas' {FRelPagamentoContasPagar},
+  uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar},
+  uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar};
 
 {$R *.res}
 
 begin
   Application.Initialize;
-  Application.CreateForm(TFormPrincipal, FormPrincipal);
-  Application.CreateForm(TDMAdiantamentos, DMAdiantamentos);
-  Application.CreateForm(TDMAdiantamentoOrcPedido, DMAdiantamentoOrcPedido);
-  Application.CreateForm(TDMAdiantamentosPedido, DMAdiantamentosPedido);
-  Application.CreateForm(TDMBancos, DMBancos);
-  Application.CreateForm(TDMCadClientes, DMCadClientes);
-  Application.CreateForm(TDMConfig, DMConfig);
-  Application.CreateForm(TDMConfiguracoes, DMConfiguracoes);
+  Application.CreateForm(TDMConexao, DMConexao);
   Application.CreateForm(TDMConnection, DMConnection);
-  Application.CreateForm(TDMDuplicata, DMDuplicata);
-  Application.CreateForm(TDMEmitente, DMEmitente);
-  Application.CreateForm(TDMLogin, DMLogin);
-  Application.CreateForm(TDMMenuPermissao, DMMenuPermissao);
-  Application.CreateForm(TDMOrcamentoPedido, DMOrcamentoPedido);
-  Application.CreateForm(TDMOrcamentoPedidoPrint, DMOrcamentoPedidoPrint);
-  Application.CreateForm(TDMOrcamentoPedidoRevisao, DMOrcamentoPedidoRevisao);
-  Application.CreateForm(TDMOrcamentoTipo, DMOrcamentoTipo);
-  Application.CreateForm(TDMOrdemServico, DMOrdemServico);
-  Application.CreateForm(TDMPedido, DMPedido);
-  Application.CreateForm(TDMPedidoPrint, DMPedidoPrint);
   Application.CreateForm(TDMPrincipal, DMPrincipal);
-  Application.CreateForm(TDMProduto, DMProduto);
-  Application.CreateForm(TDMProdutoTipo, DMProdutoTipo);
-  Application.CreateForm(TDMRelatorioBanco, DMRelatorioBanco);
-  Application.CreateForm(TDMRelatorioClientes, DMRelatorioClientes);
-  Application.CreateForm(TDMRelatorioItensPedido, DMRelatorioItensPedido);
-  Application.CreateForm(TDMRelatorioOrcamento, DMRelatorioOrcamento);
-  Application.CreateForm(TDMRelatorioOrdemServico, DMRelatorioOrdemServico);
-  Application.CreateForm(TDMRelatorioPedido, DMRelatorioPedido);
-  Application.CreateForm(TDMRelatorioProduto, DMRelatorioProduto);
-  Application.CreateForm(TDMRelatorioTipoProduto, DMRelatorioTipoProduto);
-  Application.CreateForm(TDMUsuario, DMUsuario);
-  Application.CreateForm(TFormPadraoBusca2, FormPadraoBusca2);
-  Application.CreateForm(TForm1, Form1);
-  Application.CreateForm(TFormPadraoCad2, FormPadraoCad2);
-  Application.CreateForm(TFormPadraoCad3, FormPadraoCad3);
-  Application.CreateForm(TFormPadraoRel, FormPadraoRel);
-  Application.CreateForm(TFormBibliotecaFuncoes, FormBibliotecaFuncoes);
-  Application.CreateForm(TFormBuscaCliente_OrcPedido, FormBuscaCliente_OrcPedido);
-  Application.CreateForm(TFormBuscaProdutos_OrcPedido, FormBuscaProdutos_OrcPedido);
-  Application.CreateForm(TFormCadAdiantamentos, FormCadAdiantamentos);
-  Application.CreateForm(TFormCadBancos, FormCadBancos);
-  Application.CreateForm(TFormCadObras, FormCadObras);
-  Application.CreateForm(TFormCadEmitente, FormCadEmitente);
-  Application.CreateForm(TFormCadOrcamentoPedido, FormCadOrcamentoPedido);
-  Application.CreateForm(TFormCadOrcamentoPedido_Acessorios, FormCadOrcamentoPedido_Acessorios);
-  Application.CreateForm(TFormCadOrcamentoPedido_Produtos, FormCadOrcamentoPedido_Produtos);
-  Application.CreateForm(TFormCadProduto, FormCadProduto);
-  Application.CreateForm(TFormCadProdutoTipo, FormCadProdutoTipo);
-  Application.CreateForm(TFormAdiantamentos, FormAdiantamentos);
-  Application.CreateForm(TFormAdiantamento_Edit, FormAdiantamento_Edit);
-  Application.CreateForm(TFormAdiantamentosPedido, FormAdiantamentosPedido);
-  Application.CreateForm(TFormBuscaClienteOS, FormBuscaClienteOS);
-  Application.CreateForm(TFormBuscaClientes, FormBuscaClientes);
-  Application.CreateForm(TFormBuscaOrcPed, FormBuscaOrcPed);
-  Application.CreateForm(TFormBuscaOrdemServico, FormBuscaOrdemServico);
-  Application.CreateForm(TFormBuscaOrdemServico_Filtro, FormBuscaOrdemServico_Filtro);
-  Application.CreateForm(TFormBuscaPedido, FormBuscaPedido);
-  Application.CreateForm(TFormBuscaPedidoOS, FormBuscaPedidoOS);
-  Application.CreateForm(TFormBuscaTipo_OrcPed, FormBuscaTipo_OrcPed);
-  Application.CreateForm(TFormCadOrcamentoTipo, FormCadOrcamentoTipo);
-  Application.CreateForm(TFormCadUsuario, FormCadUsuario);
-  Application.CreateForm(TFormConfiguracoes, FormConfiguracoes);
-  Application.CreateForm(TFormDuplicata, FormDuplicata);
-  Application.CreateForm(TFCadLinhaProd, FCadLinhaProd);
-  Application.CreateForm(TFormCadCliente, FormCadCliente);
+  Application.CreateForm(TFormPrincipal, FormPrincipal);
+  Application.CreateForm(TFdesign, Fdesign);
+  Application.CreateForm(TFimprel, Fimprel);
+  Application.CreateForm(TFRelatorioPadrao, FRelatorioPadrao);
+  Application.CreateForm(TFRelPagamentoContasPagar, FRelPagamentoContasPagar);
+  Application.CreateForm(TFRelExtratoContasPagar, FRelExtratoContasPagar);
+  Application.CreateForm(TFRelVencimentoContasPagar, FRelVencimentoContasPagar);
   Application.Run;
 end.

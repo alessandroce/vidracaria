@@ -3,8 +3,8 @@ object DMConnection: TDMConnection
   OnCreate = DataModuleCreate
   Left = 392
   Top = 241
-  Height = 134
-  Width = 318
+  Height = 232
+  Width = 386
   object SQLConnection: TSQLConnection
     ConnectionName = 'Conn_MovelariaDMarco'
     DriverName = 'Interbase'
