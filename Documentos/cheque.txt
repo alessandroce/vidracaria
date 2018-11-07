@@ -1,0 +1,5 @@
+1 Depositado (entrada movimento bancario)
+2 Devolvido (saida movmento bancario)
+3 Cancelado (saida movimento bancario)
+4 Custodiado (entada movimeto bancario - conta custodia)
+5 Recebido antecipado (entrada movimento bancario)
