@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 0
-  Top = 0
+  Left = 304
+  Top = 168
   Width = 1024
   Height = 768
   BorderIcons = [biSystemMenu, biMinimize]
@@ -30,7 +30,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 691
+    Top = 690
     Width = 1008
     Height = 19
     Panels = <
@@ -51,7 +51,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 5
     Width = 1008
-    Height = 686
+    Height = 685
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1

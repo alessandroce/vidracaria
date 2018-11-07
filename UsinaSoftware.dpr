@@ -59,9 +59,5 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
-  Application.CreateForm(TFRelatorioPadrao, FRelatorioPadrao);
-  Application.CreateForm(TFRelPagamentoContasPagar, FRelPagamentoContasPagar);
-  Application.CreateForm(TFRelExtratoContasPagar, FRelExtratoContasPagar);
-  Application.CreateForm(TFRelVencimentoContasPagar, FRelVencimentoContasPagar);
   Application.Run;
 end.
