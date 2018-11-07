@@ -1,17 +1,17 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 227
-  Top = 164
+  Left = 296
+  Top = 165
   Height = 600
   Caption = 'FCadPagarReceber'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 532
+    Height = 531
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
-        Height = 434
+        Height = 433
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           DataController.Filter.AutoDataSetFilter = True
@@ -101,7 +101,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 484
+        Top = 483
       end
     end
     inherited tsCadastro: TTabSheet
@@ -476,21 +476,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
           Caption = 'vezes'
           Enabled = False
         end
-        object Label7: TLabel
-          Left = 352
-          Top = 42
-          Width = 37
-          Height = 13
-          Caption = 'Cheque'
-          Visible = False
-        end
-        object Label8: TLabel
-          Left = 344
-          Top = 18
-          Width = 48
-          Height = 13
-          Caption = 'Cheque(s)'
-        end
         object chRepetir: TCheckBox
           Left = 9
           Top = 11
@@ -527,42 +512,32 @@ inherited FCadPagarReceber: TFCadPagarReceber
           Enabled = False
           TabOrder = 2
         end
-        object DBEdit3: TDBEdit
+        object btCheque: TBitBtn
           Left = 344
-          Top = 34
-          Width = 81
-          Height = 21
-          DataSource = dsCadastro
-          Enabled = False
-          TabOrder = 3
-          Visible = False
-        end
-        object BitBtn1: TBitBtn
-          Left = 426
-          Top = 33
-          Width = 22
-          Height = 22
-          Caption = '...'
+          Top = 31
+          Width = 93
+          Height = 24
+          Action = bt_Cheque
+          Caption = 'Cheque'
           Font.Charset = ANSI_CHARSET
           Font.Color = clGreen
           Font.Height = -16
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 4
-          Visible = False
-          OnClick = BitBtn1Click
+          TabOrder = 3
         end
       end
     end
   end
   inherited dsConsulta: TDataSource
     DataSet = cdsConsulta
-    Left = 640
-    Top = 232
+    Left = 696
+    Top = 256
   end
   inherited ibCadastro: TIBDataSet
     AfterInsert = ibCadastroAfterInsert
+    AfterPost = ibCadastroAfterPost
     BeforePost = ibCadastroBeforePost
     DeleteSQL.Strings = (
       'delete from pagarreceber'
@@ -762,8 +737,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
       
         'select pagarreceber.par_id ID, pagarreceber.* from pagarreceber ' +
         'where pagarreceber.PAR_PAGREC = :pagrec')
-    Left = 472
-    Top = 232
+    Left = 528
+    Top = 256
     ParamData = <
       item
         DataType = ftUnknown
@@ -887,6 +862,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
       ImageIndex = 4
       ShortCut = 117
     end
+    object bt_Cheque: TAction
+      Category = 'Botao'
+      Caption = 'Cheque'
+      OnExecute = bt_ChequeExecute
+    end
   end
   inherited frxReport1: TfrxReport
     Left = 564
@@ -900,8 +880,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -946,12 +924,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qConta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
-      'select forma_pgto.fop_id,'
-      '       forma_pgto.fop_descricao'
-      '  from forma_pgto')
+      'select * from forma_pgto')
     Left = 376
     Top = 56
     object qContaFOP_ID: TIntegerField
@@ -964,17 +938,32 @@ inherited FCadPagarReceber: TFCadPagarReceber
       Origin = 'FORMA_PGTO.FOP_DESCRICAO'
       Size = 100
     end
+    object qContaFOP_TIPO: TIntegerField
+      FieldName = 'FOP_TIPO'
+      Origin = '"FORMA_PGTO"."FOP_TIPO"'
+    end
+    object qContaFOP_BANCO_ID: TIntegerField
+      FieldName = 'FOP_BANCO_ID'
+      Origin = '"FORMA_PGTO"."FOP_BANCO_ID"'
+    end
+    object qContaFOP_DH_CA: TDateTimeField
+      FieldName = 'FOP_DH_CA'
+      Origin = '"FORMA_PGTO"."FOP_DH_CA"'
+    end
+    object qContaFOP_FLAG: TIntegerField
+      FieldName = 'FOP_FLAG'
+      Origin = '"FORMA_PGTO"."FOP_FLAG"'
+    end
   end
   object dsConta: TDataSource
     DataSet = qConta
+    OnDataChange = dsContaDataChange
     Left = 424
     Top = 56
   end
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -1006,8 +995,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select distinct pagarreceber.par_cetrocusto'
       '  from pagarreceber'
@@ -1042,8 +1029,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber'
       'where'
@@ -1130,7 +1115,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_ID = :OLD_PAR_ID')
     GeneratorField.Field = 'PAR_ID'
     GeneratorField.Generator = 'GEN_PAGARRECEBER'
-    Left = 264
+    Left = 240
     Top = 8
     object ibParcelaPAR_ID: TIntegerField
       FieldName = 'PAR_ID'
@@ -1238,8 +1223,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qGerador: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select gen_id(GEN_PAGARRECEBER,1) ID from rdb$database')
     Left = 592
@@ -1252,8 +1235,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from relatorio')
     Left = 480
@@ -1336,101 +1317,123 @@ inherited FCadPagarReceber: TFCadPagarReceber
       'PAR_DH_CA=PAR_DH_CA')
     DataSource = dsConsulta
     BCDToCurrency = False
-    Left = 380
-    Top = 175
+    Left = 532
+    Top = 319
   end
   object dspConsulta: TDataSetProvider
     DataSet = qConsulta
-    Left = 520
-    Top = 232
+    Left = 576
+    Top = 256
   end
   object cdsConsulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta'
-    Left = 568
-    Top = 232
+    Left = 624
+    Top = 256
     object cdsConsultaID: TIntegerField
       FieldName = 'ID'
+      Origin = '"PAGARRECEBER"."PAR_ID"'
       Required = True
     end
     object cdsConsultaPAR_ID: TIntegerField
       FieldName = 'PAR_ID'
+      Origin = '"PAGARRECEBER"."PAR_ID"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object cdsConsultaPAR_PAGREC: TIntegerField
       FieldName = 'PAR_PAGREC'
+      Origin = '"PAGARRECEBER"."PAR_PAGREC"'
     end
     object cdsConsultaPAR_DESCRICAO: TStringField
       FieldName = 'PAR_DESCRICAO'
+      Origin = '"PAGARRECEBER"."PAR_DESCRICAO"'
       Size = 100
     end
     object cdsConsultaPAR_CAT_ID: TIntegerField
       FieldName = 'PAR_CAT_ID'
+      Origin = '"PAGARRECEBER"."PAR_CAT_ID"'
     end
     object cdsConsultaPAR_CONTA_ID: TIntegerField
       FieldName = 'PAR_CONTA_ID'
+      Origin = '"PAGARRECEBER"."PAR_CONTA_ID"'
     end
     object cdsConsultaPAR_DATACOMPETENCIA: TDateField
       FieldName = 'PAR_DATACOMPETENCIA'
+      Origin = '"PAGARRECEBER"."PAR_DATACOMPETENCIA"'
     end
     object cdsConsultaPAR_DATAVENCTO: TDateField
       FieldName = 'PAR_DATAVENCTO'
+      Origin = '"PAGARRECEBER"."PAR_DATAVENCTO"'
     end
     object cdsConsultaPAR_VALOR: TBCDField
       FieldName = 'PAR_VALOR'
+      Origin = '"PAGARRECEBER"."PAR_VALOR"'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
     object cdsConsultaPAR_CLI_ID: TIntegerField
       FieldName = 'PAR_CLI_ID'
+      Origin = '"PAGARRECEBER"."PAR_CLI_ID"'
     end
     object cdsConsultaPAR_CETROCUSTO: TStringField
       FieldName = 'PAR_CETROCUSTO'
+      Origin = '"PAGARRECEBER"."PAR_CETROCUSTO"'
       Size = 100
     end
     object cdsConsultaPAR_OBSERVACAO: TStringField
       FieldName = 'PAR_OBSERVACAO'
+      Origin = '"PAGARRECEBER"."PAR_OBSERVACAO"'
       Size = 255
     end
     object cdsConsultaPAR_ANEXO: TMemoField
       FieldName = 'PAR_ANEXO'
+      Origin = '"PAGARRECEBER"."PAR_ANEXO"'
+      ProviderFlags = [pfInUpdate]
       BlobType = ftMemo
       Size = 8
     end
     object cdsConsultaPAR_PAGO: TStringField
       FieldName = 'PAR_PAGO'
+      Origin = '"PAGARRECEBER"."PAR_PAGO"'
       FixedChar = True
       Size = 1
     end
     object cdsConsultaPAR_DATAPGTO: TDateField
       FieldName = 'PAR_DATAPGTO'
+      Origin = '"PAGARRECEBER"."PAR_DATAPGTO"'
     end
     object cdsConsultaPAR_DESCONTOTAXA: TBCDField
       FieldName = 'PAR_DESCONTOTAXA'
+      Origin = '"PAGARRECEBER"."PAR_DESCONTOTAXA"'
       Precision = 18
       Size = 2
     end
     object cdsConsultaPAR_JUROMULTA: TBCDField
       FieldName = 'PAR_JUROMULTA'
+      Origin = '"PAGARRECEBER"."PAR_JUROMULTA"'
       Precision = 18
       Size = 2
     end
     object cdsConsultaPAR_VALORPAGO: TBCDField
       FieldName = 'PAR_VALORPAGO'
+      Origin = '"PAGARRECEBER"."PAR_VALORPAGO"'
       Precision = 18
       Size = 2
     end
     object cdsConsultaPAR_DH_CA: TDateTimeField
       FieldName = 'PAR_DH_CA'
+      Origin = '"PAGARRECEBER"."PAR_DH_CA"'
     end
   end
   object cdsCheque: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta'
-    Left = 400
-    Top = 104
+    Left = 296
+    Top = 56
     object cdsConsultaSELECIONAR: TStringField
       FieldName = 'SELECIONAR'
       Required = True
@@ -1463,10 +1466,83 @@ inherited FCadPagarReceber: TFCadPagarReceber
       Size = 2
     end
   end
-  object ibCheque: TIBDataSet
-    BufferChunks = 1000
-    CachedUpdates = False
-    Left = 360
-    Top = 104
+  object ibPagarreceberCheque: TIBDataSet
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacao
+    DeleteSQL.Strings = (
+      'delete from pagarreceber_cheque'
+      'where'
+      '  PAC_ID = :OLD_PAC_ID')
+    InsertSQL.Strings = (
+      'insert into pagarreceber_cheque'
+      '  (PAC_CHQ_ID, PAC_DH_CA, PAC_ID, PAC_PAR_ID)'
+      'values'
+      '  (:PAC_CHQ_ID, :PAC_DH_CA, :PAC_ID, :PAC_PAR_ID)')
+    RefreshSQL.Strings = (
+      'Select '
+      '  PAC_ID,'
+      '  PAC_PAR_ID,'
+      '  PAC_CHQ_ID,'
+      '  PAC_DH_CA'
+      'from pagarreceber_cheque '
+      'where'
+      '  PAC_ID = :PAC_ID')
+    SelectSQL.Strings = (
+      'select * from pagarreceber_cheque')
+    ModifySQL.Strings = (
+      'update pagarreceber_cheque'
+      'set'
+      '  PAC_CHQ_ID = :PAC_CHQ_ID,'
+      '  PAC_DH_CA = :PAC_DH_CA,'
+      '  PAC_ID = :PAC_ID,'
+      '  PAC_PAR_ID = :PAC_PAR_ID'
+      'where'
+      '  PAC_ID = :OLD_PAC_ID')
+    GeneratorField.Field = 'PAC_ID'
+    GeneratorField.Generator = 'GEN_PAGARRECEBER_CHEQUE'
+    Left = 112
+    Top = 72
+    object ibPagarreceberChequePAC_ID: TIntegerField
+      FieldName = 'PAC_ID'
+      Origin = '"PAGARRECEBER_CHEQUE"."PAC_ID"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object ibPagarreceberChequePAC_PAR_ID: TIntegerField
+      FieldName = 'PAC_PAR_ID'
+      Origin = '"PAGARRECEBER_CHEQUE"."PAC_PAR_ID"'
+    end
+    object ibPagarreceberChequePAC_CHQ_ID: TIntegerField
+      FieldName = 'PAC_CHQ_ID'
+      Origin = '"PAGARRECEBER_CHEQUE"."PAC_CHQ_ID"'
+    end
+    object ibPagarreceberChequePAC_DH_CA: TDateTimeField
+      FieldName = 'PAC_DH_CA'
+      Origin = '"PAGARRECEBER_CHEQUE"."PAC_DH_CA"'
+    end
+  end
+  object dspPagarreceberCheque: TDataSetProvider
+    DataSet = ibPagarreceberCheque
+    Left = 168
+    Top = 72
+  end
+  object cdsPagarreceberCheque: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspPagarreceberCheque'
+    Left = 216
+    Top = 72
+    object cdsPagarreceberChequePAC_ID: TIntegerField
+      FieldName = 'PAC_ID'
+    end
+    object cdsPagarreceberChequePAC_PAR_ID: TIntegerField
+      FieldName = 'PAC_PAR_ID'
+    end
+    object cdsPagarreceberChequePAC_CHQ_ID: TIntegerField
+      FieldName = 'PAC_CHQ_ID'
+    end
+    object cdsPagarreceberChequePAC_DH_CA: TDateTimeField
+      FieldName = 'PAC_DH_CA'
+    end
   end
 end

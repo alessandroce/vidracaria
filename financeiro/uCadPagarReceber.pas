@@ -204,11 +204,23 @@ type
     cdsConsultaCHQ_AGENCIA: TStringField;
     cdsConsultaCHQ_NUMERO: TStringField;
     cdsConsultaCHQ_VALOR: TBCDField;
-    ibCheque: TIBDataSet;
-    Label7: TLabel;
-    DBEdit3: TDBEdit;
-    BitBtn1: TBitBtn;
-    Label8: TLabel;
+    btCheque: TBitBtn;
+    qContaFOP_TIPO: TIntegerField;
+    qContaFOP_BANCO_ID: TIntegerField;
+    qContaFOP_DH_CA: TDateTimeField;
+    qContaFOP_FLAG: TIntegerField;
+    bt_Cheque: TAction;
+    ibPagarreceberCheque: TIBDataSet;
+    ibPagarreceberChequePAC_ID: TIntegerField;
+    ibPagarreceberChequePAC_PAR_ID: TIntegerField;
+    ibPagarreceberChequePAC_CHQ_ID: TIntegerField;
+    ibPagarreceberChequePAC_DH_CA: TDateTimeField;
+    dspPagarreceberCheque: TDataSetProvider;
+    cdsPagarreceberCheque: TClientDataSet;
+    cdsPagarreceberChequePAC_ID: TIntegerField;
+    cdsPagarreceberChequePAC_PAR_ID: TIntegerField;
+    cdsPagarreceberChequePAC_CHQ_ID: TIntegerField;
+    cdsPagarreceberChequePAC_DH_CA: TDateTimeField;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -221,9 +233,12 @@ type
     procedure ibCadastroAfterInsert(DataSet: TDataSet);
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure dsContaDataChange(Sender: TObject; Field: TField);
+    procedure bt_ChequeExecute(Sender: TObject);
+    procedure ibCadastroAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
+    GeradorID : Integer;
     procedure EntrouAbaCadastro;override;
     procedure EntrouAbaConsulta;override;
     procedure ExibeRepetir(pVisivel:Boolean);
@@ -237,6 +252,7 @@ type
     { Public declarations }
     FTipoPagRec : Integer;
     function getIdConsulta:Integer;override;
+    Procedure CarregarConsultaCDSParametro;override;
   end;
 
 var
@@ -250,6 +266,7 @@ uses uSelecionarCliente, uCadClientes, uSelecionarCheque;
 
 procedure TFCadPagarReceber.FormShow(Sender: TObject);
 begin
+  FCarregarConsultaCDSParametro := true;
   inherited;
   if FTipoPagRec>0 then
   begin
@@ -260,6 +277,10 @@ begin
   end
   else
     Aviso('Selecione tipo Pagar/Receber.');
+
+  cdsPagarreceberCheque.Close;
+  cdsPagarreceberCheque.CreateDataSet;
+  cdsPagarreceberCheque.Open;
 
 end;
 
@@ -339,8 +360,9 @@ begin
     getComboCentroCusto(qConsultaPAR_CETROCUSTO.asString);
 
 
-    RetiraRepetir(not(ibCadastro.State=dsInsert));
-    MovePagar(not(ibCadastro.State=dsInsert));
+    DBEdit2.SetFocus;
+    //RetiraRepetir(not(ibCadastro.State=dsInsert));
+    //MovePagar(not(ibCadastro.State=dsInsert));
 
     if FTipoPagRec=2 then
       Label13.Caption :='Fornecedor';
@@ -349,10 +371,8 @@ end;
 procedure TFCadPagarReceber.EntrouAbaConsulta;
 begin
   inherited;
-    qConsulta.Close;
-    qConsulta.ParamByName('pagrec').AsInteger := FTipoPagRec;
-    qConsulta.Open;
-    cdsConsulta.Open;
+  if FCarregarConsultaCDSParametro then
+    CarregarConsultaCDSParametro;
 end;
 
 procedure TFCadPagarReceber.btAnexarClick(Sender: TObject);
@@ -423,8 +443,8 @@ begin
     ibCadastroPAR_JUROMULTA.Clear;
     ibCadastroPAR_VALORPAGO.Clear;
   end;
-
-  ibCadastroPAR_ID.Value := getGeradorID;
+  //if (GeradorID=0) then
+  //  GeradorID := getGeradorID;
 
   if (ibCadastro.State=dsInsert) then
   begin
@@ -448,7 +468,10 @@ begin
   try
     if not(pQtdade>=1) then
       Exit;
-    vData := pDataVencto;
+    if pDataVencto > 0 then
+      vData := pDataVencto
+    else
+      vData := Now;
     vPeriodo := 1;
     case pPeriodo of
     {Diariamente    }  0 : vPeriodo := vPeriodo * 1;
@@ -484,7 +507,9 @@ begin
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := pQtdade+1
           else
           if (ibParcela.Fields.Fields[j].FieldName='PAR_DATAVENCTO') then
+          begin
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := vData
+          end
           else
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := ibCadastro.FieldByName(ibCadastro.Fields.Fields[j].FieldName).Value;
         end;
@@ -554,31 +579,88 @@ begin
   Result := cdsConsultaID.Value;
 end;
 
-procedure TFCadPagarReceber.BitBtn1Click(Sender: TObject);
+procedure TFCadPagarReceber.dsContaDataChange(Sender: TObject;
+  Field: TField);
+begin
+  inherited;
+
+  //btCheque.Visible := (qContaFOP_FLAG.asInteger=2);
+
+end;
+
+procedure TFCadPagarReceber.bt_ChequeExecute(Sender: TObject);
 var j : Integer;
 begin
   inherited;
-  if (StrToIntDef(edOcorrencia.Text,0)=1) then
-  begin
+  //if (StrToIntDef(edOcorrencia.Text,0)=1) then
+  //begin
+  if not(Continua( edOcorrencia.Text<>'','Informe a ocorrência.')) then
+    Exit;
     FSelecionarCheque := TFSelecionarCheque.Create(nil);
+    FSelecionarCheque.FOcorrencia := StrToInt(edOcorrencia.Text);
     FSelecionarCheque.ShowModal;
     if not(FSelecionarCheque.FCancelado) then
     begin
       FSelecionarCheque.cdsConsulta.First;
+      ibPagarreceberCheque.Close;
+      ibPagarreceberCheque.Open;
+
       while not FSelecionarCheque.cdsConsulta.Eof do
       begin
-        if not(cdsCheque.State=dsInsert) then
-          cdsCheque.Insert;
-        for j := 0 to cdsCheque.FieldCount-1 do
-          cdsCheque.FieldByName(cdsCheque.Fields.Fields[j].FieldName).Value := FSelecionarCheque.cdsConsulta.FieldByName(FSelecionarCheque.cdsConsulta.Fields.Fields[j].FieldName).Value;
+
+        if (FSelecionarCheque.cdsConsultaSELECIONAR.asString='S') then
+        begin
+          if not(cdsPagarreceberCheque.State=dsInsert) then
+            cdsPagarreceberCheque.Insert;
+          //cdsPagarreceberChequePAC_ID.asInteger     := GeradorID;
+          cdsPagarreceberChequePAC_PAR_ID.asInteger := ibCadastroPAR_ID.asInteger;
+          cdsPagarreceberChequePAC_CHQ_ID.asInteger := FSelecionarCheque.cdsConsultaCHQ_ID.asInteger;
+          cdsPagarreceberCheque.Post;
+          //cdsPagarreceberChequePAC_DH_CA.asInteger  :=
+        end;
+
         FSelecionarCheque.cdsConsulta.Next;
       end;
     end;
     FSelecionarCheque.Free;
-  end
-  else
-  begin
-  end;
+  //end
+  //else
+  //begin
+  //end;
+end;
+
+procedure TFCadPagarReceber.ibCadastroAfterPost(DataSet: TDataSet);
+var i : Integer;
+begin
+  inherited;
+    if cdsPagarreceberCheque.RecordCount>0 then
+    begin
+      while not(cdsPagarreceberCheque.Eof) do
+      begin
+        if not(ibPagarreceberCheque.State=dsInsert) then
+          ibPagarreceberCheque.Insert;
+        for i := 0 to cdsPagarreceberCheque.FieldCount-1 do
+        begin
+          if ibPagarreceberCheque.Fields.Fields[i].FieldName='PAC_PAR_ID' then
+            ibPagarreceberCheque.FieldByName(ibPagarreceberCheque.Fields.Fields[i].FieldName).Value := cdsPagarreceberCheque.FieldByName(cdsPagarreceberCheque.Fields.Fields[i].FieldName).Value
+          else
+          if ibPagarreceberCheque.Fields.Fields[i].FieldName='PAC_CHQ_ID' then
+            ibPagarreceberCheque.FieldByName(ibPagarreceberCheque.Fields.Fields[i].FieldName).Value := cdsPagarreceberCheque.FieldByName(cdsPagarreceberCheque.Fields.Fields[i].FieldName).Value;
+        end;
+        ibPagarreceberCheque.Post;
+        cdsPagarreceberCheque.Next;
+      end;
+    end;
+end;
+
+procedure TFCadPagarReceber.CarregarConsultaCDSParametro;
+begin
+  inherited;
+  qConsulta.Close;
+  qConsulta.ParamByName('pagrec').AsInteger := FTipoPagRec;
+  qConsulta.Open;
+  cdsConsulta.Close;
+  cdsConsulta.Open;
 end;
 
 end.

@@ -55,10 +55,17 @@ type
     grConsultaDBTableView1CHQ_AGENCIA: TcxGridDBColumn;
     grConsultaDBTableView1CHQ_NUMERO: TcxGridDBColumn;
     grConsultaDBTableView1CHQ_VALOR: TcxGridDBColumn;
+    Panel3: TPanel;
+    lblVezes: TLabel;
+    lblOcorrencia: TLabel;
+    edOcorrencia: TEdit;
+    BitBtn3: TBitBtn;
+    BitBtn4: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure BitBtn2Click(Sender: TObject);
-    procedure qConsultaAfterOpen(DataSet: TDataSet);
+    procedure BitBtn3Click(Sender: TObject);
+    procedure BitBtn4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -86,6 +93,7 @@ begin
   inherited;
   qConsulta.Close;
   qConsulta.Open;
+  cdsConsulta.Open;
   pnBarraForm.Caption := 'Selecionar Cheques';
 end;
 
@@ -102,14 +110,8 @@ begin
   if getSelecionado then
   begin
     FCancelado := false;
-  Close;
+    Close;
   end;
-end;
-
-procedure TFSelecionarCheque.qConsultaAfterOpen(DataSet: TDataSet);
-begin
-  inherited;
-  cdsConsulta.Open;
 end;
 
 function TFSelecionarCheque.getSelecionado:Boolean;
@@ -123,12 +125,58 @@ begin
       Inc(FQtdadeSel);
     cdsConsulta.Next;
   end;
-  Result := (i<=FOcorrencia);
-  if not Result then
+  Result := (FQtdadeSel=FOcorrencia);
+  if not(Result) then
+  begin
+    FCancelado := true;
     Aviso('Quantidade selecionada e quantidade de ocorrenia divergem.');
-  Result := (i>0);
-  if not Result then
-    Aviso('Registro não selecionado.');
+  end
+  else
+  begin
+    Result := (FQtdadeSel>0);
+    if not(Result) then
+    begin
+      FCancelado := true;
+      Aviso('Registro não selecionado.');
+    end;
+  end;
+end;
+
+procedure TFSelecionarCheque.BitBtn3Click(Sender: TObject);
+begin
+  inherited;
+  cdsConsulta.First;
+  cdsConsulta.DisableControls;
+  while not(cdsConsulta.Eof) do
+  begin
+    if not(cdsConsulta.State=dsEdit) then
+      cdsConsulta.Edit;
+    if cdsConsultaSELECIONAR.asString='N' then
+      cdsConsultaSELECIONAR.asString := 'S';
+    cdsConsulta.Post;
+    cdsConsulta.Next;
+  end;
+  cdsConsulta.EnableControls;
+end;
+
+procedure TFSelecionarCheque.BitBtn4Click(Sender: TObject);
+begin
+  inherited;
+  cdsConsulta.First;
+  cdsConsulta.DisableControls;
+  while not(cdsConsulta.Eof) do
+  begin
+    if not(cdsConsulta.State=dsEdit) then
+      cdsConsulta.Edit;
+    if cdsConsultaSELECIONAR.asString='N' then
+      cdsConsultaSELECIONAR.asString := 'S'
+    else
+    if cdsConsultaSELECIONAR.asString='S' then
+      cdsConsultaSELECIONAR.asString := 'N';
+    cdsConsulta.Post;
+    cdsConsulta.Next;
+  end;
+  cdsConsulta.EnableControls;
 end;
 
 end.

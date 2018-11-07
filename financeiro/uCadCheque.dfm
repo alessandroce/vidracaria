@@ -1,16 +1,16 @@
 inherited FCadCheque: TFCadCheque
-  Left = 227
-  Top = 168
+  Left = 295
+  Top = 162
   Height = 496
   Caption = 'FCadCheque'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 428
+    Height = 427
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Height = 330
+        Height = 329
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1CHQ_ID: TcxGridDBColumn
@@ -101,7 +101,7 @@ inherited FCadCheque: TFCadCheque
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 380
+        Top = 379
       end
     end
     inherited tsCadastro: TTabSheet
@@ -179,10 +179,10 @@ inherited FCadCheque: TFCadCheque
         Top = 247
         Width = 41
         Height = 13
-        Caption = 'Historico'
+        Caption = 'Hist'#243'rico'
       end
       object Label13: TLabel [11]
-        Left = 144
+        Left = 137
         Top = 120
         Width = 32
         Height = 13
@@ -433,6 +433,7 @@ inherited FCadCheque: TFCadCheque
     end
   end
   inherited ibCadastro: TIBDataSet
+    OnNewRecord = ibCadastroNewRecord
     DeleteSQL.Strings = (
       'delete from cheque'
       'where'
@@ -704,6 +705,7 @@ inherited FCadCheque: TFCadCheque
     object qConsultaCHQ_VALOR: TIBBCDField
       FieldName = 'CHQ_VALOR'
       Origin = '"CHEQUE"."CHQ_VALOR"'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end

@@ -126,6 +126,7 @@ type
     procedure rgSituacaoClick(Sender: TObject);
     procedure bt_SelCliCustodiaExecute(Sender: TObject);
     procedure bt_SelCliExecute(Sender: TObject);
+    procedure ibCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -192,6 +193,12 @@ begin
     Edit2.Text := FSelecionarCli.FDescricao;
   end;
   FSelecionarCli.Free;
+end;
+
+procedure TFCadCheque.ibCadastroNewRecord(DataSet: TDataSet);
+begin
+  inherited;
+  ibCadastroCHQ_SITUACAO.asInteger := 0;
 end;
 
 end.

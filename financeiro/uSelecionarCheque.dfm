@@ -8,16 +8,16 @@ inherited FSelecionarCheque: TFSelecionarCheque
   TextHeight = 13
   object Panel1: TPanel [1]
     Left = 0
-    Top = 30
+    Top = 71
     Width = 584
-    Height = 291
+    Height = 249
     Align = alClient
     TabOrder = 1
     object grConsulta: TcxGrid
       Left = 1
       Top = 1
       Width = 582
-      Height = 289
+      Height = 247
       Align = alClient
       TabOrder = 0
       object grConsultaDBTableView1: TcxGridDBTableView
@@ -33,7 +33,6 @@ inherited FSelecionarCheque: TFSelecionarCheque
         FilterRow.SeparatorWidth = 5
         FilterRow.Visible = True
         FilterRow.ApplyChanges = fracImmediately
-        OptionsSelection.CellSelect = False
         OptionsView.NoDataToDisplayInfoText = 'Sem registros para exibir'
         OptionsView.Footer = True
         OptionsView.GroupByBox = False
@@ -52,23 +51,28 @@ inherited FSelecionarCheque: TFSelecionarCheque
         object grConsultaDBTableView1CHQ_BANCO: TcxGridDBColumn
           Caption = 'Banco'
           DataBinding.FieldName = 'CHQ_BANCO'
+          Options.Editing = False
         end
         object grConsultaDBTableView1CHQ_CONTA: TcxGridDBColumn
           Caption = 'Conta'
           DataBinding.FieldName = 'CHQ_CONTA'
+          Options.Editing = False
         end
         object grConsultaDBTableView1CHQ_AGENCIA: TcxGridDBColumn
           Caption = 'Ag'#234'ncia'
           DataBinding.FieldName = 'CHQ_AGENCIA'
+          Options.Editing = False
           Width = 94
         end
         object grConsultaDBTableView1CHQ_NUMERO: TcxGridDBColumn
           Caption = 'N'#250'mero'
           DataBinding.FieldName = 'CHQ_NUMERO'
+          Options.Editing = False
         end
         object grConsultaDBTableView1CHQ_VALOR: TcxGridDBColumn
           Caption = 'Valor'
           DataBinding.FieldName = 'CHQ_VALOR'
+          Options.Editing = False
           Width = 94
         end
       end
@@ -79,7 +83,7 @@ inherited FSelecionarCheque: TFSelecionarCheque
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 321
+    Top = 320
     Width = 584
     Height = 41
     Align = alBottom
@@ -103,27 +107,76 @@ inherited FSelecionarCheque: TFSelecionarCheque
       Kind = bkOK
     end
   end
+  object Panel3: TPanel [3]
+    Left = 0
+    Top = 30
+    Width = 584
+    Height = 41
+    Align = alTop
+    BevelOuter = bvNone
+    TabOrder = 3
+    object lblVezes: TLabel
+      Left = 295
+      Top = 14
+      Width = 28
+      Height = 13
+      Caption = 'vezes'
+      Visible = False
+    end
+    object lblOcorrencia: TLabel
+      Left = 189
+      Top = 14
+      Width = 52
+      Height = 13
+      Caption = 'Ocorr'#234'ncia'
+      Visible = False
+    end
+    object edOcorrencia: TEdit
+      Left = 249
+      Top = 10
+      Width = 40
+      Height = 21
+      Enabled = False
+      TabOrder = 0
+      Visible = False
+    end
+    object BitBtn3: TBitBtn
+      Left = 8
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Todos'
+      TabOrder = 1
+      OnClick = BitBtn3Click
+    end
+    object BitBtn4: TBitBtn
+      Left = 88
+      Top = 8
+      Width = 75
+      Height = 25
+      Caption = 'Inverter'
+      TabOrder = 2
+      OnClick = BitBtn4Click
+    end
+  end
   inherited ActionList1: TActionList
-    Top = 80
+    Top = 120
   end
   inherited ImageList1: TImageList
-    Top = 80
+    Top = 120
   end
   inherited frxReport1: TfrxReport
-    Top = 80
+    Top = 120
     Datasets = <>
     Variables = <>
     Style = <>
   end
   inherited frxIBXComponents1: TfrxIBXComponents
-    Top = 80
+    Top = 120
   end
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    AfterOpen = qConsultaAfterOpen
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select '#39'N'#39' selecionar,'
       '    CHQ_ID,'
@@ -135,7 +188,7 @@ inherited FSelecionarCheque: TFSelecionarCheque
       '  from cheque'
       ' where coalesce(cheque.chq_situacao,0)=0')
     Left = 392
-    Top = 72
+    Top = 112
     object qConsultaSELECIONAR: TIBStringField
       FieldName = 'SELECIONAR'
       Required = True
@@ -177,14 +230,14 @@ inherited FSelecionarCheque: TFSelecionarCheque
   object dsConsulta: TDataSource
     DataSet = cdsConsulta
     Left = 520
-    Top = 72
+    Top = 112
   end
   object cdsConsulta: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta'
     Left = 480
-    Top = 72
+    Top = 112
     object cdsConsultaSELECIONAR: TStringField
       FieldName = 'SELECIONAR'
       Required = True
@@ -213,6 +266,7 @@ inherited FSelecionarCheque: TFSelecionarCheque
     end
     object cdsConsultaCHQ_VALOR: TBCDField
       FieldName = 'CHQ_VALOR'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
@@ -220,6 +274,6 @@ inherited FSelecionarCheque: TFSelecionarCheque
   object dspConsulta: TDataSetProvider
     DataSet = qConsulta
     Left = 432
-    Top = 72
+    Top = 112
   end
 end
