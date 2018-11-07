@@ -1,14 +1,12 @@
 inherited FCadPlGrupo: TFCadPlGrupo
-  Width = 800
   Caption = 'FCadPlGrupo'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Width = 784
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Width = 776
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1PGR_CODIGO: TcxGridDBColumn
@@ -23,22 +21,12 @@ inherited FCadPlGrupo: TFCadPlGrupo
         end
       end
       inherited pnBarraPg: TPanel
-        Width = 776
-        inherited btSair: TSpeedButton
-          Left = 716
-        end
         inherited rgAtivo: TRadioGroup
           Visible = False
         end
       end
-      inherited sbBarraStatus: TStatusBar
-        Width = 776
-      end
     end
     inherited tsCadastro: TTabSheet
-      inherited Bevel1: TBevel
-        Width = 776
-      end
       object Label1: TLabel [1]
         Left = 64
         Top = 88
@@ -54,15 +42,6 @@ inherited FCadPlGrupo: TFCadPlGrupo
         Height = 13
         Caption = 'Descri'#231#227'o'
         FocusControl = DBEdit2
-      end
-      inherited Panel1: TPanel
-        Width = 776
-        inherited btSalvar: TSpeedButton
-          Left = 716
-        end
-        inherited btCancelar: TSpeedButton
-          Left = 657
-        end
       end
       object DBEdit1: TDBEdit
         Left = 64
@@ -83,9 +62,6 @@ inherited FCadPlGrupo: TFCadPlGrupo
         TabOrder = 2
       end
     end
-  end
-  inherited pnBarraForm: TPanel
-    Width = 784
   end
   inherited ibCadastro: TIBDataSet
     DeleteSQL.Strings = (

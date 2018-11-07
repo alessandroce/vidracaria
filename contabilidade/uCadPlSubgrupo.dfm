@@ -36,9 +36,9 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
       object Label1: TLabel [1]
         Left = 42
         Top = 82
-        Width = 95
+        Width = 29
         Height = 13
-        Caption = 'Grupo Plano Contas'
+        Caption = 'Grupo'
       end
       object Label2: TLabel [2]
         Left = 40
@@ -56,18 +56,6 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         Caption = 'Descri'#231#227'o'
         FocusControl = DBEdit2
       end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 42
-        Top = 98
-        Width = 250
-        Height = 21
-        DataField = 'PSG_PGR_ID'
-        DataSource = dsCadastro
-        KeyField = 'PGR_ID'
-        ListField = 'PGR_DESCRICAO'
-        ListSource = dsGrupo
-        TabOrder = 1
-      end
       object DBEdit1: TDBEdit
         Left = 40
         Top = 144
@@ -75,7 +63,7 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         Height = 21
         DataField = 'PSG_CODIGO'
         DataSource = dsCadastro
-        TabOrder = 2
+        TabOrder = 1
       end
       object DBEdit2: TDBEdit
         Left = 40
@@ -84,6 +72,16 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         Height = 21
         DataField = 'PSG_DESCRICAO'
         DataSource = dsCadastro
+        TabOrder = 2
+      end
+      object DBEdit3: TDBEdit
+        Left = 40
+        Top = 96
+        Width = 250
+        Height = 21
+        DataField = 'PGR_DESCRICAO'
+        DataSource = dsPlanoContas
+        Enabled = False
         TabOrder = 3
       end
     end
@@ -197,6 +195,8 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
   object qGrupo: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select *'
       '  from pl_grupo'
@@ -243,12 +243,15 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
     Left = 412
     Top = 175
   end
-  object qGetIdGrupo: TIBQuery
+  object qPlanoContas: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
-      'select pl_subgrupo.psg_pgr_id'
+      'select pl_grupo.pgr_descricao'
       '  from pl_subgrupo'
+      ' left join pl_grupo on (pl_grupo.pgr_id=pl_subgrupo.psg_pgr_id)'
       ' where pl_subgrupo.psg_id = :psg_id')
     Left = 368
     Top = 112
@@ -258,14 +261,14 @@ inherited FCadPlSubgrupo: TFCadPlSubgrupo
         Name = 'psg_id'
         ParamType = ptUnknown
       end>
-    object qGetIdGrupoPSG_PGR_ID: TIntegerField
-      FieldName = 'PSG_PGR_ID'
-      Origin = '"PL_SUBGRUPO"."PSG_PGR_ID"'
-      Required = True
+    object qPlanoContasPGR_DESCRICAO: TIBStringField
+      FieldName = 'PGR_DESCRICAO'
+      Origin = 'PL_GRUPO.PGR_DESCRICAO'
+      Size = 100
     end
   end
-  object dsGetIdGrupo: TDataSource
-    DataSet = qGetIdGrupo
+  object dsPlanoContas: TDataSource
+    DataSet = qPlanoContas
     Left = 416
     Top = 112
   end

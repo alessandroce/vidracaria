@@ -37,7 +37,6 @@ type
     grConsultaDBTableView1PSG_CODIGO: TcxGridDBColumn;
     grConsultaDBTableView1PSG_DESCRICAO: TcxGridDBColumn;
     grConsultaDBTableView1GRUPO: TcxGridDBColumn;
-    DBLookupComboBox1: TDBLookupComboBox;
     Label1: TLabel;
     qGrupo: TIBQuery;
     dsGrupo: TDataSource;
@@ -50,19 +49,20 @@ type
     Label3: TLabel;
     DBEdit2: TDBEdit;
     frxDBSubgrupo: TfrxDBDataset;
-    qGetIdGrupo: TIBQuery;
-    dsGetIdGrupo: TDataSource;
-    qGetIdGrupoPSG_PGR_ID: TIntegerField;
+    qPlanoContas: TIBQuery;
+    dsPlanoContas: TDataSource;
+    qPlanoContasPGR_DESCRICAO: TIBStringField;
+    DBEdit3: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
     procedure ibCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
-    function getIdGrupo(pIdSubGrupo:Integer):Integer;
   public
     { Public declarations }
     FAcao : String;
-    function getIdConsulta:Integer;override;
+    FIdGrupo : Integer;
+    //function getIdConsulta:Integer;override;
   end;
 
 var
@@ -82,6 +82,19 @@ begin
   qGrupo.Open;
   qGrupo.Last;
   qGrupo.First;
+
+  qPlanoContas.Close;
+  qPlanoContas.ParamByName('psg_id').asInteger := FId;
+  qPlanoContas.Open;
+
+  if ((FAcao<>'') or (FId>0)) then
+  begin
+    if FAcao='N' then
+      Act_Btn_Novo.Execute
+    else
+    if FAcao='A' then
+      Act_Btn_Alterar.Execute;
+  end;
 end;
 
 procedure TFCadPlSubgrupo.Act_Btn_ImprimirExecute(Sender: TObject);
@@ -97,24 +110,16 @@ begin
     ChamaRelatorio(frxReport1,sRelatorio);
 end;
 
-function TFCadPlSubgrupo.getIdConsulta: Integer;
-begin
-  Result := FId;
-end;
-
-function TFCadPlSubgrupo.getIdGrupo(pIdSubGrupo: Integer): Integer;
-begin
-  qGetIdGrupo.Close;
-  qGetIdGrupo.ParamByName('psg_id').asInteger := pIdSubGrupo;
-  qGetIdGrupo.Open;
-  Result := qGetIdGrupoPSG_PGR_ID.asInteger;
-end;
+//function TFCadPlSubgrupo.getIdConsulta: Integer;
+//begin
+//  Result := FId;
+//end;
 
 procedure TFCadPlSubgrupo.ibCadastroNewRecord(DataSet: TDataSet);
 begin
   inherited;
   if FAcao='N' then
-    ibCadastroPSG_PGR_ID.asInteger := getIdGrupo(FId);
+    ibCadastroPSG_PGR_ID.asInteger := FIdGrupo;
 end;
 
 end.

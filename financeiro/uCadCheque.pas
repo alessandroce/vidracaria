@@ -97,8 +97,6 @@ type
     Label8: TLabel;
     Label9: TLabel;
     DBEdit9: TDBEdit;
-    ComboBox1: TComboBox;
-    Label10: TLabel;
     ibCadastroCHQ_PAR_ID: TIntegerField;
     wwDBDateTimePicker1: TwwDBDateTimePicker;
     wwDBDateTimePicker2: TwwDBDateTimePicker;
@@ -107,14 +105,27 @@ type
     Label11: TLabel;
     Label13: TLabel;
     btCACliente: TBitBtn;
-    Edit2: TEdit;
     DBEdit1: TDBEdit;
     Label12: TLabel;
     frxCheques: TfrxDBDataset;
+    rgSituacao: TDBRadioGroup;
+    pnCliCustodia: TPanel;
+    Label14: TLabel;
+    DBEdit7: TDBEdit;
+    BitBtn1: TBitBtn;
+    Label15: TLabel;
+    ibCadastroCHQ_CLI_CUSTODIA: TIntegerField;
+    bt_SelCli: TAction;
+    bt_SelCliCustodia: TAction;
+    ibCadastroCLIENTE: TIBStringField;
+    ibCadastroCLIENTE_CUSTODIA: TIBStringField;
+    Edit2: TDBEdit;
+    Edit1: TDBEdit;
     procedure FormShow(Sender: TObject);
-    procedure btCAClienteClick(Sender: TObject);
-    procedure ComboBox1Change(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
+    procedure rgSituacaoClick(Sender: TObject);
+    procedure bt_SelCliCustodiaExecute(Sender: TObject);
+    procedure bt_SelCliExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -136,27 +147,6 @@ begin
   qConsulta.Open;
 end;
 
-procedure TFCadCheque.btCAClienteClick(Sender: TObject);
-begin
-  inherited;
-  FSelecionarCli := TFSelecionarCli.Create(nil);
-  FSelecionarCli.FTipoCli := 1;
-  FSelecionarCli.ShowModal;
-  if FSelecionarCli.FId>0 then
-  begin
-    ibCadastroCHQ_CLIENTE_ID.Value := FSelecionarCli.FCodigo;
-    Edit2.Text := FSelecionarCli.FDescricao;
-  end;
-  FSelecionarCli.Free;
-end;
-
-procedure TFCadCheque.ComboBox1Change(Sender: TObject);
-begin
-  inherited;
-  //ShowMessage(ComboBox1.Text);
-
-end;
-
 procedure TFCadCheque.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   inherited;
@@ -168,6 +158,40 @@ begin
   end
   else
     ChamaRelatorio(frxReport1,sRelatorio);
+end;
+
+procedure TFCadCheque.rgSituacaoClick(Sender: TObject);
+begin
+  inherited;
+  pnCliCustodia.Visible := (rgSituacao.ItemIndex=4);
+end;
+
+procedure TFCadCheque.bt_SelCliCustodiaExecute(Sender: TObject);
+begin
+  inherited;
+  FSelecionarCli := TFSelecionarCli.Create(nil);
+  FSelecionarCli.FTipoCli := 1;
+  FSelecionarCli.ShowModal;
+  if FSelecionarCli.FId>0 then
+  begin
+    ibCadastroCHQ_CLI_CUSTODIA.Value := FSelecionarCli.FCodigo;
+    Edit1.Text := FSelecionarCli.FDescricao;
+  end;
+  FSelecionarCli.Free;
+end;
+
+procedure TFCadCheque.bt_SelCliExecute(Sender: TObject);
+begin
+  inherited;
+  FSelecionarCli := TFSelecionarCli.Create(nil);
+  FSelecionarCli.FTipoCli := 1;
+  FSelecionarCli.ShowModal;
+  if FSelecionarCli.FId>0 then
+  begin
+    ibCadastroCHQ_CLIENTE_ID.Value := FSelecionarCli.FCodigo;
+    Edit2.Text := FSelecionarCli.FDescricao;
+  end;
+  FSelecionarCli.Free;
 end;
 
 end.

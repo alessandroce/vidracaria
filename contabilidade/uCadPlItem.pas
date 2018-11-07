@@ -45,14 +45,6 @@ type
     grConsultaDBTableView1PSG_DESCRICAO: TcxGridDBColumn;
     grConsultaDBTableView1PGR_DESCRICAO: TcxGridDBColumn;
     Label2: TLabel;
-    DBLookupComboBox2: TDBLookupComboBox;
-    qSubgrupo: TIBQuery;
-    dsSubgrupo: TDataSource;
-    qSubgrupoPSG_ID: TIntegerField;
-    qSubgrupoPSG_PGR_ID: TIntegerField;
-    qSubgrupoPSG_CODIGO: TIntegerField;
-    qSubgrupoPSG_DESCRICAO: TIBStringField;
-    qSubgrupoPSG_DH_CA: TDateTimeField;
     Label3: TLabel;
     DBEdit1: TDBEdit;
     Label4: TLabel;
@@ -67,19 +59,24 @@ type
     qCategoriaPCA_CODIGO: TIntegerField;
     qCategoriaPCA_DESCRICAO: TIBStringField;
     qCategoriaPCA_DH_CA: TDateTimeField;
-    qGrupo: TIBQuery;
-    dsGrupo: TDataSource;
     Label1: TLabel;
-    qGrupoPGR_DESCRICAO: TIBStringField;
-    DBEdit4: TDBEdit;
     frxDBItem: TfrxDBDataset;
+    qPlanoContas: TIBQuery;
+    DBEdit5: TDBEdit;
+    dsPlanoContas: TDataSource;
+    DBEdit4: TDBEdit;
+    qPlanoContasPSG_DESCRICAO: TIBStringField;
+    qPlanoContasPGR_DESCRICAO: TIBStringField;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
+    procedure ibCadastroNewRecord(DataSet: TDataSet);
   private
     { Private declarations }
   public
     { Public declarations }
-    function getIdConsulta:Integer;override;
+    FAcao : String;
+    FIdSubGrupo : Integer;
+    //function getIdConsulta:Integer;override;
   end;
 
 var
@@ -101,14 +98,18 @@ begin
   qCategoria.Last;
   qCategoria.First;
 
-  qSubgrupo.close;
-  qSubgrupo.Open;
-  qSubgrupo.Last;
-  qSubgrupo.First;
+  qPlanoContas.Close;
+  qPlanoContas.ParamByName('pit_id').asInteger := FId;
+  qPlanoContas.Open;
 
-  qGrupo.close;
-  qGrupo.Open;
-
+  if ((FAcao<>'') or (FId>0)) then
+  begin
+    if FAcao='N' then
+      Act_Btn_Novo.Execute
+    else
+    if FAcao='A' then
+      Act_Btn_Alterar.Execute;
+  end;
 end;
 
 procedure TFCadPlItem.Act_Btn_ImprimirExecute(Sender: TObject);
@@ -124,9 +125,16 @@ begin
     ChamaRelatorio(frxReport1,sRelatorio);
 end;
 
-function TFCadPlItem.getIdConsulta: Integer;
+//function TFCadPlItem.getIdConsulta: Integer;
+//begin
+//  Result := FId;
+//end;
+
+procedure TFCadPlItem.ibCadastroNewRecord(DataSet: TDataSet);
 begin
-  Result := FId;
+  inherited;
+  if FAcao='N' then
+    ibCadastroPIT_PSG_ID.asInteger := FIdSubGrupo;
 end;
 
 end.

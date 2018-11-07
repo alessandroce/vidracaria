@@ -45,7 +45,8 @@ type
     { Private declarations }
   public
     { Public declarations }
-    function getIdConsulta:Integer;override;
+    FAcao : String;
+//    function getIdConsulta:Integer;override;
   end;
 
 var
@@ -61,6 +62,15 @@ procedure TFCadPlGrupo.FormShow(Sender: TObject);
 begin
   inherited;
   qConsulta.Open;
+
+  if ((FAcao<>'') or (FId>0)) then
+  begin
+    if FAcao='N' then
+      Act_Btn_Novo.Execute
+    else
+    if FAcao='A' then
+      Act_Btn_Alterar.Execute;
+  end;
 end;
 
 procedure TFCadPlGrupo.Act_Btn_ImprimirExecute(Sender: TObject);
@@ -76,9 +86,9 @@ begin
     ChamaRelatorio(frxReport1,sRelatorio);
 end;
 
-function TFCadPlGrupo.getIdConsulta: Integer;
-begin
-  Result := FId;
-end;
+//function TFCadPlGrupo.getIdConsulta: Integer;
+//begin
+//  Result := FId;
+//end;
 
 end.

@@ -1,5 +1,5 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 300
+  Left = 227
   Top = 164
   Height = 600
   Caption = 'FCadPagarReceber'
@@ -7,12 +7,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 531
-    ActivePage = tsCadastro
+    Height = 532
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
-        Height = 433
+        Height = 434
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           DataController.Filter.AutoDataSetFilter = True
@@ -102,7 +101,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 483
+        Top = 484
       end
     end
     inherited tsCadastro: TTabSheet
@@ -177,14 +176,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Width = 63
         Height = 13
         Caption = 'Observa'#231#245'es'
-      end
-      object Label7: TLabel [11]
-        Left = 8
-        Top = 162
-        Width = 37
-        Height = 13
-        Caption = 'Cheque'
-        Visible = False
       end
       inherited Panel1: TPanel
         TabOrder = 10
@@ -470,7 +461,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
           Shape = bsTopLine
         end
         object lblOcorrencia: TLabel
-          Left = 169
+          Left = 173
           Top = 39
           Width = 52
           Height = 13
@@ -478,12 +469,27 @@ inherited FCadPagarReceber: TFCadPagarReceber
           Enabled = False
         end
         object lblVezes: TLabel
-          Left = 305
+          Left = 279
           Top = 39
           Width = 28
           Height = 13
           Caption = 'vezes'
           Enabled = False
+        end
+        object Label7: TLabel
+          Left = 352
+          Top = 42
+          Width = 37
+          Height = 13
+          Caption = 'Cheque'
+          Visible = False
+        end
+        object Label8: TLabel
+          Left = 344
+          Top = 18
+          Width = 48
+          Height = 13
+          Caption = 'Cheque(s)'
         end
         object chRepetir: TCheckBox
           Left = 9
@@ -516,37 +522,37 @@ inherited FCadPagarReceber: TFCadPagarReceber
         object edOcorrencia: TEdit
           Left = 233
           Top = 35
-          Width = 57
+          Width = 40
           Height = 21
           Enabled = False
           TabOrder = 2
         end
-      end
-      object DBEdit3: TDBEdit
-        Left = 8
-        Top = 178
-        Width = 81
-        Height = 21
-        DataSource = dsCadastro
-        Enabled = False
-        TabOrder = 17
-        Visible = False
-      end
-      object BitBtn1: TBitBtn
-        Left = 91
-        Top = 177
-        Width = 22
-        Height = 22
-        Caption = '...'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 18
-        Visible = False
-        OnClick = BitBtn1Click
+        object DBEdit3: TDBEdit
+          Left = 344
+          Top = 34
+          Width = 81
+          Height = 21
+          DataSource = dsCadastro
+          Enabled = False
+          TabOrder = 3
+          Visible = False
+        end
+        object BitBtn1: TBitBtn
+          Left = 426
+          Top = 33
+          Width = 22
+          Height = 22
+          Caption = '...'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 4
+          Visible = False
+          OnClick = BitBtn1Click
+        end
       end
     end
   end
@@ -894,6 +900,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -938,6 +946,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qConta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select forma_pgto.fop_id,'
       '       forma_pgto.fop_descricao'
@@ -963,6 +973,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -994,6 +1006,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select distinct pagarreceber.par_cetrocusto'
       '  from pagarreceber'
@@ -1028,6 +1042,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
+    BufferChunks = 1000
+    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber'
       'where'
@@ -1222,6 +1238,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qGerador: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select gen_id(GEN_PAGARRECEBER,1) ID from rdb$database')
     Left = 592
@@ -1234,6 +1252,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select * from relatorio')
     Left = 480
@@ -1409,8 +1429,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
     Aggregates = <>
     Params = <>
     ProviderName = 'dspConsulta'
-    Left = 408
-    Top = 256
+    Left = 400
+    Top = 104
     object cdsConsultaSELECIONAR: TStringField
       FieldName = 'SELECIONAR'
       Required = True
@@ -1444,7 +1464,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
     end
   end
   object ibCheque: TIBDataSet
-    Left = 376
-    Top = 256
+    BufferChunks = 1000
+    CachedUpdates = False
+    Left = 360
+    Top = 104
   end
 end

@@ -196,9 +196,6 @@ type
     cdsConsultaPAR_JUROMULTA: TBCDField;
     cdsConsultaPAR_VALORPAGO: TBCDField;
     cdsConsultaPAR_DH_CA: TDateTimeField;
-    DBEdit3: TDBEdit;
-    BitBtn1: TBitBtn;
-    Label7: TLabel;
     cdsCheque: TClientDataSet;
     cdsConsultaSELECIONAR: TStringField;
     cdsConsultaCHQ_ID: TIntegerField;
@@ -208,6 +205,10 @@ type
     cdsConsultaCHQ_NUMERO: TStringField;
     cdsConsultaCHQ_VALOR: TBCDField;
     ibCheque: TIBDataSet;
+    Label7: TLabel;
+    DBEdit3: TDBEdit;
+    BitBtn1: TBitBtn;
+    Label8: TLabel;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -557,22 +558,27 @@ procedure TFCadPagarReceber.BitBtn1Click(Sender: TObject);
 var j : Integer;
 begin
   inherited;
-  FSelecionarCheque := TFSelecionarCheque.Create(nil);
-  FSelecionarCheque.ShowModal;
-  if not(FSelecionarCheque.FCancelado) then
+  if (StrToIntDef(edOcorrencia.Text,0)=1) then
   begin
-    FSelecionarCheque.cdsConsulta.First;
-    while not FSelecionarCheque.cdsConsulta.Eof do
+    FSelecionarCheque := TFSelecionarCheque.Create(nil);
+    FSelecionarCheque.ShowModal;
+    if not(FSelecionarCheque.FCancelado) then
     begin
-      if not(cdsCheque.State=dsInsert) then
-        cdsCheque.Insert;
-      for j := 0 to cdsCheque.FieldCount-1 do
-        cdsCheque.FieldByName(cdsCheque.Fields.Fields[j].FieldName).Value := FSelecionarCheque.cdsConsulta.FieldByName(FSelecionarCheque.cdsConsulta.Fields.Fields[j].FieldName).Value;
-      FSelecionarCheque.cdsConsulta.Next;
+      FSelecionarCheque.cdsConsulta.First;
+      while not FSelecionarCheque.cdsConsulta.Eof do
+      begin
+        if not(cdsCheque.State=dsInsert) then
+          cdsCheque.Insert;
+        for j := 0 to cdsCheque.FieldCount-1 do
+          cdsCheque.FieldByName(cdsCheque.Fields.Fields[j].FieldName).Value := FSelecionarCheque.cdsConsulta.FieldByName(FSelecionarCheque.cdsConsulta.Fields.Fields[j].FieldName).Value;
+        FSelecionarCheque.cdsConsulta.Next;
+      end;
     end;
+    FSelecionarCheque.Free;
+  end
+  else
+  begin
   end;
-  FSelecionarCheque.Free;
-
 end;
 
 end.

@@ -1,7 +1,7 @@
 inherited FCadCheque: TFCadCheque
-  Left = 298
+  Left = 227
   Top = 168
-  Height = 497
+  Height = 496
   Caption = 'FCadCheque'
   OldCreateOrder = True
   PixelsPerInch = 96
@@ -94,31 +94,10 @@ inherited FCadCheque: TFCadCheque
         end
       end
       inherited pnBarraPg: TPanel
-        object Label10: TLabel [5]
-          Left = 264
-          Top = 8
-          Width = 37
-          Height = 13
-          Caption = 'Op'#231#245'es'
-        end
         inherited rgAtivo: TRadioGroup
           Left = 250
           Top = 32
           Visible = False
-        end
-        object ComboBox1: TComboBox
-          Left = 264
-          Top = 24
-          Width = 177
-          Height = 21
-          Style = csDropDownList
-          ItemHeight = 13
-          TabOrder = 1
-          OnChange = ComboBox1Change
-          Items.Strings = (
-            'Depositar Cheque'
-            'Devolver Cheque'
-            'Cancelar Cheque')
         end
       end
       inherited sbBarraStatus: TStatusBar
@@ -197,7 +176,7 @@ inherited FCadCheque: TFCadCheque
       end
       object Label11: TLabel [10]
         Left = 64
-        Top = 254
+        Top = 247
         Width = 41
         Height = 13
         Caption = 'Historico'
@@ -218,11 +197,14 @@ inherited FCadCheque: TFCadCheque
       end
       inherited Panel1: TPanel
         TabOrder = 10
+        inherited btCancelar: TSpeedButton
+          Left = 655
+        end
       end
       object DBEdit2: TDBEdit
         Left = 64
         Top = 88
-        Width = 100
+        Width = 90
         Height = 21
         DataField = 'CHQ_BANCO'
         DataSource = dsCadastro
@@ -231,7 +213,7 @@ inherited FCadCheque: TFCadCheque
       object DBEdit3: TDBEdit
         Left = 288
         Top = 88
-        Width = 100
+        Width = 90
         Height = 21
         DataField = 'CHQ_CONTA'
         DataSource = dsCadastro
@@ -240,7 +222,7 @@ inherited FCadCheque: TFCadCheque
       object DBEdit4: TDBEdit
         Left = 176
         Top = 88
-        Width = 100
+        Width = 90
         Height = 21
         DataField = 'CHQ_AGENCIA'
         DataSource = dsCadastro
@@ -249,7 +231,7 @@ inherited FCadCheque: TFCadCheque
       object DBEdit5: TDBEdit
         Left = 400
         Top = 88
-        Width = 120
+        Width = 110
         Height = 21
         DataField = 'CHQ_NUMERO'
         DataSource = dsCadastro
@@ -258,7 +240,7 @@ inherited FCadCheque: TFCadCheque
       object DBEdit6: TDBEdit
         Left = 528
         Top = 88
-        Width = 100
+        Width = 90
         Height = 21
         DataField = 'CHQ_VALOR'
         DataSource = dsCadastro
@@ -323,18 +305,19 @@ inherited FCadCheque: TFCadCheque
       end
       object DBMemo1: TDBMemo
         Left = 64
-        Top = 270
+        Top = 263
         Width = 401
-        Height = 44
+        Height = 66
         DataField = 'CHQ_HISTORICO'
         DataSource = dsCadastro
         TabOrder = 9
       end
       object btCACliente: TBitBtn
-        Left = 115
+        Left = 114
         Top = 135
         Width = 22
         Height = 22
+        Action = bt_SelCli
         Caption = '...'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -343,15 +326,6 @@ inherited FCadCheque: TFCadCheque
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 11
-        OnClick = btCAClienteClick
-      end
-      object Edit2: TEdit
-        Left = 140
-        Top = 136
-        Width = 325
-        Height = 21
-        Enabled = False
-        TabOrder = 12
       end
       object DBEdit1: TDBEdit
         Left = 64
@@ -361,7 +335,100 @@ inherited FCadCheque: TFCadCheque
         DataField = 'CHQ_CLIENTE_ID'
         DataSource = dsCadastro
         Enabled = False
+        TabOrder = 12
+      end
+      object rgSituacao: TDBRadioGroup
+        Left = 486
+        Top = 131
+        Width = 145
+        Height = 182
+        Caption = '  Situa'#231#227'o  '
+        DataField = 'CHQ_SITUACAO'
+        DataSource = dsCadastro
+        Items.Strings = (
+          'Normal'
+          'Depositado'
+          'Devolvido'
+          'Cancelado'
+          'Custodiado'
+          'Recebido antecipado')
         TabOrder = 13
+        Values.Strings = (
+          '0'
+          '1'
+          '2'
+          '3'
+          '4'
+          '5')
+        OnClick = rgSituacaoClick
+      end
+      object pnCliCustodia: TPanel
+        Left = 58
+        Top = 326
+        Width = 575
+        Height = 49
+        BevelOuter = bvNone
+        TabOrder = 14
+        Visible = False
+        object Label14: TLabel
+          Left = 8
+          Top = 7
+          Width = 33
+          Height = 13
+          Caption = 'Codigo'
+        end
+        object Label15: TLabel
+          Left = 81
+          Top = 7
+          Width = 76
+          Height = 13
+          Caption = 'Cliente Cust'#243'dia'
+        end
+        object DBEdit7: TDBEdit
+          Left = 8
+          Top = 23
+          Width = 50
+          Height = 21
+          DataField = 'CHQ_CLI_CUSTODIA'
+          DataSource = dsCadastro
+          Enabled = False
+          TabOrder = 0
+        end
+        object BitBtn1: TBitBtn
+          Left = 58
+          Top = 22
+          Width = 22
+          Height = 22
+          Action = bt_SelCliCustodia
+          Caption = '...'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object Edit1: TDBEdit
+          Left = 81
+          Top = 23
+          Width = 325
+          Height = 21
+          DataField = 'CLIENTE_CUSTODIA'
+          DataSource = dsCadastro
+          Enabled = False
+          TabOrder = 2
+        end
+      end
+      object Edit2: TDBEdit
+        Left = 137
+        Top = 136
+        Width = 325
+        Height = 21
+        DataField = 'CLIENTE'
+        DataSource = dsCadastro
+        Enabled = False
+        TabOrder = 15
       end
     end
   end
@@ -378,7 +445,7 @@ inherited FCadCheque: TFCadCheque
       'CHQ_DATA_VENCIMENTO, CHQ_EMISSOR_ID, '
       '   CHQ_EMISSOR, CHQ_CLIENTE_ID, CHQ_HISTORICO, CHQ_VALOR, '
       'CHQ_SITUACAO, '
-      '   CHQ_DATACORRENTISTA, CHQ_DH_CA, CHQ_PAR_ID)'
+      '   CHQ_DATACORRENTISTA, CHQ_DH_CA, CHQ_PAR_ID, CHQ_CLI_CUSTODIA)'
       'values'
       
         '  (:CHQ_ID, :CHQ_DATA, :CHQ_CMC7, :CHQ_COMP, :CHQ_SERIE, :CHQ_BA' +
@@ -390,14 +457,23 @@ inherited FCadCheque: TFCadCheque
         '   :CHQ_EMISSOR_ID, :CHQ_EMISSOR, :CHQ_CLIENTE_ID, :CHQ_HISTORIC' +
         'O, '
       ':CHQ_VALOR, '
-      '   :CHQ_SITUACAO, :CHQ_DATACORRENTISTA, :CHQ_DH_CA, :CHQ_PAR_ID)')
+      
+        '   :CHQ_SITUACAO, :CHQ_DATACORRENTISTA, :CHQ_DH_CA, :CHQ_PAR_ID,' +
+        ' '
+      ':CHQ_CLI_CUSTODIA)')
     RefreshSQL.Strings = (
       'Select *'
       'from cheque '
       'where'
       '  CHQ_ID = :CHQ_ID')
     SelectSQL.Strings = (
-      'select * from cheque where chq_id = :FId')
+      'select cheque.*,'
+      '       cl.cli_cliente cliente,'
+      '       clc.cli_cliente cliente_custodia'
+      '  from cheque'
+      ' left join clientes cl on (cl.cli_id=cheque.chq_cliente_id)'
+      ' left join clientes clc on (clc.cli_id=cheque.chq_cli_custodia)'
+      ' where chq_id = :FId')
     ModifySQL.Strings = (
       'update cheque'
       'set'
@@ -420,7 +496,8 @@ inherited FCadCheque: TFCadCheque
       '  CHQ_SITUACAO = :CHQ_SITUACAO,'
       '  CHQ_DATACORRENTISTA = :CHQ_DATACORRENTISTA,'
       '  CHQ_DH_CA = :CHQ_DH_CA,'
-      '  CHQ_PAR_ID = :CHQ_PAR_ID'
+      '  CHQ_PAR_ID = :CHQ_PAR_ID,'
+      '  CHQ_CLI_CUSTODIA = :CHQ_CLI_CUSTODIA'
       'where'
       '  CHQ_ID = :OLD_CHQ_ID')
     GeneratorField.Field = 'CHQ_ID'
@@ -520,6 +597,20 @@ inherited FCadCheque: TFCadCheque
     object ibCadastroCHQ_PAR_ID: TIntegerField
       FieldName = 'CHQ_PAR_ID'
       Origin = 'CHEQUE.CHQ_PAR_ID'
+    end
+    object ibCadastroCHQ_CLI_CUSTODIA: TIntegerField
+      FieldName = 'CHQ_CLI_CUSTODIA'
+      Origin = 'CHEQUE.CHQ_CLI_CUSTODIA'
+    end
+    object ibCadastroCLIENTE: TIBStringField
+      FieldName = 'CLIENTE'
+      Origin = 'CLIENTES.CLI_CLIENTE'
+      Size = 100
+    end
+    object ibCadastroCLIENTE_CUSTODIA: TIBStringField
+      FieldName = 'CLIENTE_CUSTODIA'
+      Origin = 'CLIENTES.CLI_CLIENTE'
+      Size = 100
     end
   end
   inherited qConsulta: TIBQuery
@@ -647,6 +738,16 @@ inherited FCadCheque: TFCadCheque
   inherited ActionList1: TActionList
     inherited Act_Btn_Imprimir: TAction
       OnExecute = Act_Btn_ImprimirExecute
+    end
+    object bt_SelCli: TAction
+      Category = 'Botao'
+      Caption = '...'
+      OnExecute = bt_SelCliExecute
+    end
+    object bt_SelCliCustodia: TAction
+      Category = 'Botao'
+      Caption = '...'
+      OnExecute = bt_SelCliCustodiaExecute
     end
   end
   inherited frxReport1: TfrxReport

@@ -183,6 +183,7 @@ end;
 procedure TFCadPlanoContas.Act_Btn_NovoExecute(Sender: TObject);
 begin
   inherited;
+  //abre nivel abaixo, quando acao = NOVO
   AbrirNivel(qConsultaNIVEL.Value+1,qConsultaID.Value,'N');
   qConsulta.Close;
   qConsulta.Open;
@@ -193,6 +194,7 @@ begin
   inherited;
   if (qConsultaNIVEL.Value>0) then
   begin
+    //abre nivel atual, quando acao = ALTERAR
     AbrirNivel(qConsultaNIVEL.Value,qConsultaID.Value,'A');
     qConsulta.Close;
     qConsulta.Open;
@@ -294,14 +296,7 @@ end;
 procedure TFCadPlanoContas.Abrir_Grupo(pID:Integer;pAcao:String);
 begin
   FCadPlGrupo := TFCadPlGrupo.Create(nil);
-  if ((pAcao<>'N') or (pID>0)) then
-  begin
-    FCadPlGrupo.FId := pID;
-    if pAcao='N' then
-      FCadPlGrupo.Act_Btn_Novo.Execute
-    else
-      FCadPlGrupo.Act_Btn_Alterar.Execute;
-  end;
+  FCadPlGrupo.FId := pId;
   FCadPlGrupo.FAcao := pAcao;
   FCadPlGrupo.PnBarraFormCaption := Btn_PlGrupo.Hint;
   FCadPlGrupo.ShowModal;
@@ -311,15 +306,9 @@ end;
 procedure TFCadPlanoContas.Abrir_Subgrupo(pID:Integer;pAcao:String);
 begin
   FCadPlSubgrupo := TFCadPlSubgrupo.Create(nil);
-  if ((pAcao<>'N') or (pID>0)) then
-  begin
-    FCadPlSubgrupo.FId := pID;
-    if pAcao='N' then
-      FCadPlSubgrupo.Act_Btn_Novo.Execute
-    else
-      FCadPlSubgrupo.Act_Btn_Alterar.Execute;
-  end;
+  FCadPlSubgrupo.FId := pId;
   FCadPlSubgrupo.FAcao := pAcao;
+  FCadPlSubgrupo.FIdGrupo := pID;
   FCadPlSubgrupo.PnBarraFormCaption := Btn_PlSubgrupo.Hint;
   FCadPlSubgrupo.ShowModal;
   FCadPlSubgrupo.Free;
@@ -328,14 +317,9 @@ end;
 procedure TFCadPlanoContas.Abrir_Item(pID:Integer;pAcao:String);
 begin
   FCadPlItem := TFCadPlItem.Create(nil);
-  if ((pAcao<>'N') or (pID>0)) then
-  begin
-    FCadPlItem.FId := pID;
-    if pAcao='N' then
-      FCadPlItem.Act_Btn_Novo.Execute
-    else
-      FCadPlItem.Act_Btn_Alterar.Execute;
-  end;
+  FCadPlItem.FId := pId;
+  FCadPlItem.FAcao := pAcao;
+  FCadPlItem.FIdSubGrupo := pID;
   FCadPlItem.PnBarraFormCaption := Btn_PlItem.Hint;
   FCadPlItem.ShowModal;
   FCadPlItem.Free;

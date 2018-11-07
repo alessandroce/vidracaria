@@ -1,5 +1,5 @@
 inherited FCadPlanoContas: TFCadPlanoContas
-  Left = 297
+  Left = 224
   Top = 172
   Width = 800
   Caption = 'FCadPlanoContas'
@@ -110,7 +110,7 @@ inherited FCadPlanoContas: TFCadPlanoContas
   end
   object StatusBar1: TStatusBar [2]
     Left = 0
-    Top = 422
+    Top = 423
     Width = 784
     Height = 19
     Panels = <>
@@ -396,7 +396,7 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Left = 0
     Top = 80
     Width = 784
-    Height = 342
+    Height = 343
     Align = alClient
     TabOrder = 4
     object cxGridDBTableView1: TcxGridDBTableView
@@ -419,15 +419,13 @@ inherited FCadPlanoContas: TFCadPlanoContas
       object cxGridDBTableView1DESCRICAO: TcxGridDBColumn
         Caption = 'Descri'#231#227'o'
         DataBinding.FieldName = 'DESCRICAO'
-        Width = 600
+        Width = 389
       end
       object cxGridDBTableView1NIVEL: TcxGridDBColumn
         DataBinding.FieldName = 'NIVEL'
-        Visible = False
       end
       object cxGridDBTableView1ID: TcxGridDBColumn
         DataBinding.FieldName = 'ID'
-        Visible = False
       end
     end
     object cxGridDBTableView2: TcxGridDBTableView
@@ -545,6 +543,8 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     AfterOpen = qGrupoAfterOpen
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select 1 conta, pl_grupo.* from pl_grupo')
     Left = 296
@@ -577,6 +577,8 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     AfterOpen = qSubGrupoAfterOpen
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select 2 conta, pl_subgrupo.* from pl_subgrupo')
     Left = 376
@@ -614,6 +616,8 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     AfterOpen = qItemAfterOpen
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select 3 conta, pl_item.* from pl_item')
     Left = 456
@@ -716,6 +720,8 @@ inherited FCadPlanoContas: TFCadPlanoContas
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     AfterOpen = qGrupoAfterOpen
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pl_grupo.pgr_codigo||'#39'.'#39'||'
       '       pl_subgrupo.psg_codigo||'#39'.'#39'||'
@@ -806,6 +812,8 @@ inherited FCadPlanoContas: TFCadPlanoContas
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select 0 nivel,'
       '       0 id,'
