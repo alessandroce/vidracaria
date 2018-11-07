@@ -1,5 +1,5 @@
 object FCadPadrao: TFCadPadrao
-  Left = 299
+  Left = 224
   Top = 169
   Width = 800
   Height = 500
@@ -21,7 +21,7 @@ object FCadPadrao: TFCadPadrao
     Top = 30
     Width = 784
     Height = 432
-    ActivePage = tsConsulta
+    ActivePage = tsCadastro
     Align = alClient
     Images = ImageList1
     TabOrder = 0

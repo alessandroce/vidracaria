@@ -220,6 +220,9 @@ begin
   if FMudaAba then
   begin
     pgCadastro.ActivePageIndex := pNovaAba;
+    if pNovaAba=0 then
+      if FId>0 then
+        FId := 0;
     case pNovaAba of
       cAbaConsulta  : begin
                         EntrouAbaConsulta;
@@ -283,7 +286,10 @@ end;
 
 function TFCadPadrao.getIdConsulta: Integer;
 begin
-  Result := qConsulta.FieldByName('Id').Value;
+  if FId>0 then
+    Result := FId
+  else
+    Result := qConsulta.FieldByName('Id').Value;
 end;
 
 end.
