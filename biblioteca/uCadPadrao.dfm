@@ -20,7 +20,7 @@ object FCadPadrao: TFCadPadrao
     Left = 0
     Top = 30
     Width = 784
-    Height = 432
+    Height = 431
     ActivePage = tsCadastro
     Align = alClient
     Images = ImageList1
@@ -33,7 +33,7 @@ object FCadPadrao: TFCadPadrao
         Left = 0
         Top = 50
         Width = 776
-        Height = 334
+        Height = 333
         Align = alClient
         TabOrder = 0
         object grConsultaDBTableView1: TcxGridDBTableView
@@ -336,7 +336,7 @@ object FCadPadrao: TFCadPadrao
       end
       object sbBarraStatus: TStatusBar
         Left = 0
-        Top = 384
+        Top = 383
         Width = 776
         Height = 19
         Panels = <
@@ -516,16 +516,12 @@ object FCadPadrao: TFCadPadrao
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
-    BufferChunks = 1000
-    CachedUpdates = False
     Left = 384
     Top = 8
   end
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     Left = 480
     Top = 8
   end

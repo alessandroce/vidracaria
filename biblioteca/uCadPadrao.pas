@@ -21,6 +21,7 @@ uses
   ActnList, ImgList, DBCtrls, frxClass, frxIBXComponents;
 
 type
+  TModoCarregarConsulta = (cSemParametro,cComParametro);
   TFCadPadrao = class(TForm)
     dsCadastro: TDataSource;
     dsConsulta: TDataSource;
@@ -88,6 +89,7 @@ type
     FId : Integer;
     FIdConsulta : Integer;
     FTabela : String;
+    FCarregarConsultaCDSParametro : Boolean;
     procedure MudaAba(pNovaAba:Integer);
     procedure AntesMudaAba(var pContinuaAcao : Boolean);Virtual;
     procedure DepoisMudaAba;Virtual;
@@ -96,6 +98,8 @@ type
     procedure EntrouAbaRelatorio;Virtual;
     property PnBarraFormCaption : String read FPnBarraForm write setFPnBarraForm;
     function getIdConsulta:Integer;Virtual;
+    procedure CarregarConsulta;Virtual;
+    procedure CarregarConsultaCDSParametro;Virtual;
   end;
 
 var
@@ -174,8 +178,11 @@ begin
     ibCadastro.Delete;
 
     DMConexao.IBTransacao.Commit;
-    qConsulta.Close;
-    qConsulta.Open;
+
+    if FCarregarConsultaCDSParametro then
+      CarregarConsultaCDSParametro
+    else
+      CarregarConsulta;
 
     Aviso('Registro apagado com sucesso.');
   end;
@@ -190,9 +197,11 @@ procedure TFCadPadrao.Act_Btn_GravarExecute(Sender: TObject);
 begin
   ibCadastro.Post;
   DMConexao.IBTransacao.CommitRetaining;
-  qConsulta.Close;
-  qConsulta.Open;
   MudaAba(0);
+  if FCarregarConsultaCDSParametro then
+    CarregarConsultaCDSParametro
+  else
+    CarregarConsulta;
 end;
 
 procedure TFCadPadrao.Act_Btn_InserirExecute(Sender: TObject);
@@ -290,6 +299,17 @@ begin
     Result := FId
   else
     Result := qConsulta.FieldByName('Id').Value;
+end;
+
+procedure TFCadPadrao.CarregarConsulta;
+begin
+    qConsulta.Close;
+    qConsulta.Open;
+end;
+
+procedure TFCadPadrao.CarregarConsultaCDSParametro;
+begin
+//
 end;
 
 end.
