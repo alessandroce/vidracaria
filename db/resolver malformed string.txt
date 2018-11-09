@@ -1,0 +1,3 @@
+http://www.tecnobyte.com.br/124613583/Dicas-Firebird-e-Interbase/Erro-ao-restaurar-backup-do-Firebird-Malformed-string-Como-resolver
+
+gbak -r -user SYSDBA -pas masterkey -fix_fss_m iso8859_1 -fix_fss_d iso8859_1 caminho_backup caminho_banco
