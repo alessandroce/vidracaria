@@ -8,6 +8,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
   TextHeight = 13
   inherited pgCadastro: TPageControl
     Height = 531
+    ActivePage = tsConsulta
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
@@ -514,18 +515,19 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
         object btCheque: TBitBtn
           Left = 344
-          Top = 31
+          Top = 33
           Width = 93
           Height = 24
           Action = bt_Cheque
           Caption = 'Cheque'
           Font.Charset = ANSI_CHARSET
           Font.Color = clGreen
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 3
+          Visible = False
         end
       end
     end
@@ -623,8 +625,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_VALORPAGO = :PAR_VALORPAGO'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
-    GeneratorField.Field = 'PAR_ID'
-    GeneratorField.Generator = 'GEN_PAGARRECEBER'
     object ibCadastroPAR_ID: TIntegerField
       FieldName = 'PAR_ID'
       Origin = '"PAGARRECEBER"."PAR_ID"'
@@ -784,6 +784,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
     object qConsultaPAR_VALOR: TIBBCDField
       FieldName = 'PAR_VALOR'
       Origin = '"PAGARRECEBER"."PAR_VALOR"'
+      DisplayFormat = '0.00'
       currency = True
       Precision = 18
       Size = 2
@@ -822,18 +823,21 @@ inherited FCadPagarReceber: TFCadPagarReceber
     object qConsultaPAR_DESCONTOTAXA: TIBBCDField
       FieldName = 'PAR_DESCONTOTAXA'
       Origin = '"PAGARRECEBER"."PAR_DESCONTOTAXA"'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
     object qConsultaPAR_JUROMULTA: TIBBCDField
       FieldName = 'PAR_JUROMULTA'
       Origin = '"PAGARRECEBER"."PAR_JUROMULTA"'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
     object qConsultaPAR_VALORPAGO: TIBBCDField
       FieldName = 'PAR_VALORPAGO'
       Origin = '"PAGARRECEBER"."PAR_VALORPAGO"'
+      DisplayFormat = '0.00'
       currency = True
       Precision = 18
       Size = 2

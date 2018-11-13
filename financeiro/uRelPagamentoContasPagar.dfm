@@ -61,9 +61,9 @@ inherited FRelPagamentoContasPagar: TFRelPagamentoContasPagar
     object Label4: TLabel
       Left = 87
       Top = 83
-      Width = 32
+      Width = 54
       Height = 13
-      Caption = 'Cliente'
+      Caption = 'Fornecedor'
     end
     object Label5: TLabel
       Left = 11

@@ -584,7 +584,7 @@ procedure TFCadPagarReceber.dsContaDataChange(Sender: TObject;
 begin
   inherited;
 
-  //btCheque.Visible := (qContaFOP_FLAG.asInteger=2);
+  btCheque.Visible := (qContaFOP_FLAG.asInteger=2);
 
 end;
 

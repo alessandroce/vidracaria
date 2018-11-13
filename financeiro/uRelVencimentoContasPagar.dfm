@@ -61,9 +61,9 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
     object Label4: TLabel
       Left = 87
       Top = 83
-      Width = 32
+      Width = 54
       Height = 13
-      Caption = 'Cliente'
+      Caption = 'Fornecedor'
     end
     object Label5: TLabel
       Left = 11
@@ -240,7 +240,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -256,7 +255,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -272,7 +270,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           DisplayFormat.DecimalSeparator = ','
           DisplayFormat.FormatStr = '%2.2f'
           DisplayFormat.Kind = fkNumeric
@@ -292,7 +289,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -308,7 +304,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -324,7 +319,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Height = 18.897650000000000000
           ShowHint = False
           StretchMode = smMaxHeight
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -348,7 +342,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 170.078740160000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -364,7 +357,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 64.252010000000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -380,7 +372,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 60.472480000000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -397,7 +388,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 154.960620160000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -413,7 +403,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 154.960620160000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -429,7 +418,6 @@ inherited FRelVencimentoContasPagar: TFRelVencimentoContasPagar
           Width = 151.181090160000000000
           Height = 18.897637795275600000
           ShowHint = False
-          DataSetName = 'frxExtratoPagarReceber'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
