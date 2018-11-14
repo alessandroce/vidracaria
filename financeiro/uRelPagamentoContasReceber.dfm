@@ -84,7 +84,7 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
       Top = 24
       Width = 113
       Height = 17
-      Caption = 'Pagas'
+      Caption = 'Recebidas'
       Checked = True
       TabOrder = 0
       TabStop = True
@@ -94,7 +94,7 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
       Top = 24
       Width = 113
       Height = 17
-      Caption = 'A pagar'
+      Caption = 'A receber'
       TabOrder = 1
     end
     object BitBtn4: TBitBtn
@@ -1170,6 +1170,8 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pagarreceber.*,'
       '       clientes.cli_cliente desc_cliente'

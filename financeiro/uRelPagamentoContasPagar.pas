@@ -70,6 +70,7 @@ type
   private
     { Private declarations }
     FSQL : String;
+    function getDescricaoCliForn(pTipoCli: Integer;pComplemento: String=''): String;
   public
     { Public declarations }
     FTipoCli : Integer;
@@ -130,7 +131,7 @@ begin
   if IdCli>0 then
   begin
     Filtro := Filtro + 'and par_cli_id = '+IntToStr(IdCli)+#13;
-    FiltroUsado := FiltroUsado + 'Cliente/Fornecedor: '+Edit2.Text+' | ';
+    FiltroUsado := FiltroUsado + getDescricaoCliForn(FTipoCli,':')+Edit2.Text+' | ';
   end;
 
   if Edit3.Text<>'' then
@@ -206,6 +207,16 @@ begin
   cxDBDateEdit1.Date := StartOfTheMonth(Now);
   cxDBDateEdit2.Date := Now;
   cxDBDateEdit1.SetFocus;
+  Label4.Caption := getDescricaoCliForn(FTipoCli);
 end;
+
+function TFRelPagamentoContasPagar.getDescricaoCliForn(pTipoCli:Integer;pComplemento:String=''):String;
+begin
+  case pTipoCli of
+    1 : Result := 'Cliente'+pComplemento+' ';
+    2 : Result := 'Fornecedor'+pComplemento+' ';
+  end;
+end;
+
 
 end.

@@ -1170,6 +1170,8 @@ inherited FRelPagamentoContasPagar: TFRelPagamentoContasPagar
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     Active = True
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pagarreceber.*,'
       '       clientes.cli_cliente desc_cliente'
