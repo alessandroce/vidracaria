@@ -47,7 +47,9 @@ uses
   uRelatorioPadrao in 'biblioteca\uRelatorioPadrao.pas' {FRelatorioPadrao},
   uRelPagamentoContasPagar in 'financeiro\uRelPagamentoContasPagar.pas' {FRelPagamentoContasPagar},
   uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar},
-  uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar};
+  uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar},
+  uRelPagamentoContasReceber in 'financeiro\uRelPagamentoContasReceber.pas' {FRelPagamentoContasReceber},
+  uRelVencimentoContasReceber in 'financeiro\uRelVencimentoContasReceber.pas' {FRelVencimentoContasReceber};
 
 {$R *.res}
 
@@ -59,5 +61,7 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
+  Application.CreateForm(TFRelPagamentoContasReceber, FRelPagamentoContasReceber);
+  Application.CreateForm(TFRelVencimentoContasReceber, FRelVencimentoContasReceber);
   Application.Run;
 end.

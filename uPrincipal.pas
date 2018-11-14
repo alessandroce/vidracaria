@@ -159,11 +159,13 @@ type
     ContasaPagar2: TMenuItem;
     frxReport1: TfrxReport;
     Rel_Fin_Pagar_Vencimento: TAction;
-    N7: TMenuItem;
-    N8: TMenuItem;
     ContasaPagarVencimentos1: TMenuItem;
     Rel_Fin_Pagar_Pagamento: TAction;
     ContasaPagarPagamentos1: TMenuItem;
+    Rel_Fin_Receber_Vencimento: TAction;
+    Rel_Fin_Receber_Pagamento: TAction;
+    ContasaReceberPagamentos1: TMenuItem;
+    ContasaReceberPagamentos2: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -211,6 +213,8 @@ type
     procedure Rel_Fin_ExtratoContasPagarExecute(Sender: TObject);
     procedure Rel_Fin_Pagar_VencimentoExecute(Sender: TObject);
     procedure Rel_Fin_Pagar_PagamentoExecute(Sender: TObject);
+    procedure Rel_Fin_Receber_VencimentoExecute(Sender: TObject);
+    procedure Rel_Fin_Receber_PagamentoExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -248,7 +252,8 @@ uses
   uCadClientes, uCadCoresFerragem, uCadLinhaProduto, uCadBancos,
   uFormaPgto, uCadPagarReceber, uCadPlanoContas, uCadCheque,
   uRelExtratoContasPagar, uRelVencimentoContasPagar,
-  uRelPagamentoContasPagar;
+  uRelPagamentoContasPagar, uRelPagamentoContasReceber,
+  uRelVencimentoContasReceber;
 
 {$R *.dfm}
 
@@ -672,6 +677,24 @@ begin
   FRelPagamentoContasPagar.pnBarraForm.Caption := Rel_Fin_Pagar_Pagamento.Hint;
   FRelPagamentoContasPagar.ShowModal;
   FRelPagamentoContasPagar.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_Receber_VencimentoExecute(Sender: TObject);
+begin
+  FRelVencimentoContasReceber := TFRelVencimentoContasReceber.Create(nil);
+  FRelVencimentoContasReceber.FTipoCli := cContasReceber;
+  FRelVencimentoContasReceber.pnBarraForm.Caption := Rel_Fin_Receber_Vencimento.Hint;
+  FRelVencimentoContasReceber.ShowModal;
+  FRelVencimentoContasReceber.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_Receber_PagamentoExecute(Sender: TObject);
+begin
+  FRelPagamentoContasReceber := TFRelPagamentoContasReceber.Create(nil);
+  FRelPagamentoContasReceber.FTipoCli := cContasReceber;
+  FRelPagamentoContasReceber.pnBarraForm.Caption := Rel_Fin_Receber_Pagamento.Hint;
+  FRelPagamentoContasReceber.ShowModal;
+  FRelPagamentoContasReceber.Free;
 end;
 
 end.

@@ -30,7 +30,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 690
+    Top = 691
     Width = 1008
     Height = 19
     Panels = <
@@ -51,7 +51,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 5
     Width = 1008
-    Height = 685
+    Height = 686
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -1050,7 +1050,7 @@ object FormPrincipal: TFormPrincipal
     end
     object Rel_Fin_ExtratoContasPagar: TAction
       Category = 'Financeiro_Rel'
-      Caption = 'Extrato Contas a Pagar'
+      Caption = 'Extrato Contas a Pagar / Receber'
       Hint = 'Extrato de Contas a Pagar'
       OnExecute = Rel_Fin_ExtratoContasPagarExecute
     end
@@ -1067,9 +1067,21 @@ object FormPrincipal: TFormPrincipal
     end
     object Rel_Fin_Pagar_Pagamento: TAction
       Category = 'Financeiro_Rel'
-      Caption = 'Contas a Pagar - Pagamentos'
-      Hint = 'Contas a Pagar - Pagamentos'
+      Caption = 'Contas a Pagar no Per'#237'odo'
+      Hint = 'Contas a Pagar no per'#237'odo'
       OnExecute = Rel_Fin_Pagar_PagamentoExecute
+    end
+    object Rel_Fin_Receber_Vencimento: TAction
+      Category = 'Financeiro_Rel'
+      Caption = 'Contas a Receber - Vencimentos'
+      Hint = 'Contas a Receber - Vencimentos'
+      OnExecute = Rel_Fin_Receber_VencimentoExecute
+    end
+    object Rel_Fin_Receber_Pagamento: TAction
+      Category = 'Financeiro_Rel'
+      Caption = 'Contas a Receber no Per'#237'odo'
+      Hint = 'Contas a Receber no Per'#237'odo'
+      OnExecute = Rel_Fin_Receber_PagamentoExecute
     end
   end
   object menu: TMainMenu
@@ -1151,17 +1163,19 @@ object FormPrincipal: TFormPrincipal
         object ContasaPagar2: TMenuItem
           Action = Rel_Fin_ExtratoContasPagar
         end
-        object N7: TMenuItem
-          Caption = '-'
-        end
         object ContasaPagarVencimentos1: TMenuItem
           Action = Rel_Fin_Pagar_Vencimento
+          Visible = False
         end
         object ContasaPagarPagamentos1: TMenuItem
           Action = Rel_Fin_Pagar_Pagamento
         end
-        object N8: TMenuItem
-          Caption = '-'
+        object ContasaReceberPagamentos1: TMenuItem
+          Action = Rel_Fin_Receber_Vencimento
+          Visible = False
+        end
+        object ContasaReceberPagamentos2: TMenuItem
+          Action = Rel_Fin_Receber_Pagamento
         end
       end
       object Auxiliares2: TMenuItem
