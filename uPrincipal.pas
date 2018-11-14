@@ -158,14 +158,15 @@ type
     RelatorioFinanceiro1: TMenuItem;
     ContasaPagar2: TMenuItem;
     frxReport1: TfrxReport;
-    Rel_Fin_Pagar_Vencimento: TAction;
-    ContasaPagarVencimentos1: TMenuItem;
     Rel_Fin_Pagar_Pagamento: TAction;
     ContasaPagarPagamentos1: TMenuItem;
-    Rel_Fin_Receber_Vencimento: TAction;
     Rel_Fin_Receber_Pagamento: TAction;
-    ContasaReceberPagamentos1: TMenuItem;
     ContasaReceberPagamentos2: TMenuItem;
+    Rel_Fin_Vendas: TAction;
+    N7: TMenuItem;
+    Vendasnoperodo1: TMenuItem;
+    Fin_ComissaoVenda: TAction;
+    ComissodeVenda1: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -211,10 +212,10 @@ type
     procedure Fin_ChequeExecute(Sender: TObject);
     procedure smn_RelatorioFinanceiroExecute(Sender: TObject);
     procedure Rel_Fin_ExtratoContasPagarExecute(Sender: TObject);
-    procedure Rel_Fin_Pagar_VencimentoExecute(Sender: TObject);
     procedure Rel_Fin_Pagar_PagamentoExecute(Sender: TObject);
-    procedure Rel_Fin_Receber_VencimentoExecute(Sender: TObject);
     procedure Rel_Fin_Receber_PagamentoExecute(Sender: TObject);
+    procedure Rel_Fin_VendasExecute(Sender: TObject);
+    procedure Fin_ComissaoVendaExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -253,9 +254,44 @@ uses
   uFormaPgto, uCadPagarReceber, uCadPlanoContas, uCadCheque,
   uRelExtratoContasPagar, uRelVencimentoContasPagar,
   uRelPagamentoContasPagar, uRelPagamentoContasReceber,
-  uRelVencimentoContasReceber;
+  uRelVencimentoContasReceber, uRelVendasPeriodo;
 
 {$R *.dfm}
+
+function VersaoExe(ArquivoExe : string): String;
+type
+  PFFI = ^vs_FixedFileInfo;
+var
+  F: PFFI;
+  Handle: Dword;
+  Len: Longint;
+  Data: Pchar;
+  Buffer: Pointer;
+  Tamanho: Dword;
+  Parquivo: Pchar;
+  Arquivo: String;
+begin
+  Arquivo := ArquivoExe;
+  Parquivo := StrAlloc(Length(Arquivo) + 1);
+  StrPcopy(Parquivo, Arquivo);
+  Len := GetFileVersionInfoSize(Parquivo, Handle);
+  Result := '';
+  if Len > 0 then
+  begin
+    Data := StrAlloc(Len + 1);
+    if GetFileVersionInfo(Parquivo, Handle, Len, Data) then
+    begin
+      VerQueryValue(Data, '', Buffer, Tamanho);
+      F := PFFI(Buffer);
+      Result := Format('%d.%d.%d.%d', [HiWord(F^.dwFileVersionMs), LoWord
+          (F^.dwFileVersionMs), HiWord(F^.dwFileVersionLs), LoWord
+          (F^.dwFileVersionLs)]);
+    end;
+    StrDispose(Data);
+  end;
+  StrDispose(Parquivo);
+end;
+
 
 procedure TFormPrincipal.FormKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
@@ -319,6 +355,7 @@ begin
   end;
   StatusBar1.Panels[0].Text := FormatDateTime('  hh:nn:ss',Now);
   StatusBar1.Panels[1].Text := FormatDateTime('  dddd" , "dd" de "mmmmm" de "yyyyy',Now);
+  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 14/11/2018]';
 end;
 
 procedure TFormPrincipal.ApplicationEvents2Message(var Msg: tagMSG;
@@ -661,15 +698,6 @@ begin
   FRelExtratoContasPagar.Free;
 end;
 
-procedure TFormPrincipal.Rel_Fin_Pagar_VencimentoExecute(Sender: TObject);
-begin
-  FRelVencimentoContasPagar := TFRelVencimentoContasPagar.Create(nil);
-  FRelVencimentoContasPagar.FTipoCli := cContasPagar;
-  FRelVencimentoContasPagar.pnBarraForm.Caption := Rel_Fin_Pagar_Vencimento.Hint;
-  FRelVencimentoContasPagar.ShowModal;
-  FRelVencimentoContasPagar.Free;
-end;
-
 procedure TFormPrincipal.Rel_Fin_Pagar_PagamentoExecute(Sender: TObject);
 begin
   FRelPagamentoContasPagar := TFRelPagamentoContasPagar.Create(nil);
@@ -679,15 +707,6 @@ begin
   FRelPagamentoContasPagar.Free;
 end;
 
-procedure TFormPrincipal.Rel_Fin_Receber_VencimentoExecute(Sender: TObject);
-begin
-  FRelVencimentoContasReceber := TFRelVencimentoContasReceber.Create(nil);
-  FRelVencimentoContasReceber.FTipoCli := cContasReceber;
-  FRelVencimentoContasReceber.pnBarraForm.Caption := Rel_Fin_Receber_Vencimento.Hint;
-  FRelVencimentoContasReceber.ShowModal;
-  FRelVencimentoContasReceber.Free;
-end;
-
 procedure TFormPrincipal.Rel_Fin_Receber_PagamentoExecute(Sender: TObject);
 begin
   FRelPagamentoContasReceber := TFRelPagamentoContasReceber.Create(nil);
@@ -695,6 +714,19 @@ begin
   FRelPagamentoContasReceber.pnBarraForm.Caption := Rel_Fin_Receber_Pagamento.Hint;
   FRelPagamentoContasReceber.ShowModal;
   FRelPagamentoContasReceber.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_VendasExecute(Sender: TObject);
+begin
+  FRelVendasPeriodo := tFRelVendasPeriodo.Create(nil);
+  FRelVendasPeriodo.pnBarraForm.Caption := Rel_Fin_Vendas.Hint;
+  FRelVendasPeriodo.ShowModal;
+  FRelVendasPeriodo.Free;
+end;
+
+procedure TFormPrincipal.Fin_ComissaoVendaExecute(Sender: TObject);
+begin
+//
 end;
 
 end.

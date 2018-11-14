@@ -30,7 +30,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 691
+    Top = 690
     Width = 1008
     Height = 19
     Panels = <
@@ -51,7 +51,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 5
     Width = 1008
-    Height = 686
+    Height = 685
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -1059,29 +1059,29 @@ object FormPrincipal: TFormPrincipal
       Caption = 'Relatorio Financeiro'
       OnExecute = smn_RelatorioFinanceiroExecute
     end
-    object Rel_Fin_Pagar_Vencimento: TAction
-      Category = 'Financeiro_Rel'
-      Caption = 'Contas a Pagar - Vencimentos'
-      Hint = 'Contas a Pagar - Vencimentos'
-      OnExecute = Rel_Fin_Pagar_VencimentoExecute
-    end
     object Rel_Fin_Pagar_Pagamento: TAction
       Category = 'Financeiro_Rel'
       Caption = 'Contas a Pagar no Per'#237'odo'
       Hint = 'Contas a Pagar no per'#237'odo'
       OnExecute = Rel_Fin_Pagar_PagamentoExecute
     end
-    object Rel_Fin_Receber_Vencimento: TAction
-      Category = 'Financeiro_Rel'
-      Caption = 'Contas a Receber - Vencimentos'
-      Hint = 'Contas a Receber - Vencimentos'
-      OnExecute = Rel_Fin_Receber_VencimentoExecute
-    end
     object Rel_Fin_Receber_Pagamento: TAction
       Category = 'Financeiro_Rel'
       Caption = 'Contas a Receber no Per'#237'odo'
       Hint = 'Contas a Receber no Per'#237'odo'
       OnExecute = Rel_Fin_Receber_PagamentoExecute
+    end
+    object Rel_Fin_Vendas: TAction
+      Category = 'Financeiro_Rel'
+      Caption = 'Vendas no per'#237'odo'
+      Hint = 'Relatorio de Vendas no per'#237'odo'
+      OnExecute = Rel_Fin_VendasExecute
+    end
+    object Fin_ComissaoVenda: TAction
+      Category = 'Financeiro'
+      Caption = 'Comiss'#227'o de Venda'
+      Hint = 'Comiss'#227'o de Venda'
+      OnExecute = Fin_ComissaoVendaExecute
     end
   end
   object menu: TMainMenu
@@ -1155,6 +1155,10 @@ object FormPrincipal: TFormPrincipal
       object ContasaPagar1: TMenuItem
         Action = Fin_Cheque
       end
+      object ComissodeVenda1: TMenuItem
+        Action = Fin_ComissaoVenda
+        Visible = False
+      end
       object N4: TMenuItem
         Caption = '-'
       end
@@ -1163,19 +1167,17 @@ object FormPrincipal: TFormPrincipal
         object ContasaPagar2: TMenuItem
           Action = Rel_Fin_ExtratoContasPagar
         end
-        object ContasaPagarVencimentos1: TMenuItem
-          Action = Rel_Fin_Pagar_Vencimento
-          Visible = False
-        end
         object ContasaPagarPagamentos1: TMenuItem
           Action = Rel_Fin_Pagar_Pagamento
         end
-        object ContasaReceberPagamentos1: TMenuItem
-          Action = Rel_Fin_Receber_Vencimento
-          Visible = False
-        end
         object ContasaReceberPagamentos2: TMenuItem
           Action = Rel_Fin_Receber_Pagamento
+        end
+        object N7: TMenuItem
+          Caption = '-'
+        end
+        object Vendasnoperodo1: TMenuItem
+          Action = Rel_Fin_Vendas
         end
       end
       object Auxiliares2: TMenuItem
