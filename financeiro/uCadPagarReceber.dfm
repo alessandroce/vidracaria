@@ -7,11 +7,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 532
+    Height = 531
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
-        Height = 434
+        Height = 433
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           DataController.Filter.AutoDataSetFilter = True
@@ -101,7 +101,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 484
+        Top = 483
       end
     end
     inherited tsCadastro: TTabSheet
@@ -494,7 +494,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
           ItemHeight = 13
           ItemIndex = 2
           TabOrder = 1
-          Text = 'Mensalmente'
+          Text = 'NA'
           Items.Strings = (
             'Diariamente'
             'Semanalmente'
@@ -623,6 +623,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_VALORPAGO = :PAR_VALORPAGO'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
+    GeneratorField.Field = 'PAR_ID'
+    GeneratorField.Generator = 'GEN_PAGARRECEBER'
     object ibCadastroPAR_ID: TIntegerField
       FieldName = 'PAR_ID'
       Origin = '"PAGARRECEBER"."PAR_ID"'
@@ -882,8 +884,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -928,8 +928,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qConta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from forma_pgto')
     Left = 376
@@ -970,8 +968,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -1003,8 +999,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select distinct pagarreceber.par_cetrocusto'
       '  from pagarreceber'
@@ -1039,8 +1033,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber'
       'where'
@@ -1235,8 +1227,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qGerador: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select gen_id(GEN_PAGARRECEBER,1) ID from rdb$database')
     Left = 592
@@ -1249,8 +1239,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from relatorio')
     Left = 480
@@ -1485,8 +1473,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object ibPagarreceberCheque: TIBDataSet
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber_cheque'
       'where'

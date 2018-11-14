@@ -359,13 +359,15 @@ begin
 
     getComboCentroCusto(qConsultaPAR_CETROCUSTO.asString);
 
-
     DBEdit2.SetFocus;
     //RetiraRepetir(not(ibCadastro.State=dsInsert));
     //MovePagar(not(ibCadastro.State=dsInsert));
 
     if FTipoPagRec=2 then
       Label13.Caption :='Fornecedor';
+
+    if chRepetir.Checked then
+      chRepetir.Checked := false;
 end;
 
 procedure TFCadPagarReceber.EntrouAbaConsulta;

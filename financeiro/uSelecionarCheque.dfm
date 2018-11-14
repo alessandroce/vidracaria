@@ -186,7 +186,14 @@ inherited FSelecionarCheque: TFSelecionarCheque
       '    CHQ_NUMERO,'
       '    CHQ_VALOR'
       '  from cheque'
-      ' where coalesce(cheque.chq_situacao,0)=0')
+      ' where not exists ('
+      '                 select null'
+      '                   from pagarreceber_cheque'
+      
+        '                  where pagarreceber_cheque.pac_chq_id=cheque.ch' +
+        'q_id'
+      '                   )'
+      '   and coalesce(cheque.chq_situacao,0)=0')
     Left = 392
     Top = 112
     object qConsultaSELECIONAR: TIBStringField

@@ -351,7 +351,8 @@ inherited FCadCheque: TFCadCheque
           'Devolvido'
           'Cancelado'
           'Custodiado'
-          'Recebido antecipado')
+          'Recebido antecipado'
+          'Contas Pagar/Receber')
         TabOrder = 13
         Values.Strings = (
           '0'
@@ -359,7 +360,8 @@ inherited FCadCheque: TFCadCheque
           '2'
           '3'
           '4'
-          '5')
+          '5'
+          '6')
         OnClick = rgSituacaoClick
       end
       object pnCliCustodia: TPanel
