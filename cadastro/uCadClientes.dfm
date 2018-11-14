@@ -290,6 +290,14 @@ inherited FCadClientes: TFCadClientes
         Font.Style = []
         ParentFont = False
       end
+      object Label1: TLabel [16]
+        Left = 15
+        Top = 287
+        Width = 28
+        Height = 13
+        Caption = 'E-mail'
+        FocusControl = DBEdit11
+      end
       inherited Panel1: TPanel
         Width = 716
         inherited btSalvar: TSpeedButton
@@ -420,7 +428,7 @@ inherited FCadClientes: TFCadClientes
         TabOrder = 12
       end
       object DBCheckBox1: TDBCheckBox
-        Left = 648
+        Left = 640
         Top = 112
         Width = 97
         Height = 17
@@ -460,6 +468,15 @@ inherited FCadClientes: TFCadClientes
         DataField = 'CLI_RG'
         DataSource = dsCadastro
         TabOrder = 16
+      end
+      object DBEdit11: TDBEdit
+        Left = 88
+        Top = 283
+        Width = 461
+        Height = 21
+        DataField = 'CLI_EMAIL'
+        DataSource = dsCadastro
+        TabOrder = 17
       end
     end
   end

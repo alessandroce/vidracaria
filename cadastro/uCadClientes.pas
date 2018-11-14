@@ -109,6 +109,8 @@ type
     ibCadastroCLI_TIPOCLI: TIntegerField;
     frxDBDataset1: TfrxDBDataset;
     qConsultaCLI_TIPOCLI: TIntegerField;
+    Label1: TLabel;
+    DBEdit11: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
     procedure ibCadastroBeforePost(DataSet: TDataSet);
