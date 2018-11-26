@@ -79,6 +79,7 @@ type
     procedure pgCadastroChanging(Sender: TObject;
       var AllowChange: Boolean);
     procedure FormShow(Sender: TObject);
+    procedure Act_Btn_ImprimirExecute(Sender: TObject);
   private
     { Private declarations }
     FMudaAba : Boolean;
@@ -298,7 +299,10 @@ begin
   if FId>0 then
     Result := FId
   else
-    Result := qConsulta.FieldByName('Id').Value;
+  if not(qConsulta.FieldByName('Id').IsNull) then
+    Result := qConsulta.FieldByName('Id').Value
+  else
+    Result := 0;
 end;
 
 procedure TFCadPadrao.CarregarConsulta;
@@ -310,6 +314,12 @@ end;
 procedure TFCadPadrao.CarregarConsultaCDSParametro;
 begin
 //
+end;
+
+procedure TFCadPadrao.Act_Btn_ImprimirExecute(Sender: TObject);
+begin
+  if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Aviso'])) then
+    Abort;
 end;
 
 end.
