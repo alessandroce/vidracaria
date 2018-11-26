@@ -34,6 +34,7 @@ type
     dsConsulta: TDataSource;
     dspConsulta: TDataSetProvider;
     cdsConsulta: TClientDataSet;
+    BitBtn4: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
     procedure BitBtn1Click(Sender: TObject);
@@ -46,6 +47,7 @@ type
     FId : Integer;
     FCodigo : Integer;
     FDescricao : String;
+    FPodeCadastrar : Boolean;
     procedure CarregarConsulta;Virtual;
   end;
 
@@ -62,6 +64,7 @@ procedure TFSelecionarPadrao.FormShow(Sender: TObject);
 begin
   inherited;
   CarregarConsulta;
+  BitBtn4.Visible := FPodeCadastrar;
 end;
 
 procedure TFSelecionarPadrao.dsConsultaDataChange(Sender: TObject;
@@ -110,6 +113,7 @@ begin
   //qConsulta.ParamByName('TipoCli').Value := FTipoCli;
   qConsulta.Open;
   //pnBarraForm.Caption := ifthen(FTipoCli=1,'Selecionar Cliente','Selecionar Fornecedor');
+  cdsConsulta.Close;
   cdsConsulta.Open;
 end;
 
