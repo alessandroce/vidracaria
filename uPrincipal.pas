@@ -134,8 +134,6 @@ type
     ata_Cadastro: TAction;
     Fin_ContasPagar: TAction;
     Fin_ContasReceber: TAction;
-    ContasPagar1: TMenuItem;
-    ContasReceber1: TMenuItem;
     N4: TMenuItem;
     N5: TMenuItem;
     Cad_Fornecedores: TAction;
@@ -151,7 +149,6 @@ type
     Contabilidade1: TMenuItem;
     PlanodeContas1: TMenuItem;
     Fin_ControleCheque: TAction;
-    ContasaPagar1: TMenuItem;
     Fin_Cheque: TAction;
     Rel_Fin_ExtratoContasPagar: TAction;
     smn_RelatorioFinanceiro: TAction;
@@ -167,6 +164,26 @@ type
     Vendasnoperodo1: TMenuItem;
     Fin_ComissaoVenda: TAction;
     ComissodeVenda1: TMenuItem;
+    mns_Fin_Auxiliares: TAction;
+    mns_Est_Auxiliares: TAction;
+    mns_Fin_Relatorios: TAction;
+    mns_Fin_CaixasBancos: TAction;
+    mns_Fin_PagarReceber: TAction;
+    PagarReceber1: TMenuItem;
+    ContasaPagar3: TMenuItem;
+    ContasaReceber1: TMenuItem;
+    CaixaseBancos1: TMenuItem;
+    ControleCheque1: TMenuItem;
+    Fin_MovtoFinanceiro: TAction;
+    Fin_MovtoBancario: TAction;
+    MovimentoFinanceiro1: TMenuItem;
+    MovimentoBancrio1: TMenuItem;
+    Fin_ComprasDespesas: TAction;
+    Fin_VendasReceitas: TAction;
+    VendasOutrasReceitas1: TMenuItem;
+    ComissodeVenda2: TMenuItem;
+    Fin_CentroCusto: TAction;
+    CentrodeCustos1: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -216,6 +233,10 @@ type
     procedure Rel_Fin_Receber_PagamentoExecute(Sender: TObject);
     procedure Rel_Fin_VendasExecute(Sender: TObject);
     procedure Fin_ComissaoVendaExecute(Sender: TObject);
+    procedure Fin_ComprasDespesasExecute(Sender: TObject);
+    procedure Fin_VendasReceitasExecute(Sender: TObject);
+    procedure Fin_CentroCustoExecute(Sender: TObject);
+    procedure Fin_MovtoFinanceiroExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -254,7 +275,8 @@ uses
   uFormaPgto, uCadPagarReceber, uCadPlanoContas, uCadCheque,
   uRelExtratoContasPagar, uRelVencimentoContasPagar,
   uRelPagamentoContasPagar, uRelPagamentoContasReceber,
-  uRelVencimentoContasReceber, uRelVendasPeriodo;
+  uRelVencimentoContasReceber, uRelVendasPeriodo, uCadCentroCusto,
+  uMovFinanceiro;
 
 {$R *.dfm}
 
@@ -727,6 +749,32 @@ end;
 procedure TFormPrincipal.Fin_ComissaoVendaExecute(Sender: TObject);
 begin
 //
+end;
+
+procedure TFormPrincipal.Fin_ComprasDespesasExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Fin_VendasReceitasExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Fin_CentroCustoExecute(Sender: TObject);
+begin
+  FCadCentroCusto := TFCadCentroCusto.Create(nil);
+  FCadCentroCusto.PnBarraFormCaption := Fin_CentroCusto.Hint;
+  FCadCentroCusto.ShowModal;
+  FCadCentroCusto.Free;
+end;
+
+procedure TFormPrincipal.Fin_MovtoFinanceiroExecute(Sender: TObject);
+begin
+  FMovFinanceiro := TFMovFinanceiro.Create(nil);
+  FMovFinanceiro.PnBarraFormCaption := Fin_MovtoFinanceiro.Hint;
+  FMovFinanceiro.ShowModal;
+  FMovFinanceiro.Free;
 end;
 
 end.

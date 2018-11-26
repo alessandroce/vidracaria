@@ -25,7 +25,7 @@ uses
   uPadrao in 'biblioteca\uPadrao.pas' {FPadrao},
   uCadUsuario in 'cadastro\uCadUsuario.pas' {FCadUsuario},
   uCadEmitente in 'cadastro\uCadEmitente.pas' {FCadEmitente},
-  uCadPadrao in 'biblioteca\uCadPadrao.pas' {FCadPadrao},
+  uCadPadrao2 in 'biblioteca\uCadPadrao2.pas' {FCadPadrao2},
   uDuplicata in 'financeiro\uDuplicata.pas' {FDuplicata},
   uCadClientes in 'cadastro\uCadClientes.pas' {FCadClientes},
   uFormLogin in 'biblioteca\uFormLogin.pas' {FormLogin},
@@ -50,7 +50,14 @@ uses
   uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar},
   uRelVendasPeriodo in 'financeiro\uRelVendasPeriodo.pas' {FRelVendasPeriodo},
   uRelVencimentoContasReceber in 'financeiro\uRelVencimentoContasReceber.pas' {FRelVencimentoContasReceber},
-  uRelPagamentoContasReceber in 'financeiro\uRelPagamentoContasReceber.pas' {FRelPagamentoContasReceber};
+  uRelPagamentoContasReceber in 'financeiro\uRelPagamentoContasReceber.pas' {FRelPagamentoContasReceber},
+  uSelecionarPlanoContas in 'financeiro\uSelecionarPlanoContas.pas' {FSelecionarPlanoContas},
+  uSelecionarFormaPgto in 'financeiro\uSelecionarFormaPgto.pas' {FSelecionarFormaPgto},
+  uCadCentroCusto in 'financeiro\uCadCentroCusto.pas' {FCadCentroCusto},
+  uSelecionarCentroCusto in 'financeiro\uSelecionarCentroCusto.pas' {FSelecionarCentroCusto},
+  uCadPadrao in 'biblioteca\uCadPadrao.pas' {FCadPadrao},
+  uMovFinanceiro in 'financeiro\uMovFinanceiro.pas' {FMovFinanceiro},
+  uSelecionarPagarReceber in 'financeiro\uSelecionarPagarReceber.pas' {FSelecionarPagarReceber};
 
 {$R *.res}
 
@@ -62,5 +69,9 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
+  Application.CreateForm(TFSelecionarCentroCusto, FSelecionarCentroCusto);
+  Application.CreateForm(TFCadPadrao, FCadPadrao);
+  Application.CreateForm(TFMovFinanceiro, FMovFinanceiro);
+  Application.CreateForm(TFSelecionarPagarReceber, FSelecionarPagarReceber);
   Application.Run;
 end.

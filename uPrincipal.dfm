@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 304
-  Top = 168
+  Left = 202
+  Top = 128
   Width = 1024
   Height = 768
   BorderIcons = [biSystemMenu, biMinimize]
@@ -30,7 +30,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 690
+    Top = 691
     Width = 1008
     Height = 19
     Panels = <
@@ -51,7 +51,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 5
     Width = 1008
-    Height = 685
+    Height = 686
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -1083,6 +1083,55 @@ object FormPrincipal: TFormPrincipal
       Hint = 'Comiss'#227'o de Venda'
       OnExecute = Fin_ComissaoVendaExecute
     end
+    object mns_Fin_Auxiliares: TAction
+      Category = 'MenuSec'
+      Caption = 'Auxiliares'
+    end
+    object mns_Fin_Relatorios: TAction
+      Category = 'MenuSec'
+      Caption = 'Relat'#243'rios Financeiros'
+    end
+    object mns_Est_Auxiliares: TAction
+      Category = 'MenuSec'
+      Caption = 'Auxiliares'
+    end
+    object mns_Fin_CaixasBancos: TAction
+      Category = 'MenuSec'
+      Caption = 'Caixas e Bancos'
+    end
+    object mns_Fin_PagarReceber: TAction
+      Category = 'MenuSec'
+      Caption = 'Pagar/Receber'
+    end
+    object Fin_MovtoFinanceiro: TAction
+      Category = 'Financeiro'
+      Caption = 'Movimento Financeiro'
+      Hint = 'Movimento Financeiro'
+      OnExecute = Fin_MovtoFinanceiroExecute
+    end
+    object Fin_MovtoBancario: TAction
+      Category = 'Financeiro'
+      Caption = 'Movimento Banc'#225'rio'
+      Hint = 'Movimento Banc'#225'rio'
+    end
+    object Fin_ComprasDespesas: TAction
+      Category = 'Financeiro'
+      Caption = 'Compras/Outras Despesas'
+      Hint = 'Compras/Outras despesas'
+      OnExecute = Fin_ComprasDespesasExecute
+    end
+    object Fin_VendasReceitas: TAction
+      Category = 'Financeiro'
+      Caption = 'Vendas/Outras Receitas'
+      Hint = 'Vendas/Outras Receitas'
+      OnExecute = Fin_VendasReceitasExecute
+    end
+    object Fin_CentroCusto: TAction
+      Category = 'Financeiro'
+      Caption = 'Centro de Custos'
+      Hint = 'Cadastro de Centro de Custos'
+      OnExecute = Fin_CentroCustoExecute
+    end
   end
   object menu: TMainMenu
     Left = 413
@@ -1146,14 +1195,32 @@ object FormPrincipal: TFormPrincipal
     end
     object Financeiro1: TMenuItem
       Action = mn_Financeiro
-      object ContasPagar1: TMenuItem
-        Action = Fin_ContasPagar
+      object PagarReceber1: TMenuItem
+        Action = mns_Fin_PagarReceber
+        object ContasaPagar3: TMenuItem
+          Action = Fin_ContasPagar
+        end
+        object ContasaReceber1: TMenuItem
+          Action = Fin_ContasReceber
+        end
       end
-      object ContasReceber1: TMenuItem
-        Action = Fin_ContasReceber
+      object CaixaseBancos1: TMenuItem
+        Action = mns_Fin_CaixasBancos
+        object MovimentoFinanceiro1: TMenuItem
+          Action = Fin_MovtoFinanceiro
+        end
+        object MovimentoBancrio1: TMenuItem
+          Action = Fin_MovtoBancario
+        end
+        object ControleCheque1: TMenuItem
+          Action = Fin_Cheque
+        end
       end
-      object ContasaPagar1: TMenuItem
-        Action = Fin_Cheque
+      object VendasOutrasReceitas1: TMenuItem
+        Action = Fin_VendasReceitas
+      end
+      object ComissodeVenda2: TMenuItem
+        Action = Fin_ComprasDespesas
       end
       object ComissodeVenda1: TMenuItem
         Action = Fin_ComissaoVenda
@@ -1187,6 +1254,9 @@ object FormPrincipal: TFormPrincipal
         end
         object Bancos1: TMenuItem
           Action = Fin_Bancos
+        end
+        object CentrodeCustos1: TMenuItem
+          Action = Fin_CentroCusto
         end
         object N6: TMenuItem
           Caption = '-'
