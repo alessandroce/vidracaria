@@ -4,7 +4,6 @@ inherited FCadPlGrupo: TFCadPlGrupo
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
         inherited grConsultaDBTableView1: TcxGridDBTableView

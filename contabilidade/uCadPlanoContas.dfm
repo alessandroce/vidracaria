@@ -419,13 +419,15 @@ inherited FCadPlanoContas: TFCadPlanoContas
       object cxGridDBTableView1DESCRICAO: TcxGridDBColumn
         Caption = 'Descri'#231#227'o'
         DataBinding.FieldName = 'DESCRICAO'
-        Width = 389
+        Width = 637
       end
       object cxGridDBTableView1NIVEL: TcxGridDBColumn
         DataBinding.FieldName = 'NIVEL'
+        Visible = False
       end
       object cxGridDBTableView1ID: TcxGridDBColumn
         DataBinding.FieldName = 'ID'
+        Visible = False
       end
     end
     object cxGridDBTableView2: TcxGridDBTableView
