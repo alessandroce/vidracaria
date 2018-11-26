@@ -59,8 +59,7 @@ type
     qConsultaBANC_ATIVO: TIBStringField;
     qConsultaBANC_DH_CA: TDateTimeField;
     Label13: TLabel;
-    btCACliente: TBitBtn;
-    Label12: TLabel;
+    btCABanco: TBitBtn;
     ibCadastroBANC_BANCO_ID: TIntegerField;
     qBanco: TIBQuery;
     dsBanco: TDataSource;
@@ -68,15 +67,15 @@ type
     qBancoBFEB_CODIGO: TIBStringField;
     qBancoBFEB_DESCRICAO: TIBStringField;
     qBancoBFEB_DH_CA: TDateTimeField;
-    DBEdit7: TDBEdit;
-    DBEdit8: TDBEdit;
     qConsultaBANC_BANCO_ID: TIntegerField;
+    DBRadioGroup1: TDBRadioGroup;
+    btEXCategorai: TBitBtn;
+    DBLookupComboBox1: TDBLookupComboBox;
     procedure FormShow(Sender: TObject);
-    procedure btCAClienteClick(Sender: TObject);
-    procedure ibCadastroAfterEdit(DataSet: TDataSet);
+    procedure btCABancoClick(Sender: TObject);
+    procedure btEXCategoraiClick(Sender: TObject);
   private
     { Private declarations }
-    procedure CarregarBanco(pID : Integer);
   public
     { Public declarations }
   end;
@@ -94,33 +93,29 @@ procedure TFCadBancos.FormShow(Sender: TObject);
 begin
   inherited;
   qConsulta.Open;
+
+  qBanco.Close;
+  qBanco.Open;
+  qBanco.Last;
+  qBanco.First;
+
 end;
 
-procedure TFCadBancos.btCAClienteClick(Sender: TObject);
+procedure TFCadBancos.btCABancoClick(Sender: TObject);
 begin
   inherited;
   FSelecionarBanco := TFSelecionarBanco.Create(nil);
   FSelecionarBanco.pnBarraForm.Caption := 'Selecionar Banco';
   FSelecionarBanco.ShowModal;
   if FSelecionarBanco.FId>0 then
-  begin
     ibCadastroBANC_BANCO_ID.Value := FSelecionarBanco.FId;
-    CarregarBanco(FSelecionarBanco.FId);
-  end;
   FSelecionarBanco.Free;
 end;
 
-procedure TFCadBancos.CarregarBanco(pID : Integer);
-begin
-  qBanco.Close;
-  qBanco.ParamByName('id').Value := pID;
-  qBanco.Open;
-end;
-
-procedure TFCadBancos.ibCadastroAfterEdit(DataSet: TDataSet);
+procedure TFCadBancos.btEXCategoraiClick(Sender: TObject);
 begin
   inherited;
-  CarregarBanco(qConsultaBANC_BANCO_ID.Value);
+  ibCadastroBANC_BANCO_ID.Clear;
 end;
 
 end.

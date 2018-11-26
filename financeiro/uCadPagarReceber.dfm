@@ -1,17 +1,18 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 296
-  Top = 165
-  Height = 600
+  Left = 200
+  Top = 171
+  Height = 597
   Caption = 'FCadPagarReceber'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 531
+    Height = 529
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
-        Height = 433
+        Height = 431
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           DataController.Filter.AutoDataSetFilter = True
@@ -101,7 +102,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 483
+        Top = 481
       end
     end
     inherited tsCadastro: TTabSheet
@@ -114,71 +115,80 @@ inherited FCadPagarReceber: TFCadPagarReceber
         FocusControl = DBEdit2
       end
       object Label1: TLabel [2]
-        Left = 274
-        Top = 66
+        Left = 10
+        Top = 114
         Width = 45
         Height = 13
         Caption = 'Categoria'
       end
       object Label3: TLabel [3]
-        Left = 9
+        Left = 257
         Top = 114
         Width = 28
         Height = 13
         Caption = 'Conta'
       end
       object Label4: TLabel [4]
-        Left = 185
-        Top = 114
+        Left = 117
+        Top = 162
         Width = 88
         Height = 13
         Caption = 'Data Compet'#234'ncia'
       end
       object Label5: TLabel [5]
-        Left = 289
-        Top = 114
+        Left = 221
+        Top = 162
         Width = 82
         Height = 13
         Caption = 'Data Vencimento'
       end
       object Label6: TLabel [6]
-        Left = 393
-        Top = 114
+        Left = 325
+        Top = 162
         Width = 24
         Height = 13
         Caption = 'Valor'
         FocusControl = DBEdit1
       end
-      object Bevel3: TBevel [7]
-        Left = 482
-        Top = 66
-        Width = 5
-        Height = 311
-        Shape = bsLeftLine
-      end
-      object Label13: TLabel [8]
-        Left = 492
+      object Label13: TLabel [7]
+        Left = 500
         Top = 66
         Width = 32
         Height = 13
         Caption = 'Cliente'
       end
-      object Label14: TLabel [9]
-        Left = 491
+      object Label14: TLabel [8]
+        Left = 499
         Top = 114
         Width = 61
         Height = 13
         Caption = 'Centro Custo'
       end
-      object Label15: TLabel [10]
-        Left = 492
+      object Label15: TLabel [9]
+        Left = 500
         Top = 162
         Width = 63
         Height = 13
         Caption = 'Observa'#231#245'es'
       end
+      object Label7: TLabel [10]
+        Left = 10
+        Top = 162
+        Width = 83
+        Height = 13
+        Caption = 'Num. Documento'
+        FocusControl = DBEdit3
+      end
+      object Bevel3: TBevel [11]
+        Left = 490
+        Top = 66
+        Width = 5
+        Height = 311
+        Shape = bsLeftLine
+        Visible = False
+      end
       inherited Panel1: TPanel
-        TabOrder = 10
+        TabOrder = 20
         inherited btSalvar: TSpeedButton
           Left = 715
         end
@@ -189,97 +199,108 @@ inherited FCadPagarReceber: TFCadPagarReceber
       object DBEdit2: TDBEdit
         Left = 9
         Top = 82
-        Width = 260
+        Width = 471
         Height = 21
         DataField = 'PAR_DESCRICAO'
         DataSource = dsCadastro
         TabOrder = 0
       end
       object DBLookupComboBox1: TDBLookupComboBox
-        Left = 274
-        Top = 82
-        Width = 200
+        Left = 10
+        Top = 130
+        Width = 191
         Height = 21
         DataField = 'PAR_CAT_ID'
         DataSource = dsCadastro
         KeyField = 'PIT_ID'
         ListField = 'PIT_DESCRICAO'
         ListSource = dsCategoria
-        TabOrder = 1
+        TabOrder = 4
       end
       object DBLookupComboBox2: TDBLookupComboBox
-        Left = 9
+        Left = 256
         Top = 130
-        Width = 172
+        Width = 183
         Height = 21
         DataField = 'PAR_CONTA_ID'
         DataSource = dsCadastro
         KeyField = 'FOP_ID'
         ListField = 'FOP_DESCRICAO'
         ListSource = dsConta
-        TabOrder = 2
+        TabOrder = 7
       end
       object DBEdit1: TDBEdit
-        Left = 393
-        Top = 130
-        Width = 81
+        Left = 325
+        Top = 178
+        Width = 100
         Height = 21
         DataField = 'PAR_VALOR'
         DataSource = dsCadastro
-        TabOrder = 5
+        TabOrder = 16
       end
       object cxDBDateEdit1: TcxDBDateEdit
-        Left = 185
-        Top = 130
+        Left = 117
+        Top = 178
         DataBinding.DataField = 'PAR_DATACOMPETENCIA'
         DataBinding.DataSource = dsCadastro
-        TabOrder = 3
+        TabOrder = 14
         Width = 97
       end
       object cbDataVencto: TcxDBDateEdit
-        Left = 289
-        Top = 130
+        Left = 221
+        Top = 178
         DataBinding.DataField = 'PAR_DATAVENCTO'
         DataBinding.DataSource = dsCadastro
-        TabOrder = 4
+        TabOrder = 15
         Width = 97
       end
       object DBLookupComboBox3: TDBLookupComboBox
-        Left = 492
+        Left = 500
         Top = 82
-        Width = 220
+        Width = 216
         Height = 21
         DataField = 'PAR_CLI_ID'
         DataSource = dsCadastro
         KeyField = 'CLI_ID'
         ListField = 'CLI_CLIENTE'
         ListSource = dsCliente
-        TabOrder = 6
-      end
-      object cbCentroCusto: TComboBox
-        Left = 492
-        Top = 130
-        Width = 220
-        Height = 21
-        ItemHeight = 13
-        TabOrder = 7
-        Text = 'cbCentroCusto'
-      end
-      object btAnexar: TBitBtn
-        Left = 566
-        Top = 335
-        Width = 121
-        Height = 40
-        Caption = 'Anexar um Arquivo'
-        TabOrder = 9
-        Visible = False
-        OnClick = btAnexarClick
+        TabOrder = 1
       end
       object btCACliente: TBitBtn
         Left = 715
         Top = 81
         Width = 22
-        Height = 22
+        Height = 21
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clGreen
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        OnClick = btCAClienteClick
+      end
+      object btEXCliente: TBitBtn
+        Left = 737
+        Top = 81
+        Width = 22
+        Height = 21
+        Caption = 'x'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnClick = btEXClienteClick
+      end
+      object btCACentroCusto: TBitBtn
+        Left = 715
+        Top = 129
+        Width = 22
+        Height = 21
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -288,13 +309,13 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 11
-        OnClick = btCAClienteClick
+        OnClick = btCACentroCustoClick
       end
-      object btEXCliente: TBitBtn
-        Left = 739
-        Top = 81
+      object btEXCentroCusto: TBitBtn
+        Left = 737
+        Top = 129
         Width = 22
-        Height = 22
+        Height = 21
         Caption = 'x'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -303,46 +324,16 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 12
-        OnClick = btEXClienteClick
-      end
-      object btCACentroCusto: TBitBtn
-        Left = 715
-        Top = 129
-        Width = 22
-        Height = 22
-        Caption = '+'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 13
-        OnClick = btCACentroCustoClick
-      end
-      object btEXCentroCusto: TBitBtn
-        Left = 739
-        Top = 129
-        Width = 22
-        Height = 22
-        Caption = 'x'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 14
         OnClick = btEXCentroCustoClick
       end
       object DBMemo1: TDBMemo
-        Left = 492
+        Left = 500
         Top = 179
         Width = 269
-        Height = 66
+        Height = 110
         DataField = 'PAR_OBSERVACAO'
         DataSource = dsCadastro
-        TabOrder = 8
+        TabOrder = 17
       end
       object pnPago: TPanel
         Left = 0
@@ -350,13 +341,14 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Width = 481
         Height = 71
         BevelOuter = bvNone
-        TabOrder = 15
+        TabOrder = 19
         object Bevel2: TBevel
           Left = 9
           Top = 2
           Width = 462
           Height = 5
           Shape = bsTopLine
+          Visible = False
         end
         object lblDataPagamento: TLabel
           Left = 9
@@ -452,13 +444,14 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Width = 481
         Height = 71
         BevelOuter = bvNone
-        TabOrder = 16
+        TabOrder = 18
         object Bevel4: TBevel
           Left = 9
           Top = 1
           Width = 462
           Height = 5
           Shape = bsTopLine
+          Visible = False
         end
         object lblOcorrencia: TLabel
           Left = 173
@@ -494,7 +487,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
           ItemHeight = 13
           ItemIndex = 2
           TabOrder = 1
-          Text = 'NA'
+          Text = 'Mensalmente'
           Items.Strings = (
             'Diariamente'
             'Semanalmente'
@@ -528,6 +521,86 @@ inherited FCadPagarReceber: TFCadPagarReceber
           TabOrder = 3
         end
       end
+      object DBEdit3: TDBEdit
+        Left = 10
+        Top = 178
+        Width = 97
+        Height = 21
+        DataField = 'PAR_NUMDOC'
+        DataSource = dsCadastro
+        TabOrder = 13
+      end
+      object btCACategorai: TBitBtn
+        Left = 200
+        Top = 130
+        Width = 22
+        Height = 21
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clGreen
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 5
+        OnClick = btCACategoraiClick
+      end
+      object btEXCategorai: TBitBtn
+        Left = 222
+        Top = 130
+        Width = 22
+        Height = 21
+        Caption = 'x'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 6
+        OnClick = btEXCategoraiClick
+      end
+      object btEXConta: TBitBtn
+        Left = 461
+        Top = 129
+        Width = 22
+        Height = 21
+        Caption = 'x'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 9
+      end
+      object btCAConta: TBitBtn
+        Left = 439
+        Top = 129
+        Width = 22
+        Height = 21
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clGreen
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 8
+        OnClick = btCAContaClick
+      end
+      object DBLookupComboBox4: TDBLookupComboBox
+        Left = 500
+        Top = 130
+        Width = 216
+        Height = 21
+        DataField = 'PAR_CCO_ID'
+        DataSource = dsCadastro
+        KeyField = 'CCO_ID'
+        ListField = 'CCO_DESCRICAO'
+        ListSource = dsCentroCusto
+        TabOrder = 10
+      end
     end
   end
   inherited dsConsulta: TDataSource
@@ -545,82 +618,68 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_ID = :OLD_PAR_ID')
     InsertSQL.Strings = (
       'insert into pagarreceber'
-      
-        '  (PAR_ANEXO, PAR_CAT_ID, PAR_CETROCUSTO, PAR_CLI_ID, PAR_CONTA_' +
-        'ID, PAR_DATACOMPETENCIA, '
-      
-        '   PAR_DATAPGTO, PAR_DATAVENCTO, PAR_DESCONTOTAXA, PAR_DESCRICAO' +
-        ', PAR_DH_CA, '
-      
-        '   PAR_ID, PAR_JUROMULTA, PAR_OBSERVACAO, PAR_PAGO, PAR_PAGREC, ' +
-        'PAR_PARCELAMAX, '
-      '   PAR_PARCELANUM, PAR_PARCELAPAI, PAR_VALOR, PAR_VALORPAGO)'
+      '  (PAR_ID, PAR_PAGREC, PAR_DESCRICAO, PAR_CAT_ID, PAR_CONTA_ID, '
+      'PAR_DATACOMPETENCIA, '
+      '   PAR_DATAVENCTO, PAR_VALOR, PAR_CLI_ID, PAR_CETROCUSTO, '
+      'PAR_OBSERVACAO, '
+      '   PAR_ANEXO, PAR_PAGO, PAR_DATAPGTO, PAR_DESCONTOTAXA, '
+      'PAR_JUROMULTA, '
+      '   PAR_VALORPAGO, PAR_DH_CA, PAR_PARCELANUM, PAR_PARCELAMAX, '
+      'PAR_PARCELAPAI, '
+      '   PAR_NUMDOC)'
       'values'
       
-        '  (:PAR_ANEXO, :PAR_CAT_ID, :PAR_CETROCUSTO, :PAR_CLI_ID, :PAR_C' +
-        'ONTA_ID, '
+        '  (:PAR_ID, :PAR_PAGREC, :PAR_DESCRICAO, :PAR_CAT_ID, :PAR_CONTA' +
+        '_ID, '
+      ':PAR_DATACOMPETENCIA, '
+      '   :PAR_DATAVENCTO, :PAR_VALOR, :PAR_CLI_ID, :PAR_CETROCUSTO, '
+      ':PAR_OBSERVACAO, '
+      '   :PAR_ANEXO, :PAR_PAGO, :PAR_DATAPGTO, :PAR_DESCONTOTAXA, '
+      ':PAR_JUROMULTA, '
       
-        '   :PAR_DATACOMPETENCIA, :PAR_DATAPGTO, :PAR_DATAVENCTO, :PAR_DE' +
-        'SCONTOTAXA, '
-      
-        '   :PAR_DESCRICAO, :PAR_DH_CA, :PAR_ID, :PAR_JUROMULTA, :PAR_OBS' +
-        'ERVACAO, '
-      
-        '   :PAR_PAGO, :PAR_PAGREC, :PAR_PARCELAMAX, :PAR_PARCELANUM, :PA' +
-        'R_PARCELAPAI, '
-      '   :PAR_VALOR, :PAR_VALORPAGO)')
+        '   :PAR_VALORPAGO, :PAR_DH_CA, :PAR_PARCELANUM, :PAR_PARCELAMAX,' +
+        ' '
+      ':PAR_PARCELAPAI, '
+      '   :PAR_NUMDOC)')
     RefreshSQL.Strings = (
-      'Select '
-      '  PAR_ID,'
-      '  PAR_PAGREC,'
-      '  PAR_DESCRICAO,'
-      '  PAR_CAT_ID,'
-      '  PAR_CONTA_ID,'
-      '  PAR_DATACOMPETENCIA,'
-      '  PAR_DATAVENCTO,'
-      '  PAR_VALOR,'
-      '  PAR_CLI_ID,'
-      '  PAR_CETROCUSTO,'
-      '  PAR_OBSERVACAO,'
-      '  PAR_ANEXO,'
-      '  PAR_PAGO,'
-      '  PAR_DATAPGTO,'
-      '  PAR_DESCONTOTAXA,'
-      '  PAR_JUROMULTA,'
-      '  PAR_VALORPAGO,'
-      '  PAR_DH_CA,'
-      '  PAR_PARCELANUM,'
-      '  PAR_PARCELAMAX,'
-      '  PAR_PARCELAPAI'
+      'Select *'
       'from pagarreceber '
       'where'
       '  PAR_ID = :PAR_ID')
     SelectSQL.Strings = (
-      'select * from pagarreceber where PAR_ID = :FId')
+      'select pagarreceber.*,'
+      '       (select pl_item.pit_descricao'
+      '          from pl_item'
+      
+        '         where pl_item.pit_id = pagarreceber.par_cat_id) categor' +
+        'ia'
+      '  from pagarreceber'
+      ' where PAR_ID = :FId')
     ModifySQL.Strings = (
       'update pagarreceber'
       'set'
-      '  PAR_ANEXO = :PAR_ANEXO,'
+      '  PAR_ID = :PAR_ID,'
+      '  PAR_PAGREC = :PAR_PAGREC,'
+      '  PAR_DESCRICAO = :PAR_DESCRICAO,'
       '  PAR_CAT_ID = :PAR_CAT_ID,'
-      '  PAR_CETROCUSTO = :PAR_CETROCUSTO,'
-      '  PAR_CLI_ID = :PAR_CLI_ID,'
       '  PAR_CONTA_ID = :PAR_CONTA_ID,'
       '  PAR_DATACOMPETENCIA = :PAR_DATACOMPETENCIA,'
-      '  PAR_DATAPGTO = :PAR_DATAPGTO,'
       '  PAR_DATAVENCTO = :PAR_DATAVENCTO,'
-      '  PAR_DESCONTOTAXA = :PAR_DESCONTOTAXA,'
-      '  PAR_DESCRICAO = :PAR_DESCRICAO,'
-      '  PAR_DH_CA = :PAR_DH_CA,'
-      '  PAR_ID = :PAR_ID,'
-      '  PAR_JUROMULTA = :PAR_JUROMULTA,'
-      '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
-      '  PAR_PAGO = :PAR_PAGO,'
-      '  PAR_PAGREC = :PAR_PAGREC,'
-      '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
-      '  PAR_PARCELANUM = :PAR_PARCELANUM,'
-      '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
       '  PAR_VALOR = :PAR_VALOR,'
-      '  PAR_VALORPAGO = :PAR_VALORPAGO'
+      '  PAR_CLI_ID = :PAR_CLI_ID,'
+      '  PAR_CETROCUSTO = :PAR_CETROCUSTO,'
+      '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
+      '  PAR_ANEXO = :PAR_ANEXO,'
+      '  PAR_PAGO = :PAR_PAGO,'
+      '  PAR_DATAPGTO = :PAR_DATAPGTO,'
+      '  PAR_DESCONTOTAXA = :PAR_DESCONTOTAXA,'
+      '  PAR_JUROMULTA = :PAR_JUROMULTA,'
+      '  PAR_VALORPAGO = :PAR_VALORPAGO,'
+      '  PAR_DH_CA = :PAR_DH_CA,'
+      '  PAR_PARCELANUM = :PAR_PARCELANUM,'
+      '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
+      '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
+      '  PAR_NUMDOC = :PAR_NUMDOC'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
     GeneratorField.Field = 'PAR_ID'
@@ -730,6 +789,19 @@ inherited FCadPagarReceber: TFCadPagarReceber
     object ibCadastroPAR_PARCELAPAI: TIntegerField
       FieldName = 'PAR_PARCELAPAI'
       Origin = '"PAGARRECEBER"."PAR_PARCELAPAI"'
+    end
+    object ibCadastroPAR_NUMDOC: TIBStringField
+      FieldName = 'PAR_NUMDOC'
+      Origin = 'PAGARRECEBER.PAR_NUMDOC'
+      Size = 15
+    end
+    object ibCadastroCATEGORIA: TIBStringField
+      FieldName = 'CATEGORIA'
+      Size = 100
+    end
+    object ibCadastroPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+      Origin = 'PAGARRECEBER.PAR_CCO_ID'
     end
   end
   inherited qConsulta: TIBQuery
@@ -848,9 +920,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
     end
   end
   inherited ActionList1: TActionList
-    inherited Act_Btn_Imprimir: TAction
-      OnExecute = Act_Btn_ImprimirExecute
-    end
     object Act_Btn_Voltar: TAction
       Category = 'FormCadastros'
       Caption = 'Voltar'
@@ -871,6 +940,22 @@ inherited FCadPagarReceber: TFCadPagarReceber
       Caption = 'Cheque'
       OnExecute = bt_ChequeExecute
     end
+    object btCA1: TAction
+      Category = 'Botao'
+      Caption = '+'
+    end
+    object btCA2: TAction
+      Category = 'Botao'
+      Caption = '...'
+    end
+    object btEX1: TAction
+      Category = 'Botao'
+      Caption = 'x'
+    end
+    object btEX2: TAction
+      Category = 'Botao'
+      Caption = '...'
+    end
   end
   inherited frxReport1: TfrxReport
     Left = 564
@@ -884,6 +969,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -928,6 +1015,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qConta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select * from forma_pgto')
     Left = 376
@@ -968,11 +1057,13 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
       ' where coalesce(cli_tipocli,1) = :TipoCli')
-    Left = 616
+    Left = 592
     Top = 104
     ParamData = <
       item
@@ -993,39 +1084,43 @@ inherited FCadPagarReceber: TFCadPagarReceber
   end
   object dsCliente: TDataSource
     DataSet = qCliente
-    Left = 336
-    Top = 56
+    Left = 624
+    Top = 104
   end
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
-      'select distinct pagarreceber.par_cetrocusto'
-      '  from pagarreceber'
-      ' where pagarreceber.par_pagrec = :TipoPagRec'
-      'order by pagarreceber.par_cetrocusto')
+      'select *'
+      '  from centrocusto'
+      ' order by cco_descricao')
     Left = 632
     Top = 56
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'TipoPagRec'
-        ParamType = ptUnknown
-      end>
-    object qCentroCustoPAR_CETROCUSTO: TIBStringField
-      FieldName = 'PAR_CETROCUSTO'
-      Origin = 'PAGARRECEBER.PAR_CETROCUSTO'
+    object qCentroCustoCCO_ID: TIntegerField
+      FieldName = 'CCO_ID'
+      Origin = 'CENTROCUSTO.CCO_ID'
+      Required = True
+    end
+    object qCentroCustoCCO_CODIGO: TIntegerField
+      FieldName = 'CCO_CODIGO'
+      Origin = 'CENTROCUSTO.CCO_CODIGO'
+    end
+    object qCentroCustoCCO_DESCRICAO: TIBStringField
+      FieldName = 'CCO_DESCRICAO'
+      Origin = 'CENTROCUSTO.CCO_DESCRICAO'
       Size = 100
+    end
+    object qCentroCustoCCO_DH_CA: TDateTimeField
+      FieldName = 'CCO_DH_CA'
+      Origin = 'CENTROCUSTO.CCO_DH_CA'
     end
   end
   object dsCentroCusto: TDataSource
     DataSet = qCentroCusto
-    Left = 584
-    Top = 104
-  end
-  object OpenDialog1: TOpenDialog
-    Left = 616
-    Top = 400
+    Left = 664
+    Top = 56
   end
   object ibParcela: TIBDataSet
     Database = DMConexao.IBConexao
@@ -1033,6 +1128,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
+    BufferChunks = 1000
+    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber'
       'where'
@@ -1227,9 +1324,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qGerador: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select gen_id(GEN_PAGARRECEBER,1) ID from rdb$database')
-    Left = 592
+    Left = 584
     Top = 56
     object qGeradorID: TLargeintField
       FieldName = 'ID'
@@ -1239,10 +1338,12 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select * from relatorio')
-    Left = 480
-    Top = 120
+    Left = 552
+    Top = 152
     object qRelatorioREL_ID: TIntegerField
       FieldName = 'REL_ID'
       Origin = '"RELATORIO"."REL_ID"'
@@ -1293,8 +1394,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   end
   object dsRelatorio: TDataSource
     DataSet = qRelatorio
-    Left = 528
-    Top = 120
+    Left = 584
+    Top = 152
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
@@ -1473,6 +1574,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object ibPagarreceberCheque: TIBDataSet
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber_cheque'
       'where'

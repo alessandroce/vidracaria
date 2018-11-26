@@ -1,16 +1,17 @@
 inherited FCadCheque: TFCadCheque
-  Left = 295
-  Top = 162
+  Left = 180
+  Top = 156
   Height = 496
   Caption = 'FCadCheque'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 427
+    Height = 428
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Height = 329
+        Height = 330
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1CHQ_ID: TcxGridDBColumn
@@ -101,7 +102,7 @@ inherited FCadCheque: TFCadCheque
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 379
+        Top = 380
       end
     end
     inherited tsCadastro: TTabSheet

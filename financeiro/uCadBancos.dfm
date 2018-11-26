@@ -8,6 +8,7 @@ inherited FCadBancos: TFCadBancos
   TextHeight = 13
   inherited pgCadastro: TPageControl
     Height = 434
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
         Height = 336
@@ -101,18 +102,11 @@ inherited FCadBancos: TFCadBancos
         FocusControl = DBEdit5
       end
       object Label13: TLabel [6]
-        Left = 122
-        Top = 80
+        Left = 48
+        Top = 82
         Width = 31
         Height = 13
         Caption = 'Banco'
-      end
-      object Label12: TLabel [7]
-        Left = 48
-        Top = 80
-        Width = 33
-        Height = 13
-        Caption = 'Codigo'
       end
       object DBEdit1: TDBEdit
         Left = 48
@@ -159,12 +153,12 @@ inherited FCadBancos: TFCadBancos
         DataSource = dsCadastro
         TabOrder = 5
       end
-      object btCACliente: TBitBtn
-        Left = 98
-        Top = 95
+      object btCABanco: TBitBtn
+        Left = 444
+        Top = 98
         Width = 22
-        Height = 22
-        Caption = '...'
+        Height = 21
+        Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
         Font.Height = -16
@@ -172,30 +166,60 @@ inherited FCadBancos: TFCadBancos
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 6
-        OnClick = btCAClienteClick
+        OnClick = btCABancoClick
       end
-      object DBEdit7: TDBEdit
-        Left = 48
-        Top = 96
-        Width = 50
-        Height = 21
-        DataField = 'BFEB_CODIGO'
-        DataSource = dsBanco
+      object DBRadioGroup1: TDBRadioGroup
+        Left = 504
+        Top = 88
+        Width = 121
+        Height = 130
+        Caption = '  Tipo Conta  '
+        DataField = 'BANC_CONTA_TIPO'
+        DataSource = dsCadastro
+        Items.Strings = (
+          'Corrente '
+          'Aplica'#231#227'o'
+          'Poupan'#231'a '
+          'Cart'#227'o'
+          'Outros')
         TabOrder = 7
+        Values.Strings = (
+          '1'
+          '2'
+          '3'
+          '4'
+          '5')
       end
-      object DBEdit8: TDBEdit
-        Left = 120
-        Top = 96
-        Width = 368
+      object btEXCategorai: TBitBtn
+        Left = 466
+        Top = 98
+        Width = 22
         Height = 21
-        DataField = 'BFEB_DESCRICAO'
-        DataSource = dsBanco
+        Caption = 'x'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 8
+        OnClick = btEXCategoraiClick
+      end
+      object DBLookupComboBox1: TDBLookupComboBox
+        Left = 48
+        Top = 98
+        Width = 396
+        Height = 21
+        DataField = 'BANC_BANCO_ID'
+        DataSource = dsCadastro
+        KeyField = 'BFEB_ID'
+        ListField = 'BFEB_DESCRICAO'
+        ListSource = dsBanco
+        TabOrder = 9
       end
     end
   end
   inherited ibCadastro: TIBDataSet
-    AfterEdit = ibCadastroAfterEdit
     DeleteSQL.Strings = (
       'delete from bancos'
       'where'
@@ -358,16 +382,9 @@ inherited FCadBancos: TFCadBancos
     DataSource = dsCadastro
     SQL.Strings = (
       'select *'
-      '  from bancos_febraban'
-      ' where bfeb_id = :id')
+      '  from bancos_febraban')
     Left = 480
     Top = 64
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id'
-        ParamType = ptUnknown
-      end>
     object qBancoBFEB_ID: TIntegerField
       FieldName = 'BFEB_ID'
       Origin = 'BANCOS_FEBRABAN.BFEB_ID'

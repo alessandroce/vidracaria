@@ -21,7 +21,7 @@ uses
   cxGridDBTableView, cxGrid, DBCtrls, Mask, cxContainer, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxCalendar, cxDBEdit, StrUtils, frxClass,
   frxIBXComponents,uClassAvisos, DateUtils, uFerramentas, frxDBSet,
-  DBClient, Provider;
+  DBClient, Provider, wwdblook, Wwdbdlg;
 
 type
   TFCadPagarReceber = class(TFCadPadrao)
@@ -92,7 +92,6 @@ type
     Label5: TLabel;
     Label6: TLabel;
     DBEdit1: TDBEdit;
-    Bevel3: TBevel;
     cxDBDateEdit1: TcxDBDateEdit;
     cbDataVencto: TcxDBDateEdit;
     qCliente: TIBQuery;
@@ -104,16 +103,12 @@ type
     Label14: TLabel;
     qCentroCusto: TIBQuery;
     dsCentroCusto: TDataSource;
-    qCentroCustoPAR_CETROCUSTO: TIBStringField;
-    cbCentroCusto: TComboBox;
     Label15: TLabel;
-    btAnexar: TBitBtn;
     btCACliente: TBitBtn;
     btEXCliente: TBitBtn;
     btCACentroCusto: TBitBtn;
     btEXCentroCusto: TBitBtn;
     DBMemo1: TDBMemo;
-    OpenDialog1: TOpenDialog;
     ibParcela: TIBDataSet;
     ibParcelaPAR_ID: TIntegerField;
     ibParcelaPAR_PAGREC: TIntegerField;
@@ -221,21 +216,41 @@ type
     cdsPagarreceberChequePAC_PAR_ID: TIntegerField;
     cdsPagarreceberChequePAC_CHQ_ID: TIntegerField;
     cdsPagarreceberChequePAC_DH_CA: TDateTimeField;
+    ibCadastroPAR_NUMDOC: TIBStringField;
+    Label7: TLabel;
+    DBEdit3: TDBEdit;
+    btCACategorai: TBitBtn;
+    ibCadastroCATEGORIA: TIBStringField;
+    btEXCategorai: TBitBtn;
+    btEXConta: TBitBtn;
+    btCAConta: TBitBtn;
+    btCA1: TAction;
+    btCA2: TAction;
+    btEX1: TAction;
+    btEX2: TAction;
+    ibCadastroPAR_CCO_ID: TIntegerField;
+    DBLookupComboBox4: TDBLookupComboBox;
+    qCentroCustoCCO_ID: TIntegerField;
+    qCentroCustoCCO_CODIGO: TIntegerField;
+    qCentroCustoCCO_DESCRICAO: TIBStringField;
+    qCentroCustoCCO_DH_CA: TDateTimeField;
+    Bevel3: TBevel;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
-    procedure btAnexarClick(Sender: TObject);
     procedure btCAClienteClick(Sender: TObject);
     procedure btEXClienteClick(Sender: TObject);
     procedure btCACentroCustoClick(Sender: TObject);
     procedure btEXCentroCustoClick(Sender: TObject);
     procedure ibCadastroBeforePost(DataSet: TDataSet);
     procedure ibCadastroAfterInsert(DataSet: TDataSet);
-    procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
     procedure dsContaDataChange(Sender: TObject; Field: TField);
     procedure bt_ChequeExecute(Sender: TObject);
     procedure ibCadastroAfterPost(DataSet: TDataSet);
+    procedure btCACategoraiClick(Sender: TObject);
+    procedure btEXCategoraiClick(Sender: TObject);
+    procedure btCAContaClick(Sender: TObject);
   private
     { Private declarations }
     GeradorID : Integer;
@@ -246,7 +261,6 @@ type
     procedure ExibePagar(pEnabled:Boolean);
     procedure MovePagar(pMover:Boolean);
     procedure Repetir(pDataVencto:TDate; pPeriodo:Integer;pQtdade:Integer;pPai:Integer; pDescricao : String);
-    procedure getComboCentroCusto(pTexto:String='');
     function getGeradorID:Integer;
   public
     { Public declarations }
@@ -260,7 +274,9 @@ var
 
 implementation
 
-uses uSelecionarCliente, uCadClientes, uSelecionarCheque;
+uses uSelecionarCliente, uCadClientes, uSelecionarCheque,
+  uSelecionarPlanoContas, uSelecionarFormaPgto, uCadCentroCusto,
+  uSelecionarCentroCusto;
 
 {$R *.dfm}
 
@@ -316,27 +332,6 @@ begin
   ExibePagar(chPago.checked);
 end;
 
-procedure TFCadPagarReceber.getComboCentroCusto(pTexto:String='');
-var i, iIndex : Integer;
-begin
-  qCentroCusto.Close;
-  qCentroCusto.ParamByName('TipoPagRec').Value := FTipoPagRec;
-  qCentroCusto.Open;
-  qCentroCusto.First;
-  cbCentroCusto.Items.Clear;
-  i := -1;
-  while not qCentroCusto.Eof do
-  begin
-    Inc(i);
-    if (pTexto=qCentroCustoPAR_CETROCUSTO.asString) then
-      iIndex := i;
-    cbCentroCusto.Items.Add(qCentroCustoPAR_CETROCUSTO.asString);
-    qCentroCusto.Next;
-  end;
-  cbCentroCusto.ItemIndex := iIndex;
-end;
-
-
 procedure TFCadPagarReceber.EntrouAbaCadastro;
 begin
   inherited;
@@ -357,7 +352,11 @@ begin
     qCliente.Last;
     qCliente.First;
 
-    getComboCentroCusto(qConsultaPAR_CETROCUSTO.asString);
+    qCentroCusto.Close;
+    qCentroCusto.Open;
+    qCentroCusto.Last;
+    qCentroCusto.First;
+
 
     DBEdit2.SetFocus;
     //RetiraRepetir(not(ibCadastro.State=dsInsert));
@@ -377,41 +376,15 @@ begin
     CarregarConsultaCDSParametro;
 end;
 
-procedure TFCadPagarReceber.btAnexarClick(Sender: TObject);
-var sCaminhoArquivo : String;
-begin
-  inherited;
-  if OpenDialog1.Execute then
-  begin
-    sCaminhoArquivo := OpenDialog1.FileName;
-    Aviso('Salvar em: '+sCaminhoArquivo+#13+'Não desenvolvido ainda.');
-  end;
-end;
-
 procedure TFCadPagarReceber.btCAClienteClick(Sender: TObject);
 begin
   inherited;
-(*
   FSelecionarCli := TFSelecionarCli.Create(nil);
   FSelecionarCli.FTipoCli := FTipoPagRec;
   FSelecionarCli.ShowModal;
   if FSelecionarCli.FId>0 then
     ibCadastroPAR_CLI_ID.Value := FSelecionarCli.FId;
   FSelecionarCli.Free;
-*)
-  FCadClientes := TFCadClientes.Create(nil);
-  FCadClientes.FTipoCli := FTipoPagRec;
-  FCadClientes.ShowModal;
-
-  qCliente.Active := false;
-  qCliente.Active := true;
-  //qCliente.ParamByName('TipoCli').Value := FTipoPagRec;
-  //qCliente.Open;
-
-  if FCadClientes.FId>0 then
-    if (ibCadastro.State in [dsEdit,dsInsert]) then
-      ibCadastroPAR_CLI_ID.Value := FCadClientes.FId;
-  FCadClientes.Free;
 end;
 
 procedure TFCadPagarReceber.btEXClienteClick(Sender: TObject);
@@ -423,21 +396,37 @@ end;
 procedure TFCadPagarReceber.btCACentroCustoClick(Sender: TObject);
 begin
   inherited;
-  cbCentroCusto.Text := InputBox('Novo Centro custo','Centro Custo:','');
+(*
+  FCadCentroCusto := TFCadCentroCusto.Create(nil);
+  FCadCentroCusto.ShowModal;
+  if FCadCentroCusto.FId>0 then
+    ibCadastroPAR_CCO_ID.Value := FCadCentroCusto.FId;
+  FCadCentroCusto.Free;
+*)
+  FSelecionarCentroCusto := TFSelecionarCentroCusto.Create(nil);
+  FSelecionarCentroCusto.ShowModal;
+  if FSelecionarCentroCusto.FId>0 then
+    ibCadastroPAR_CCO_ID.Value := FSelecionarCentroCusto.FId;
+  FSelecionarCentroCusto.Free;
 end;
 
 procedure TFCadPagarReceber.btEXCentroCustoClick(Sender: TObject);
 begin
   inherited;
-  cbCentroCusto.Clear;
+  ibCadastroPAR_CCO_ID.Clear;
 end;
 
 procedure TFCadPagarReceber.ibCadastroBeforePost(DataSet: TDataSet);
 var vDescricao : String;
 begin
   inherited;
+  if not(Continua(ibCadastroPAR_NUMDOC.asString<>'','Informe Num. Documento')) then
+    Abort;
+
+  if not(Continua(ibCadastroPAR_VALOR.AsFloat>0,'Informe Valor Documento')) then
+    Abort;
+
   ibCadastroPAR_PAGREC.Value := FTipoPagRec;
-  ibCadastroPAR_CETROCUSTO.Value := cbCentroCusto.Text;
   if not(chPago.Checked) then
   begin
     ibCadastroPAR_DATAPGTO.Clear;
@@ -502,6 +491,9 @@ begin
           if (ibParcela.Fields.Fields[j].FieldName='PAR_DESCRICAO') then
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := pDescricao+' ('+IntToStr(i+1)+'/'+IntToStr(pQtdade+1)+')'
           else
+          if (ibParcela.Fields.Fields[j].FieldName='PAR_NUMDOC') then
+            ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value+'-'+IntToStr(i+1)+'/'+IntToStr(pQtdade+1)
+          else
           if (ibParcela.Fields.Fields[j].FieldName='PAR_PARCELANUM') then
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := i+1
           else
@@ -531,12 +523,6 @@ procedure TFCadPagarReceber.ibCadastroAfterInsert(DataSet: TDataSet);
 begin
   inherited;
   ibCadastroPAR_PAGO.Value := 'N';
-end;
-
-procedure TFCadPagarReceber.Act_Btn_NovoExecute(Sender: TObject);
-begin
-  inherited;
-  cbCentroCusto.Text := '';
 end;
 
 procedure TFCadPagarReceber.RetiraRepetir(pRetirar: Boolean);
@@ -663,6 +649,33 @@ begin
   qConsulta.Open;
   cdsConsulta.Close;
   cdsConsulta.Open;
+end;
+
+procedure TFCadPagarReceber.btCACategoraiClick(Sender: TObject);
+begin
+  inherited;
+  FSelecionarPlanoContas := TFSelecionarPlanoContas.Create(nil);
+  FSelecionarPlanoContas.FPGR_ID := FTipoPagRec;
+  FSelecionarPlanoContas.ShowModal;
+  if FSelecionarPlanoContas.FId>0 then
+    ibCadastroPAR_CAT_ID.Value := FSelecionarPlanoContas.FId;
+  FSelecionarPlanoContas.Free;
+end;
+
+procedure TFCadPagarReceber.btEXCategoraiClick(Sender: TObject);
+begin
+  inherited;
+  ibCadastroPAR_CAT_ID.Clear;
+end;
+
+procedure TFCadPagarReceber.btCAContaClick(Sender: TObject);
+begin
+  inherited;
+  FSelecionarFormaPgto := TFSelecionarFormaPgto.Create(nil);
+  FSelecionarFormaPgto.ShowModal;
+  if FSelecionarFormaPgto.FId>0 then
+    ibCadastroPAR_CONTA_ID.Value := FSelecionarFormaPgto.FId;
+  FSelecionarFormaPgto.Free;
 end;
 
 end.
