@@ -13,6 +13,9 @@ object DMConexao: TDMConexao
       'password=masterkey')
     LoginPrompt = False
     DefaultTransaction = IBTransacao
+    IdleTimer = 0
+    SQLDialect = 3
+    TraceFlags = []
     Left = 40
     Top = 16
   end
@@ -23,6 +26,7 @@ object DMConexao: TDMConexao
       'read_committed'
       'rec_version'
       'nowait')
+    AutoStopAction = saNone
     Left = 96
     Top = 16
   end
@@ -33,6 +37,7 @@ object DMConexao: TDMConexao
       'read_committed'
       'rec_version'
       'nowait')
+    AutoStopAction = saNone
     Left = 152
     Top = 16
   end
