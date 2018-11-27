@@ -1,5 +1,8 @@
 inherited FMovFinanceiro: TFMovFinanceiro
+  Left = 318
+  Top = 172
   Caption = 'FMovFinanceiro'
+  OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited Panel2: TPanel
@@ -79,7 +82,7 @@ inherited FMovFinanceiro: TFMovFinanceiro
       Left = 472
       Top = 1
       Width = 311
-      Height = 361
+      Height = 360
       Align = alRight
       TabOrder = 12
       object cxGrid1DBTableView1: TcxGridDBTableView
@@ -275,6 +278,30 @@ inherited FMovFinanceiro: TFMovFinanceiro
       Width = 97
     end
   end
+  inherited pnBarraPg: TPanel
+    inherited btAlterar: TSpeedButton
+      Tag = 1
+    end
+    inherited btExcluir: TSpeedButton
+      Tag = 2
+    end
+    inherited btSair: TSpeedButton
+      Tag = 6
+    end
+    inherited btImprimir: TSpeedButton
+      Tag = 3
+    end
+    inherited btCancelar: TSpeedButton
+      Tag = 4
+      Left = 243
+      Top = 2
+    end
+    inherited btSalvar: TSpeedButton
+      Tag = 5
+      Left = 303
+      Top = 2
+    end
+  end
   inherited dsCadastro: TDataSource
     OnDataChange = dsCadastroDataChange
   end
@@ -380,8 +407,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -407,8 +432,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -446,8 +469,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select *'
       '  from centrocusto'
