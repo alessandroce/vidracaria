@@ -1,6 +1,6 @@
 object FCadPadrao2: TFCadPadrao2
-  Left = 201
-  Top = 167
+  Left = 818
+  Top = 216
   Width = 800
   Height = 500
   Caption = ':: sistema gest'#227'o comercial ::'
@@ -33,7 +33,7 @@ object FCadPadrao2: TFCadPadrao2
   end
   object sbBarraStatus: TStatusBar
     Left = 0
-    Top = 443
+    Top = 442
     Width = 784
     Height = 19
     Panels = <
@@ -57,7 +57,7 @@ object FCadPadrao2: TFCadPadrao2
     Left = 0
     Top = 80
     Width = 784
-    Height = 363
+    Height = 362
     Align = alClient
     TabOrder = 2
   end
@@ -436,28 +436,13 @@ object FCadPadrao2: TFCadPadrao2
     Left = 432
     Top = 8
   end
-  object dsConsulta: TDataSource
-    DataSet = qConsulta
-    Left = 528
-    Top = 8
-  end
   object ibCadastro: TIBDataSet
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
-    BufferChunks = 1000
-    CachedUpdates = False
     Left = 384
-    Top = 8
-  end
-  object qConsulta: TIBQuery
-    Database = DMConexao.IBConexao
-    Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
-    Left = 480
     Top = 8
   end
   object ImageList1: TImageList
@@ -1004,6 +989,7 @@ object FCadPadrao2: TFCadPadrao2
     Left = 336
     Top = 8
     object Act_Btn_Gravar: TAction
+      Tag = 5
       Category = 'FormCadastros'
       Caption = 'Gravar'
       Hint = 'Gravar registro'
@@ -1020,6 +1006,7 @@ object FCadPadrao2: TFCadPadrao2
       OnExecute = Act_Btn_InserirExecute
     end
     object Act_Btn_Alterar: TAction
+      Tag = 1
       Category = 'FormCadastros'
       Caption = 'Alterar'
       Hint = 'Alterar registro'
@@ -1028,6 +1015,7 @@ object FCadPadrao2: TFCadPadrao2
       OnExecute = Act_Btn_AlterarExecute
     end
     object Act_Btn_Excluir: TAction
+      Tag = 2
       Category = 'FormCadastros'
       Caption = 'Excluir'
       Hint = 'Excluir registro'
@@ -1036,6 +1024,7 @@ object FCadPadrao2: TFCadPadrao2
       OnExecute = Act_Btn_ExcluirExecute
     end
     object Act_Btn_Imprimir: TAction
+      Tag = 3
       Category = 'FormCadastros'
       Caption = 'Imprimir'
       Hint = 'Imprimir'
@@ -1060,6 +1049,7 @@ object FCadPadrao2: TFCadPadrao2
       OnExecute = Act_Btn_NovoExecute
     end
     object Act_Btn_Cancelar: TAction
+      Tag = 4
       Category = 'FormCadastros'
       Caption = 'Cancelar'
       Hint = 'Cancelar'

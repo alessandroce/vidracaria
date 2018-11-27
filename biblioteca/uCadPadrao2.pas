@@ -24,9 +24,7 @@ type
   TModoCarregarConsulta = (cSemParametro,cComParametro);
   TFCadPadrao2 = class(TForm)
     dsCadastro: TDataSource;
-    dsConsulta: TDataSource;
     ibCadastro: TIBDataSet;
-    qConsulta: TIBQuery;
     ImageList1: TImageList;
     ActionList1: TActionList;
     Act_Btn_Gravar: TAction;
@@ -84,9 +82,7 @@ type
     procedure EntrouAbaConsulta;Virtual;
     procedure EntrouAbaRelatorio;Virtual;
     property PnBarraFormCaption : String read FPnBarraForm write setFPnBarraForm;
-    function getIdConsulta:Integer;Virtual;
-    procedure CarregarConsulta;Virtual;
-    procedure CarregarConsultaCDSParametro;Virtual;
+    procedure barra_botao(pBotao:TAction);
   end;
 
 var
@@ -106,6 +102,7 @@ uses uClassAvisos, uFerramentas;
 
 procedure TFCadPadrao2.Act_Btn_NovoExecute(Sender: TObject);
 begin
+  barra_botao(Act_Btn_Novo);
   //if not(DMConexao.IBTransacao.InTransaction) then
   if DMConexao.IBTransacao.InTransaction then
     DMConexao.IBTransacao.CommitRetaining;
@@ -118,7 +115,7 @@ end;
 
 procedure TFCadPadrao2.Act_Btn_AlterarExecute(Sender: TObject);
 begin
-  FIdConsulta := getIdConsulta;
+  barra_botao(Act_Btn_Alterar);
   if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Aviso'])) then
     Exit;
   if not(DMConexao.IBTransacao.InTransaction) then
@@ -152,22 +149,17 @@ end;
 
 procedure TFCadPadrao2.Act_Btn_ExcluirExecute(Sender: TObject);
 begin
+  barra_botao(Act_Btn_Excluir);
   if Duvida('Excluir registro.') then
   begin
-    FIdConsulta := getIdConsulta;
     if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Informação'])) then
       Exit;
     ibCadastro.Close;
-    ibCadastro.ParamByName('FId').Value := FIdConsulta;//qConsulta.FieldByName('Id').Value;
+    //ibCadastro.ParamByName('FId').Value := FIdConsulta;//qConsulta.FieldByName('Id').Value;
     ibCadastro.Open;
     ibCadastro.Delete;
 
     DMConexao.IBTransacao.Commit;
-
-    if FCarregarConsultaCDSParametro then
-      CarregarConsultaCDSParametro
-    else
-      CarregarConsulta;
 
     Aviso('Registro apagado com sucesso.');
   end;
@@ -180,12 +172,9 @@ end;
 
 procedure TFCadPadrao2.Act_Btn_GravarExecute(Sender: TObject);
 begin
+  barra_botao(Act_Btn_Gravar);
   ibCadastro.Post;
   DMConexao.IBTransacao.CommitRetaining;
-  if FCarregarConsultaCDSParametro then
-    CarregarConsultaCDSParametro
-  else
-    CarregarConsulta;
 end;
 
 procedure TFCadPadrao2.Act_Btn_InserirExecute(Sender: TObject);
@@ -195,6 +184,7 @@ end;
 
 procedure TFCadPadrao2.Act_Btn_CancelarExecute(Sender: TObject);
 begin
+  barra_botao(Act_Btn_Cancelar);
   ibCadastro.Cancel;
 end;
 
@@ -233,32 +223,44 @@ begin
 end;
 
 
-function TFCadPadrao2.getIdConsulta: Integer;
-begin
-  if FId>0 then
-    Result := FId
-  else
-  if not(qConsulta.FieldByName('Id').IsNull) then
-    Result := qConsulta.FieldByName('Id').Value
-  else
-    Result := 0;
-end;
-
-procedure TFCadPadrao2.CarregarConsulta;
-begin
-    qConsulta.Close;
-    qConsulta.Open;
-end;
-
-procedure TFCadPadrao2.CarregarConsultaCDSParametro;
-begin
-//
-end;
-
 procedure TFCadPadrao2.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
+  barra_botao(Act_Btn_Imprimir);
   if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Aviso'])) then
     Abort;
+end;
+
+procedure TFCadPadrao2.barra_botao(pBotao: TAction);
+  procedure bInserindoEditando;
+  begin
+    Act_Btn_Novo.Enabled     := false;
+    Act_Btn_Alterar.Enabled  := false;
+    Act_Btn_Excluir.Enabled  := false;
+    Act_Btn_Imprimir.Enabled := true;
+    Act_Btn_Cancelar.Enabled := true;
+    Act_Btn_Gravar.Enabled   := true;
+  end;
+
+  procedure bGravando;
+  begin
+    Act_Btn_Novo.Enabled     := true;
+    Act_Btn_Alterar.Enabled  := true;
+    Act_Btn_Excluir.Enabled  := true;
+    Act_Btn_Imprimir.Enabled := true;
+    Act_Btn_Cancelar.Enabled := false;
+    Act_Btn_Gravar.Enabled   := false;
+  end;
+
+begin
+  case pBotao.Tag of
+    {Novo}     0 : bInserindoEditando;
+    {Alterar}  1 : bInserindoEditando;
+    {Excluir}  2 : bInserindoEditando;
+    {Imprimir} 3 : bInserindoEditando;
+    {Cancelar} 4 : bGravando;
+    {Gravar}   5 : bGravando;
+    {Sair}     6 : bGravando;
+  end;
 end;
 
 end.
