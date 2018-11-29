@@ -5,6 +5,11 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
   inherited Panel1: TPanel
     inherited grConsulta: TcxGrid
       inherited grConsultaDBTableView1: TcxGridDBTableView
+        object grConsultaDBTableView1TIPO: TcxGridDBColumn
+          Caption = 'Tipo'
+          DataBinding.FieldName = 'TIPO'
+          Width = 79
+        end
         object grConsultaDBTableView1ID: TcxGridDBColumn
           DataBinding.FieldName = 'ID'
           Visible = False
@@ -37,6 +42,22 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
           DataBinding.FieldName = 'PAR_CLI_ID'
           Visible = False
         end
+        object grConsultaDBTableView1PAR_CAT_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'PAR_CAT_ID'
+          Visible = False
+        end
+        object grConsultaDBTableView1PAR_NUMDOC: TcxGridDBColumn
+          DataBinding.FieldName = 'PAR_NUMDOC'
+          Visible = False
+        end
+        object grConsultaDBTableView1VALOR_ORIGINAL: TcxGridDBColumn
+          Caption = 'Valor Original'
+          DataBinding.FieldName = 'VALOR_ORIGINAL'
+        end
+        object grConsultaDBTableView1VALOR_QUITADO: TcxGridDBColumn
+          Caption = 'Valor quitado'
+          DataBinding.FieldName = 'VALOR_QUITADO'
+        end
       end
     end
   end
@@ -47,19 +68,43 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
   end
   inherited qConsulta: TIBQuery
     SQL.Strings = (
-      'select pagarreceber.par_id ID,'
+      'select case'
+      '       when (pagarreceber.par_pagrec=2) then '#39'Pagar'#39
+      '       when (pagarreceber.par_pagrec=1) then '#39'Receber'#39
+      '       end tipo,'
+      '       pagarreceber.par_id ID,'
       '       pagarreceber.par_id CODIGO,'
       '       pagarreceber.par_descricao DESCRICAO,'
       
         '       (select pl_item.pit_descricao from pl_item where pl_item.' +
         'pit_id = pagarreceber.par_cat_id) ITEM,'
-      '       pagarreceber.par_valor,'
+      '       pagarreceber.par_valor valor_original,'
+      '       pagarreceber.par_valor -'
+      '           coalesce((select sum(pagarreceber_baixa.bxp_valor)'
+      '                       from pagarreceber_baixa'
+      
+        '                      where pagarreceber_baixa.bxp_par_id=pagarr' +
+        'eceber.par_id),0) par_valor,'
+      '       coalesce((select sum(pagarreceber_baixa.bxp_valor)'
+      '                   from pagarreceber_baixa'
+      
+        '                  where pagarreceber_baixa.bxp_par_id=pagarreceb' +
+        'er.par_id),0) valor_quitado,'
       '       pagarreceber.par_datavencto,'
-      '       pagarreceber.par_cli_id'
+      '       pagarreceber.par_cli_id,'
+      '       pagarreceber.par_cat_id,'
+      '       pagarreceber.par_numdoc'
       '  from pagarreceber'
-      ' where pagarreceber.par_cli_id = :cli_id'
+      ' where ((pagarreceber.par_cli_id = :cli_id) or (0 = :cli_id))'
+      '   and coalesce(pagarreceber.par_baixado,'#39'N'#39')='#39'N'#39
       ' order by pagarreceber.par_datavencto')
+    Left = 352
     ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cli_id'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftUnknown
         Name = 'cli_id'
@@ -98,6 +143,33 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
       FieldName = 'PAR_CLI_ID'
       Origin = 'PAGARRECEBER.PAR_CLI_ID'
     end
+    object qConsultaPAR_CAT_ID: TIntegerField
+      FieldName = 'PAR_CAT_ID'
+      Origin = '"PAGARRECEBER"."PAR_CAT_ID"'
+    end
+    object qConsultaPAR_NUMDOC: TIBStringField
+      FieldName = 'PAR_NUMDOC'
+      Origin = '"PAGARRECEBER"."PAR_NUMDOC"'
+      Size = 15
+    end
+    object qConsultaTIPO: TIBStringField
+      FieldName = 'TIPO'
+      ProviderFlags = []
+      FixedChar = True
+      Size = 7
+    end
+    object qConsultaVALOR_ORIGINAL: TIBBCDField
+      FieldName = 'VALOR_ORIGINAL'
+      Origin = '"PAGARRECEBER"."PAR_VALOR"'
+      Precision = 18
+      Size = 2
+    end
+    object qConsultaVALOR_QUITADO: TIBBCDField
+      FieldName = 'VALOR_QUITADO'
+      ProviderFlags = []
+      Precision = 18
+      Size = 2
+    end
   end
   inherited cdsConsulta: TClientDataSet
     object cdsConsultaID: TIntegerField
@@ -118,6 +190,7 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
     end
     object cdsConsultaPAR_VALOR: TBCDField
       FieldName = 'PAR_VALOR'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
@@ -126,6 +199,30 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
     end
     object cdsConsultaPAR_CLI_ID: TIntegerField
       FieldName = 'PAR_CLI_ID'
+    end
+    object cdsConsultaPAR_CAT_ID: TIntegerField
+      FieldName = 'PAR_CAT_ID'
+    end
+    object cdsConsultaPAR_NUMDOC: TStringField
+      FieldName = 'PAR_NUMDOC'
+      Size = 15
+    end
+    object cdsConsultaTIPO: TStringField
+      FieldName = 'TIPO'
+      FixedChar = True
+      Size = 7
+    end
+    object cdsConsultaVALOR_ORIGINAL: TBCDField
+      FieldName = 'VALOR_ORIGINAL'
+      DisplayFormat = '0.00'
+      Precision = 18
+      Size = 2
+    end
+    object cdsConsultaVALOR_QUITADO: TBCDField
+      FieldName = 'VALOR_QUITADO'
+      DisplayFormat = '0.00'
+      Precision = 18
+      Size = 2
     end
   end
 end

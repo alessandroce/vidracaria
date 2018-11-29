@@ -235,6 +235,29 @@ type
     qCentroCustoCCO_DESCRICAO: TIBStringField;
     qCentroCustoCCO_DH_CA: TDateTimeField;
     Bevel3: TBevel;
+    ibCadastroPAR_BAIXADO: TIBStringField;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    ibBaixado: TIBQuery;
+    dsBaixado: TDataSource;
+    ibBaixadoTIPOBAIXA: TIBStringField;
+    ibBaixadoBXP_DATAPAGTO: TDateField;
+    ibBaixadoBXP_VALOR: TIBBCDField;
+    ibBaixadoBXP_OBSERVACAO: TIBStringField;
+    cxGrid1DBTableView1TIPOBAIXA: TcxGridDBColumn;
+    cxGrid1DBTableView1BXP_DATAPAGTO: TcxGridDBColumn;
+    cxGrid1DBTableView1BXP_VALOR: TcxGridDBColumn;
+    cxGrid1DBTableView1BXP_OBSERVACAO: TcxGridDBColumn;
+    ibCadastroPAR_TIPOBAIXA: TIBStringField;
+    qConsultaPAR_BAIXADO: TIBStringField;
+    qConsultaPAR_TIPOBAIXA: TIBStringField;
+    cdsConsultaPAR_BAIXADO: TStringField;
+    cdsConsultaPAR_TIPOBAIXA: TStringField;
+    grConsultaDBTableView1PAR_BAIXADO: TcxGridDBColumn;
+    grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
+    Label8: TLabel;
+    Bevel5: TBevel;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -251,6 +274,15 @@ type
     procedure btCACategoraiClick(Sender: TObject);
     procedure btEXCategoraiClick(Sender: TObject);
     procedure btCAContaClick(Sender: TObject);
+    procedure ibCadastroAfterOpen(DataSet: TDataSet);
+    procedure ibCadastroBeforeClose(DataSet: TDataSet);
+    procedure grConsultaDBTableView1CellDblClick(
+      Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
   private
     { Private declarations }
     GeradorID : Integer;
@@ -676,6 +708,55 @@ begin
   if FSelecionarFormaPgto.FId>0 then
     ibCadastroPAR_CONTA_ID.Value := FSelecionarFormaPgto.FId;
   FSelecionarFormaPgto.Free;
+end;
+
+procedure TFCadPagarReceber.ibCadastroAfterOpen(DataSet: TDataSet);
+begin
+  inherited;
+  ibBaixado.Open;
+end;
+
+procedure TFCadPagarReceber.ibCadastroBeforeClose(DataSet: TDataSet);
+begin
+  inherited;
+  ibBaixado.Close;
+end;
+
+procedure TFCadPagarReceber.grConsultaDBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+  inherited;
+//
+end;
+
+procedure TFCadPagarReceber.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+
+  if AViewInfo.GridRecord.Selected then
+    ACanvas.Brush.Color := clActiveCaption;
+
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'P') then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clBlue;
+  end
+  else
+  if(AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clGreen;
+  end
+  else
+  begin
+    //ACanvas.Font.Style := [];
+    ACanvas.Font.Color := clBlack;
+  end;
+
 end;
 
 end.

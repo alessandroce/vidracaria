@@ -10,7 +10,15 @@ uses
   cxEdit, DB, cxDBData, DBClient, Provider, IBCustomDataSet, IBQuery,
   frxClass, frxIBXComponents, ImgList, ActnList, StdCtrls, Buttons,
   cxGridLevel, cxClasses, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid, ExtCtrls;
+  cxGridTableView, cxGridDBTableView, cxGrid, ExtCtrls, dxSkinBlack,
+  dxSkinBlue, dxSkinCaramel, dxSkinCoffee, dxSkinDarkRoom, dxSkinDarkSide,
+  dxSkinFoggy, dxSkinGlassOceans, dxSkiniMaginary, dxSkinLilian,
+  dxSkinLiquidSky, dxSkinLondonLiquidSky, dxSkinMcSkin, dxSkinMoneyTwins,
+  dxSkinOffice2007Black, dxSkinOffice2007Blue, dxSkinOffice2007Green,
+  dxSkinOffice2007Pink, dxSkinOffice2007Silver, dxSkinOffice2010Black,
+  dxSkinOffice2010Blue, dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven,
+  dxSkinSharp, dxSkinSilver, dxSkinSpringTime, dxSkinStardust,
+  dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue;
 
 type
   TFSelecionarPlanoContas = class(TFSelecionarPadrao)

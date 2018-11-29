@@ -1,19 +1,20 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 200
-  Top = 171
-  Height = 597
+  Left = 298
+  Top = 167
+  Height = 600
   Caption = 'FCadPagarReceber'
   OldCreateOrder = True
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 529
+    Height = 531
     ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
-        Height = 431
+        Height = 433
         inherited grConsultaDBTableView1: TcxGridDBTableView
+          OnCustomDrawCell = grConsultaDBTableView1CustomDrawCell
           DataController.DataSource = dsConsulta
           DataController.Filter.AutoDataSetFilter = True
           DataController.Summary.FooterSummaryItems = <
@@ -91,6 +92,14 @@ inherited FCadPagarReceber: TFCadPagarReceber
             DataBinding.FieldName = 'PAR_VALORPAGO'
             Width = 100
           end
+          object grConsultaDBTableView1PAR_BAIXADO: TcxGridDBColumn
+            DataBinding.FieldName = 'PAR_BAIXADO'
+            VisibleForCustomization = False
+          end
+          object grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn
+            DataBinding.FieldName = 'PAR_TIPOBAIXA'
+            VisibleForCustomization = False
+          end
         end
       end
       inherited pnBarraPg: TPanel
@@ -102,11 +111,19 @@ inherited FCadPagarReceber: TFCadPagarReceber
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 481
+        Top = 483
       end
     end
     inherited tsCadastro: TTabSheet
-      object Label2: TLabel [1]
+      object Bevel5: TBevel [0]
+        Left = 0
+        Top = 362
+        Width = 776
+        Height = 22
+        Align = alBottom
+        Shape = bsTopLine
+      end
+      object Label2: TLabel [2]
         Left = 9
         Top = 66
         Width = 48
@@ -114,35 +131,35 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Caption = 'Descri'#231#227'o'
         FocusControl = DBEdit2
       end
-      object Label1: TLabel [2]
+      object Label1: TLabel [3]
         Left = 10
         Top = 114
         Width = 45
         Height = 13
         Caption = 'Categoria'
       end
-      object Label3: TLabel [3]
+      object Label3: TLabel [4]
         Left = 257
         Top = 114
         Width = 28
         Height = 13
         Caption = 'Conta'
       end
-      object Label4: TLabel [4]
+      object Label4: TLabel [5]
         Left = 117
         Top = 162
         Width = 88
         Height = 13
         Caption = 'Data Compet'#234'ncia'
       end
-      object Label5: TLabel [5]
+      object Label5: TLabel [6]
         Left = 221
         Top = 162
         Width = 82
         Height = 13
         Caption = 'Data Vencimento'
       end
-      object Label6: TLabel [6]
+      object Label6: TLabel [7]
         Left = 325
         Top = 162
         Width = 24
@@ -150,28 +167,28 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Caption = 'Valor'
         FocusControl = DBEdit1
       end
-      object Label13: TLabel [7]
+      object Label13: TLabel [8]
         Left = 500
         Top = 66
         Width = 32
         Height = 13
         Caption = 'Cliente'
       end
-      object Label14: TLabel [8]
+      object Label14: TLabel [9]
         Left = 499
         Top = 114
         Width = 61
         Height = 13
         Caption = 'Centro Custo'
       end
-      object Label15: TLabel [9]
+      object Label15: TLabel [10]
         Left = 500
         Top = 162
         Width = 63
         Height = 13
         Caption = 'Observa'#231#245'es'
       end
-      object Label7: TLabel [10]
+      object Label7: TLabel [11]
         Left = 10
         Top = 162
         Width = 83
@@ -179,13 +196,20 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Caption = 'Num. Documento'
         FocusControl = DBEdit3
       end
-      object Bevel3: TBevel [11]
+      object Bevel3: TBevel [12]
         Left = 490
         Top = 66
         Width = 5
-        Height = 311
+        Height = 287
         Shape = bsLeftLine
         Visible = False
+      end
+      object Label8: TLabel [13]
+        Left = 4
+        Top = 368
+        Width = 74
+        Height = 13
+        Caption = 'Dados da baixa'
       end
       inherited Panel1: TPanel
         TabOrder = 20
@@ -267,10 +291,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         TabOrder = 1
       end
       object btCACliente: TBitBtn
-        Left = 715
-        Top = 81
+        Left = 716
+        Top = 82
         Width = 22
-        Height = 21
+        Height = 20
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -282,10 +306,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         OnClick = btCAClienteClick
       end
       object btEXCliente: TBitBtn
-        Left = 737
-        Top = 81
+        Left = 738
+        Top = 82
         Width = 22
-        Height = 21
+        Height = 20
         Caption = 'x'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -297,10 +321,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         OnClick = btEXClienteClick
       end
       object btCACentroCusto: TBitBtn
-        Left = 715
-        Top = 129
+        Left = 716
+        Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -312,10 +336,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         OnClick = btCACentroCustoClick
       end
       object btEXCentroCusto: TBitBtn
-        Left = 737
-        Top = 129
+        Left = 738
+        Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = 'x'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -339,9 +363,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         Left = 0
         Top = 284
         Width = 481
-        Height = 71
+        Height = 38
         BevelOuter = bvNone
         TabOrder = 19
+        Visible = False
         object Bevel2: TBevel
           Left = 9
           Top = 2
@@ -531,10 +556,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         TabOrder = 13
       end
       object btCACategorai: TBitBtn
-        Left = 200
+        Left = 201
         Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -546,10 +571,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
         OnClick = btCACategoraiClick
       end
       object btEXCategorai: TBitBtn
-        Left = 222
+        Left = 223
         Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = 'x'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -562,9 +587,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
       end
       object btEXConta: TBitBtn
         Left = 461
-        Top = 129
+        Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = 'x'
         Font.Charset = ANSI_CHARSET
         Font.Color = clRed
@@ -576,9 +601,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
       end
       object btCAConta: TBitBtn
         Left = 439
-        Top = 129
+        Top = 130
         Width = 22
-        Height = 21
+        Height = 20
         Caption = '+'
         Font.Charset = ANSI_CHARSET
         Font.Color = clGreen
@@ -601,6 +626,51 @@ inherited FCadPagarReceber: TFCadPagarReceber
         ListSource = dsCentroCusto
         TabOrder = 10
       end
+      object cxGrid1: TcxGrid
+        Left = 0
+        Top = 384
+        Width = 776
+        Height = 118
+        Align = alBottom
+        TabOrder = 21
+        object cxGrid1DBTableView1: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = dsBaixado
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <
+            item
+              Kind = skSum
+              Column = cxGrid1DBTableView1BXP_VALOR
+            end>
+          DataController.Summary.SummaryGroups = <>
+          OptionsSelection.CellSelect = False
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          object cxGrid1DBTableView1TIPOBAIXA: TcxGridDBColumn
+            Caption = 'Tipo baixa'
+            DataBinding.FieldName = 'TIPOBAIXA'
+            Width = 71
+          end
+          object cxGrid1DBTableView1BXP_DATAPAGTO: TcxGridDBColumn
+            Caption = 'Data pagamento'
+            DataBinding.FieldName = 'BXP_DATAPAGTO'
+            Width = 102
+          end
+          object cxGrid1DBTableView1BXP_VALOR: TcxGridDBColumn
+            Caption = 'Valor'
+            DataBinding.FieldName = 'BXP_VALOR'
+            Width = 116
+          end
+          object cxGrid1DBTableView1BXP_OBSERVACAO: TcxGridDBColumn
+            Caption = 'Observa'#231#227'o'
+            DataBinding.FieldName = 'BXP_OBSERVACAO'
+            Width = 300
+          end
+        end
+        object cxGrid1Level1: TcxGridLevel
+          GridView = cxGrid1DBTableView1
+        end
+      end
     end
   end
   inherited dsConsulta: TDataSource
@@ -610,7 +680,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
   end
   inherited ibCadastro: TIBDataSet
     AfterInsert = ibCadastroAfterInsert
+    AfterOpen = ibCadastroAfterOpen
     AfterPost = ibCadastroAfterPost
+    BeforeClose = ibCadastroBeforeClose
     BeforePost = ibCadastroBeforePost
     DeleteSQL.Strings = (
       'delete from pagarreceber'
@@ -622,11 +694,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
       'PAR_DATACOMPETENCIA, '
       '   PAR_DATAVENCTO, PAR_VALOR, PAR_CLI_ID, PAR_CETROCUSTO, '
       'PAR_OBSERVACAO, '
-      '   PAR_ANEXO, PAR_PAGO, PAR_DATAPGTO, PAR_DESCONTOTAXA, '
-      'PAR_JUROMULTA, '
+      '   PAR_ANEXO, PAR_PAGO, PAR_BAIXADO, PAR_DATAPGTO, '
+      'PAR_DESCONTOTAXA, PAR_JUROMULTA, '
       '   PAR_VALORPAGO, PAR_DH_CA, PAR_PARCELANUM, PAR_PARCELAMAX, '
       'PAR_PARCELAPAI, '
-      '   PAR_NUMDOC)'
+      '   PAR_NUMDOC, PAR_CCO_ID, PAR_TIPOBAIXA)'
       'values'
       
         '  (:PAR_ID, :PAR_PAGREC, :PAR_DESCRICAO, :PAR_CAT_ID, :PAR_CONTA' +
@@ -634,13 +706,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
       ':PAR_DATACOMPETENCIA, '
       '   :PAR_DATAVENCTO, :PAR_VALOR, :PAR_CLI_ID, :PAR_CETROCUSTO, '
       ':PAR_OBSERVACAO, '
-      '   :PAR_ANEXO, :PAR_PAGO, :PAR_DATAPGTO, :PAR_DESCONTOTAXA, '
-      ':PAR_JUROMULTA, '
-      
-        '   :PAR_VALORPAGO, :PAR_DH_CA, :PAR_PARCELANUM, :PAR_PARCELAMAX,' +
-        ' '
-      ':PAR_PARCELAPAI, '
-      '   :PAR_NUMDOC)')
+      '   :PAR_ANEXO, :PAR_PAGO, :PAR_BAIXADO, :PAR_DATAPGTO, '
+      ':PAR_DESCONTOTAXA, '
+      '   :PAR_JUROMULTA, :PAR_VALORPAGO, :PAR_DH_CA, :PAR_PARCELANUM, '
+      ':PAR_PARCELAMAX, '
+      '   :PAR_PARCELAPAI, :PAR_NUMDOC, :PAR_CCO_ID, :PAR_TIPOBAIXA)')
     RefreshSQL.Strings = (
       'Select *'
       'from pagarreceber '
@@ -671,6 +741,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
       '  PAR_ANEXO = :PAR_ANEXO,'
       '  PAR_PAGO = :PAR_PAGO,'
+      '  PAR_BAIXADO = :PAR_BAIXADO,'
       '  PAR_DATAPGTO = :PAR_DATAPGTO,'
       '  PAR_DESCONTOTAXA = :PAR_DESCONTOTAXA,'
       '  PAR_JUROMULTA = :PAR_JUROMULTA,'
@@ -679,7 +750,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_PARCELANUM = :PAR_PARCELANUM,'
       '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
       '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
-      '  PAR_NUMDOC = :PAR_NUMDOC'
+      '  PAR_NUMDOC = :PAR_NUMDOC,'
+      '  PAR_CCO_ID = :PAR_CCO_ID,'
+      '  PAR_TIPOBAIXA = :PAR_TIPOBAIXA'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
     GeneratorField.Field = 'PAR_ID'
@@ -803,6 +876,18 @@ inherited FCadPagarReceber: TFCadPagarReceber
       FieldName = 'PAR_CCO_ID'
       Origin = 'PAGARRECEBER.PAR_CCO_ID'
     end
+    object ibCadastroPAR_BAIXADO: TIBStringField
+      FieldName = 'PAR_BAIXADO'
+      Origin = '"PAGARRECEBER"."PAR_BAIXADO"'
+      FixedChar = True
+      Size = 1
+    end
+    object ibCadastroPAR_TIPOBAIXA: TIBStringField
+      FieldName = 'PAR_TIPOBAIXA'
+      Origin = 'PAGARRECEBER.PAR_TIPOBAIXA'
+      FixedChar = True
+      Size = 1
+    end
   end
   inherited qConsulta: TIBQuery
     SQL.Strings = (
@@ -918,6 +1003,18 @@ inherited FCadPagarReceber: TFCadPagarReceber
       FieldName = 'PAR_DH_CA'
       Origin = '"PAGARRECEBER"."PAR_DH_CA"'
     end
+    object qConsultaPAR_BAIXADO: TIBStringField
+      FieldName = 'PAR_BAIXADO'
+      Origin = 'PAGARRECEBER.PAR_BAIXADO'
+      FixedChar = True
+      Size = 1
+    end
+    object qConsultaPAR_TIPOBAIXA: TIBStringField
+      FieldName = 'PAR_TIPOBAIXA'
+      Origin = 'PAGARRECEBER.PAR_TIPOBAIXA'
+      FixedChar = True
+      Size = 1
+    end
   end
   inherited ActionList1: TActionList
     object Act_Btn_Voltar: TAction
@@ -969,8 +1066,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -1015,8 +1110,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qConta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from forma_pgto')
     Left = 376
@@ -1057,8 +1150,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -1090,8 +1181,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select *'
       '  from centrocusto'
@@ -1128,8 +1217,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
     OnDeleteError = ibCadastroDeleteError
     OnEditError = ibCadastroEditError
     OnPostError = ibCadastroPostError
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber'
       'where'
@@ -1324,8 +1411,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qGerador: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select gen_id(GEN_PAGARRECEBER,1) ID from rdb$database')
     Left = 584
@@ -1338,8 +1423,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from relatorio')
     Left = 552
@@ -1532,6 +1615,16 @@ inherited FCadPagarReceber: TFCadPagarReceber
       FieldName = 'PAR_DH_CA'
       Origin = '"PAGARRECEBER"."PAR_DH_CA"'
     end
+    object cdsConsultaPAR_BAIXADO: TStringField
+      FieldName = 'PAR_BAIXADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsConsultaPAR_TIPOBAIXA: TStringField
+      FieldName = 'PAR_TIPOBAIXA'
+      FixedChar = True
+      Size = 1
+    end
   end
   object cdsCheque: TClientDataSet
     Aggregates = <>
@@ -1574,8 +1667,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   object ibPagarreceberCheque: TIBDataSet
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from pagarreceber_cheque'
       'where'
@@ -1651,5 +1742,55 @@ inherited FCadPagarReceber: TFCadPagarReceber
     object cdsPagarreceberChequePAC_DH_CA: TDateTimeField
       FieldName = 'PAC_DH_CA'
     end
+  end
+  object ibBaixado: TIBQuery
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacaoLeitura
+    DataSource = dsCadastro
+    SQL.Strings = (
+      'select case'
+      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'P'#39') then '#39'Parial'#39
+      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'P'#39') then '#39'Parial'#39
+      '       end tipobaixa,'
+      '       pagarreceber_baixa.bxp_datapagto,'
+      '       pagarreceber_baixa.bxp_valor,'
+      '       pagarreceber_baixa.bxp_observacao'
+      '  from pagarreceber_baixa'
+      ' where pagarreceber_baixa.bxp_par_id = :PAR_ID')
+    Left = 160
+    Top = 448
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'PAR_ID'
+        ParamType = ptUnknown
+        Size = 4
+      end>
+    object ibBaixadoTIPOBAIXA: TIBStringField
+      FieldName = 'TIPOBAIXA'
+      FixedChar = True
+      Size = 6
+    end
+    object ibBaixadoBXP_DATAPAGTO: TDateField
+      FieldName = 'BXP_DATAPAGTO'
+      Origin = 'PAGARRECEBER_BAIXA.BXP_DATAPAGTO'
+    end
+    object ibBaixadoBXP_VALOR: TIBBCDField
+      FieldName = 'BXP_VALOR'
+      Origin = 'PAGARRECEBER_BAIXA.BXP_VALOR'
+      DisplayFormat = '0.00'
+      Precision = 18
+      Size = 2
+    end
+    object ibBaixadoBXP_OBSERVACAO: TIBStringField
+      FieldName = 'BXP_OBSERVACAO'
+      Origin = 'PAGARRECEBER_BAIXA.BXP_OBSERVACAO'
+      Size = 255
+    end
+  end
+  object dsBaixado: TDataSource
+    DataSet = ibBaixado
+    Left = 192
+    Top = 448
   end
 end

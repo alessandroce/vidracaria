@@ -103,8 +103,13 @@ inherited FSelecionarPlanoContas: TFSelecionarPlanoContas
       '     where ID>0'
       '     order by CODIGO'
       '))'
-      ' where pgr_id = :pgr_id')
+      ' where ((pgr_id = :pgr_id) or (0 = :pgr_id))')
     ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'pgr_id'
+        ParamType = ptInput
+      end
       item
         DataType = ftInteger
         Name = 'pgr_id'
