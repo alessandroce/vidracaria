@@ -1,5 +1,5 @@
 inherited FCadClientes: TFCadClientes
-  Left = 298
+  Left = 299
   Width = 740
   Height = 600
   Caption = 'FCadClientes'
@@ -9,6 +9,7 @@ inherited FCadClientes: TFCadClientes
   inherited pgCadastro: TPageControl
     Width = 724
     Height = 531
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
         Width = 716
@@ -83,6 +84,8 @@ inherited FCadClientes: TFCadClientes
           Left = 656
         end
         inherited rgAtivo: TRadioGroup
+          Left = 415
+          Top = -24
           Visible = False
         end
       end
@@ -97,7 +100,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label2: TLabel [1]
         Left = 15
-        Top = 112
+        Top = 144
         Width = 34
         Height = 13
         Caption = 'Nome: '
@@ -110,7 +113,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label3: TLabel [2]
         Left = 15
-        Top = 140
+        Top = 172
         Width = 52
         Height = 13
         Caption = 'Endere'#231'o: '
@@ -123,7 +126,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label4: TLabel [3]
         Left = 15
-        Top = 169
+        Top = 201
         Width = 33
         Height = 13
         Caption = 'Bairro: '
@@ -136,7 +139,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label5: TLabel [4]
         Left = 545
-        Top = 169
+        Top = 201
         Width = 27
         Height = 13
         Caption = 'CEP: '
@@ -149,7 +152,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label7: TLabel [5]
         Left = 15
-        Top = 198
+        Top = 230
         Width = 53
         Height = 13
         Caption = 'Munic'#237'pio: '
@@ -162,7 +165,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label8: TLabel [6]
         Left = 371
-        Top = 198
+        Top = 230
         Width = 30
         Height = 13
         Caption = 'Fone: '
@@ -175,7 +178,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label9: TLabel [7]
         Left = 547
-        Top = 198
+        Top = 230
         Width = 23
         Height = 13
         Caption = 'Fax: '
@@ -188,7 +191,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label10: TLabel [8]
         Left = 15
-        Top = 226
+        Top = 258
         Width = 30
         Height = 13
         Caption = 'CNPJ:'
@@ -201,7 +204,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label11: TLabel [9]
         Left = 210
-        Top = 226
+        Top = 258
         Width = 44
         Height = 13
         Caption = 'Insc. Est.'
@@ -214,7 +217,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label12: TLabel [10]
         Left = 301
-        Top = 258
+        Top = 290
         Width = 50
         Height = 13
         Caption = 'Atividade: '
@@ -227,7 +230,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label14: TLabel [11]
         Left = 15
-        Top = 258
+        Top = 290
         Width = 43
         Height = 13
         Caption = 'Contato: '
@@ -240,7 +243,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label15: TLabel [12]
         Left = 558
-        Top = 258
+        Top = 290
         Width = 38
         Height = 13
         Caption = 'Celular: '
@@ -253,7 +256,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label17: TLabel [13]
         Left = 295
-        Top = 171
+        Top = 203
         Width = 70
         Height = 13
         Caption = 'Complemento: '
@@ -266,7 +269,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label18: TLabel [14]
         Left = 386
-        Top = 226
+        Top = 258
         Width = 23
         Height = 13
         Caption = 'CPF:'
@@ -279,7 +282,7 @@ inherited FCadClientes: TFCadClientes
       end
       object Label19: TLabel [15]
         Left = 554
-        Top = 226
+        Top = 258
         Width = 19
         Height = 13
         Caption = 'RG:'
@@ -292,11 +295,18 @@ inherited FCadClientes: TFCadClientes
       end
       object Label1: TLabel [16]
         Left = 15
-        Top = 287
+        Top = 319
         Width = 28
         Height = 13
         Caption = 'E-mail'
         FocusControl = DBEdit11
+      end
+      object Label6: TLabel [17]
+        Left = 15
+        Top = 95
+        Width = 59
+        Height = 13
+        Caption = 'Tipo Pessoa'
       end
       inherited Panel1: TPanel
         Width = 716
@@ -309,7 +319,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit1: TDBEdit
         Left = 88
-        Top = 110
+        Top = 142
         Width = 537
         Height = 21
         CharCase = ecUpperCase
@@ -319,7 +329,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit2: TDBEdit
         Left = 88
-        Top = 138
+        Top = 170
         Width = 609
         Height = 21
         CharCase = ecUpperCase
@@ -329,7 +339,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit3: TDBEdit
         Left = 88
-        Top = 167
+        Top = 199
         Width = 193
         Height = 21
         CharCase = ecUpperCase
@@ -339,7 +349,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit4: TDBEdit
         Left = 574
-        Top = 167
+        Top = 199
         Width = 121
         Height = 21
         CharCase = ecUpperCase
@@ -349,7 +359,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit5: TDBEdit
         Left = 88
-        Top = 196
+        Top = 228
         Width = 277
         Height = 21
         CharCase = ecUpperCase
@@ -359,7 +369,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit6: TDBEdit
         Left = 420
-        Top = 196
+        Top = 228
         Width = 121
         Height = 21
         CharCase = ecUpperCase
@@ -369,7 +379,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit7: TDBEdit
         Left = 574
-        Top = 196
+        Top = 228
         Width = 121
         Height = 21
         CharCase = ecUpperCase
@@ -379,7 +389,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit8: TDBEdit
         Left = 88
-        Top = 224
+        Top = 256
         Width = 108
         Height = 21
         CharCase = ecUpperCase
@@ -389,7 +399,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit9: TDBEdit
         Left = 259
-        Top = 224
+        Top = 256
         Width = 108
         Height = 21
         CharCase = ecUpperCase
@@ -399,7 +409,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit10: TDBEdit
         Left = 350
-        Top = 254
+        Top = 286
         Width = 199
         Height = 21
         CharCase = ecUpperCase
@@ -409,7 +419,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit13: TDBEdit
         Left = 603
-        Top = 254
+        Top = 286
         Width = 92
         Height = 21
         CharCase = ecUpperCase
@@ -419,7 +429,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit12: TDBEdit
         Left = 88
-        Top = 254
+        Top = 286
         Width = 209
         Height = 21
         CharCase = ecUpperCase
@@ -429,7 +439,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBCheckBox1: TDBCheckBox
         Left = 640
-        Top = 112
+        Top = 144
         Width = 97
         Height = 17
         Caption = 'Ativo'
@@ -441,7 +451,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit14: TDBEdit
         Left = 368
-        Top = 167
+        Top = 199
         Width = 174
         Height = 21
         CharCase = ecUpperCase
@@ -451,7 +461,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit15: TDBEdit
         Left = 419
-        Top = 224
+        Top = 256
         Width = 108
         Height = 21
         CharCase = ecUpperCase
@@ -461,7 +471,7 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit16: TDBEdit
         Left = 587
-        Top = 224
+        Top = 256
         Width = 108
         Height = 21
         CharCase = ecUpperCase
@@ -471,12 +481,80 @@ inherited FCadClientes: TFCadClientes
       end
       object DBEdit11: TDBEdit
         Left = 88
-        Top = 283
+        Top = 315
         Width = 461
         Height = 21
         DataField = 'CLI_EMAIL'
         DataSource = dsCadastro
         TabOrder = 17
+      end
+      object cxGrid1: TcxGrid
+        Left = 88
+        Top = 68
+        Width = 202
+        Height = 66
+        TabOrder = 18
+        object cxGrid1DBTableView1: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = dsTipoCliente
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsSelection.CellSelect = False
+          OptionsView.NoDataToDisplayInfoText = '<Sem dados para exibir>'
+          OptionsView.ScrollBars = ssVertical
+          OptionsView.GroupByBox = False
+          OptionsView.Header = False
+          OptionsView.Indicator = True
+          object cxGrid1DBTableView1CTP_DESCRICAO: TcxGridDBColumn
+            Caption = 'Descricao'
+            DataBinding.FieldName = 'CTP_DESCRICAO'
+            Width = 185
+          end
+        end
+        object cxGrid1Level1: TcxGridLevel
+          GridView = cxGrid1DBTableView1
+        end
+      end
+      object btCACliente: TBitBtn
+        Left = 293
+        Top = 68
+        Width = 22
+        Height = 21
+        Caption = '+'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clGreen
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 19
+        OnClick = btCAClienteClick
+      end
+      object btEXCliente: TBitBtn
+        Left = 293
+        Top = 90
+        Width = 22
+        Height = 21
+        Caption = 'x'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 20
+        OnClick = btEXClienteClick
+      end
+      object DBEdit17: TDBEdit
+        Left = 295
+        Top = 116
+        Width = 58
+        Height = 21
+        DataField = 'CLI_ID'
+        DataSource = dsCadastro
+        TabOrder = 21
+        Visible = False
       end
     end
   end
@@ -488,7 +566,7 @@ inherited FCadClientes: TFCadClientes
   end
   inherited ibCadastro: TIBDataSet
     AfterInsert = ibCadastroAfterInsert
-    BeforePost = ibCadastroBeforePost
+    AfterPost = ibCadastroAfterPost
     DeleteSQL.Strings = (
       'delete from clientes'
       'where'
@@ -672,20 +750,12 @@ inherited FCadClientes: TFCadClientes
     end
   end
   inherited qConsulta: TIBQuery
-    Active = True
     SQL.Strings = (
       'select clientes.cli_id ID,'
       '       clientes.*'
       '  from clientes'
-      ' where coalesce(cli_tipocli,1) = :TipoCli'
       ' order by cli_cliente'
       '')
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'TipoCli'
-        ParamType = ptUnknown
-      end>
     object qConsultaID: TIntegerField
       FieldName = 'ID'
       Origin = 'CLIENTES.CLI_ID'
@@ -790,11 +860,6 @@ inherited FCadClientes: TFCadClientes
     object qConsultaCLI_TIPOCLI: TIntegerField
       FieldName = 'CLI_TIPOCLI'
       Origin = '"CLIENTES"."CLI_TIPOCLI"'
-    end
-  end
-  inherited ActionList1: TActionList
-    inherited Act_Btn_Imprimir: TAction
-      OnExecute = Act_Btn_ImprimirExecute
     end
   end
   inherited frxReport1: TfrxReport
@@ -1545,5 +1610,125 @@ inherited FCadClientes: TFCadClientes
     BCDToCurrency = False
     Left = 244
     Top = 159
+  end
+  object qTipoCliente: TIBQuery
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacaoLeitura
+    SQL.Strings = (
+      'select cliente_tipo.ctp_id,'
+      '       cliente_tipo.ctp_descricao'
+      '  from cliente_tipo'
+      
+        ' join cliente_tipo_cliente on (cliente_tipo_cliente.ctc_ctp_id=c' +
+        'liente_tipo.ctp_id)'
+      ' where cliente_tipo_cliente.ctc_cli_id = :cli_id'
+      ' order by cliente_tipo.ctp_descricao')
+    Left = 360
+    Top = 112
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cli_id'
+        ParamType = ptUnknown
+      end>
+    object qTipoClienteCTP_ID: TIntegerField
+      FieldName = 'CTP_ID'
+      Origin = '"CLIENTE_TIPO"."CTP_ID"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qTipoClienteCTP_DESCRICAO: TIBStringField
+      FieldName = 'CTP_DESCRICAO'
+      Origin = '"CLIENTE_TIPO"."CTP_DESCRICAO"'
+      Size = 100
+    end
+  end
+  object dsTipoCliente: TDataSource
+    DataSet = cdsTipoCliente
+    OnDataChange = dsConsultaDataChange
+    Left = 488
+    Top = 112
+  end
+  object dspTipoCliente: TDataSetProvider
+    DataSet = qTipoCliente
+    Left = 400
+    Top = 112
+  end
+  object cdsTipoCliente: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'dspTipoCliente'
+    Left = 440
+    Top = 112
+    object cdsTipoClienteCTP_ID: TIntegerField
+      FieldName = 'CTP_ID'
+      Required = True
+    end
+    object cdsTipoClienteCTP_DESCRICAO: TStringField
+      FieldName = 'CTP_DESCRICAO'
+      Size = 100
+    end
+  end
+  object ibClienteTipoCliente: TIBDataSet
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacao
+    OnDeleteError = ibClienteTipoClienteDeleteError
+    OnEditError = ibClienteTipoClienteEditError
+    OnPostError = ibClienteTipoClientePostError
+    DeleteSQL.Strings = (
+      'delete from cliente_tipo_cliente'
+      'where'
+      '  CTC_ID = :OLD_CTC_ID')
+    InsertSQL.Strings = (
+      'insert into cliente_tipo_cliente'
+      '  (CTC_CLI_ID, CTC_CTP_ID, CTC_DH_CA, CTC_ID)'
+      'values'
+      '  (:CTC_CLI_ID, :CTC_CTP_ID, :CTC_DH_CA, :CTC_ID)')
+    RefreshSQL.Strings = (
+      'Select '
+      '  CTC_ID,'
+      '  CTC_CLI_ID,'
+      '  CTC_CTP_ID,'
+      '  CTC_DH_CA'
+      'from cliente_tipo_cliente '
+      'where'
+      '  CTC_ID = :CTC_ID')
+    SelectSQL.Strings = (
+      
+        'select * from cliente_tipo_cliente where cliente_tipo_cliente.ct' +
+        'c_cli_id = :CLI_ID')
+    ModifySQL.Strings = (
+      'update cliente_tipo_cliente'
+      'set'
+      '  CTC_CLI_ID = :CTC_CLI_ID,'
+      '  CTC_CTP_ID = :CTC_CTP_ID,'
+      '  CTC_DH_CA = :CTC_DH_CA,'
+      '  CTC_ID = :CTC_ID'
+      'where'
+      '  CTC_ID = :OLD_CTC_ID')
+    GeneratorField.Field = 'CTC_ID'
+    GeneratorField.Generator = 'GEN_CLIENTE_TIPO_CLIENTE'
+    DataSource = dsCadastro
+    Left = 360
+    Top = 160
+    object ibClienteTipoClienteCTC_ID: TIntegerField
+      FieldName = 'CTC_ID'
+      Origin = '"CLIENTE_TIPO_CLIENTE"."CTC_ID"'
+      Required = True
+    end
+    object ibClienteTipoClienteCTC_CLI_ID: TIntegerField
+      FieldName = 'CTC_CLI_ID'
+      Origin = '"CLIENTE_TIPO_CLIENTE"."CTC_CLI_ID"'
+      Required = True
+    end
+    object ibClienteTipoClienteCTC_CTP_ID: TIntegerField
+      FieldName = 'CTC_CTP_ID'
+      Origin = '"CLIENTE_TIPO_CLIENTE"."CTC_CTP_ID"'
+      Required = True
+    end
+    object ibClienteTipoClienteCTC_DH_CA: TDateTimeField
+      FieldName = 'CTC_DH_CA'
+      Origin = '"CLIENTE_TIPO_CLIENTE"."CTC_DH_CA"'
+    end
   end
 end

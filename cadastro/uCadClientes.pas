@@ -19,7 +19,8 @@ uses
   dxSkinOffice2007Silver, dxSkinOffice2010Black, dxSkinOffice2010Blue,
   dxSkinOffice2010Silver, dxSkinPumpkin, dxSkinSeven, dxSkinSharp,
   dxSkinSilver, dxSkinSpringTime, dxSkinStardust, dxSkinSummer2008,
-  dxSkinValentine, dxSkinXmas2008Blue, uFerramentas, uClassAvisos;
+  dxSkinValentine, dxSkinXmas2008Blue, uFerramentas, uClassAvisos,
+  DBClient, Provider;
 
 type
   TFCadClientes = class(TFCadPadrao)
@@ -111,13 +112,43 @@ type
     qConsultaCLI_TIPOCLI: TIntegerField;
     Label1: TLabel;
     DBEdit11: TDBEdit;
+    cxGrid1DBTableView1: TcxGridDBTableView;
+    cxGrid1Level1: TcxGridLevel;
+    cxGrid1: TcxGrid;
+    Label6: TLabel;
+    btCACliente: TBitBtn;
+    btEXCliente: TBitBtn;
+    qTipoCliente: TIBQuery;
+    dsTipoCliente: TDataSource;
+    dspTipoCliente: TDataSetProvider;
+    cdsTipoCliente: TClientDataSet;
+    qTipoClienteCTP_ID: TIntegerField;
+    qTipoClienteCTP_DESCRICAO: TIBStringField;
+    cdsTipoClienteCTP_ID: TIntegerField;
+    cdsTipoClienteCTP_DESCRICAO: TStringField;
+    cxGrid1DBTableView1CTP_DESCRICAO: TcxGridDBColumn;
+    ibClienteTipoCliente: TIBDataSet;
+    ibClienteTipoClienteCTC_ID: TIntegerField;
+    ibClienteTipoClienteCTC_CLI_ID: TIntegerField;
+    ibClienteTipoClienteCTC_CTP_ID: TIntegerField;
+    ibClienteTipoClienteCTC_DH_CA: TDateTimeField;
+    DBEdit17: TDBEdit;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
-    procedure ibCadastroBeforePost(DataSet: TDataSet);
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
     procedure ibCadastroAfterInsert(DataSet: TDataSet);
+    procedure btCAClienteClick(Sender: TObject);
+    procedure btEXClienteClick(Sender: TObject);
+    procedure ibCadastroAfterPost(DataSet: TDataSet);
+    procedure ibClienteTipoClientePostError(DataSet: TDataSet;
+      E: EDatabaseError; var Action: TDataAction);
+    procedure ibClienteTipoClienteDeleteError(DataSet: TDataSet;
+      E: EDatabaseError; var Action: TDataAction);
+    procedure ibClienteTipoClienteEditError(DataSet: TDataSet;
+      E: EDatabaseError; var Action: TDataAction);
   private
     { Private declarations }
+    procedure EntrouAbaCadastro;override;
   public
     { Public declarations }
     FTipoCli : Integer;
@@ -128,6 +159,8 @@ var
   FCadClientes: TFCadClientes;
 
 implementation
+
+uses uSelecionarTipoCliente, uDMConexao;
 
 
 {$R *.dfm}
@@ -143,7 +176,6 @@ begin
     end;
   end;
   qConsulta.Close;
-  qConsulta.ParamByName('TipoCli').Value := FTipoCli;
   qConsulta.Open;
 end;
 
@@ -153,6 +185,8 @@ begin
   case FTipoCli of
     1 : sRelatorio := 'CAD001_CAD_CLIENTE';
     2 : sRelatorio := 'CAD003_CAD_FORNECEDOR';
+    else
+      sRelatorio := 'CAD001_CAD_CLIENTE';
   end;
   if ImprimirModoDesign then
   begin
@@ -166,12 +200,6 @@ begin
     ChamaRelatorio(frxReport1,sRelatorio);
 end;
 
-procedure TFCadClientes.ibCadastroBeforePost(DataSet: TDataSet);
-begin
-  inherited;
-  ibCadastroCLI_TIPOCLI.Value := FTipoCli;
-end;
-
 procedure TFCadClientes.dsConsultaDataChange(Sender: TObject;
   Field: TField);
 begin
@@ -182,7 +210,97 @@ end;
 procedure TFCadClientes.ibCadastroAfterInsert(DataSet: TDataSet);
 begin
   inherited;
+  ibCadastroCLI_TIPOCLI.Value := FTipoCli;
   ibCadastroCLI_ATIVO.Value := 'T';
+end;
+
+procedure TFCadClientes.btCAClienteClick(Sender: TObject);
+begin
+  inherited;
+
+  FSelecionarTipoCliente := TFSelecionarTipoCliente.Create(nil);
+  FSelecionarTipoCliente.ShowModal;
+  FSelecionarTipoCliente.cdsConsulta.First;
+  if FSelecionarTipoCliente.FSelecionado then
+  begin
+    cdsTipoCliente.EmptyDataSet;
+    while not FSelecionarTipoCliente.cdsConsulta.Eof do
+    begin
+      if FSelecionarTipoCliente.cdsConsultaSELECAO.AsString='S' then
+      begin
+        if not(cdsTipoCliente.State=dsInsert) then
+          cdsTipoCliente.Insert;
+        cdsTipoClienteCTP_ID.asInteger       := FSelecionarTipoCliente.cdsConsultaID.Value;
+        cdsTipoClienteCTP_DESCRICAO.asString := FSelecionarTipoCliente.cdsConsultaDESCRICAO.Value;
+        cdsTipoCliente.Post;
+      end;
+      FSelecionarTipoCliente.cdsConsulta.Next;
+    end;
+  end;
+  FSelecionarTipoCliente.Free;
+end;
+
+procedure TFCadClientes.EntrouAbaCadastro;
+begin
+  inherited;
+  qTipoCliente.Close;
+  qTipoCliente.ParamByName('cli_id').Value := ibCadastroCLI_ID.Value;
+  qTipoCliente.Open;
+  qTipoCliente.Last;
+  qTipoCliente.First;
+  cdsTipoCliente.Close;
+  cdsTipoCliente.Open;
+end;
+
+procedure TFCadClientes.btEXClienteClick(Sender: TObject);
+begin
+  inherited;
+  cdsTipoCliente.Delete;
+end;
+
+procedure TFCadClientes.ibCadastroAfterPost(DataSet: TDataSet);
+begin
+  inherited;
+  ibClienteTipoCliente.Open;
+
+  while ibClienteTipoCliente.RecordCount > 0 do
+    ibClienteTipoCliente.delete;
+
+  cdsTipoCliente.First;
+  while not(cdsTipoCliente.Eof) do
+  begin
+
+    if not(ibClienteTipoCliente.State=dsInsert) then
+      ibClienteTipoCliente.Insert;
+    ibClienteTipoClienteCTC_CLI_ID.asInteger := ibCadastroCLI_ID.Value;
+    ibClienteTipoClienteCTC_CTP_ID.asInteger := cdsTipoClienteCTP_ID.Value;
+    ibClienteTipoClienteCTC_DH_CA.asDateTime := Now;
+    ibClienteTipoCliente.Post;
+
+    cdsTipoCliente.Next;
+  end;
+
+end;
+
+procedure TFCadClientes.ibClienteTipoClientePostError(DataSet: TDataSet;
+  E: EDatabaseError; var Action: TDataAction);
+begin
+  inherited;
+  ibCadastroPostError(DataSet,E,Action);
+end;
+
+procedure TFCadClientes.ibClienteTipoClienteDeleteError(DataSet: TDataSet;
+  E: EDatabaseError; var Action: TDataAction);
+begin
+  inherited;
+  ibCadastroDeleteError(Dataset,E,Action);
+end;
+
+procedure TFCadClientes.ibClienteTipoClienteEditError(DataSet: TDataSet;
+  E: EDatabaseError; var Action: TDataAction);
+begin
+  inherited;
+  ibCadastroEditError(Dataset,E,Action);
 end;
 
 end.
