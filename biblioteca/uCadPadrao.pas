@@ -56,9 +56,9 @@ type
     btSalvar: TSpeedButton;
     btCancelar: TSpeedButton;
     pnBarraForm: TPanel;
-    Bevel1: TBevel;
     frxReport1: TfrxReport;
     frxIBXComponents1: TfrxIBXComponents;
+    Bevel1: TBevel;
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
     procedure ibCadastroDeleteError(DataSet: TDataSet; E: EDatabaseError;

@@ -4,7 +4,8 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, uDMConexao, DB, ExtCtrls, ImgList, ActnList, frxIBXComponents, frxClass;
+  Dialogs, uDMConexao, DB, ExtCtrls, ImgList, ActnList, frxIBXComponents, frxClass,
+  ComCtrls;
 
 type
   TFPadrao = class(TForm)
