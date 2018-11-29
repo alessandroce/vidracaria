@@ -25,7 +25,6 @@ uses
   uPadrao in 'biblioteca\uPadrao.pas' {FPadrao},
   uCadUsuario in 'cadastro\uCadUsuario.pas' {FCadUsuario},
   uCadEmitente in 'cadastro\uCadEmitente.pas' {FCadEmitente},
-  uCadPadrao2 in 'biblioteca\uCadPadrao2.pas' {FCadPadrao2},
   uDuplicata in 'financeiro\uDuplicata.pas' {FDuplicata},
   uCadClientes in 'cadastro\uCadClientes.pas' {FCadClientes},
   uFormLogin in 'biblioteca\uFormLogin.pas' {FormLogin},
@@ -46,7 +45,7 @@ uses
   uSelecionarBanco in 'financeiro\uSelecionarBanco.pas' {FSelecionarBanco},
   uRelatorioPadrao in 'biblioteca\uRelatorioPadrao.pas' {FRelatorioPadrao},
   uRelPagamentoContasPagar in 'financeiro\uRelPagamentoContasPagar.pas' {FRelPagamentoContasPagar},
-  uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar},
+  uRelCaixaDiario in 'financeiro\uRelCaixaDiario.pas' {FRelCaixaDiario},
   uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar},
   uRelVendasPeriodo in 'financeiro\uRelVendasPeriodo.pas' {FRelVendasPeriodo},
   uRelVencimentoContasReceber in 'financeiro\uRelVencimentoContasReceber.pas' {FRelVencimentoContasReceber},
@@ -56,8 +55,11 @@ uses
   uCadCentroCusto in 'financeiro\uCadCentroCusto.pas' {FCadCentroCusto},
   uSelecionarCentroCusto in 'financeiro\uSelecionarCentroCusto.pas' {FSelecionarCentroCusto},
   uCadPadrao in 'biblioteca\uCadPadrao.pas' {FCadPadrao},
+  uSelecionarPagarReceber in 'financeiro\uSelecionarPagarReceber.pas' {FSelecionarPagarReceber},
+  uSelecionarTipoCliente in 'cadastro\uSelecionarTipoCliente.pas' {FSelecionarTipoCliente},
   uMovFinanceiro in 'financeiro\uMovFinanceiro.pas' {FMovFinanceiro},
-  uSelecionarPagarReceber in 'financeiro\uSelecionarPagarReceber.pas' {FSelecionarPagarReceber};
+  uTipoBaixaMovFinanceiro in 'financeiro\uTipoBaixaMovFinanceiro.pas' {FTipoBaixaMovFinanceiro},
+  uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar};
 
 {$R *.res}
 
@@ -69,9 +71,7 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
-  Application.CreateForm(TFSelecionarCentroCusto, FSelecionarCentroCusto);
-  Application.CreateForm(TFCadPadrao, FCadPadrao);
-  Application.CreateForm(TFMovFinanceiro, FMovFinanceiro);
-  Application.CreateForm(TFSelecionarPagarReceber, FSelecionarPagarReceber);
+  Application.CreateForm(TFTipoBaixaMovFinanceiro, FTipoBaixaMovFinanceiro);
+  Application.CreateForm(TFRelExtratoContasPagar, FRelExtratoContasPagar);
   Application.Run;
 end.

@@ -1,6 +1,6 @@
 object FormPrincipal: TFormPrincipal
-  Left = 202
-  Top = 128
+  Left = 302
+  Top = 165
   Width = 1024
   Height = 768
   BorderIcons = [biSystemMenu, biMinimize]
@@ -30,7 +30,7 @@ object FormPrincipal: TFormPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 691
+    Top = 690
     Width = 1008
     Height = 19
     Panels = <
@@ -51,7 +51,7 @@ object FormPrincipal: TFormPrincipal
     Left = 0
     Top = 5
     Width = 1008
-    Height = 686
+    Height = 685
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 1
@@ -1113,17 +1113,20 @@ object FormPrincipal: TFormPrincipal
       Category = 'Financeiro'
       Caption = 'Movimento Banc'#225'rio'
       Hint = 'Movimento Banc'#225'rio'
+      Visible = False
     end
     object Fin_ComprasDespesas: TAction
       Category = 'Financeiro'
       Caption = 'Compras/Outras Despesas'
       Hint = 'Compras/Outras despesas'
+      Visible = False
       OnExecute = Fin_ComprasDespesasExecute
     end
     object Fin_VendasReceitas: TAction
       Category = 'Financeiro'
       Caption = 'Vendas/Outras Receitas'
       Hint = 'Vendas/Outras Receitas'
+      Visible = False
       OnExecute = Fin_VendasReceitasExecute
     end
     object Fin_CentroCusto: TAction
@@ -1132,17 +1135,34 @@ object FormPrincipal: TFormPrincipal
       Hint = 'Cadastro de Centro de Custos'
       OnExecute = Fin_CentroCustoExecute
     end
+    object Cad_Pessoas: TAction
+      Category = 'Cadastro'
+      Caption = 'Pessoas'
+      Hint = 'Cadastro de Pessoas'
+      OnExecute = Cad_PessoasExecute
+    end
+    object Rel_Fin_CaixaDiario: TAction
+      Category = 'Financeiro_Rel'
+      Caption = 'Caixa di'#225'rio'
+      Hint = 'Relat'#243'rio de Caixa di'#225'rio'
+      OnExecute = Rel_Fin_CaixaDiarioExecute
+    end
   end
   object menu: TMainMenu
     Left = 413
     Top = 232
     object Cadastro1: TMenuItem
       Action = mn_Cadastro
+      object Pessoas1: TMenuItem
+        Action = Cad_Pessoas
+      end
       object Clientes1: TMenuItem
         Action = Cad_Clientes
+        Visible = False
       end
       object Fornecedores1: TMenuItem
         Action = Cad_Fornecedores
+        Visible = False
       end
       object Usurio1: TMenuItem
         Action = Cad_Usuario
@@ -1239,6 +1259,12 @@ object FormPrincipal: TFormPrincipal
         end
         object ContasaReceberPagamentos2: TMenuItem
           Action = Rel_Fin_Receber_Pagamento
+        end
+        object N8: TMenuItem
+          Caption = '-'
+        end
+        object Caixadirio1: TMenuItem
+          Action = Rel_Fin_CaixaDiario
         end
         object N7: TMenuItem
           Caption = '-'

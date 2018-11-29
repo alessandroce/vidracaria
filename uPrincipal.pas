@@ -184,6 +184,11 @@ type
     ComissodeVenda2: TMenuItem;
     Fin_CentroCusto: TAction;
     CentrodeCustos1: TMenuItem;
+    Cad_Pessoas: TAction;
+    Pessoas1: TMenuItem;
+    N8: TMenuItem;
+    Rel_Fin_CaixaDiario: TAction;
+    Caixadirio1: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -237,6 +242,8 @@ type
     procedure Fin_VendasReceitasExecute(Sender: TObject);
     procedure Fin_CentroCustoExecute(Sender: TObject);
     procedure Fin_MovtoFinanceiroExecute(Sender: TObject);
+    procedure Cad_PessoasExecute(Sender: TObject);
+    procedure Rel_Fin_CaixaDiarioExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -276,7 +283,7 @@ uses
   uRelExtratoContasPagar, uRelVencimentoContasPagar,
   uRelPagamentoContasPagar, uRelPagamentoContasReceber,
   uRelVencimentoContasReceber, uRelVendasPeriodo, uCadCentroCusto,
-  uMovFinanceiro;
+  uMovFinanceiro, uRelCaixaDiario;
 
 {$R *.dfm}
 
@@ -775,6 +782,22 @@ begin
   FMovFinanceiro.PnBarraFormCaption := Fin_MovtoFinanceiro.Hint;
   FMovFinanceiro.ShowModal;
   FMovFinanceiro.Free;
+end;
+
+procedure TFormPrincipal.Cad_PessoasExecute(Sender: TObject);
+begin
+  FCadClientes := TFCadClientes.Create(nil);
+  //FCadClientes.FTipoCli := pTipo;
+  FCadClientes.ShowModal;
+  FCadClientes.Free;
+end;
+
+procedure TFormPrincipal.Rel_Fin_CaixaDiarioExecute(Sender: TObject);
+begin
+  FRelCaixaDiario := TFRelCaixaDiario.Create(nil);
+  FRelCaixaDiario.pnBarraForm.Caption := Rel_Fin_CaixaDiario.Hint;
+  FRelCaixaDiario.ShowModal;
+  FRelCaixaDiario.Free;
 end;
 
 end.
