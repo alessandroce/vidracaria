@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style Name="">
+  <item Name="Titulo" Color="536870911" Font.Charset="1" Font.Color="16711680" Font.Height="-16" Font.Name="Arial" Font.Style="1"/>
+  <item Name="Titulo2" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-16" Font.Name="Arial" Font.Style="0"/>
+  <item Name="Titulo3" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-16" Font.Name="Arial" Font.Style="1"/>
+  <item Name="Texto1" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0"/>
+  <item Name="Texto2" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="1"/>
+  <item Name="Frame1" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15"/>
+  <item Name="Frame2" Color="536870911" Font.Charset="1" Font.Color="-16777208" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15"/>
+</style>
