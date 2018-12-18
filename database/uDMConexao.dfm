@@ -6,8 +6,7 @@ object DMConexao: TDMConexao
   Height = 323
   Width = 362
   object IBConexao: TIBDatabase
-    Connected = True
-    DatabaseName = 'D:\Projetos\Vidracaria\trunk\db\DBUSINASOFTWARE.GDB'
+    DatabaseName = 'D:\Projetos\Vidracaria\db\DBUSINASOFTWARE.GDB'
     Params.Strings = (
       'user_name=sysdba'
       'password=masterkey')
@@ -17,7 +16,6 @@ object DMConexao: TDMConexao
     Top = 16
   end
   object IBTransacao: TIBTransaction
-    Active = True
     DefaultDatabase = IBConexao
     Params.Strings = (
       'read_committed'
