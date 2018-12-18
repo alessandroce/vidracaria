@@ -8,10 +8,11 @@ inherited FCadVendas: TFCadVendas
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 532
+    Height = 531
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Height = 434
+        Height = 433
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1CLIENTE: TcxGridDBColumn
@@ -51,7 +52,7 @@ inherited FCadVendas: TFCadVendas
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 484
+        Top = 483
       end
     end
     inherited tsCadastro: TTabSheet
@@ -59,7 +60,7 @@ inherited FCadVendas: TFCadVendas
         Left = 0
         Top = 52
         Width = 776
-        Height = 451
+        Height = 450
         ActivePage = tsVendaComissionada
         Align = alClient
         Images = ImageList1
@@ -456,8 +457,6 @@ inherited FCadVendas: TFCadVendas
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
     Left = 592
@@ -486,8 +485,6 @@ inherited FCadVendas: TFCadVendas
   object qVendedor: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
     Left = 592
@@ -516,8 +513,6 @@ inherited FCadVendas: TFCadVendas
   object qExisteFinanceiro: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select count(*) encontrou'
       '  from pagarreceber'
