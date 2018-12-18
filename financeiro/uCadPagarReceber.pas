@@ -67,13 +67,7 @@ type
     grConsultaDBTableView1PAR_DATACOMPETENCIA: TcxGridDBColumn;
     grConsultaDBTableView1PAR_DATAVENCTO: TcxGridDBColumn;
     grConsultaDBTableView1PAR_VALOR: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_CETROCUSTO: TcxGridDBColumn;
     grConsultaDBTableView1PAR_OBSERVACAO: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_PAGO: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_DATAPGTO: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_DESCONTOTAXA: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_JUROMULTA: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_VALORPAGO: TcxGridDBColumn;
     Label2: TLabel;
     DBEdit2: TDBEdit;
     DBLookupComboBox1: TDBLookupComboBox;
@@ -253,8 +247,6 @@ type
     qConsultaPAR_TIPOBAIXA: TIBStringField;
     cdsConsultaPAR_BAIXADO: TStringField;
     cdsConsultaPAR_TIPOBAIXA: TStringField;
-    grConsultaDBTableView1PAR_BAIXADO: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
     Label8: TLabel;
     Bevel5: TBevel;
     ibParcelaPAR_BAIXADO: TIBStringField;
@@ -286,6 +278,7 @@ type
     qConsultaCLI_CLIENTE: TIBStringField;
     cdsConsultaCLI_CLIENTE: TStringField;
     grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
+    grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -847,7 +840,8 @@ begin
     ACanvas.Font.Color := clRed;
   end
   else
-  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'S') then
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') and
+     (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'S')) then
   begin
     //ACanvas.Font.Style := [fsBold];
     ACanvas.Font.Color := clGreen;

@@ -22,7 +22,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
             end
             item
               Kind = skSum
-              Column = grConsultaDBTableView1PAR_VALORPAGO
             end
             item
               Kind = skSum
@@ -39,12 +38,12 @@ inherited FCadPagarReceber: TFCadPagarReceber
           object grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn
             Caption = 'Cliente'
             DataBinding.FieldName = 'CLI_CLIENTE'
-            Width = 300
+            Width = 250
           end
           object grConsultaDBTableView1PAR_DESCRICAO: TcxGridDBColumn
             Caption = 'Descri'#231#227'o'
             DataBinding.FieldName = 'PAR_DESCRICAO'
-            Width = 300
+            Width = 250
           end
           object grConsultaDBTableView1PAR_DATACOMPETENCIA: TcxGridDBColumn
             Caption = 'Data Compet'#234'ncia'
@@ -61,51 +60,17 @@ inherited FCadPagarReceber: TFCadPagarReceber
             DataBinding.FieldName = 'PAR_VALOR'
             Width = 100
           end
-          object grConsultaDBTableView1PAR_CETROCUSTO: TcxGridDBColumn
-            Caption = 'Centro Custo'
-            DataBinding.FieldName = 'PAR_CETROCUSTO'
-            Width = 300
-          end
           object grConsultaDBTableView1PAR_OBSERVACAO: TcxGridDBColumn
             Caption = 'Observa'#231#227'o'
             DataBinding.FieldName = 'PAR_OBSERVACAO'
             Width = 300
           end
-          object grConsultaDBTableView1PAR_PAGO: TcxGridDBColumn
-            Caption = 'Pago'
-            DataBinding.FieldName = 'PAR_PAGO'
-            Width = 49
-          end
-          object grConsultaDBTableView1PAR_DATAPGTO: TcxGridDBColumn
-            Caption = 'Data Pagamento'
-            DataBinding.FieldName = 'PAR_DATAPGTO'
-            Width = 100
-          end
-          object grConsultaDBTableView1PAR_DESCONTOTAXA: TcxGridDBColumn
-            Caption = 'Desconto/Taxa'
-            DataBinding.FieldName = 'PAR_DESCONTOTAXA'
-            Width = 100
-          end
-          object grConsultaDBTableView1PAR_JUROMULTA: TcxGridDBColumn
-            Caption = 'Juros/Multa'
-            DataBinding.FieldName = 'PAR_JUROMULTA'
-            Width = 100
-          end
-          object grConsultaDBTableView1PAR_VALORPAGO: TcxGridDBColumn
-            Caption = 'Valor Pago'
-            DataBinding.FieldName = 'PAR_VALORPAGO'
-            Width = 100
-          end
-          object grConsultaDBTableView1PAR_BAIXADO: TcxGridDBColumn
-            DataBinding.FieldName = 'PAR_BAIXADO'
-            VisibleForCustomization = False
+          object grConsultaDBTableView1BAIXADO: TcxGridDBColumn
+            DataBinding.FieldName = 'BAIXADO'
+            Visible = False
           end
           object grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn
             DataBinding.FieldName = 'PAR_TIPOBAIXA'
-            VisibleForCustomization = False
-          end
-          object grConsultaDBTableView1BAIXADO: TcxGridDBColumn
-            DataBinding.FieldName = 'BAIXADO'
             Visible = False
           end
         end
