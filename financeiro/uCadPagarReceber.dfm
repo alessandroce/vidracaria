@@ -1,6 +1,6 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 298
-  Top = 167
+  Left = 326
+  Top = 172
   Height = 600
   Caption = 'FCadPagarReceber'
   OldCreateOrder = True
@@ -8,7 +8,6 @@ inherited FCadPagarReceber: TFCadPagarReceber
   TextHeight = 13
   inherited pgCadastro: TPageControl
     Height = 531
-    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
@@ -36,6 +35,11 @@ inherited FCadPagarReceber: TFCadPagarReceber
           object grConsultaDBTableView1PAR_ID: TcxGridDBColumn
             Caption = 'Codigo'
             DataBinding.FieldName = 'PAR_ID'
+          end
+          object grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn
+            Caption = 'Cliente'
+            DataBinding.FieldName = 'CLI_CLIENTE'
+            Width = 300
           end
           object grConsultaDBTableView1PAR_DESCRICAO: TcxGridDBColumn
             Caption = 'Descri'#231#227'o'
@@ -99,6 +103,10 @@ inherited FCadPagarReceber: TFCadPagarReceber
           object grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn
             DataBinding.FieldName = 'PAR_TIPOBAIXA'
             VisibleForCustomization = False
+          end
+          object grConsultaDBTableView1BAIXADO: TcxGridDBColumn
+            DataBinding.FieldName = 'BAIXADO'
+            Visible = False
           end
         end
       end
@@ -690,29 +698,67 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_ID = :OLD_PAR_ID')
     InsertSQL.Strings = (
       'insert into pagarreceber'
-      '  (PAR_ID, PAR_PAGREC, PAR_DESCRICAO, PAR_CAT_ID, PAR_CONTA_ID, '
-      'PAR_DATACOMPETENCIA, '
-      '   PAR_DATAVENCTO, PAR_VALOR, PAR_CLI_ID, PAR_CETROCUSTO, '
-      'PAR_OBSERVACAO, '
-      '   PAR_ANEXO, PAR_PAGO, PAR_BAIXADO, PAR_DATAPGTO, '
-      'PAR_DESCONTOTAXA, PAR_JUROMULTA, '
-      '   PAR_VALORPAGO, PAR_DH_CA, PAR_PARCELANUM, PAR_PARCELAMAX, '
-      'PAR_PARCELAPAI, '
-      '   PAR_NUMDOC, PAR_CCO_ID, PAR_TIPOBAIXA)'
+      
+        '  (PAR_ANEXO, PAR_BAIXADO, PAR_CAT_ID, PAR_CCO_ID, PAR_CETROCUST' +
+        'O, PAR_CLI_ID, '
+      
+        '   PAR_CONTA_ID, PAR_DATACOMPETENCIA, PAR_DATAPGTO, PAR_DATAVENC' +
+        'TO, PAR_DESCONTOTAXA, '
+      
+        '   PAR_DESCRICAO, PAR_DH_CA, PAR_ID, PAR_JUROMULTA, PAR_NUMDOC, ' +
+        'PAR_OBSERVACAO, '
+      
+        '   PAR_PAGO, PAR_PAGREC, PAR_PARCELAMAX, PAR_PARCELANUM, PAR_PAR' +
+        'CELAPAI, '
+      
+        '   PAR_TIPOBAIXA, PAR_VALOR, PAR_VALORPAGO, PAR_VENDACOMISSIONAD' +
+        'A_ID, PAR_VENDEDOR_ID)'
       'values'
       
-        '  (:PAR_ID, :PAR_PAGREC, :PAR_DESCRICAO, :PAR_CAT_ID, :PAR_CONTA' +
-        '_ID, '
-      ':PAR_DATACOMPETENCIA, '
-      '   :PAR_DATAVENCTO, :PAR_VALOR, :PAR_CLI_ID, :PAR_CETROCUSTO, '
-      ':PAR_OBSERVACAO, '
-      '   :PAR_ANEXO, :PAR_PAGO, :PAR_BAIXADO, :PAR_DATAPGTO, '
-      ':PAR_DESCONTOTAXA, '
-      '   :PAR_JUROMULTA, :PAR_VALORPAGO, :PAR_DH_CA, :PAR_PARCELANUM, '
-      ':PAR_PARCELAMAX, '
-      '   :PAR_PARCELAPAI, :PAR_NUMDOC, :PAR_CCO_ID, :PAR_TIPOBAIXA)')
+        '  (:PAR_ANEXO, :PAR_BAIXADO, :PAR_CAT_ID, :PAR_CCO_ID, :PAR_CETR' +
+        'OCUSTO, '
+      
+        '   :PAR_CLI_ID, :PAR_CONTA_ID, :PAR_DATACOMPETENCIA, :PAR_DATAPG' +
+        'TO, :PAR_DATAVENCTO, '
+      
+        '   :PAR_DESCONTOTAXA, :PAR_DESCRICAO, :PAR_DH_CA, :PAR_ID, :PAR_' +
+        'JUROMULTA, '
+      
+        '   :PAR_NUMDOC, :PAR_OBSERVACAO, :PAR_PAGO, :PAR_PAGREC, :PAR_PA' +
+        'RCELAMAX, '
+      
+        '   :PAR_PARCELANUM, :PAR_PARCELAPAI, :PAR_TIPOBAIXA, :PAR_VALOR,' +
+        ' :PAR_VALORPAGO, '
+      '   :PAR_VENDACOMISSIONADA_ID, :PAR_VENDEDOR_ID)')
     RefreshSQL.Strings = (
-      'Select *'
+      'Select '
+      '  PAR_ID,'
+      '  PAR_PAGREC,'
+      '  PAR_DESCRICAO,'
+      '  PAR_CAT_ID,'
+      '  PAR_CONTA_ID,'
+      '  PAR_DATACOMPETENCIA,'
+      '  PAR_DATAVENCTO,'
+      '  PAR_VALOR,'
+      '  PAR_CLI_ID,'
+      '  PAR_CETROCUSTO,'
+      '  PAR_OBSERVACAO,'
+      '  PAR_ANEXO,'
+      '  PAR_PAGO,'
+      '  PAR_DATAPGTO,'
+      '  PAR_DESCONTOTAXA,'
+      '  PAR_JUROMULTA,'
+      '  PAR_VALORPAGO,'
+      '  PAR_DH_CA,'
+      '  PAR_PARCELANUM,'
+      '  PAR_PARCELAMAX,'
+      '  PAR_PARCELAPAI,'
+      '  PAR_NUMDOC,'
+      '  PAR_CCO_ID,'
+      '  PAR_BAIXADO,'
+      '  PAR_TIPOBAIXA,'
+      '  PAR_VENDEDOR_ID,'
+      '  PAR_VENDACOMISSIONADA_ID'
       'from pagarreceber '
       'where'
       '  PAR_ID = :PAR_ID')
@@ -728,31 +774,33 @@ inherited FCadPagarReceber: TFCadPagarReceber
     ModifySQL.Strings = (
       'update pagarreceber'
       'set'
-      '  PAR_ID = :PAR_ID,'
-      '  PAR_PAGREC = :PAR_PAGREC,'
-      '  PAR_DESCRICAO = :PAR_DESCRICAO,'
+      '  PAR_ANEXO = :PAR_ANEXO,'
+      '  PAR_BAIXADO = :PAR_BAIXADO,'
       '  PAR_CAT_ID = :PAR_CAT_ID,'
+      '  PAR_CCO_ID = :PAR_CCO_ID,'
+      '  PAR_CETROCUSTO = :PAR_CETROCUSTO,'
+      '  PAR_CLI_ID = :PAR_CLI_ID,'
       '  PAR_CONTA_ID = :PAR_CONTA_ID,'
       '  PAR_DATACOMPETENCIA = :PAR_DATACOMPETENCIA,'
-      '  PAR_DATAVENCTO = :PAR_DATAVENCTO,'
-      '  PAR_VALOR = :PAR_VALOR,'
-      '  PAR_CLI_ID = :PAR_CLI_ID,'
-      '  PAR_CETROCUSTO = :PAR_CETROCUSTO,'
-      '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
-      '  PAR_ANEXO = :PAR_ANEXO,'
-      '  PAR_PAGO = :PAR_PAGO,'
-      '  PAR_BAIXADO = :PAR_BAIXADO,'
       '  PAR_DATAPGTO = :PAR_DATAPGTO,'
+      '  PAR_DATAVENCTO = :PAR_DATAVENCTO,'
       '  PAR_DESCONTOTAXA = :PAR_DESCONTOTAXA,'
-      '  PAR_JUROMULTA = :PAR_JUROMULTA,'
-      '  PAR_VALORPAGO = :PAR_VALORPAGO,'
+      '  PAR_DESCRICAO = :PAR_DESCRICAO,'
       '  PAR_DH_CA = :PAR_DH_CA,'
-      '  PAR_PARCELANUM = :PAR_PARCELANUM,'
-      '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
-      '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
+      '  PAR_ID = :PAR_ID,'
+      '  PAR_JUROMULTA = :PAR_JUROMULTA,'
       '  PAR_NUMDOC = :PAR_NUMDOC,'
-      '  PAR_CCO_ID = :PAR_CCO_ID,'
-      '  PAR_TIPOBAIXA = :PAR_TIPOBAIXA'
+      '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
+      '  PAR_PAGO = :PAR_PAGO,'
+      '  PAR_PAGREC = :PAR_PAGREC,'
+      '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
+      '  PAR_PARCELANUM = :PAR_PARCELANUM,'
+      '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
+      '  PAR_TIPOBAIXA = :PAR_TIPOBAIXA,'
+      '  PAR_VALOR = :PAR_VALOR,'
+      '  PAR_VALORPAGO = :PAR_VALORPAGO,'
+      '  PAR_VENDACOMISSIONADA_ID = :PAR_VENDACOMISSIONADA_ID,'
+      '  PAR_VENDEDOR_ID = :PAR_VENDEDOR_ID'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
     GeneratorField.Field = 'PAR_ID'
@@ -868,32 +916,44 @@ inherited FCadPagarReceber: TFCadPagarReceber
       Origin = 'PAGARRECEBER.PAR_NUMDOC'
       Size = 15
     end
-    object ibCadastroCATEGORIA: TIBStringField
-      FieldName = 'CATEGORIA'
-      Size = 100
-    end
-    object ibCadastroPAR_CCO_ID: TIntegerField
-      FieldName = 'PAR_CCO_ID'
-      Origin = 'PAGARRECEBER.PAR_CCO_ID'
-    end
     object ibCadastroPAR_BAIXADO: TIBStringField
       FieldName = 'PAR_BAIXADO'
       Origin = '"PAGARRECEBER"."PAR_BAIXADO"'
       FixedChar = True
       Size = 1
     end
+    object ibCadastroPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+      Origin = 'PAGARRECEBER.PAR_CCO_ID'
+    end
     object ibCadastroPAR_TIPOBAIXA: TIBStringField
       FieldName = 'PAR_TIPOBAIXA'
-      Origin = 'PAGARRECEBER.PAR_TIPOBAIXA'
+      Origin = '"PAGARRECEBER"."PAR_TIPOBAIXA"'
       FixedChar = True
       Size = 1
+    end
+    object ibCadastroPAR_VENDACOMISSIONADA_ID: TIntegerField
+      FieldName = 'PAR_VENDACOMISSIONADA_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDACOMISSIONADA_ID"'
+    end
+    object ibCadastroPAR_VENDEDOR_ID: TIntegerField
+      FieldName = 'PAR_VENDEDOR_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDEDOR_ID"'
+    end
+    object ibCadastroCATEGORIA: TIBStringField
+      FieldName = 'CATEGORIA'
+      Size = 100
     end
   end
   inherited qConsulta: TIBQuery
     SQL.Strings = (
-      
-        'select pagarreceber.par_id ID, pagarreceber.* from pagarreceber ' +
-        'where pagarreceber.PAR_PAGREC = :pagrec')
+      'select pagarreceber.par_id ID,'
+      '       pagarreceber.* ,'
+      '       coalesce(pagarreceber.par_baixado,'#39'N'#39') baixado,'
+      '       clientes.cli_cliente'
+      'from pagarreceber'
+      ' left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)'
+      'where pagarreceber.PAR_PAGREC = :pagrec')
     Left = 528
     Top = 256
     ParamData = <
@@ -1014,6 +1074,46 @@ inherited FCadPagarReceber: TFCadPagarReceber
       Origin = 'PAGARRECEBER.PAR_TIPOBAIXA'
       FixedChar = True
       Size = 1
+    end
+    object qConsultaPAR_PARCELANUM: TIntegerField
+      FieldName = 'PAR_PARCELANUM'
+      Origin = '"PAGARRECEBER"."PAR_PARCELANUM"'
+    end
+    object qConsultaPAR_PARCELAMAX: TIntegerField
+      FieldName = 'PAR_PARCELAMAX'
+      Origin = '"PAGARRECEBER"."PAR_PARCELAMAX"'
+    end
+    object qConsultaPAR_PARCELAPAI: TIntegerField
+      FieldName = 'PAR_PARCELAPAI'
+      Origin = '"PAGARRECEBER"."PAR_PARCELAPAI"'
+    end
+    object qConsultaPAR_NUMDOC: TIBStringField
+      FieldName = 'PAR_NUMDOC'
+      Origin = '"PAGARRECEBER"."PAR_NUMDOC"'
+      Size = 15
+    end
+    object qConsultaPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+      Origin = '"PAGARRECEBER"."PAR_CCO_ID"'
+    end
+    object qConsultaPAR_VENDEDOR_ID: TIntegerField
+      FieldName = 'PAR_VENDEDOR_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDEDOR_ID"'
+    end
+    object qConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField
+      FieldName = 'PAR_VENDACOMISSIONADA_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDACOMISSIONADA_ID"'
+    end
+    object qConsultaBAIXADO: TIBStringField
+      FieldName = 'BAIXADO'
+      ProviderFlags = []
+      FixedChar = True
+      Size = 1
+    end
+    object qConsultaCLI_CLIENTE: TIBStringField
+      FieldName = 'CLI_CLIENTE'
+      Origin = '"CLIENTES"."CLI_CLIENTE"'
+      Size = 100
     end
   end
   inherited ActionList1: TActionList
@@ -1151,9 +1251,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
     SQL.Strings = (
-      'select cli_id, cli_cliente'
-      '  from clientes'
-      ' where coalesce(cli_tipocli,1) = :TipoCli')
+      'select id cli_id, nome cli_cliente'
+      '  from sp_cliente_portipo(:TipoCli)')
     Left = 592
     Top = 104
     ParamData = <
@@ -1224,29 +1323,37 @@ inherited FCadPagarReceber: TFCadPagarReceber
     InsertSQL.Strings = (
       'insert into pagarreceber'
       
-        '  (PAR_ANEXO, PAR_CAT_ID, PAR_CETROCUSTO, PAR_CLI_ID, PAR_CONTA_' +
-        'ID, PAR_DATACOMPETENCIA, '
+        '  (PAR_ANEXO, PAR_BAIXADO, PAR_CAT_ID, PAR_CCO_ID, PAR_CETROCUST' +
+        'O, PAR_CLI_ID, '
       
-        '   PAR_DATAPGTO, PAR_DATAVENCTO, PAR_DESCONTOTAXA, PAR_DESCRICAO' +
-        ', PAR_DH_CA, '
+        '   PAR_CONTA_ID, PAR_DATACOMPETENCIA, PAR_DATAPGTO, PAR_DATAVENC' +
+        'TO, PAR_DESCONTOTAXA, '
       
-        '   PAR_ID, PAR_JUROMULTA, PAR_OBSERVACAO, PAR_PAGO, PAR_PAGREC, ' +
-        'PAR_PARCELAMAX, '
-      '   PAR_PARCELANUM, PAR_PARCELAPAI, PAR_VALOR, PAR_VALORPAGO)'
+        '   PAR_DESCRICAO, PAR_DH_CA, PAR_ID, PAR_JUROMULTA, PAR_NUMDOC, ' +
+        'PAR_OBSERVACAO, '
+      
+        '   PAR_PAGO, PAR_PAGREC, PAR_PARCELAMAX, PAR_PARCELANUM, PAR_PAR' +
+        'CELAPAI, '
+      
+        '   PAR_TIPOBAIXA, PAR_VALOR, PAR_VALORPAGO, PAR_VENDACOMISSIONAD' +
+        'A_ID, PAR_VENDEDOR_ID)'
       'values'
       
-        '  (:PAR_ANEXO, :PAR_CAT_ID, :PAR_CETROCUSTO, :PAR_CLI_ID, :PAR_C' +
-        'ONTA_ID, '
+        '  (:PAR_ANEXO, :PAR_BAIXADO, :PAR_CAT_ID, :PAR_CCO_ID, :PAR_CETR' +
+        'OCUSTO, '
       
-        '   :PAR_DATACOMPETENCIA, :PAR_DATAPGTO, :PAR_DATAVENCTO, :PAR_DE' +
-        'SCONTOTAXA, '
+        '   :PAR_CLI_ID, :PAR_CONTA_ID, :PAR_DATACOMPETENCIA, :PAR_DATAPG' +
+        'TO, :PAR_DATAVENCTO, '
       
-        '   :PAR_DESCRICAO, :PAR_DH_CA, :PAR_ID, :PAR_JUROMULTA, :PAR_OBS' +
-        'ERVACAO, '
+        '   :PAR_DESCONTOTAXA, :PAR_DESCRICAO, :PAR_DH_CA, :PAR_ID, :PAR_' +
+        'JUROMULTA, '
       
-        '   :PAR_PAGO, :PAR_PAGREC, :PAR_PARCELAMAX, :PAR_PARCELANUM, :PA' +
-        'R_PARCELAPAI, '
-      '   :PAR_VALOR, :PAR_VALORPAGO)')
+        '   :PAR_NUMDOC, :PAR_OBSERVACAO, :PAR_PAGO, :PAR_PAGREC, :PAR_PA' +
+        'RCELAMAX, '
+      
+        '   :PAR_PARCELANUM, :PAR_PARCELAPAI, :PAR_TIPOBAIXA, :PAR_VALOR,' +
+        ' :PAR_VALORPAGO, '
+      '   :PAR_VENDACOMISSIONADA_ID, :PAR_VENDEDOR_ID)')
     RefreshSQL.Strings = (
       'Select '
       '  PAR_ID,'
@@ -1269,7 +1376,13 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_DH_CA,'
       '  PAR_PARCELANUM,'
       '  PAR_PARCELAMAX,'
-      '  PAR_PARCELAPAI'
+      '  PAR_PARCELAPAI,'
+      '  PAR_NUMDOC,'
+      '  PAR_CCO_ID,'
+      '  PAR_BAIXADO,'
+      '  PAR_TIPOBAIXA,'
+      '  PAR_VENDEDOR_ID,'
+      '  PAR_VENDACOMISSIONADA_ID'
       'from pagarreceber '
       'where'
       '  PAR_ID = :PAR_ID')
@@ -1279,7 +1392,9 @@ inherited FCadPagarReceber: TFCadPagarReceber
       'update pagarreceber'
       'set'
       '  PAR_ANEXO = :PAR_ANEXO,'
+      '  PAR_BAIXADO = :PAR_BAIXADO,'
       '  PAR_CAT_ID = :PAR_CAT_ID,'
+      '  PAR_CCO_ID = :PAR_CCO_ID,'
       '  PAR_CETROCUSTO = :PAR_CETROCUSTO,'
       '  PAR_CLI_ID = :PAR_CLI_ID,'
       '  PAR_CONTA_ID = :PAR_CONTA_ID,'
@@ -1291,14 +1406,18 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '  PAR_DH_CA = :PAR_DH_CA,'
       '  PAR_ID = :PAR_ID,'
       '  PAR_JUROMULTA = :PAR_JUROMULTA,'
+      '  PAR_NUMDOC = :PAR_NUMDOC,'
       '  PAR_OBSERVACAO = :PAR_OBSERVACAO,'
       '  PAR_PAGO = :PAR_PAGO,'
       '  PAR_PAGREC = :PAR_PAGREC,'
       '  PAR_PARCELAMAX = :PAR_PARCELAMAX,'
       '  PAR_PARCELANUM = :PAR_PARCELANUM,'
       '  PAR_PARCELAPAI = :PAR_PARCELAPAI,'
+      '  PAR_TIPOBAIXA = :PAR_TIPOBAIXA,'
       '  PAR_VALOR = :PAR_VALOR,'
-      '  PAR_VALORPAGO = :PAR_VALORPAGO'
+      '  PAR_VALORPAGO = :PAR_VALORPAGO,'
+      '  PAR_VENDACOMISSIONADA_ID = :PAR_VENDACOMISSIONADA_ID,'
+      '  PAR_VENDEDOR_ID = :PAR_VENDEDOR_ID'
       'where'
       '  PAR_ID = :OLD_PAR_ID')
     GeneratorField.Field = 'PAR_ID'
@@ -1406,6 +1525,35 @@ inherited FCadPagarReceber: TFCadPagarReceber
     object ibParcelaPAR_PARCELAPAI: TIntegerField
       FieldName = 'PAR_PARCELAPAI'
       Origin = '"PAGARRECEBER"."PAR_PARCELAPAI"'
+    end
+    object ibParcelaPAR_NUMDOC: TIBStringField
+      FieldName = 'PAR_NUMDOC'
+      Origin = 'PAGARRECEBER.PAR_NUMDOC'
+      Size = 15
+    end
+    object ibParcelaPAR_BAIXADO: TIBStringField
+      FieldName = 'PAR_BAIXADO'
+      Origin = 'PAGARRECEBER.PAR_BAIXADO'
+      FixedChar = True
+      Size = 1
+    end
+    object ibParcelaPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+      Origin = 'PAGARRECEBER.PAR_CCO_ID'
+    end
+    object ibParcelaPAR_TIPOBAIXA: TIBStringField
+      FieldName = 'PAR_TIPOBAIXA'
+      Origin = 'PAGARRECEBER.PAR_TIPOBAIXA'
+      FixedChar = True
+      Size = 1
+    end
+    object ibParcelaPAR_VENDACOMISSIONADA_ID: TIntegerField
+      FieldName = 'PAR_VENDACOMISSIONADA_ID'
+      Origin = 'PAGARRECEBER.PAR_VENDACOMISSIONADA_ID'
+    end
+    object ibParcelaPAR_VENDEDOR_ID: TIntegerField
+      FieldName = 'PAR_VENDEDOR_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDEDOR_ID"'
     end
   end
   object qGerador: TIBQuery
@@ -1624,6 +1772,37 @@ inherited FCadPagarReceber: TFCadPagarReceber
       FieldName = 'PAR_TIPOBAIXA'
       FixedChar = True
       Size = 1
+    end
+    object cdsConsultaPAR_PARCELANUM: TIntegerField
+      FieldName = 'PAR_PARCELANUM'
+    end
+    object cdsConsultaPAR_PARCELAMAX: TIntegerField
+      FieldName = 'PAR_PARCELAMAX'
+    end
+    object cdsConsultaPAR_PARCELAPAI: TIntegerField
+      FieldName = 'PAR_PARCELAPAI'
+    end
+    object cdsConsultaPAR_NUMDOC: TStringField
+      FieldName = 'PAR_NUMDOC'
+      Size = 15
+    end
+    object cdsConsultaPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+    end
+    object cdsConsultaPAR_VENDEDOR_ID: TIntegerField
+      FieldName = 'PAR_VENDEDOR_ID'
+    end
+    object cdsConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField
+      FieldName = 'PAR_VENDACOMISSIONADA_ID'
+    end
+    object cdsConsultaBAIXADO: TStringField
+      FieldName = 'BAIXADO'
+      FixedChar = True
+      Size = 1
+    end
+    object cdsConsultaCLI_CLIENTE: TStringField
+      FieldName = 'CLI_CLIENTE'
+      Size = 100
     end
   end
   object cdsCheque: TClientDataSet

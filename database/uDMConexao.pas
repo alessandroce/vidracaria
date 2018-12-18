@@ -5,18 +5,22 @@ interface
 uses
   SysUtils, Classes, IBDatabase, DB, IniFiles, Dialogs, frxClass, frxDBSet,
   frxIBXComponents, frxExportTXT, frxExportText, frxExportCSV,
-  frxExportRTF, frxExportXLS, frxExportHTML, frxExportPDF;
+  frxExportRTF, frxExportXLS, frxExportHTML, frxExportPDF, IBCustomDataSet,
+  IBQuery;
 
 type
   TDMConexao = class(TDataModule)
     IBConexao: TIBDatabase;
     IBTransacao: TIBTransaction;
     IBTransacaoLeitura: TIBTransaction;
+    qGeral: TIBQuery;
+    qGenId: TIBQuery;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    function GetGenId(pTabela:String):Integer;
   end;
 
 var
@@ -59,6 +63,15 @@ begin
   finally
     ListaParms.Free;
   end;
+end;
+
+function TDMConexao.GetGenId(pTabela: String): Integer;
+begin
+  qGenId.Close;
+  qGenId.SQL.Clear;
+  qGenId.SQL.Text := 'select gen_id(gen_'+pTabela+',1) from rdb$database';
+  qGenId.Open;
+  Result := qGenId.Fields.Fields[0].Value;
 end;
 
 end.

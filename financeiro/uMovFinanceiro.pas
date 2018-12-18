@@ -20,7 +20,7 @@ uses
   dxSkinOffice2010Black, dxSkinOffice2010Blue, dxSkinOffice2010Silver,
   dxSkinPumpkin, dxSkinSeven, dxSkinSharp, dxSkinSilver, dxSkinSpringTime,
   dxSkinStardust, dxSkinSummer2008, dxSkinValentine, dxSkinXmas2008Blue,
-  Spin, StrUtils;
+  Spin, StrUtils, frxDBSet;
 
 type
   TFMovFinanceiro = class(TFPadrao)
@@ -244,6 +244,21 @@ procedure TFMovFinanceiro.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   inherited;
   barra_botao(Act_Btn_Imprimir);
+  if ImprimirModoDesign then
+  begin
+    if ChamaRelatorioDesign(frxReport1,'SISTEMA','FIN013_MOVOMENTO_FINANCEIRO') then
+    begin
+      getVariavelDesign('MESANOREF',QuotedStr(getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value)));
+      ImprimirAlterarRelatorio(0,'FIN013_MOVOMENTO_FINANCEIRO','Relatório de Movimento Financeiro');
+    end;
+  end
+  else
+  begin
+    ChamaRelatorio(frxReport1,'FIN013_MOVOMENTO_FINANCEIRO',false);
+    frxReport1.Variables['MESANOREF'] := QuotedStr(getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value));
+    frxReport1.PrepareReport();
+    frxReport1.ShowPreparedReport;
+  end;
 end;
 
 procedure TFMovFinanceiro.Act_Btn_CancelarExecute(Sender: TObject);

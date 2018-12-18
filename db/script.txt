@@ -29,3 +29,16 @@ select cheque.chq_id ID,
   from cheque
  left join clientes emi on (emi.cli_id=cheque.chq_emissor_id)
  left join clientes cli on (cli.cli_id=cheque.chq_cliente_id)
+----------------------------
+create table conferencia_medida(
+cmed_id dinteiro not null
+cmed_agenda_id dinteiro
+cmed_responsavel_id dinteiro
+cmed_dh_ca ddatahora
+)
+
+create table solicitacao_material(
+)
+
+create table entrega_material(
+)

@@ -249,7 +249,6 @@ type
     cxGrid1DBTableView1BXP_DATAPAGTO: TcxGridDBColumn;
     cxGrid1DBTableView1BXP_VALOR: TcxGridDBColumn;
     cxGrid1DBTableView1BXP_OBSERVACAO: TcxGridDBColumn;
-    ibCadastroPAR_TIPOBAIXA: TIBStringField;
     qConsultaPAR_BAIXADO: TIBStringField;
     qConsultaPAR_TIPOBAIXA: TIBStringField;
     cdsConsultaPAR_BAIXADO: TStringField;
@@ -258,6 +257,35 @@ type
     grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
     Label8: TLabel;
     Bevel5: TBevel;
+    ibParcelaPAR_BAIXADO: TIBStringField;
+    ibParcelaPAR_NUMDOC: TIBStringField;
+    ibParcelaPAR_CCO_ID: TIntegerField;
+    ibParcelaPAR_TIPOBAIXA: TIBStringField;
+    ibCadastroPAR_TIPOBAIXA: TIBStringField;
+    ibCadastroPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    ibParcelaPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    ibCadastroPAR_VENDEDOR_ID: TIntegerField;
+    ibParcelaPAR_VENDEDOR_ID: TIntegerField;
+    qConsultaPAR_PARCELANUM: TIntegerField;
+    qConsultaPAR_PARCELAMAX: TIntegerField;
+    qConsultaPAR_PARCELAPAI: TIntegerField;
+    qConsultaPAR_NUMDOC: TIBStringField;
+    qConsultaPAR_CCO_ID: TIntegerField;
+    qConsultaPAR_VENDEDOR_ID: TIntegerField;
+    qConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    qConsultaBAIXADO: TIBStringField;
+    cdsConsultaPAR_PARCELANUM: TIntegerField;
+    cdsConsultaPAR_PARCELAMAX: TIntegerField;
+    cdsConsultaPAR_PARCELAPAI: TIntegerField;
+    cdsConsultaPAR_NUMDOC: TStringField;
+    cdsConsultaPAR_CCO_ID: TIntegerField;
+    cdsConsultaPAR_VENDEDOR_ID: TIntegerField;
+    cdsConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    cdsConsultaBAIXADO: TStringField;
+    grConsultaDBTableView1BAIXADO: TcxGridDBColumn;
+    qConsultaCLI_CLIENTE: TIBStringField;
+    cdsConsultaCLI_CLIENTE: TStringField;
+    grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -286,17 +314,25 @@ type
   private
     { Private declarations }
     GeradorID : Integer;
+    FLancadoVendaComissionada : Boolean;
     procedure EntrouAbaCadastro;override;
     procedure EntrouAbaConsulta;override;
     procedure ExibeRepetir(pVisivel:Boolean);
     procedure RetiraRepetir(pRetirar:Boolean);
     procedure ExibePagar(pEnabled:Boolean);
     procedure MovePagar(pMover:Boolean);
-    procedure Repetir(pDataVencto:TDate; pPeriodo:Integer;pQtdade:Integer;pPai:Integer; pDescricao : String);
+    procedure Repetir(pDataVencto:TDate; pPeriodo:Integer;pQtdade:Integer;pPai:Integer; pDescricao : String; pValor : Extended);
     function getGeradorID:Integer;
   public
     { Public declarations }
     FTipoPagRec : Integer;
+    FVendaComissionadaId : Integer;
+    FVendedorId : Integer;
+    FClienteId : Integer;
+    FValor : Extended;
+    FNumDocumento : Integer;
+    FObservacao : WideString;
+    FCategoriaId : Integer;
     function getIdConsulta:Integer;override;
     Procedure CarregarConsultaCDSParametro;override;
   end;
@@ -308,7 +344,7 @@ implementation
 
 uses uSelecionarCliente, uCadClientes, uSelecionarCheque,
   uSelecionarPlanoContas, uSelecionarFormaPgto, uCadCentroCusto,
-  uSelecionarCentroCusto;
+  uSelecionarCentroCusto, uSelecionarVendedor;
 
 {$R *.dfm}
 
@@ -330,6 +366,21 @@ begin
   cdsPagarreceberCheque.CreateDataSet;
   cdsPagarreceberCheque.Open;
 
+  if ((FTipoPagRec=1) and (FClienteId>0) and (FVendedorId>0)) then
+  begin
+    Act_Btn_Novo.Execute;
+    ibCadastroPAR_CLI_ID.Value      := FClienteId;
+    ibCadastroPAR_VALOR.Value       := FValor;
+    ibCadastroPAR_NUMDOC.Value      := IntToStr(FNumDocumento);
+    ibCadastroPAR_OBSERVACAO.Value  := FObservacao;
+    ibCadastroPAR_CAT_ID.Value      := FCategoriaId;
+    ibCadastroPAR_VENDEDOR_ID.Value := FVendedorId;
+    ibCadastroPAR_VENDACOMISSIONADA_ID.Value := FVendaComissionadaId;
+    DBEdit1.Enabled := false;
+    FLancadoVendaComissionada := true;
+  end
+  else
+    DBEdit1.Enabled := true;
 end;
 
 procedure TFCadPagarReceber.ExibeRepetir(pVisivel: Boolean);
@@ -450,6 +501,7 @@ end;
 
 procedure TFCadPagarReceber.ibCadastroBeforePost(DataSet: TDataSet);
 var vDescricao : String;
+    vValorParcela : Extended;
 begin
   inherited;
   if not(Continua(ibCadastroPAR_NUMDOC.asString<>'','Informe Num. Documento')) then
@@ -457,6 +509,20 @@ begin
 
   if not(Continua(ibCadastroPAR_VALOR.AsFloat>0,'Informe Valor Documento')) then
     Abort;
+
+  //if Continua(((qCategoriaPIT_ID.AsInteger=3) and (FVendaComissionadaId=0)),'Informe o(a) vendedor(a)') then
+  if ((qCategoriaPIT_ID.AsInteger=3) and (FVendaComissionadaId=0)) then
+  begin
+    FSelecionarVendedor := TFSelecionarVendedor.Create(nil);
+    FSelecionarVendedor.pnBarraForm.Caption := 'Selecionar Vendedor';
+    FSelecionarVendedor.ShowModal;
+    if FSelecionarVendedor.FId>0 then
+    begin
+      FVendedorId := FSelecionarVendedor.FId;
+      ibCadastroPAR_VENDEDOR_ID.Value := FSelecionarVendedor.FId;
+    end;
+    FSelecionarVendedor.Free;
+  end;
 
   ibCadastroPAR_PAGREC.Value := FTipoPagRec;
   if not(chPago.Checked) then
@@ -473,17 +539,24 @@ begin
   begin
     if chRepetir.Checked then
     begin
+      if FLancadoVendaComissionada then
+      begin
+        vValorParcela := (ibCadastroPAR_VALOR.Value / StrToIntDef(edOcorrencia.Text,1));
+        ibCadastroPAR_VALOR.Value := vValorParcela;
+        ibCadastroPAR_VENDEDOR_ID.Value := FVendedorId;
+        ibCadastroPAR_VENDACOMISSIONADA_ID.Value := FVendaComissionadaId;
+      end;
       vDescricao := ibCadastroPAR_DESCRICAO.Value;
       ibCadastroPAR_DESCRICAO.Value := vDescricao+' (1/'+edOcorrencia.Text+')';
       ibCadastroPAR_PARCELANUM.Value := 1;
       ibCadastroPAR_PARCELAMAX.Value := StrToIntDef(edOcorrencia.Text,1);
       ibCadastroPAR_PARCELAPAI.Value := ibCadastroPAR_ID.Value;
-      Repetir(cbDataVencto.Date,cbMensalmente.ItemIndex,StrToIntDef(edOcorrencia.Text,1)-1,ibCadastroPAR_ID.Value,vDescricao);
+      Repetir(cbDataVencto.Date,cbMensalmente.ItemIndex,StrToIntDef(edOcorrencia.Text,1)-1,ibCadastroPAR_ID.Value,vDescricao, ibCadastroPAR_VALOR.Value);
     end;
   end;
 end;
 
-procedure TFCadPagarReceber.Repetir(pDataVencto:TDate; pPeriodo, pQtdade, pPai: Integer; pDescricao : String);
+procedure TFCadPagarReceber.Repetir(pDataVencto:TDate; pPeriodo, pQtdade, pPai: Integer; pDescricao : String; pValor : Extended);
 var vPeriodo : Integer;
     vData : TDate;
     i, j : Integer;
@@ -507,6 +580,7 @@ begin
     end;
     ibParcela.Close;
     ibParcela.Open;
+
     for i := 1 to pQtdade do
     begin
       vData := IncDay(vData,vPeriodo);
@@ -523,8 +597,11 @@ begin
           if (ibParcela.Fields.Fields[j].FieldName='PAR_DESCRICAO') then
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := pDescricao+' ('+IntToStr(i+1)+'/'+IntToStr(pQtdade+1)+')'
           else
-          if (ibParcela.Fields.Fields[j].FieldName='PAR_NUMDOC') then
-            ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value+'-'+IntToStr(i+1)+'/'+IntToStr(pQtdade+1)
+          //if (ibParcela.Fields.Fields[j].FieldName='PAR_NUMDOC') then
+          //  ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value+'-'+IntToStr(i+1)+'/'+IntToStr(pQtdade+1)
+          //else
+          if (ibParcela.Fields.Fields[j].FieldName='PAR_VALOR') then
+            ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := pValor
           else
           if (ibParcela.Fields.Fields[j].FieldName='PAR_PARCELANUM') then
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := i+1
@@ -533,9 +610,7 @@ begin
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := pQtdade+1
           else
           if (ibParcela.Fields.Fields[j].FieldName='PAR_DATAVENCTO') then
-          begin
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := vData
-          end
           else
             ibParcela.FieldByName(ibParcela.Fields.Fields[j].FieldName).Value := ibCadastro.FieldByName(ibCadastro.Fields.Fields[j].FieldName).Value;
         end;
@@ -740,6 +815,7 @@ begin
   if AViewInfo.GridRecord.Selected then
     ACanvas.Brush.Color := clActiveCaption;
 
+(*
   if (AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'P') then
   begin
     //ACanvas.Font.Style := [fsBold];
@@ -747,6 +823,31 @@ begin
   end
   else
   if(AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clGreen;
+  end
+  else
+  begin
+    //ACanvas.Font.Style := [];
+    ACanvas.Font.Color := clBlack;
+  end;
+*)
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] = Now) and
+     (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'N')) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clBlue;
+  end
+  else
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] < Now) and
+     (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'N')) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clRed;
+  end
+  else
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'S') then
   begin
     //ACanvas.Font.Style := [fsBold];
     ACanvas.Font.Color := clGreen;

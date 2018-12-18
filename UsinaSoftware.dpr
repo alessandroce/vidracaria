@@ -57,9 +57,21 @@ uses
   uCadPadrao in 'biblioteca\uCadPadrao.pas' {FCadPadrao},
   uSelecionarPagarReceber in 'financeiro\uSelecionarPagarReceber.pas' {FSelecionarPagarReceber},
   uSelecionarTipoCliente in 'cadastro\uSelecionarTipoCliente.pas' {FSelecionarTipoCliente},
-  uMovFinanceiro in 'financeiro\uMovFinanceiro.pas' {FMovFinanceiro},
   uTipoBaixaMovFinanceiro in 'financeiro\uTipoBaixaMovFinanceiro.pas' {FTipoBaixaMovFinanceiro},
-  uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar};
+  uRelExtratoContasPagar in 'financeiro\uRelExtratoContasPagar.pas' {FRelExtratoContasPagar},
+  uSelecionarVendedor in 'Caixa\uSelecionarVendedor.pas' {FSelecionarVendedor},
+  uMovFinanceiro in 'financeiro\uMovFinanceiro.pas' {FMovFinanceiro},
+  uVendaProjetos in 'Caixa\uVendaProjetos.pas' {FVendaProjeto},
+  uCadVendas in 'Vendas\uCadVendas.pas' {FCadVendas},
+  uExibirFinanceiroVendaComissionada in 'financeiro\uExibirFinanceiroVendaComissionada.pas' {FExibirFinanceiroVendaComissionada},
+  uSelecionarFinanceiroVendaComissionada in 'financeiro\uSelecionarFinanceiroVendaComissionada.pas' {FSelecionarFinanceiroVendaComissionada},
+  uCadAgenda in 'Vendas\uCadAgenda.pas' {FCadAgenda},
+  uAgendaConferenciaMedidas in 'Vendas\uAgendaConferenciaMedidas.pas' {FCadAgendaConferenciaMedidas},
+  uCadConferenciaMedida in 'Vendas\uCadConferenciaMedida.pas' {FCadConferenciaMedida},
+  uVincularVendaFinanceiro in 'Vendas\uVincularVendaFinanceiro.pas' {FCadVincularVendaFinanceiro},
+  uSelecionarVendas in 'Vendas\uSelecionarVendas.pas' {FSelecionarVenda},
+  uSelecionarAgendaById in 'Vendas\uSelecionarAgendaById.pas' {FSelecionarAgendaById},
+  uCadVendaComissionada in 'Caixa\uCadVendaComissionada.pas' {FCadVendaComissionada};
 
 {$R *.res}
 
@@ -71,7 +83,5 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
-  Application.CreateForm(TFTipoBaixaMovFinanceiro, FTipoBaixaMovFinanceiro);
-  Application.CreateForm(TFRelExtratoContasPagar, FRelExtratoContasPagar);
   Application.Run;
 end.

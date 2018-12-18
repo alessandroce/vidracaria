@@ -196,7 +196,8 @@ end;
 
 procedure TFCadPadrao.Act_Btn_GravarExecute(Sender: TObject);
 begin
-  ibCadastro.Post;
+  if (ibCadastro.State in [dsInsert,dsEdit]) then
+    ibCadastro.Post;
   DMConexao.IBTransacao.CommitRetaining;
   MudaAba(0);
   if FCarregarConsultaCDSParametro then
@@ -285,7 +286,8 @@ end;
 procedure TFCadPadrao.setFPnBarraForm(const Value: String);
 begin
   FPnBarraForm := Value;
-  PnBarraForm.Caption := ':: '+FPnBarraForm+' ::';
+  //PnBarraForm.Caption := ':: '+FPnBarraForm+' ::';
+  PnBarraForm.Caption := FPnBarraForm;
 end;
 
 procedure TFCadPadrao.EntrouAbaRelatorio;

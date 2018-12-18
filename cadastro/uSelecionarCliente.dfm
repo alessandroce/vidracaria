@@ -10,14 +10,14 @@ inherited FSelecionarCli: TFSelecionarCli
     Left = 0
     Top = 30
     Width = 584
-    Height = 291
+    Height = 290
     Align = alClient
     TabOrder = 1
     object grConsulta: TcxGrid
       Left = 1
       Top = 1
       Width = 582
-      Height = 289
+      Height = 288
       Align = alClient
       TabOrder = 0
       object grConsultaDBTableView1: TcxGridDBTableView
@@ -54,7 +54,7 @@ inherited FSelecionarCli: TFSelecionarCli
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 321
+    Top = 320
     Width = 584
     Height = 41
     Align = alBottom
@@ -86,22 +86,13 @@ inherited FSelecionarCli: TFSelecionarCli
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
-      'select clientes.cli_id,'
-      '       clientes.cli_cliente'
-      '  from clientes'
-      ' where ((clientes.cli_tipocli = :TipoCli) or (0 = :TipoCli))'
-      ' order by clientes.cli_cliente')
+      
+        'select id cli_id, nome cli_cliente from sp_cliente_portipo(:Tipo' +
+        'Cli)')
     Left = 432
     Top = 72
     ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'TipoCli'
-        ParamType = ptUnknown
-      end
       item
         DataType = ftUnknown
         Name = 'TipoCli'

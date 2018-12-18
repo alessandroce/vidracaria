@@ -14,14 +14,14 @@ inherited FMovFinanceiro: TFMovFinanceiro
     Left = 0
     Top = 80
     Width = 784
-    Height = 481
+    Height = 482
     Align = alClient
     TabOrder = 1
     object cxGrid1: TcxGrid
       Left = 483
       Top = 1
       Width = 300
-      Height = 479
+      Height = 480
       Align = alRight
       TabOrder = 0
       object cxGrid1DBTableView1: TcxGridDBTableView
@@ -56,7 +56,7 @@ inherited FMovFinanceiro: TFMovFinanceiro
       Left = 1
       Top = 1
       Width = 482
-      Height = 479
+      Height = 480
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
@@ -446,7 +446,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
           Layout = blGlyphTop
           ParentShowHint = False
           ShowHint = True
-          Visible = False
         end
         object btExcluir: TSpeedButton
           Left = 123
@@ -816,6 +815,8 @@ inherited FMovFinanceiro: TFMovFinanceiro
     Transaction = DMConexao.IBTransacao
     BeforePost = ibCadastroBeforePost
     OnNewRecord = ibCadastroNewRecord
+    BufferChunks = 1000
+    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from movfinanceiro'
       'where'
@@ -975,6 +976,8 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -1000,6 +1003,8 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -1037,6 +1042,8 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select *'
       '  from centrocusto'
@@ -1070,6 +1077,8 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qPagarReceber: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select par_descricao,'
       '       case when(pagarreceber.par_pagrec=1) then '#39'RECEBER'#39

@@ -62,6 +62,13 @@ type
     cxDBDateEdit1: TcxDateEdit;
     cxDBDateEdit2: TcxDateEdit;
     frxRelatorio: TfrxDBDataset;
+    qRelatorioPAR_NUMDOC: TIBStringField;
+    qRelatorioPAR_CCO_ID: TIntegerField;
+    qRelatorioPAR_BAIXADO: TIBStringField;
+    qRelatorioPAR_TIPOBAIXA: TIBStringField;
+    qRelatorioPAR_VENDEDOR_ID: TIntegerField;
+    qRelatorioPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    qRelatorioVEC_NUMDOCUMENTO: TIntegerField;
     procedure bt_CancelarExecute(Sender: TObject);
     procedure bt_LimparExecute(Sender: TObject);
     procedure bt_okExecute(Sender: TObject);
@@ -119,12 +126,12 @@ begin
 
   if RadioButton1.Checked then
   begin
-    Filtro := Filtro + 'and ((coalesce(par_pago,''N'') = ''S'') and (par_datavencto between '+sDataIni+' and '+sdataFim+'))'+#13;
+    Filtro := Filtro + 'and ((coalesce(par_baixado,''N'') = ''S'') and (par_datavencto between '+sDataIni+' and '+sdataFim+'))'+#13;
     FiltroUsado := FiltroUsado + RadioButton1.caption+' '+StringReplace(sDataIni,'''','',[rfReplaceAll])+' até '+StringReplace(sDataFim,'''','',[rfReplaceAll])+' | ';
   end;
   if RadioButton2.Checked then
   begin
-    Filtro := Filtro + 'and ((coalesce(par_pago,''N'') = ''N'') and (par_datavencto between '+sDataIni+' and '+sdataFim+'))'+#13;
+    Filtro := Filtro + 'and ((coalesce(par_baixado,''N'') = ''N'') and (par_datavencto between '+sDataIni+' and '+sdataFim+'))'+#13;
     FiltroUsado := FiltroUsado + RadioButton2.caption+' '+StringReplace(sDataIni,'''','',[rfReplaceAll])+' até '+StringReplace(sDataFim,'''','',[rfReplaceAll])+' | ';
   end;
 

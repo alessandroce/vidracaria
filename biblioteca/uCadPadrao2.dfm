@@ -1,8 +1,8 @@
 object FCadPadrao2: TFCadPadrao2
-  Left = 818
-  Top = 216
+  Left = 302
+  Top = 176
   Width = 800
-  Height = 500
+  Height = 600
   Caption = ':: sistema gest'#227'o comercial ::'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -33,7 +33,7 @@ object FCadPadrao2: TFCadPadrao2
   end
   object sbBarraStatus: TStatusBar
     Left = 0
-    Top = 442
+    Top = 542
     Width = 784
     Height = 19
     Panels = <
@@ -57,7 +57,7 @@ object FCadPadrao2: TFCadPadrao2
     Left = 0
     Top = 80
     Width = 784
-    Height = 362
+    Height = 462
     Align = alClient
     TabOrder = 2
   end
@@ -325,8 +325,8 @@ object FCadPadrao2: TFCadPadrao2
       ShowHint = True
     end
     object btCancelar: TSpeedButton
-      Left = 265
-      Top = 3
+      Left = 603
+      Top = 2
       Width = 60
       Height = 45
       Action = Act_Btn_Cancelar
@@ -378,8 +378,8 @@ object FCadPadrao2: TFCadPadrao2
       ShowHint = True
     end
     object btSalvar: TSpeedButton
-      Left = 324
-      Top = 3
+      Left = 665
+      Top = 2
       Width = 60
       Height = 45
       Action = Act_Btn_Gravar

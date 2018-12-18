@@ -785,6 +785,24 @@ object FormPrincipal: TFormPrincipal
       Caption = 'Sobre'
       Hint = 'Informa'#231#245'es do Sistema'
     end
+    object Ven_CadVendas: TAction
+      Category = 'Vendas'
+      Caption = 'Lan'#231'amento de Vendas'
+      Hint = 'Lan'#231'amento de Vendas'
+      OnExecute = Ven_CadVendasExecute
+    end
+    object Ven_CadAgenda: TAction
+      Category = 'Vendas'
+      Caption = 'Agenda de compromissos de venda'
+      Hint = 'Agenda de compromisso de vendas'
+      OnExecute = Ven_CadAgendaExecute
+    end
+    object Ven_ConferenciaMedidas: TAction
+      Category = 'Vendas'
+      Caption = 'Confer'#234'ncia de medidas'
+      Hint = 'Confer'#234'ncia de medidas'
+      OnExecute = Ven_ConferenciaMedidasExecute
+    end
     object Logoff: TAction
       Category = 'Sistema'
       Caption = 'Logoff de:'
@@ -1147,6 +1165,42 @@ object FormPrincipal: TFormPrincipal
       Hint = 'Relat'#243'rio de Caixa di'#225'rio'
       OnExecute = Rel_Fin_CaixaDiarioExecute
     end
+    object mn_Vendas: TAction
+      Category = 'Menu'
+      Caption = 'Vendas'
+      OnExecute = mn_VendasExecute
+    end
+    object Ven_SolicitacaoMaterial: TAction
+      Category = 'Vendas'
+      Caption = 'Solicita'#231#227'o de material'
+      Hint = 'Solicita'#231#227'o de material'
+      OnExecute = Ven_SolicitacaoMaterialExecute
+    end
+    object Ven_RoteiroEntrega: TAction
+      Category = 'Vendas'
+      Caption = 'Roteiro de entrega'
+      Hint = 'Roteiro de entrega'
+    end
+    object smn_RelatorioVendas: TAction
+      Category = 'SubMenu'
+      Caption = 'Relat'#243'rio Vendas'
+    end
+    object Rel_Ven_VendasPorPeriodo: TAction
+      Category = 'Vendas_Rel'
+      Caption = 'Vendas por per'#237'odo'
+      Hint = 'Relat'#243'rio de Vendas por Per'#237'odo'
+    end
+    object Rel_Ven_AgendaPorPeriodo: TAction
+      Category = 'Vendas_Rel'
+      Caption = 'Agenda por per'#237'odo'
+      Hint = 'Relat'#243'rio de Agenda por Per'#237'odo'
+    end
+    object Ven_VincularVendaFinanceiro: TAction
+      Category = 'Vendas'
+      Caption = 'Vincular Venda ao Financeiro'
+      Hint = 'Vincular Venda ao Financeiro'
+      OnExecute = Ven_VincularVendaFinanceiroExecute
+    end
   end
   object menu: TMainMenu
     Left = 413
@@ -1170,6 +1224,7 @@ object FormPrincipal: TFormPrincipal
     end
     object Estoque1: TMenuItem
       Action = mn_Estoque
+      Visible = False
       object Produtos1: TMenuItem
         Action = Est_Produto
       end
@@ -1213,6 +1268,45 @@ object FormPrincipal: TFormPrincipal
         end
       end
     end
+    object Vendas1: TMenuItem
+      Action = mn_Vendas
+      object LanamentodeVendas1: TMenuItem
+        Action = Ven_CadVendas
+      end
+      object Agendamento1: TMenuItem
+        Action = Ven_CadAgenda
+      end
+      object Confernciademedidas1: TMenuItem
+        Action = Ven_ConferenciaMedidas
+      end
+      object Solicitaodematerial1: TMenuItem
+        Action = Ven_SolicitacaoMaterial
+      end
+      object Entregadematerial1: TMenuItem
+        Action = Ven_RoteiroEntrega
+      end
+      object N8: TMenuItem
+        Caption = '-'
+        Visible = False
+      end
+      object RelatrioVendas1: TMenuItem
+        Action = smn_RelatorioVendas
+        Visible = False
+        object VendasporPerodo1: TMenuItem
+          Action = Rel_Ven_VendasPorPeriodo
+        end
+        object Agendaporperodo1: TMenuItem
+          Action = Rel_Ven_AgendaPorPeriodo
+        end
+      end
+      object Auxiliares3: TMenuItem
+        Action = smn_Auxiliares
+        Visible = False
+        object VincularVendaaoFinanceiro1: TMenuItem
+          Action = Ven_VincularVendaFinanceiro
+        end
+      end
+    end
     object Financeiro1: TMenuItem
       Action = mn_Financeiro
       object PagarReceber1: TMenuItem
@@ -1251,6 +1345,9 @@ object FormPrincipal: TFormPrincipal
       end
       object RelatorioFinanceiro1: TMenuItem
         Action = smn_RelatorioFinanceiro
+        object Caixadirio1: TMenuItem
+          Action = Rel_Fin_CaixaDiario
+        end
         object ContasaPagar2: TMenuItem
           Action = Rel_Fin_ExtratoContasPagar
         end
@@ -1259,12 +1356,6 @@ object FormPrincipal: TFormPrincipal
         end
         object ContasaReceberPagamentos2: TMenuItem
           Action = Rel_Fin_Receber_Pagamento
-        end
-        object N8: TMenuItem
-          Caption = '-'
-        end
-        object Caixadirio1: TMenuItem
-          Action = Rel_Fin_CaixaDiario
         end
         object N7: TMenuItem
           Caption = '-'

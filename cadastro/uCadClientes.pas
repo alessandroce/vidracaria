@@ -132,7 +132,9 @@ type
     ibClienteTipoClienteCTC_CLI_ID: TIntegerField;
     ibClienteTipoClienteCTC_CTP_ID: TIntegerField;
     ibClienteTipoClienteCTC_DH_CA: TDateTimeField;
-    DBEdit17: TDBEdit;
+    DBRadioGroup1: TDBRadioGroup;
+    ibCadastroCLI_DH_CA: TDateTimeField;
+    ibCadastroCLI_TIPOPESSOA: TIBStringField;
     procedure FormShow(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);

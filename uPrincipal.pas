@@ -186,9 +186,30 @@ type
     CentrodeCustos1: TMenuItem;
     Cad_Pessoas: TAction;
     Pessoas1: TMenuItem;
-    N8: TMenuItem;
     Rel_Fin_CaixaDiario: TAction;
     Caixadirio1: TMenuItem;
+    mn_Vendas: TAction;
+    Vendas1: TMenuItem;
+    Ven_SolicitacaoMaterial: TAction;
+    Ven_RoteiroEntrega: TAction;
+    Solicitaodematerial1: TMenuItem;
+    Entregadematerial1: TMenuItem;
+    Ven_CadAgenda: TAction;
+    Agendamento1: TMenuItem;
+    Ven_CadVendas: TAction;
+    LanamentodeVendas1: TMenuItem;
+    Ven_ConferenciaMedidas: TAction;
+    Confernciademedidas1: TMenuItem;
+    smn_RelatorioVendas: TAction;
+    N8: TMenuItem;
+    RelatrioVendas1: TMenuItem;
+    Rel_Ven_VendasPorPeriodo: TAction;
+    VendasporPerodo1: TMenuItem;
+    Rel_Ven_AgendaPorPeriodo: TAction;
+    Agendaporperodo1: TMenuItem;
+    Auxiliares3: TMenuItem;
+    Ven_VincularVendaFinanceiro: TAction;
+    VincularVendaaoFinanceiro1: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -244,6 +265,13 @@ type
     procedure Fin_MovtoFinanceiroExecute(Sender: TObject);
     procedure Cad_PessoasExecute(Sender: TObject);
     procedure Rel_Fin_CaixaDiarioExecute(Sender: TObject);
+    procedure mn_VendasExecute(Sender: TObject);
+    procedure Ven_CadAgendaExecute(Sender: TObject);
+    procedure Ven_CadVendasExecute(Sender: TObject);
+    procedure Ven_ConferenciaMedidasExecute(Sender: TObject);
+    procedure Ven_VincularVendaFinanceiroExecute(Sender: TObject);
+    procedure Ven_SolicitacaoMaterialExecute(Sender: TObject);
+    procedure Entregadematerial1Click(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -252,6 +280,7 @@ type
     procedure getContaPagarReceber(pConta: Integer);
     procedure getCliente(pTipo: Integer);
     procedure ProcessaMsg(var Msg: TMsg; var Handler: Boolean);
+    procedure Naodesenvolvido;
 
   public
     { Public declarations }
@@ -283,7 +312,9 @@ uses
   uRelExtratoContasPagar, uRelVencimentoContasPagar,
   uRelPagamentoContasPagar, uRelPagamentoContasReceber,
   uRelVencimentoContasReceber, uRelVendasPeriodo, uCadCentroCusto,
-  uMovFinanceiro, uRelCaixaDiario;
+  uMovFinanceiro, uRelCaixaDiario, uVendaProjetos, uCadVendaComissionada,
+  uAgendaConferenciaMedidas, uCadAgenda, uCadVendas, uCadConferenciaMedida,
+  uVincularVendaFinanceiro, uClassAvisos;
 
 {$R *.dfm}
 
@@ -384,7 +415,7 @@ begin
   end;
   StatusBar1.Panels[0].Text := FormatDateTime('  hh:nn:ss',Now);
   StatusBar1.Panels[1].Text := FormatDateTime('  dddd" , "dd" de "mmmmm" de "yyyyy',Now);
-  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 14/11/2018]';
+  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 17/12/2018]';
 end;
 
 procedure TFormPrincipal.ApplicationEvents2Message(var Msg: tagMSG;
@@ -798,6 +829,59 @@ begin
   FRelCaixaDiario.pnBarraForm.Caption := Rel_Fin_CaixaDiario.Hint;
   FRelCaixaDiario.ShowModal;
   FRelCaixaDiario.Free;
+end;
+
+procedure TFormPrincipal.mn_VendasExecute(Sender: TObject);
+begin
+//
+end;
+
+procedure TFormPrincipal.Ven_CadAgendaExecute(Sender: TObject);
+begin
+  FCadAgenda := TFCadAgenda.Create(nil);
+  FCadAgenda.pnBarraForm.Caption := Ven_CadAgenda.Hint;
+  FCadAgenda.ShowModal;
+  FCadAgenda.Free;
+end;
+
+procedure TFormPrincipal.Ven_CadVendasExecute(Sender: TObject);
+begin
+  FCadVendas := TFCadVendas.Create(nil);
+  FCadVendas.pnBarraForm.Caption := Ven_CadVendas.Hint;
+  FCadVendas.ShowModal;
+  FCadVendas.Free;
+end;
+
+procedure TFormPrincipal.Ven_ConferenciaMedidasExecute(Sender: TObject);
+begin
+  FCadConferenciaMedida := TFCadConferenciaMedida.Create(nil);
+  FCadConferenciaMedida.pnBarraForm.Caption := Ven_ConferenciaMedidas.Hint;
+  FCadConferenciaMedida.ShowModal;
+  FCadConferenciaMedida.Free;
+end;
+
+procedure TFormPrincipal.Ven_VincularVendaFinanceiroExecute(
+  Sender: TObject);
+begin
+  FCadVincularVendaFinanceiro := TFCadVincularVendaFinanceiro.Create(nil);
+  FCadVincularVendaFinanceiro.pnBarraForm.Caption := Ven_VincularVendaFinanceiro.Hint;
+  FCadVincularVendaFinanceiro.ShowModal;
+  FCadVincularVendaFinanceiro.Free;
+end;
+
+procedure TFormPrincipal.Ven_SolicitacaoMaterialExecute(Sender: TObject);
+begin
+  Naodesenvolvido;
+end;
+
+procedure TFormPrincipal.Naodesenvolvido;
+begin
+  Aviso('Processo de análise e desenvolvimento.');
+end;
+
+procedure TFormPrincipal.Entregadematerial1Click(Sender: TObject);
+begin
+  Naodesenvolvido;
 end;
 
 end.

@@ -62,6 +62,13 @@ type
     cxDBDateEdit1: TcxDateEdit;
     cxDBDateEdit2: TcxDateEdit;
     frxRelatorio: TfrxDBDataset;
+    qRelatorioPAR_NUMDOC: TIBStringField;
+    qRelatorioPAR_CCO_ID: TIntegerField;
+    qRelatorioPAR_BAIXADO: TIBStringField;
+    qRelatorioPAR_TIPOBAIXA: TIBStringField;
+    qRelatorioPAR_VENDEDOR_ID: TIntegerField;
+    qRelatorioPAR_VENDACOMISSIONADA_ID: TIntegerField;
+    qRelatorioVEC_NUMDOCUMENTO: TIntegerField;
     procedure bt_CancelarExecute(Sender: TObject);
     procedure bt_LimparExecute(Sender: TObject);
     procedure bt_okExecute(Sender: TObject);

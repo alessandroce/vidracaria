@@ -71,11 +71,11 @@ var Filtro, FiltroUsado : String;
     sOrdenar : String;
 begin
   inherited;
-  Filtro := '';
+  FiltroUsado := '';
   sDataIni := FormatDateTime('dd/mm/yyyy',cxDBDateEdit1.Date);
   sDataFim := FormatDateTime('dd/mm/yyyy',cxDBDateEdit2.Date);
 
-  Filtro := Filtro + 'Período '+sDataIni+' até '+sDataFim;
+  FiltroUsado := FiltroUsado + 'Período '+sDataIni+' até '+sDataFim;
   {pagar}sRelatorio := 'FIN012_CAIXA_DIARIO';
   sDescricaoRelatorio := 'Relatorio de '+pnBarraForm.Caption;
   if ImprimirModoDesign then

@@ -35,4 +35,16 @@ object DMConexao: TDMConexao
     Left = 152
     Top = 16
   end
+  object qGeral: TIBQuery
+    Database = IBConexao
+    Transaction = IBTransacao
+    Left = 160
+    Top = 128
+  end
+  object qGenId: TIBQuery
+    Database = IBConexao
+    Transaction = IBTransacao
+    Left = 160
+    Top = 192
+  end
 end

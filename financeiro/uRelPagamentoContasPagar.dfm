@@ -1169,14 +1169,15 @@ inherited FRelPagamentoContasPagar: TFRelPagamentoContasPagar
   object qRelatorio: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    Active = True
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pagarreceber.*,'
-      '       clientes.cli_cliente desc_cliente'
+      '       clientes.cli_cliente desc_cliente,'
+      '       venda_comissionada.vec_numdocumento'
       '  from pagarreceber'
       ' left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)'
+      
+        ' left join venda_comissionada on (venda_comissionada.vec_id=paga' +
+        'rreceber.par_vendacomissionada_id)'
       ' where 1=1')
     Left = 216
     Top = 160
@@ -1285,6 +1286,39 @@ inherited FRelPagamentoContasPagar: TFRelPagamentoContasPagar
       Origin = 'CLIENTES.CLI_CLIENTE'
       Size = 100
     end
+    object qRelatorioPAR_NUMDOC: TIBStringField
+      FieldName = 'PAR_NUMDOC'
+      Origin = '"PAGARRECEBER"."PAR_NUMDOC"'
+      Size = 15
+    end
+    object qRelatorioPAR_CCO_ID: TIntegerField
+      FieldName = 'PAR_CCO_ID'
+      Origin = '"PAGARRECEBER"."PAR_CCO_ID"'
+    end
+    object qRelatorioPAR_BAIXADO: TIBStringField
+      FieldName = 'PAR_BAIXADO'
+      Origin = '"PAGARRECEBER"."PAR_BAIXADO"'
+      FixedChar = True
+      Size = 1
+    end
+    object qRelatorioPAR_TIPOBAIXA: TIBStringField
+      FieldName = 'PAR_TIPOBAIXA'
+      Origin = '"PAGARRECEBER"."PAR_TIPOBAIXA"'
+      FixedChar = True
+      Size = 1
+    end
+    object qRelatorioPAR_VENDEDOR_ID: TIntegerField
+      FieldName = 'PAR_VENDEDOR_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDEDOR_ID"'
+    end
+    object qRelatorioPAR_VENDACOMISSIONADA_ID: TIntegerField
+      FieldName = 'PAR_VENDACOMISSIONADA_ID'
+      Origin = '"PAGARRECEBER"."PAR_VENDACOMISSIONADA_ID"'
+    end
+    object qRelatorioVEC_NUMDOCUMENTO: TIntegerField
+      FieldName = 'VEC_NUMDOCUMENTO'
+      Origin = '"VENDA_COMISSIONADA"."VEC_NUMDOCUMENTO"'
+    end
   end
   object dsRelatorio: TDataSource
     DataSet = qRelatorio
@@ -1316,7 +1350,14 @@ inherited FRelPagamentoContasPagar: TFRelPagamentoContasPagar
       'PAR_PARCELANUM=PAR_PARCELANUM'
       'PAR_PARCELAMAX=PAR_PARCELAMAX'
       'PAR_PARCELAPAI=PAR_PARCELAPAI'
-      'DESC_CLIENTE=DESC_CLIENTE')
+      'DESC_CLIENTE=DESC_CLIENTE'
+      'PAR_NUMDOC=PAR_NUMDOC'
+      'PAR_CCO_ID=PAR_CCO_ID'
+      'PAR_BAIXADO=PAR_BAIXADO'
+      'PAR_TIPOBAIXA=PAR_TIPOBAIXA'
+      'PAR_VENDEDOR_ID=PAR_VENDEDOR_ID'
+      'PAR_VENDACOMISSIONADA_ID=PAR_VENDACOMISSIONADA_ID'
+      'VEC_NUMDOCUMENTO=VEC_NUMDOCUMENTO')
     DataSource = dsRelatorio
     BCDToCurrency = False
     Left = 299
