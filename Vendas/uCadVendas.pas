@@ -84,6 +84,20 @@ type
     Bevel2: TBevel;
     cdsFinanceiro: TClientDataSet;
     cdsFinanceiroPAR_ID: TIntegerField;
+    ibCadastroVEC_VCOR_ID: TIntegerField;
+    BitBtn1: TBitBtn;
+    Label6: TLabel;
+    qOrcamento: TIBQuery;
+    dsOrcamento: TDataSource;
+    qOrcamentoVCOR_ID: TIntegerField;
+    qOrcamentoVCOR_CODIGO: TIntegerField;
+    qOrcamentoVCOR_DATAEMISSAO: TDateField;
+    qOrcamentoVCOR_CLIENTE_ID: TIntegerField;
+    qOrcamentoVCOR_VALORTOTAL: TIBBCDField;
+    qOrcamentoVCOR_CONDICAOPAGTO: TIBStringField;
+    qOrcamentoVCOR_DH_CA: TDateTimeField;
+    DBEdit2: TDBEdit;
+    BitBtn2: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure ibCadastroNewRecord(DataSet: TDataSet);
     procedure btGerarFinanceiroClick(Sender: TObject);
@@ -95,6 +109,9 @@ type
     procedure btEXClienteClick(Sender: TObject);
     procedure btEXVendedorClick(Sender: TObject);
     procedure Act_Btn_ImprimirExecute(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
+    procedure dsCadastroDataChange(Sender: TObject; Field: TField);
+    procedure BitBtn2Click(Sender: TObject);
   private
     { Private declarations }
     ListaFinancerioId : TStringList;
@@ -119,7 +136,8 @@ implementation
 
 uses uSelecionarCliente, uCadPagarReceber, uClassAvisos, uDMConexao,
   uExibirFinanceiroVendaComissionada,
-  uSelecionarFinanceiroVendaComissionada;
+  uSelecionarFinanceiroVendaComissionada, uPagamentosDiversos,
+  uFerramentas, uSelecionarOrcamentoVComiss, uSelecionarPadrao;
 
 {$R *.dfm}
 
@@ -154,6 +172,8 @@ end;
 procedure TFCadVendas.btGerarFinanceiroClick(Sender: TObject);
 begin
   inherited;
+
+(*
   //if DMConexao.IBTransacao.InTransaction then
     DMConexao.IBTransacao.CommitRetaining;
 
@@ -170,6 +190,27 @@ begin
 
   FCadPagarReceber.ShowModal;
   FCadPagarReceber.Free;
+*)
+
+  //if DMConexao.IBTransacao.InTransaction then
+    DMConexao.IBTransacao.CommitRetaining;
+  FPagamentosDiversos               := TFPagamentosDiversos.Create(nil);
+  FPagamentosDiversos.FVendedorId   := ibCadastroVEC_VENDEDOR_ID.Value;
+  FPagamentosDiversos.FClienteId    := ibCadastroVEC_CLIENTE_ID.Value;
+  FPagamentosDiversos.FValor        := ibCadastroVEC_VALOR.Value;
+  FPagamentosDiversos.FNumDocumento := ibCadastroVEC_NUMDOCUMENTO.Value;
+  FPagamentosDiversos.FObservacao   := ibCadastroVEC_OBSERVACAO.Value;
+  FPagamentosDiversos.FCategoriaId  := 3;
+  FPagamentosDiversos.FData         := cxDBDateEdit1.Date;
+  FPagamentosDiversos.FVendaComissionadaId := ibCadastroVEC_ID.Value;
+  FPagamentosDiversos.ShowModal;
+  if not(FPagamentosDiversos.FCancelar) then
+  begin
+    btGerarFinanceiro.Enabled := false;
+    btCAFinanceiro.Enabled := true;
+    btEXFinanceiro.Enabled := true;
+  end;
+  FPagamentosDiversos.Free;
 end;
 
 procedure TFCadVendas.btEXFinanceiroClick(Sender: TObject);
@@ -178,11 +219,31 @@ begin
   if Duvida('Apagar todas as parcelas geradas?') then
   begin
     try
-    DMConexao.qGeral.Close;
-    DMConexao.qGeral.SQL.Text := 'delete from pagarreceber where pagarreceber.par_vendacomissionada_id = '+IntToStr(ibCadastroVEC_ID.Value);
-    DMConexao.qGeral.ExecSQL;
-    DMConexao.IBTransacao.CommitRetaining;
-    Aviso('parcelas apagadas com sucesso.');
+      DMConexao.qGeral.Close;
+      DMConexao.qGeral.SQL.Clear;
+      DMConexao.qGeral.SQL.Text :=' select count(*) existe      '#13+
+                                  '   from pagarreceber_baixa   '#13+
+                                  '  where exists(              '#13+
+                                  '         select null         '#13+
+                                  '           from pagarreceber '#13+
+                                  '          where pagarreceber.par_id = pagarreceber_baixa.bxp_par_id '#13+
+                                  '            and pagarreceber.par_vendacomissionada_id = '+IntToStr(ibCadastroVEC_ID.Value)+')';
+      DMConexao.qGeral.Open;
+      if DMConexao.qGeral.Fields.Fields[0].Value>0 then
+      begin
+        Aviso('Existe parcela já baixada. Verifique.');
+        Exit;
+      end;
+
+      DMConexao.qGeral.Close;
+      DMConexao.qGeral.SQL.Clear;
+      DMConexao.qGeral.SQL.Text := 'delete from pagarreceber where pagarreceber.par_vendacomissionada_id = '+IntToStr(ibCadastroVEC_ID.Value);
+      DMConexao.qGeral.ExecSQL;
+      DMConexao.IBTransacao.CommitRetaining;
+      btGerarFinanceiro.Enabled := true;
+      btCAFinanceiro.Enabled := false;
+      btEXFinanceiro.Enabled := false;
+      Aviso('parcelas apagadas com sucesso.');
     except
       on e : Exception do
       begin
@@ -206,9 +267,14 @@ begin
 end;
 
 procedure TFCadVendas.EntrouAbaCadastro;
+var vId : Integer;
 begin
   inherited;
-  ExisteFinanceiro(qConsultaID.Value);
+  if (ibCadastro.State=dsEdit) then
+    vId := qConsultaID.Value
+  else
+    vId := 0;
+  ExisteFinanceiro(vId);
 end;
 
 procedure TFCadVendas.FormCreate(Sender: TObject);
@@ -264,7 +330,40 @@ end;
 procedure TFCadVendas.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   inherited;
-//
+  NaoDesenvolvidoAinda;
+end;
+
+procedure TFCadVendas.BitBtn1Click(Sender: TObject);
+begin
+  inherited;
+  if ibCadastroVEC_CLIENTE_ID.Value>0 then
+  begin
+    FSelecionarOrcamentoVComiss := TFSelecionarOrcamentoVComiss.Create(nil);
+    FSelecionarOrcamentoVComiss.vIdCliente := ibCadastroVEC_CLIENTE_ID.Value;
+    FSelecionarOrcamentoVComiss.ShowModal;
+    if FSelecionarOrcamentoVComiss.FId>0 then
+    begin
+      //ibCadastroVEC_CLIENTE_ID.Value := FSelecionarOrcamentoVComiss.FIdCliente;
+      ibCadastroVEC_VALOR.Value := FSelecionarOrcamentoVComiss.FValor;
+      ibCadastroVEC_VCOR_ID.Value := FSelecionarOrcamentoVComiss.FId;
+    end;
+    FSelecionarOrcamentoVComiss.Free;
+  end
+  else
+    Aviso('Cliente não informado.');
+end;
+
+procedure TFCadVendas.dsCadastroDataChange(Sender: TObject; Field: TField);
+begin
+  inherited;
+  qOrcamento.Close;
+  qOrcamento.Open;
+end;
+
+procedure TFCadVendas.BitBtn2Click(Sender: TObject);
+begin
+  inherited;
+  ibCadastroVEC_VCOR_ID.Clear;
 end;
 
 end.

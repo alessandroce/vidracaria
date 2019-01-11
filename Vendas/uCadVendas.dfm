@@ -9,7 +9,6 @@ inherited FCadVendas: TFCadVendas
   TextHeight = 13
   inherited pgCadastro: TPageControl
     Height = 531
-    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
         Height = 433
@@ -117,6 +116,13 @@ inherited FCadVendas: TFCadVendas
             Top = 264
             Width = 393
             Height = 54
+          end
+          object Label6: TLabel
+            Left = 432
+            Top = 5
+            Width = 52
+            Height = 13
+            Caption = 'Or'#231'amento'
           end
           object DBEdit1: TDBEdit
             Left = 136
@@ -288,9 +294,53 @@ inherited FCadVendas: TFCadVendas
             TabOrder = 12
             OnClick = btCAFinanceiroClick
           end
+          object DBEdit2: TDBEdit
+            Left = 432
+            Top = 21
+            Width = 121
+            Height = 21
+            DataField = 'VCOR_CODIGO'
+            DataSource = dsOrcamento
+            TabOrder = 13
+          end
         end
       end
     end
+  end
+  object BitBtn1: TBitBtn [2]
+    Left = 563
+    Top = 151
+    Width = 22
+    Height = 20
+    Hint = 'Selecionar'
+    Caption = '+'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clGreen
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    OnClick = BitBtn1Click
+  end
+  object BitBtn2: TBitBtn [3]
+    Left = 587
+    Top = 151
+    Width = 22
+    Height = 20
+    Hint = 'Apagar'
+    Caption = 'x'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clRed
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    OnClick = BitBtn2Click
+  end
+  inherited dsCadastro: TDataSource
+    OnDataChange = dsCadastroDataChange
   end
   inherited ibCadastro: TIBDataSet
     OnNewRecord = ibCadastroNewRecord
@@ -303,12 +353,12 @@ inherited FCadVendas: TFCadVendas
       
         '  (VEC_CLIENTE_ID, VEC_DATA, VEC_DH_CA, VEC_ID, VEC_NUMDOCUMENTO' +
         ', VEC_OBSERVACAO, '
-      '   VEC_VALOR, VEC_VENDEDOR_ID)'
+      '   VEC_VALOR, VEC_VCOR_ID, VEC_VENDEDOR_ID)'
       'values'
       
         '  (:VEC_CLIENTE_ID, :VEC_DATA, :VEC_DH_CA, :VEC_ID, :VEC_NUMDOCU' +
         'MENTO, '
-      '   :VEC_OBSERVACAO, :VEC_VALOR, :VEC_VENDEDOR_ID)')
+      '   :VEC_OBSERVACAO, :VEC_VALOR, :VEC_VCOR_ID, :VEC_VENDEDOR_ID)')
     RefreshSQL.Strings = (
       'Select '
       '  VEC_ID,'
@@ -318,7 +368,8 @@ inherited FCadVendas: TFCadVendas
       '  VEC_DATA,'
       '  VEC_VALOR,'
       '  VEC_OBSERVACAO,'
-      '  VEC_DH_CA'
+      '  VEC_DH_CA,'
+      '  VEC_VCOR_ID'
       'from venda_comissionada '
       'where'
       '  VEC_ID = :VEC_ID')
@@ -336,6 +387,7 @@ inherited FCadVendas: TFCadVendas
       '  VEC_NUMDOCUMENTO = :VEC_NUMDOCUMENTO,'
       '  VEC_OBSERVACAO = :VEC_OBSERVACAO,'
       '  VEC_VALOR = :VEC_VALOR,'
+      '  VEC_VCOR_ID = :VEC_VCOR_ID,'
       '  VEC_VENDEDOR_ID = :VEC_VENDEDOR_ID'
       'where'
       '  VEC_ID = :OLD_VEC_ID')
@@ -381,6 +433,10 @@ inherited FCadVendas: TFCadVendas
       FieldName = 'VEC_DH_CA'
       Origin = '"VENDA_COMISSIONADA"."VEC_DH_CA"'
     end
+    object ibCadastroVEC_VCOR_ID: TIntegerField
+      FieldName = 'VEC_VCOR_ID'
+      Origin = '"VENDA_COMISSIONADA"."VEC_VCOR_ID"'
+    end
   end
   inherited qConsulta: TIBQuery
     SQL.Strings = (
@@ -392,7 +448,8 @@ inherited FCadVendas: TFCadVendas
         '       (select clientes.cli_cliente from clientes where clientes' +
         '.cli_id = venda_comissionada.vec_cliente_id) cliente,'
       '       venda_comissionada.*'
-      '  from venda_comissionada')
+      '  from venda_comissionada'
+      ' order by venda_comissionada.vec_id')
     object qConsultaID: TIntegerField
       FieldName = 'ID'
       Origin = '"VENDA_COMISSIONADA"."VEC_ID"'
@@ -459,8 +516,8 @@ inherited FCadVendas: TFCadVendas
     Transaction = DMConexao.IBTransacaoLeitura
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
-    Left = 592
-    Top = 104
+    Left = 680
+    Top = 136
     ParamData = <
       item
         DataType = ftUnknown
@@ -479,16 +536,16 @@ inherited FCadVendas: TFCadVendas
   end
   object dsCliente: TDataSource
     DataSet = qCliente
-    Left = 624
-    Top = 104
+    Left = 712
+    Top = 136
   end
   object qVendedor: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
-    Left = 592
-    Top = 160
+    Left = 680
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown
@@ -507,8 +564,8 @@ inherited FCadVendas: TFCadVendas
   end
   object dsVendedor: TDataSource
     DataSet = qVendedor
-    Left = 624
-    Top = 160
+    Left = 712
+    Top = 192
   end
   object qExisteFinanceiro: TIBQuery
     Database = DMConexao.IBConexao
@@ -517,8 +574,8 @@ inherited FCadVendas: TFCadVendas
       'select count(*) encontrou'
       '  from pagarreceber'
       ' where pagarreceber.par_vendacomissionada_id = :vendac_id')
-    Left = 592
-    Top = 216
+    Left = 680
+    Top = 248
     ParamData = <
       item
         DataType = ftUnknown
@@ -532,16 +589,72 @@ inherited FCadVendas: TFCadVendas
   end
   object dsExisteFinanceiro: TDataSource
     DataSet = qExisteFinanceiro
-    Left = 624
-    Top = 216
+    Left = 712
+    Top = 248
   end
   object cdsFinanceiro: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 592
-    Top = 280
+    Left = 680
+    Top = 312
     object cdsFinanceiroPAR_ID: TIntegerField
       FieldName = 'PAR_ID'
     end
+  end
+  object qOrcamento: TIBQuery
+    Database = DMConexao.IBConexao
+    Transaction = DMConexao.IBTransacaoLeitura
+    DataSource = dsCadastro
+    SQL.Strings = (
+      'select *'
+      '  from vcomiss_orcamento'
+      ' where vcomiss_orcamento.vcor_id = :VEC_VCOR_ID')
+    Left = 680
+    Top = 360
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'VEC_VCOR_ID'
+        ParamType = ptUnknown
+      end>
+    object qOrcamentoVCOR_ID: TIntegerField
+      FieldName = 'VCOR_ID'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_ID"'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object qOrcamentoVCOR_CODIGO: TIntegerField
+      FieldName = 'VCOR_CODIGO'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_CODIGO"'
+      Required = True
+    end
+    object qOrcamentoVCOR_DATAEMISSAO: TDateField
+      FieldName = 'VCOR_DATAEMISSAO'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_DATAEMISSAO"'
+    end
+    object qOrcamentoVCOR_CLIENTE_ID: TIntegerField
+      FieldName = 'VCOR_CLIENTE_ID'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_CLIENTE_ID"'
+    end
+    object qOrcamentoVCOR_VALORTOTAL: TIBBCDField
+      FieldName = 'VCOR_VALORTOTAL'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_VALORTOTAL"'
+      Precision = 18
+      Size = 2
+    end
+    object qOrcamentoVCOR_CONDICAOPAGTO: TIBStringField
+      FieldName = 'VCOR_CONDICAOPAGTO'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_CONDICAOPAGTO"'
+      Size = 100
+    end
+    object qOrcamentoVCOR_DH_CA: TDateTimeField
+      FieldName = 'VCOR_DH_CA'
+      Origin = '"VCOMISS_ORCAMENTO"."VCOR_DH_CA"'
+    end
+  end
+  object dsOrcamento: TDataSource
+    DataSet = qOrcamento
+    Left = 712
+    Top = 360
   end
 end
