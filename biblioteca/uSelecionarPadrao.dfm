@@ -10,18 +10,19 @@ inherited FSelecionarPadrao: TFSelecionarPadrao
     Left = 0
     Top = 30
     Width = 584
-    Height = 291
+    Height = 290
     Align = alClient
     TabOrder = 1
     object grConsulta: TcxGrid
       Left = 1
       Top = 1
       Width = 582
-      Height = 289
+      Height = 288
       Align = alClient
       TabOrder = 0
       object grConsultaDBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
+        OnCellDblClick = grConsultaDBTableView1CellDblClick
         DataController.DataSource = dsConsulta
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <
@@ -45,30 +46,30 @@ inherited FSelecionarPadrao: TFSelecionarPadrao
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 321
+    Top = 320
     Width = 584
     Height = 41
     Align = alBottom
     TabOrder = 2
-    object BitBtn1: TBitBtn
+    object btCancelar: TBitBtn
       Left = 210
       Top = 8
       Width = 75
       Height = 25
       TabOrder = 0
-      OnClick = BitBtn1Click
+      OnClick = btCancelarClick
       Kind = bkCancel
     end
-    object BitBtn2: TBitBtn
+    object btOK: TBitBtn
       Left = 298
       Top = 8
       Width = 75
       Height = 25
       TabOrder = 1
-      OnClick = BitBtn2Click
+      OnClick = btOKClick
       Kind = bkOK
     end
-    object BitBtn4: TBitBtn
+    object btCadastrar: TBitBtn
       Left = 5
       Top = 8
       Width = 75
@@ -104,8 +105,6 @@ inherited FSelecionarPadrao: TFSelecionarPadrao
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     Left = 360
     Top = 72
   end

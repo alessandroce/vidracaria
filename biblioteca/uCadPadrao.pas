@@ -101,6 +101,7 @@ type
     function getIdConsulta:Integer;Virtual;
     procedure CarregarConsulta;Virtual;
     procedure CarregarConsultaCDSParametro;Virtual;
+    function IbCadastroAtivo(pCadastro:TIBDataSet):Boolean;
   end;
 
 var
@@ -322,6 +323,11 @@ procedure TFCadPadrao.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Aviso'])) then
     Abort;
+end;
+
+function TFCadPadrao.IbCadastroAtivo(pCadastro:TIBDataSet): Boolean;
+begin
+  Result := (pCadastro.State in [dsEdit,dsInsert]);
 end;
 
 end.

@@ -50,7 +50,8 @@ end;
 procedure TFPadrao.setFPnBarraForm(const Value: String);
 begin
   FPnBarraForm := Value;
-  PnBarraForm.Caption := ':: '+FPnBarraForm+' ::';
+  //PnBarraForm.Caption := ':: '+FPnBarraForm+' ::';
+  PnBarraForm.Caption := FPnBarraForm;
 end;
 
 end.

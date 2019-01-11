@@ -247,7 +247,8 @@ end;
 
 procedure NaoDesenvolvidoAinda;
 begin
-  ShowMessage('Não desenvolvido ainda.');
+  //ShowMessage('Não desenvolvido ainda.');
+  ShowMessage('Processo de análise e desenvolvimento.');
 end;
 
 procedure getVariavelDesign(pCampo, pConteudo:String);
