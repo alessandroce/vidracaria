@@ -210,6 +210,17 @@ type
     Auxiliares3: TMenuItem;
     Ven_VincularVendaFinanceiro: TAction;
     VincularVendaaoFinanceiro1: TMenuItem;
+    APanelClient: TPanel;
+    Image1: TImage;
+    APanelTop: TPanel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    SpeedButton3: TSpeedButton;
+    SpeedButton4: TSpeedButton;
+    SpeedButton5: TSpeedButton;
+    Ven_CadOrcamentoVComiss: TAction;
+    Oramentos1: TMenuItem;
+    N9: TMenuItem;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -272,6 +283,7 @@ type
     procedure Ven_VincularVendaFinanceiroExecute(Sender: TObject);
     procedure Ven_SolicitacaoMaterialExecute(Sender: TObject);
     procedure Entregadematerial1Click(Sender: TObject);
+    procedure Ven_CadOrcamentoVComissExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -314,7 +326,7 @@ uses
   uRelVencimentoContasReceber, uRelVendasPeriodo, uCadCentroCusto,
   uMovFinanceiro, uRelCaixaDiario, uVendaProjetos, uCadVendaComissionada,
   uAgendaConferenciaMedidas, uCadAgenda, uCadVendas, uCadConferenciaMedida,
-  uVincularVendaFinanceiro, uClassAvisos;
+  uVincularVendaFinanceiro, uClassAvisos, uCadOrcamentoVComiss;
 
 {$R *.dfm}
 
@@ -415,7 +427,7 @@ begin
   end;
   StatusBar1.Panels[0].Text := FormatDateTime('  hh:nn:ss',Now);
   StatusBar1.Panels[1].Text := FormatDateTime('  dddd" , "dd" de "mmmmm" de "yyyyy',Now);
-  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 17/12/2018]';
+  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 09/01/2019]';
 end;
 
 procedure TFormPrincipal.ApplicationEvents2Message(var Msg: tagMSG;
@@ -884,6 +896,70 @@ begin
   Naodesenvolvido;
 end;
 
+procedure TFormPrincipal.Ven_CadOrcamentoVComissExecute(Sender: TObject);
+begin
+  FCadOrcamentoVComiss := TFCadOrcamentoVComiss.Create(nil);
+  FCadOrcamentoVComiss.pnBarraForm.Caption := Ven_CadOrcamentoVComiss.Hint;
+  FCadOrcamentoVComiss.ShowModal;
+  FCadOrcamentoVComiss.Free;
+end;
+
 end.
 
 
+
+
+(*
+//////TESTE////////
+procedure TfrmModulos.btnExcluirClick(Sender: TObject);
+var  login,
+     aux: string;
+     erro: EConvertError;
+begin
+  if messagedlg ('ATENÇÃO! Você está prestes a excluir o módulo '+uppercase(dm.ibtModulosMODLOGIN.AsString)+'. Deseja prosseguir?', mtWarning, [mbYes, mbNo], 0) = mrYes then
+  begin
+    // Guarda o login do módulo para depois usar no log
+    login := dm.ibtModulosMODLOGIN.AsString;
+    try
+      if not dm.itrTransa.InTransaction then
+        dm.itrTransa.StartTransaction;
+
+
+      dm.ibtModulos.delete;
+
+
+      dedLogin.setfocus;
+      // LOG
+      insereLog ('Exclusão do módulo '+login);
+      dm.itrTransa.CommitRetaining;
+    except
+      on erro : EIBInterBaseError do
+      begin
+        // Violação de Chave Estrangeira
+        aux := copy(erro.Message,0,24);
+        if (aux = 'violation of FOREIGN KEY') then
+        begin
+          MessageDlg('Não é possível excluir o módulo '+login+
+          ' pois ele está ligado a outras informações do Banco de Dados.',mtWarning,[mbOK],0);
+        end;
+        // Perda de conexão com Banco de Dados
+        aux := copy(erro.Message,0,27);
+        if (aux = 'connection lost to database') then
+        begin
+          MessageDlg('Não foi possível excluir o módulo '+login+'.'+#13+
+          'O sistema perdeu a conexão com o Banco de Dados.'+#13+
+          'Por favor, tente excluir novamente ou, em último caso, reiniciar o programa.',mtWarning,[mbOK],0);
+          CriarLogErro(datadosistema, horadosistema, 'Sistema perdeu conexão com o banco de dados');
+        end;
+      end
+      else
+      begin
+        MessageDlg('ATENÇÃO!!! Ocorreu um erro na operação.'+#13+
+        'Comunique imediatamente o suporte técnico.'+#13#13+
+        'Será gravado um arquivo de log contendo maiores informações.',mtError,[mbOK],0);
+        CriarLogErro(datadosistema, horadosistema, 'Tentou excluir o módulo '+login);
+      end;
+    end;
+  end;
+end;
+*)

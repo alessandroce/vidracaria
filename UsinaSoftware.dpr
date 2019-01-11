@@ -71,7 +71,10 @@ uses
   uVincularVendaFinanceiro in 'Vendas\uVincularVendaFinanceiro.pas' {FCadVincularVendaFinanceiro},
   uSelecionarVendas in 'Vendas\uSelecionarVendas.pas' {FSelecionarVenda},
   uSelecionarAgendaById in 'Vendas\uSelecionarAgendaById.pas' {FSelecionarAgendaById},
-  uCadVendaComissionada in 'Caixa\uCadVendaComissionada.pas' {FCadVendaComissionada};
+  uCadVendaComissionada in 'Caixa\uCadVendaComissionada.pas' {FCadVendaComissionada},
+  uPagamentosDiversos in 'financeiro\uPagamentosDiversos.pas' {FPagamentosDiversos},
+  uCadOrcamentoVComiss in 'Vendas\uCadOrcamentoVComiss.pas' {FCadOrcamentoVComiss},
+  uSelecionarOrcamentoVComiss in 'Vendas\uSelecionarOrcamentoVComiss.pas' {FSelecionarOrcamentoVComiss};
 
 {$R *.res}
 
@@ -83,5 +86,7 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
+  Application.CreateForm(TFCadOrcamentoVComiss, FCadOrcamentoVComiss);
+  Application.CreateForm(TFSelecionarOrcamentoVComiss, FSelecionarOrcamentoVComiss);
   Application.Run;
 end.
