@@ -58,6 +58,9 @@ type
     cdsConsultaVALOR_QUITADO: TBCDField;
     grConsultaDBTableView1VALOR_ORIGINAL: TcxGridDBColumn;
     grConsultaDBTableView1VALOR_QUITADO: TcxGridDBColumn;
+    qConsultaCLI_CLIENTE: TIBStringField;
+    cdsConsultaCLI_CLIENTE: TStringField;
+    grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }

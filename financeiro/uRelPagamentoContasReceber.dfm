@@ -1170,15 +1170,55 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
     SQL.Strings = (
+      
+        'select PAR_ID,PAR_PAGREC,PAR_DESCRICAO,PAR_CAT_ID,PAR_CONTA_ID,P' +
+        'AR_DATACOMPETENCIA,'
+      
+        '       PAR_DATAVENCTO,PAR_VALOR,PAR_CLI_ID,PAR_CETROCUSTO,PAR_OB' +
+        'SERVACAO,PAR_ANEXO,'
+      
+        '       PAR_PAGO,PAR_DATAPGTO,PAR_DESCONTOTAXA,PAR_JUROMULTA,PAR_' +
+        'VALORPAGO,PAR_DH_CA,'
+      
+        '       PAR_PARCELANUM,PAR_PARCELAMAX,PAR_PARCELAPAI,PAR_NUMDOC,P' +
+        'AR_CCO_ID,PAR_BAIXADO,'
+      
+        '       PAR_TIPOBAIXA,PAR_VENDEDOR_ID,PAR_VENDACOMISSIONADA_ID,DE' +
+        'SC_CLIENTE,VEC_NUMDOCUMENTO,'
+      
+        '       VALOR_ORIGINAL,PAR_VALOR_RESTANTE,VALOR_QUITADO,DATA_PAGT' +
+        'O'
+      '  from ('
       'select pagarreceber.*,'
       '       clientes.cli_cliente desc_cliente,'
-      '       venda_comissionada.vec_numdocumento'
+      '       venda_comissionada.vec_numdocumento,'
+      ''
+      '       pagarreceber.par_valor valor_original,'
+      ''
+      '       pagarreceber.par_valor -'
+      '           coalesce((select sum(pagarreceber_baixa.bxp_valor)'
+      '                       from pagarreceber_baixa'
+      
+        '                      where pagarreceber_baixa.bxp_par_id=pagarr' +
+        'eceber.par_id),0) par_valor_restante,'
+      ''
+      '       coalesce((select sum(pagarreceber_baixa.bxp_valor)'
+      '                   from pagarreceber_baixa'
+      
+        '                  where pagarreceber_baixa.bxp_par_id=pagarreceb' +
+        'er.par_id),0) valor_quitado,'
+      ''
+      '       (select max(pagarreceber_baixa.bxp_datapagto)'
+      '                   from pagarreceber_baixa'
+      
+        '                  where pagarreceber_baixa.bxp_par_id=pagarreceb' +
+        'er.par_id) data_pagto'
       '  from pagarreceber'
       ' left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)'
       
         ' left join venda_comissionada on (venda_comissionada.vec_id=paga' +
-        'rreceber.par_vendacomissionada_id)'
-      ' where 1=1')
+        'rreceber.par_vendacomissionada_id))'
+      ' where PAR_ID >- 1')
     Left = 216
     Top = 160
     object qRelatorioPAR_ID: TIntegerField
@@ -1319,6 +1359,25 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
       FieldName = 'VEC_NUMDOCUMENTO'
       Origin = '"VENDA_COMISSIONADA"."VEC_NUMDOCUMENTO"'
     end
+    object qRelatorioVALOR_ORIGINAL: TIBBCDField
+      FieldName = 'VALOR_ORIGINAL'
+      Origin = 'PAGARRECEBER.PAR_VALOR'
+      Precision = 18
+      Size = 2
+    end
+    object qRelatorioPAR_VALOR_RESTANTE: TIBBCDField
+      FieldName = 'PAR_VALOR_RESTANTE'
+      Precision = 18
+      Size = 2
+    end
+    object qRelatorioVALOR_QUITADO: TIBBCDField
+      FieldName = 'VALOR_QUITADO'
+      Precision = 18
+      Size = 2
+    end
+    object qRelatorioDATA_PAGTO: TDateField
+      FieldName = 'DATA_PAGTO'
+    end
   end
   object dsRelatorio: TDataSource
     DataSet = qRelatorio
@@ -1357,7 +1416,11 @@ inherited FRelPagamentoContasReceber: TFRelPagamentoContasReceber
       'PAR_TIPOBAIXA=PAR_TIPOBAIXA'
       'PAR_VENDEDOR_ID=PAR_VENDEDOR_ID'
       'PAR_VENDACOMISSIONADA_ID=PAR_VENDACOMISSIONADA_ID'
-      'VEC_NUMDOCUMENTO=VEC_NUMDOCUMENTO')
+      'VEC_NUMDOCUMENTO=VEC_NUMDOCUMENTO'
+      'VALOR_ORIGINAL=VALOR_ORIGINAL'
+      'PAR_VALOR_RESTANTE=PAR_VALOR_RESTANTE'
+      'VALOR_QUITADO=VALOR_QUITADO'
+      'DATA_PAGTO=DATA_PAGTO')
     DataSource = dsRelatorio
     BCDToCurrency = False
     Left = 299

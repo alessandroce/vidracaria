@@ -14,14 +14,14 @@ inherited FMovFinanceiro: TFMovFinanceiro
     Left = 0
     Top = 80
     Width = 784
-    Height = 482
+    Height = 481
     Align = alClient
     TabOrder = 1
     object cxGrid1: TcxGrid
       Left = 483
       Top = 1
       Width = 300
-      Height = 480
+      Height = 479
       Align = alRight
       TabOrder = 0
       object cxGrid1DBTableView1: TcxGridDBTableView
@@ -52,332 +52,359 @@ inherited FMovFinanceiro: TFMovFinanceiro
         GridView = cxGrid1DBTableView1
       end
     end
-    object Panel2: TPanel
+    object pnDados: TPanel
       Left = 1
       Top = 1
       Width = 482
-      Height = 480
+      Height = 479
       Align = alClient
-      BevelOuter = bvNone
       TabOrder = 1
-      object Label13: TLabel
-        Left = 8
-        Top = 80
-        Width = 32
-        Height = 13
-        Caption = 'Cliente'
-      end
-      object Label1: TLabel
-        Left = 8
-        Top = 191
-        Width = 45
-        Height = 13
-        Caption = 'Categoria'
-      end
-      object Label15: TLabel
-        Left = 8
-        Top = 322
-        Width = 63
-        Height = 13
-        Caption = 'Observa'#231#245'es'
-      end
-      object Label6: TLabel
-        Left = 272
-        Top = 277
-        Width = 24
-        Height = 13
-        Caption = 'Valor'
-        FocusControl = DBEdit1
-      end
-      object Label7: TLabel
-        Left = 8
-        Top = 277
-        Width = 83
-        Height = 13
-        Caption = 'Num. Documento'
-        FocusControl = DBEdit3
-      end
-      object Label2: TLabel
-        Left = 8
-        Top = 26
-        Width = 99
-        Height = 13
-        Caption = 'M'#234's/Ano Movimento'
-      end
-      object Label4: TLabel
-        Left = 148
-        Top = 277
-        Width = 78
-        Height = 13
-        Caption = 'Data Movimento'
-      end
-      object Bevel2: TBevel
-        Left = 6
-        Top = 71
-        Width = 467
-        Height = 9
-        Shape = bsTopLine
-      end
-      object Label14: TLabel
-        Left = 8
-        Top = 234
-        Width = 61
-        Height = 13
-        Caption = 'Centro Custo'
-      end
-      object Label3: TLabel
-        Left = 392
-        Top = 80
-        Width = 74
-        Height = 13
-        Caption = 'Pagar/Receber'
-      end
-      object Label5: TLabel
-        Left = 8
-        Top = 125
-        Width = 41
-        Height = 13
-        Caption = 'Hist'#243'rico'
-      end
-      object DBLookupComboBox3: TDBLookupComboBox
-        Left = 8
-        Top = 96
-        Width = 310
-        Height = 21
-        DataField = 'MOV_CLI_ID'
-        DataSource = dsCadastro
-        KeyField = 'CLI_ID'
-        ListField = 'CLI_CLIENTE'
-        ListSource = dsCliente
-        TabOrder = 2
-      end
-      object btCACliente: TBitBtn
-        Left = 318
-        Top = 95
-        Width = 22
-        Height = 20
-        Hint = 'Adicionar'
-        Caption = '+'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 3
-        OnClick = btCAClienteClick
-      end
-      object btEXCliente: TBitBtn
-        Left = 340
-        Top = 95
-        Width = 22
-        Height = 20
-        Hint = 'Apagar'
-        Caption = 'x'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 4
-        OnClick = btEXClienteClick
-      end
-      object DBLookupComboBox1: TDBLookupComboBox
-        Left = 8
-        Top = 207
-        Width = 310
-        Height = 21
-        DataField = 'MOV_CAT_ID'
-        DataSource = dsCadastro
-        KeyField = 'PIT_ID'
-        ListField = 'PIT_DESCRICAO'
-        ListSource = dsCategoria
-        TabOrder = 6
-      end
-      object btCACategorai: TBitBtn
-        Left = 318
-        Top = 207
-        Width = 22
-        Height = 20
-        Hint = 'Adicionar'
-        Caption = '+'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 7
-        OnClick = btCACategoraiClick
-      end
-      object btEXCategorai: TBitBtn
-        Left = 340
-        Top = 207
-        Width = 22
-        Height = 20
-        Hint = 'Apagar'
-        Caption = 'x'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 8
-        OnClick = btEXCategoraiClick
-      end
-      object DBMemo1: TDBMemo
-        Left = 8
-        Top = 339
-        Width = 457
-        Height = 44
-        DataField = 'MOV_OBSERVACAO'
-        DataSource = dsCadastro
-        TabOrder = 12
-      end
-      object DBEdit1: TDBEdit
-        Left = 272
-        Top = 293
-        Width = 88
-        Height = 21
-        DataField = 'MOV_VALOR'
-        DataSource = dsCadastro
-        TabOrder = 11
-      end
-      object DBEdit3: TDBEdit
-        Left = 8
-        Top = 293
-        Width = 121
-        Height = 21
-        DataField = 'MOV_NUMDOC'
-        DataSource = dsCadastro
-        TabOrder = 9
-      end
-      object BitBtn1: TBitBtn
-        Left = 371
-        Top = 95
-        Width = 22
-        Height = 20
-        Hint = 'Pagar/Receber'
-        Caption = '$'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 5
-        OnClick = BitBtn1Click
-      end
-      object ComboBox1: TComboBox
-        Left = 8
-        Top = 42
-        Width = 105
-        Height = 21
-        ItemHeight = 13
-        ItemIndex = 0
+      object Panel2: TPanel
+        Left = 1
+        Top = 1
+        Width = 480
+        Height = 76
+        Align = alTop
+        BevelOuter = bvNone
         TabOrder = 0
-        Text = 'JANEIRO'
-        OnChange = ComboBox1Change
-        Items.Strings = (
-          'JANEIRO'
-          'FEVEREIRO'
-          'MAR'#199'O'
-          'ABRIL'
-          'MAIO'
-          'JUNHO'
-          'JULHO'
-          'AGOSTO'
-          'SETEMBRO'
-          'OUTUBRO'
-          'NOVEMBRO'
-          'DEZEMBRO')
+        object Label2: TLabel
+          Left = 8
+          Top = 26
+          Width = 99
+          Height = 13
+          Caption = 'M'#234's/Ano Movimento'
+        end
+        object Bevel2: TBevel
+          Left = 6
+          Top = 71
+          Width = 467
+          Height = 9
+          Shape = bsTopLine
+        end
+        object ComboBox1: TComboBox
+          Left = 8
+          Top = 42
+          Width = 105
+          Height = 21
+          ItemHeight = 13
+          ItemIndex = 0
+          TabOrder = 0
+          Text = 'JANEIRO'
+          OnChange = ComboBox1Change
+          Items.Strings = (
+            'JANEIRO'
+            'FEVEREIRO'
+            'MAR'#199'O'
+            'ABRIL'
+            'MAIO'
+            'JUNHO'
+            'JULHO'
+            'AGOSTO'
+            'SETEMBRO'
+            'OUTUBRO'
+            'NOVEMBRO'
+            'DEZEMBRO')
+        end
+        object SpinEdit1: TSpinEdit
+          Left = 112
+          Top = 41
+          Width = 61
+          Height = 22
+          MaxValue = 0
+          MinValue = 0
+          TabOrder = 1
+          Value = 2018
+          OnChange = ComboBox1Change
+        end
       end
-      object cxDBDateEdit1: TcxDBDateEdit
-        Left = 148
-        Top = 293
-        DataBinding.DataField = 'MOV_DATAMOV'
-        DataBinding.DataSource = dsCadastro
-        TabOrder = 10
-        Width = 109
-      end
-      object SpinEdit1: TSpinEdit
-        Left = 112
-        Top = 41
-        Width = 61
-        Height = 22
-        MaxValue = 0
-        MinValue = 0
+      object Panel3: TPanel
+        Left = 1
+        Top = 77
+        Width = 480
+        Height = 401
+        Align = alClient
+        BevelOuter = bvNone
         TabOrder = 1
-        Value = 2018
-      end
-      object DBLookupComboBox4: TDBLookupComboBox
-        Left = 8
-        Top = 250
-        Width = 310
-        Height = 21
-        DataField = 'MOV_CCO_ID'
-        DataSource = dsCadastro
-        KeyField = 'CCO_ID'
-        ListField = 'CCO_DESCRICAO'
-        ListSource = dsCentroCusto
-        TabOrder = 13
-      end
-      object btCACentroCusto: TBitBtn
-        Left = 318
-        Top = 250
-        Width = 22
-        Height = 20
-        Hint = 'Adicionar'
-        Caption = '+'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clGreen
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 14
-        OnClick = btCACentroCustoClick
-      end
-      object btEXCentroCusto: TBitBtn
-        Left = 340
-        Top = 250
-        Width = 22
-        Height = 20
-        Hint = 'Apagar'
-        Caption = 'x'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clRed
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        ParentShowHint = False
-        ShowHint = True
-        TabOrder = 15
-        OnClick = btEXCentroCustoClick
-      end
-      object DBEdit2: TDBEdit
-        Left = 393
-        Top = 95
-        Width = 78
-        Height = 21
-        DataField = 'TIPOCONTA'
-        DataSource = dsPagarReceber
-        TabOrder = 16
+        object Label13: TLabel
+          Left = 8
+          Top = 8
+          Width = 32
+          Height = 13
+          Caption = 'Cliente'
+        end
+        object Label1: TLabel
+          Left = 8
+          Top = 119
+          Width = 45
+          Height = 13
+          Caption = 'Categoria'
+        end
+        object Label15: TLabel
+          Left = 8
+          Top = 250
+          Width = 63
+          Height = 13
+          Caption = 'Observa'#231#245'es'
+        end
+        object Label6: TLabel
+          Left = 272
+          Top = 205
+          Width = 24
+          Height = 13
+          Caption = 'Valor'
+          FocusControl = DBEdit1
+        end
+        object Label7: TLabel
+          Left = 8
+          Top = 205
+          Width = 83
+          Height = 13
+          Caption = 'Num. Documento'
+          FocusControl = DBEdit3
+        end
+        object Label4: TLabel
+          Left = 148
+          Top = 205
+          Width = 78
+          Height = 13
+          Caption = 'Data Movimento'
+        end
+        object Label14: TLabel
+          Left = 8
+          Top = 162
+          Width = 61
+          Height = 13
+          Caption = 'Centro Custo'
+        end
+        object Label3: TLabel
+          Left = 392
+          Top = 8
+          Width = 74
+          Height = 13
+          Caption = 'Pagar/Receber'
+        end
+        object Label5: TLabel
+          Left = 8
+          Top = 53
+          Width = 41
+          Height = 13
+          Caption = 'Hist'#243'rico'
+        end
+        object DBLookupComboBox3: TDBLookupComboBox
+          Left = 8
+          Top = 24
+          Width = 310
+          Height = 21
+          DataField = 'MOV_CLI_ID'
+          DataSource = dsCadastro
+          KeyField = 'CLI_ID'
+          ListField = 'CLI_CLIENTE'
+          ListSource = dsCliente
+          TabOrder = 0
+        end
+        object btCACliente: TBitBtn
+          Left = 318
+          Top = 23
+          Width = 22
+          Height = 20
+          Hint = 'Adicionar'
+          Caption = '+'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnClick = btCAClienteClick
+        end
+        object btEXCliente: TBitBtn
+          Left = 340
+          Top = 23
+          Width = 22
+          Height = 20
+          Hint = 'Apagar'
+          Caption = 'x'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnClick = btEXClienteClick
+        end
+        object DBLookupComboBox1: TDBLookupComboBox
+          Left = 8
+          Top = 135
+          Width = 310
+          Height = 21
+          DataField = 'MOV_CAT_ID'
+          DataSource = dsCadastro
+          KeyField = 'PIT_ID'
+          ListField = 'PIT_DESCRICAO'
+          ListSource = dsCategoria
+          TabOrder = 3
+        end
+        object btCACategorai: TBitBtn
+          Left = 318
+          Top = 135
+          Width = 22
+          Height = 20
+          Hint = 'Adicionar'
+          Caption = '+'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+          OnClick = btCACategoraiClick
+        end
+        object btEXCategorai: TBitBtn
+          Left = 340
+          Top = 135
+          Width = 22
+          Height = 20
+          Hint = 'Apagar'
+          Caption = 'x'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 5
+          OnClick = btEXCategoraiClick
+        end
+        object DBMemo1: TDBMemo
+          Left = 8
+          Top = 267
+          Width = 457
+          Height = 44
+          DataField = 'MOV_OBSERVACAO'
+          DataSource = dsCadastro
+          TabOrder = 6
+        end
+        object DBEdit1: TDBEdit
+          Left = 272
+          Top = 221
+          Width = 88
+          Height = 21
+          DataField = 'MOV_VALOR'
+          DataSource = dsCadastro
+          TabOrder = 7
+        end
+        object DBEdit3: TDBEdit
+          Left = 8
+          Top = 221
+          Width = 121
+          Height = 21
+          DataField = 'MOV_NUMDOC'
+          DataSource = dsCadastro
+          TabOrder = 8
+        end
+        object btPagarReceber: TBitBtn
+          Left = 371
+          Top = 23
+          Width = 22
+          Height = 20
+          Hint = 'Pagar/Receber'
+          Caption = '$'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 9
+          OnClick = btPagarReceberClick
+        end
+        object cxDBDateEdit1: TcxDBDateEdit
+          Left = 148
+          Top = 221
+          DataBinding.DataField = 'MOV_DATAMOV'
+          DataBinding.DataSource = dsCadastro
+          TabOrder = 10
+          Width = 109
+        end
+        object DBLookupComboBox4: TDBLookupComboBox
+          Left = 8
+          Top = 178
+          Width = 310
+          Height = 21
+          DataField = 'MOV_CCO_ID'
+          DataSource = dsCadastro
+          KeyField = 'CCO_ID'
+          ListField = 'CCO_DESCRICAO'
+          ListSource = dsCentroCusto
+          TabOrder = 11
+        end
+        object btCACentroCusto: TBitBtn
+          Left = 318
+          Top = 178
+          Width = 22
+          Height = 20
+          Hint = 'Adicionar'
+          Caption = '+'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clGreen
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 12
+          OnClick = btCACentroCustoClick
+        end
+        object btEXCentroCusto: TBitBtn
+          Left = 340
+          Top = 178
+          Width = 22
+          Height = 20
+          Hint = 'Apagar'
+          Caption = 'x'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 13
+          OnClick = btEXCentroCustoClick
+        end
+        object DBEdit2: TDBEdit
+          Left = 393
+          Top = 23
+          Width = 78
+          Height = 21
+          DataField = 'TIPOCONTA'
+          DataSource = dsPagarReceber
+          TabOrder = 14
+        end
+        object DBMemo2: TDBMemo
+          Left = 8
+          Top = 70
+          Width = 465
+          Height = 44
+          DataField = 'MOV_DESCRICAO'
+          DataSource = dsCadastro
+          TabOrder = 15
+        end
       end
     end
   end
@@ -768,15 +795,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
       end
     end
   end
-  object DBMemo2: TDBMemo [3]
-    Left = 8
-    Top = 222
-    Width = 465
-    Height = 44
-    DataField = 'MOV_DESCRICAO'
-    DataSource = dsCadastro
-    TabOrder = 3
-  end
   inherited ActionList1: TActionList
     inherited Act_Btn_Gravar: TAction
       Tag = 5
@@ -815,8 +833,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
     Transaction = DMConexao.IBTransacao
     BeforePost = ibCadastroBeforePost
     OnNewRecord = ibCadastroNewRecord
-    BufferChunks = 1000
-    CachedUpdates = False
     DeleteSQL.Strings = (
       'delete from movfinanceiro'
       'where'
@@ -969,6 +985,7 @@ inherited FMovFinanceiro: TFMovFinanceiro
   end
   object dsCadastro: TDataSource
     DataSet = ibCadastro
+    OnStateChange = dsCadastroStateChange
     OnDataChange = dsCadastroDataChange
     Left = 432
     Top = 8
@@ -976,8 +993,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select cli_id, cli_cliente'
       '  from clientes'
@@ -1003,8 +1018,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCategoria: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select pl_item.pit_id,'
       '       pl_item.pit_codigo,'
@@ -1042,8 +1055,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qCentroCusto: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select *'
       '  from centrocusto'
@@ -1077,8 +1088,6 @@ inherited FMovFinanceiro: TFMovFinanceiro
   object qPagarReceber: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
-    BufferChunks = 1000
-    CachedUpdates = False
     SQL.Strings = (
       'select par_descricao,'
       '       case when(pagarreceber.par_pagrec=1) then '#39'RECEBER'#39

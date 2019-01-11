@@ -1,6 +1,6 @@
 inherited FCadPagarReceber: TFCadPagarReceber
-  Left = 326
-  Top = 172
+  Left = 297
+  Top = 164
   Height = 600
   Caption = 'FCadPagarReceber'
   OldCreateOrder = True
@@ -8,6 +8,7 @@ inherited FCadPagarReceber: TFCadPagarReceber
   TextHeight = 13
   inherited pgCadastro: TPageControl
     Height = 531
+    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       ImageIndex = 8
       inherited grConsulta: TcxGrid
@@ -918,7 +919,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
       '       clientes.cli_cliente'
       'from pagarreceber'
       ' left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)'
-      'where pagarreceber.PAR_PAGREC = :pagrec')
+      'where pagarreceber.PAR_PAGREC = :pagrec'
+      'order by par_id')
     Left = 528
     Top = 256
     ParamData = <
@@ -1893,8 +1895,8 @@ inherited FCadPagarReceber: TFCadPagarReceber
     DataSource = dsCadastro
     SQL.Strings = (
       'select case'
-      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'P'#39') then '#39'Parial'#39
-      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'P'#39') then '#39'Parial'#39
+      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'P'#39') then '#39'Parcial'#39
+      '       when(pagarreceber_baixa.bxp_tipobaixa='#39'T'#39') then '#39'Total'#39
       '       end tipobaixa,'
       '       pagarreceber_baixa.bxp_datapagto,'
       '       pagarreceber_baixa.bxp_valor,'

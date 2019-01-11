@@ -10,18 +10,19 @@ inherited FSelecionarCheque: TFSelecionarCheque
     Left = 0
     Top = 71
     Width = 584
-    Height = 249
+    Height = 250
     Align = alClient
     TabOrder = 1
     object grConsulta: TcxGrid
       Left = 1
       Top = 1
       Width = 582
-      Height = 247
+      Height = 248
       Align = alClient
       TabOrder = 0
       object grConsultaDBTableView1: TcxGridDBTableView
         NavigatorButtons.ConfirmDelete = False
+        OnCellDblClick = grConsultaDBTableView1CellDblClick
         DataController.DataSource = dsConsulta
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <
@@ -83,27 +84,27 @@ inherited FSelecionarCheque: TFSelecionarCheque
   end
   object Panel2: TPanel [2]
     Left = 0
-    Top = 320
+    Top = 321
     Width = 584
     Height = 41
     Align = alBottom
     TabOrder = 2
-    object BitBtn1: TBitBtn
+    object btCancelar: TBitBtn
       Left = 210
       Top = 8
       Width = 75
       Height = 25
       TabOrder = 0
-      OnClick = BitBtn1Click
+      OnClick = btCancelarClick
       Kind = bkCancel
     end
-    object BitBtn2: TBitBtn
+    object btOK: TBitBtn
       Left = 298
       Top = 8
       Width = 75
       Height = 25
       TabOrder = 1
-      OnClick = BitBtn2Click
+      OnClick = btOKClick
       Kind = bkOK
     end
   end
@@ -177,6 +178,8 @@ inherited FSelecionarCheque: TFSelecionarCheque
   object qConsulta: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacao
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select '#39'N'#39' selecionar,'
       '    CHQ_ID,'

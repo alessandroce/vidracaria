@@ -25,8 +25,8 @@ type
   TFSelecionarCheque = class(TFPadrao)
     Panel1: TPanel;
     Panel2: TPanel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    btCancelar: TBitBtn;
+    btOK: TBitBtn;
     grConsulta: TcxGrid;
     grConsultaDBTableView1: TcxGridDBTableView;
     grConsultaLevel1: TcxGridLevel;
@@ -62,10 +62,14 @@ type
     BitBtn3: TBitBtn;
     BitBtn4: TBitBtn;
     procedure FormShow(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btCancelarClick(Sender: TObject);
+    procedure btOKClick(Sender: TObject);
     procedure BitBtn3Click(Sender: TObject);
     procedure BitBtn4Click(Sender: TObject);
+    procedure grConsultaDBTableView1CellDblClick(
+      Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     { Private declarations }
   public
@@ -97,14 +101,14 @@ begin
   pnBarraForm.Caption := 'Selecionar Cheques';
 end;
 
-procedure TFSelecionarCheque.BitBtn1Click(Sender: TObject);
+procedure TFSelecionarCheque.btCancelarClick(Sender: TObject);
 begin
   inherited;
   FCancelado := true;
   Close;
 end;
 
-procedure TFSelecionarCheque.BitBtn2Click(Sender: TObject);
+procedure TFSelecionarCheque.btOKClick(Sender: TObject);
 begin
   inherited;
   if getSelecionado then
@@ -177,6 +181,15 @@ begin
     cdsConsulta.Next;
   end;
   cdsConsulta.EnableControls;
+end;
+
+procedure TFSelecionarCheque.grConsultaDBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+  inherited;
+  btOK.Click;
 end;
 
 end.

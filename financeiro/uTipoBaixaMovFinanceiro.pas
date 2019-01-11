@@ -11,14 +11,15 @@ type
     GroupBox1: TGroupBox;
     rbParcial: TRadioButton;
     rbTotal: TRadioButton;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    btCancelar: TBitBtn;
+    btOK: TBitBtn;
     Label1: TLabel;
     Label2: TLabel;
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btOKClick(Sender: TObject);
     procedure rbParcialClick(Sender: TObject);
     procedure rbTotalClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure btCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,12 +37,17 @@ uses UFerramentas, uClassAvisos;
 
 {$R *.dfm}
 
-procedure TFTipoBaixaMovFinanceiro.BitBtn2Click(Sender: TObject);
+procedure TFTipoBaixaMovFinanceiro.btOKClick(Sender: TObject);
 begin
   if not(rbParcial.Checked or rbTotal.Checked) then
-    Aviso('Selecione o Tipo de Baixa.')
+  begin
+    Aviso('Selecione o Tipo de Baixa.');
+  end
   else
+  begin
+    FCancelado := false;
     Close;
+  end;
 end;
 
 procedure TFTipoBaixaMovFinanceiro.rbParcialClick(Sender: TObject);
@@ -54,10 +60,15 @@ begin
   FTipoBaixa := 'T';
 end;
 
-procedure TFTipoBaixaMovFinanceiro.BitBtn1Click(Sender: TObject);
+procedure TFTipoBaixaMovFinanceiro.btCancelarClick(Sender: TObject);
 begin
   FTipoBaixa := '';
   Close;
+end;
+
+procedure TFTipoBaixaMovFinanceiro.FormShow(Sender: TObject);
+begin
+  FCancelado := true;
 end;
 
 end.

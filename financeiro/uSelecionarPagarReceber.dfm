@@ -8,7 +8,7 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
         object grConsultaDBTableView1TIPO: TcxGridDBColumn
           Caption = 'Tipo'
           DataBinding.FieldName = 'TIPO'
-          Width = 79
+          Width = 63
         end
         object grConsultaDBTableView1ID: TcxGridDBColumn
           DataBinding.FieldName = 'ID'
@@ -18,14 +18,20 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
           DataBinding.FieldName = 'CODIGO'
           Visible = False
         end
+        object grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn
+          Caption = 'Cliente'
+          DataBinding.FieldName = 'CLI_CLIENTE'
+          Width = 200
+        end
         object grConsultaDBTableView1DESCRICAO: TcxGridDBColumn
-          Caption = 'Descri'#231#227'o'
+          Caption = 'Hist'#243'rio'
           DataBinding.FieldName = 'DESCRICAO'
-          Width = 190
+          Width = 200
         end
         object grConsultaDBTableView1ITEM: TcxGridDBColumn
           Caption = 'Categoria'
           DataBinding.FieldName = 'ITEM'
+          Visible = False
           Width = 190
         end
         object grConsultaDBTableView1PAR_VALOR: TcxGridDBColumn
@@ -92,9 +98,11 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
         'er.par_id),0) valor_quitado,'
       '       pagarreceber.par_datavencto,'
       '       pagarreceber.par_cli_id,'
+      '       clientes.cli_cliente,'
       '       pagarreceber.par_cat_id,'
       '       pagarreceber.par_numdoc'
       '  from pagarreceber'
+      ' left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)'
       ' where ((pagarreceber.par_cli_id = :cli_id) or (0 = :cli_id))'
       '   and coalesce(pagarreceber.par_baixado,'#39'N'#39')='#39'N'#39
       ' order by pagarreceber.par_datavencto')
@@ -170,6 +178,11 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
       Precision = 18
       Size = 2
     end
+    object qConsultaCLI_CLIENTE: TIBStringField
+      FieldName = 'CLI_CLIENTE'
+      Origin = 'CLIENTES.CLI_CLIENTE'
+      Size = 100
+    end
   end
   inherited cdsConsulta: TClientDataSet
     object cdsConsultaID: TIntegerField
@@ -223,6 +236,10 @@ inherited FSelecionarPagarReceber: TFSelecionarPagarReceber
       DisplayFormat = '0.00'
       Precision = 18
       Size = 2
+    end
+    object cdsConsultaCLI_CLIENTE: TStringField
+      FieldName = 'CLI_CLIENTE'
+      Size = 100
     end
   end
 end

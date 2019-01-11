@@ -12,6 +12,7 @@ object FTipoBaixaMovFinanceiro: TFTipoBaixaMovFinanceiro
   Font.Style = [fsBold]
   OldCreateOrder = False
   Position = poScreenCenter
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -59,7 +60,7 @@ object FTipoBaixaMovFinanceiro: TFTipoBaixaMovFinanceiro
       OnClick = rbTotalClick
     end
   end
-  object BitBtn1: TBitBtn
+  object btCancelar: TBitBtn
     Left = 97
     Top = 139
     Width = 75
@@ -67,7 +68,7 @@ object FTipoBaixaMovFinanceiro: TFTipoBaixaMovFinanceiro
     Cancel = True
     Caption = 'Cancel'
     TabOrder = 1
-    OnClick = BitBtn1Click
+    OnClick = btCancelarClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -87,7 +88,7 @@ object FTipoBaixaMovFinanceiro: TFTipoBaixaMovFinanceiro
       0000}
     NumGlyphs = 2
   end
-  object BitBtn2: TBitBtn
+  object btOK: TBitBtn
     Left = 177
     Top = 139
     Width = 75
@@ -95,7 +96,7 @@ object FTipoBaixaMovFinanceiro: TFTipoBaixaMovFinanceiro
     Caption = 'OK'
     Default = True
     TabOrder = 2
-    OnClick = BitBtn2Click
+    OnClick = btOKClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000

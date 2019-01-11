@@ -69,6 +69,10 @@ type
     qRelatorioPAR_VENDEDOR_ID: TIntegerField;
     qRelatorioPAR_VENDACOMISSIONADA_ID: TIntegerField;
     qRelatorioVEC_NUMDOCUMENTO: TIntegerField;
+    qRelatorioVALOR_ORIGINAL: TIBBCDField;
+    qRelatorioPAR_VALOR_RESTANTE: TIBBCDField;
+    qRelatorioVALOR_QUITADO: TIBBCDField;
+    qRelatorioDATA_PAGTO: TDateField;
     procedure bt_CancelarExecute(Sender: TObject);
     procedure bt_LimparExecute(Sender: TObject);
     procedure bt_okExecute(Sender: TObject);
@@ -108,7 +112,7 @@ begin
   Edit2.Clear;
   Edit3.Clear;
   cxDBDateEdit1.Date := StartOfTheMonth(Now);
-  cxDBDateEdit2.Date := Now;
+  cxDBDateEdit2.Date := Date;
 end;
 
 procedure TFRelPagamentoContasReceber.bt_okExecute(Sender: TObject);
@@ -126,7 +130,7 @@ begin
 
   if RadioButton1.Checked then
   begin
-    Filtro := Filtro + 'and ((coalesce(par_baixado,''N'') = ''S'') and (par_datavencto between '+sDataIni+' and '+sdataFim+'))'+#13;
+    Filtro := Filtro + 'and (data_pagto between '+sDataIni+' and '+sdataFim+')'+#13;
     FiltroUsado := FiltroUsado + RadioButton1.caption+' '+StringReplace(sDataIni,'''','',[rfReplaceAll])+' até '+StringReplace(sDataFim,'''','',[rfReplaceAll])+' | ';
   end;
   if RadioButton2.Checked then

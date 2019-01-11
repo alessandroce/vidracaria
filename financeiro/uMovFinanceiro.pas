@@ -61,15 +61,39 @@ type
     ibCadastroMOV_NUMDOC: TIBStringField;
     ibCadastroMOV_DH_CA: TDateTimeField;
     pnBarraPg: TPanel;
+    pnDados: TPanel;
+    nbBarraBotao: TNotebook;
+    btImprimir: TSpeedButton;
+    btExcluir: TSpeedButton;
+    btAlterar: TSpeedButton;
+    btNovo: TSpeedButton;
+    btCancelar: TSpeedButton;
+    btSalvar: TSpeedButton;
+    btSair: TSpeedButton;
+    ibCadastroMOV_TIPOBAIXA: TIBStringField;
+    qPagarReceber: TIBQuery;
+    dsPagarReceber: TDataSource;
+    qPagarReceberPAR_DESCRICAO: TIBStringField;
+    qPagarReceberTIPOCONTA: TIBStringField;
+    ibCadastroMOV_DESCRICAO: TIBStringField;
+    ibCadastroMOV_ANO: TIntegerField;
+    ibCadastroMOV_BAN_ID_CC: TIntegerField;
+    ibCadastroMOV_BAN_ID_AP: TIntegerField;
     Panel2: TPanel;
+    Label2: TLabel;
+    Bevel2: TBevel;
+    ComboBox1: TComboBox;
+    SpinEdit1: TSpinEdit;
+    Panel3: TPanel;
     Label13: TLabel;
     Label1: TLabel;
     Label15: TLabel;
     Label6: TLabel;
     Label7: TLabel;
-    Label2: TLabel;
     Label4: TLabel;
-    Bevel2: TBevel;
+    Label14: TLabel;
+    Label3: TLabel;
+    Label5: TLabel;
     DBLookupComboBox3: TDBLookupComboBox;
     btCACliente: TBitBtn;
     btEXCliente: TBitBtn;
@@ -79,35 +103,13 @@ type
     DBMemo1: TDBMemo;
     DBEdit1: TDBEdit;
     DBEdit3: TDBEdit;
-    BitBtn1: TBitBtn;
-    ComboBox1: TComboBox;
+    btPagarReceber: TBitBtn;
     cxDBDateEdit1: TcxDBDateEdit;
-    SpinEdit1: TSpinEdit;
-    nbBarraBotao: TNotebook;
-    btImprimir: TSpeedButton;
-    btExcluir: TSpeedButton;
-    btAlterar: TSpeedButton;
-    btNovo: TSpeedButton;
-    btCancelar: TSpeedButton;
-    btSalvar: TSpeedButton;
-    btSair: TSpeedButton;
-    Label14: TLabel;
     DBLookupComboBox4: TDBLookupComboBox;
     btCACentroCusto: TBitBtn;
     btEXCentroCusto: TBitBtn;
-    ibCadastroMOV_TIPOBAIXA: TIBStringField;
-    Label3: TLabel;
-    qPagarReceber: TIBQuery;
-    dsPagarReceber: TDataSource;
-    qPagarReceberPAR_DESCRICAO: TIBStringField;
-    qPagarReceberTIPOCONTA: TIBStringField;
     DBEdit2: TDBEdit;
-    ibCadastroMOV_DESCRICAO: TIBStringField;
-    Label5: TLabel;
     DBMemo2: TDBMemo;
-    ibCadastroMOV_ANO: TIntegerField;
-    ibCadastroMOV_BAN_ID_CC: TIntegerField;
-    ibCadastroMOV_BAN_ID_AP: TIntegerField;
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
     procedure Act_Btn_ExcluirExecute(Sender: TObject);
@@ -119,7 +121,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure btCAClienteClick(Sender: TObject);
     procedure btEXClienteClick(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
+    procedure btPagarReceberClick(Sender: TObject);
     procedure btCACategoraiClick(Sender: TObject);
     procedure btEXCategoraiClick(Sender: TObject);
     procedure ibCadastroNewRecord(DataSet: TDataSet);
@@ -127,14 +129,17 @@ type
     procedure btCACentroCustoClick(Sender: TObject);
     procedure btEXCentroCustoClick(Sender: TObject);
     procedure dsCadastroDataChange(Sender: TObject; Field: TField);
+    procedure dsCadastroStateChange(Sender: TObject);
   private
     { Private declarations }
-    FVAlorQuitado : Extended;
+    FValorQuitado : Extended;
     FValorOriginal : Extended;
     FDescricaoMovto : String;
+    FValorCalculado : Extended;
     function IbCadastroAtivo:Boolean;
     procedure barra_botao(pBotao:TAction);
     function getMesAnoMovimento(pMes, pAno : Integer):String;
+    procedure ToolBar_Botoes(Inserindo: Boolean = True);
 
   public
     { Public declarations }
@@ -152,6 +157,27 @@ uses uDMConexao, uSelecionarCliente, uSelecionarPagarReceber,
 {$R *.dfm}
 
 { TFMovFinanceiro }
+
+function State_Insert(Tabela : TDataSet) : Boolean;
+begin
+  Result := (Tabela.State in [dsEdit,dsInsert]);
+end;
+
+procedure TFMovFinanceiro.ToolBar_Botoes( Inserindo : Boolean = True);
+begin
+  Act_Btn_Novo.Enabled      := not Inserindo;
+  Act_Btn_Alterar.Enabled   := (not Inserindo) and (not ibCadastro.IsEmpty);
+  Act_Btn_Cancelar.Enabled  := Inserindo;
+  Act_Btn_Excluir.Enabled   := (not Inserindo) and (not ibCadastro.IsEmpty);
+  Act_Btn_Gravar.Enabled    := Inserindo;
+  Act_Btn_Imprimir.Enabled  := not Inserindo and (not ibCadastro.IsEmpty);
+  Act_Btn_Sair.Enabled := not Inserindo;
+
+  if ibCadastro.State in [dsEdit,dsInsert] then
+    nbBarraBotao.ActivePage := 'pgConsulta'
+  else
+    nbBarraBotao.ActivePage := 'pgCadastro';
+end;
 
 procedure TFMovFinanceiro.barra_botao(pBotao: TAction);
   procedure bInserindoEditando;
@@ -189,6 +215,9 @@ procedure TFMovFinanceiro.barra_botao(pBotao: TAction);
   end;
 
 begin
+  //desabilitado
+  Exit;
+
   case pBotao.Tag of
     {Novo}     0 : bInserindoEditando;
     {Alterar}  1 : bInserindoEditando;
@@ -209,16 +238,18 @@ begin
   ibCadastro.ParamByName('mesano').Value := getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value);
   ibCadastro.Open;
   ibCadastro.Insert;
-  barra_botao(Act_Btn_Novo);
-  nbBarraBotao.ActivePage := 'pgConsulta';
+  //barra_botao(Act_Btn_Novo);
+  //nbBarraBotao.ActivePage := 'pgConsulta';
+  //ComboBox1.SetFocus;
 end;
 
 procedure TFMovFinanceiro.Act_Btn_AlterarExecute(Sender: TObject);
 begin
   inherited;
   ibCadastro.Edit;
-  barra_botao(Act_Btn_Alterar);
-  nbBarraBotao.ActivePage := 'pgConsulta';
+  //barra_botao(Act_Btn_Alterar);
+  //nbBarraBotao.ActivePage := 'pgConsulta';
+  //ComboBox1.SetFocus;
 end;
 
 procedure TFMovFinanceiro.Act_Btn_ExcluirExecute(Sender: TObject);
@@ -235,6 +266,7 @@ begin
     ibCadastro.Close;
     ibCadastro.ParamByName('mesano').Value := getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value);
     ibCadastro.Open;
+    ComboBox1.SetFocus;
 
     Aviso('Registro apagado com sucesso.');
   end;
@@ -243,12 +275,14 @@ end;
 procedure TFMovFinanceiro.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   inherited;
-  barra_botao(Act_Btn_Imprimir);
+  ComboBox1.SetFocus;
+  //barra_botao(Act_Btn_Imprimir);
   if ImprimirModoDesign then
   begin
     if ChamaRelatorioDesign(frxReport1,'SISTEMA','FIN013_MOVOMENTO_FINANCEIRO') then
     begin
       getVariavelDesign('MESANOREF',QuotedStr(getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value)));
+      getVariavelDesign('FILTRO',QuotedStr(ComboBox1.Text+' / '+IntToStr(SpinEdit1.Value)));
       ImprimirAlterarRelatorio(0,'FIN013_MOVOMENTO_FINANCEIRO','Relatório de Movimento Financeiro');
     end;
   end
@@ -256,6 +290,7 @@ begin
   begin
     ChamaRelatorio(frxReport1,'FIN013_MOVOMENTO_FINANCEIRO',false);
     frxReport1.Variables['MESANOREF'] := QuotedStr(getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value));
+    frxReport1.Variables['FILTRO'] := QuotedStr(ComboBox1.Text+' / '+IntToStr(SpinEdit1.Value));
     frxReport1.PrepareReport();
     frxReport1.ShowPreparedReport;
   end;
@@ -265,8 +300,8 @@ procedure TFMovFinanceiro.Act_Btn_CancelarExecute(Sender: TObject);
 begin
   inherited;
   ibCadastro.Cancel;
-  barra_botao(Act_Btn_Cancelar);
-  nbBarraBotao.ActivePage := 'pgCadastro';
+  //barra_botao(Act_Btn_Cancelar);
+  //nbBarraBotao.ActivePage := 'pgCadastro';
 end;
 
 procedure TFMovFinanceiro.Act_Btn_GravarExecute(Sender: TObject);
@@ -274,8 +309,8 @@ begin
   inherited;
   ibCadastro.Post;
   DMConexao.IBTransacao.CommitRetaining;
-  barra_botao(Act_Btn_Gravar);
-  nbBarraBotao.ActivePage := 'pgCadastro';
+  //barra_botao(Act_Btn_Gravar);
+  //nbBarraBotao.ActivePage := 'pgCadastro';
 end;
 
 procedure TFMovFinanceiro.Act_Btn_SairExecute(Sender: TObject);
@@ -292,7 +327,7 @@ begin
   ibCadastro.Close;
   ibCadastro.ParamByName('mesano').Value := getMesAnoMovimento(ComboBox1.ItemIndex+1,SpinEdit1.Value);
   ibCadastro.Open;
-  barra_botao(Act_Btn_Cancelar);
+  //barra_botao(Act_Btn_Cancelar);
 end;
 
 procedure TFMovFinanceiro.FormShow(Sender: TObject);
@@ -300,6 +335,7 @@ begin
   inherited;
   FValorOriginal := 0;
   FValorQuitado := 0;
+  FValorCalculado := 0;
   FDescricaoMovto := EmptyStr;
 
   qCategoria.Close;
@@ -316,6 +352,8 @@ begin
   qCentroCusto.Open;
   qCentroCusto.Last;
   qCentroCusto.First;
+
+  SpinEdit1.Value := YearOf(Now);
 
   ComboBox1.ItemIndex := ( MonthOf(Now) - 1);
   ComboBox1.SetFocus;
@@ -351,7 +389,7 @@ begin
   Result := (ibCadastro.State in [dsEdit,dsInsert]);
 end;
 
-procedure TFMovFinanceiro.BitBtn1Click(Sender: TObject);
+procedure TFMovFinanceiro.btPagarReceberClick(Sender: TObject);
 begin
   inherited;
   if not(IbCadastroAtivo) then
@@ -367,7 +405,7 @@ begin
     ibCadastroMOV_NUMDOC.Value := FSelecionarPagarReceber.FNumDoc;
     ibCadastroMOV_VALOR.Value  := FSelecionarPagarReceber.FValor;
     FValorOriginal             := FSelecionarPagarReceber.FValorOriginal;
-    FVAlorQuitado              := FSelecionarPagarReceber.FValorQuitado;
+    FValorQuitado              := FSelecionarPagarReceber.FValorQuitado;
     FDescricaoMovto            := FSelecionarPagarReceber.FDescricao;
     ibCadastroMOV_DESCRICAO.AsString := ibCadastroMOV_DESCRICAO.AsString + #13 + FDescricaoMovto;
   end;
@@ -409,6 +447,9 @@ end;
 procedure TFMovFinanceiro.ibCadastroNewRecord(DataSet: TDataSet);
 begin
   inherited;
+  FValorOriginal  := 0;
+  FValorQuitado   := 0;
+  FValorCalculado := 0;
   ibCadastroMOV_DATAMOV.Value := Now;
   ibCadastroMOV_ANO.Value := SpinEdit1.Value;
 end;
@@ -417,19 +458,24 @@ procedure TFMovFinanceiro.ibCadastroBeforePost(DataSet: TDataSet);
 var bCancelado : Boolean;
 begin
   inherited;
+  FValorCalculado := 0;
   //tipo baixa
-  if ((ibCadastroMOV_VALOR.Value>=FValorOriginal) or ((FVAlorQuitado+ibCadastroMOV_VALOR.Value) >= FValorOriginal)) then
+  if ((ibCadastroMOV_VALOR.Value>=FValorOriginal) or ((FValorQuitado+ibCadastroMOV_VALOR.Value) >= FValorOriginal)) then
   begin
     ibCadastroMOV_TIPOBAIXA.Value := 'T'
   end
   else
   begin
-    if ((FValorOriginal - (FVAlorQuitado + ibCadastroMOV_VALOR.Value))>0) then
+    //if ((FValorOriginal - (FValorQuitado + ibCadastroMOV_VALOR.Value))>0) then
+    FValorCalculado := (FValorQuitado + ibCadastroMOV_VALOR.Value);
+    FValorCalculado := StrToFloat(FormatFloat('0.00',(FValorOriginal - FValorCalculado)));
+    if (FValorCalculado > 0) then
     begin
       FTipoBaixaMovFinanceiro := TFTipoBaixaMovFinanceiro.Create(nil);
       FTipoBaixaMovFinanceiro.ShowModal;
-      ibCadastroMOV_TIPOBAIXA.Value := FTipoBaixaMovFinanceiro.FTipoBaixa;
       bCancelado := FTipoBaixaMovFinanceiro.FCancelado;
+      if not bCancelado then
+        ibCadastroMOV_TIPOBAIXA.Value := FTipoBaixaMovFinanceiro.FTipoBaixa;
       FTipoBaixaMovFinanceiro.Free;
       if bCancelado then
         Abort;
@@ -464,6 +510,13 @@ begin
   qPagarReceber.Close;
   qPagarReceber.ParamByName('par_id').Value := ibCadastroMOV_PAR_ID.Value;
   qPagarReceber.Open;
+end;
+
+procedure TFMovFinanceiro.dsCadastroStateChange(Sender: TObject);
+begin
+  inherited;
+  ToolBar_Botoes(State_Insert(ibCadastro));
+  Panel3.Enabled:=State_Insert(ibCadastro);
 end;
 
 end.

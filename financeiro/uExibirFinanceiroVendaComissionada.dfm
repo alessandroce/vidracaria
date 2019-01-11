@@ -1,29 +1,36 @@
 inherited FExibirFinanceiroVendaComissionada: TFExibirFinanceiroVendaComissionada
+  Width = 650
   Caption = 'FExibirFinanceiroVendaComissionada'
   PixelsPerInch = 96
   TextHeight = 13
+  inherited pnBarraForm: TPanel
+    Width = 634
+  end
   inherited Panel1: TPanel
+    Width = 634
     inherited grConsulta: TcxGrid
+      Width = 632
       inherited grConsultaDBTableView1: TcxGridDBTableView
         object grConsultaDBTableView1PAR_DESCRICAO: TcxGridDBColumn
-          Caption = 'Descri'#231#227'o'
+          Caption = 'Hist'#243'rico'
           DataBinding.FieldName = 'DESCRICAO'
-          Width = 200
+          Width = 225
         end
         object grConsultaDBTableView1CATEGORIA: TcxGridDBColumn
           Caption = 'Categoria'
           DataBinding.FieldName = 'CATEGORIA'
+          Visible = False
           Width = 200
-        end
-        object grConsultaDBTableView1PAR_VALOR: TcxGridDBColumn
-          Caption = 'Valor'
-          DataBinding.FieldName = 'PAR_VALOR'
-          Width = 80
         end
         object grConsultaDBTableView1CLIENTE: TcxGridDBColumn
           Caption = 'Cliente'
           DataBinding.FieldName = 'CLIENTE'
-          Width = 200
+          Width = 225
+        end
+        object grConsultaDBTableView1PAR_VALOR: TcxGridDBColumn
+          Caption = 'Valor'
+          DataBinding.FieldName = 'PAR_VALOR'
+          Width = 91
         end
         object grConsultaDBTableView1PAR_NUMDOC: TcxGridDBColumn
           Caption = 'Numero Doc.'
@@ -32,24 +39,32 @@ inherited FExibirFinanceiroVendaComissionada: TFExibirFinanceiroVendaComissionad
         object grConsultaDBTableView1BAIXADO: TcxGridDBColumn
           Caption = 'Baixado'
           DataBinding.FieldName = 'BAIXADO'
-          Width = 50
+          Width = 65
         end
       end
     end
   end
   inherited Panel2: TPanel
-    inherited BitBtn1: TBitBtn
-      Left = 98
-      Visible = False
-    end
-    inherited BitBtn2: TBitBtn
-      Left = 255
-    end
+    Width = 634
+  end
+  inherited ActionList1: TActionList
+    Left = 320
+    Top = 72
+  end
+  inherited ImageList1: TImageList
+    Left = 288
+    Top = 72
   end
   inherited frxReport1: TfrxReport
+    Left = 208
+    Top = 72
     Datasets = <>
     Variables = <>
     Style = <>
+  end
+  inherited frxIBXComponents1: TfrxIBXComponents
+    Left = 240
+    Top = 72
   end
   inherited qConsulta: TIBQuery
     SQL.Strings = (
@@ -153,6 +168,7 @@ inherited FExibirFinanceiroVendaComissionada: TFExibirFinanceiroVendaComissionad
     end
     object cdsConsultaPAR_VALOR: TBCDField
       FieldName = 'PAR_VALOR'
+      DisplayFormat = '0.00'
       Precision = 18
       Size = 2
     end
