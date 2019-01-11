@@ -24,8 +24,8 @@ type
   TFSelecionarCli = class(TFPadrao)
     Panel1: TPanel;
     Panel2: TPanel;
-    BitBtn1: TBitBtn;
-    BitBtn2: TBitBtn;
+    btCancelar: TBitBtn;
+    btOK: TBitBtn;
     grConsulta: TcxGrid;
     grConsultaDBTableView1: TcxGridDBTableView;
     grConsultaLevel1: TcxGridLevel;
@@ -37,8 +37,12 @@ type
     grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
-    procedure BitBtn1Click(Sender: TObject);
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btCancelarClick(Sender: TObject);
+    procedure btOKClick(Sender: TObject);
+    procedure grConsultaDBTableView1CellDblClick(
+      Sender: TcxCustomGridTableView;
+      ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+      AShift: TShiftState; var AHandled: Boolean);
   private
     { Private declarations }
   public
@@ -76,20 +80,29 @@ begin
   FDescricao := qConsultaCLI_CLIENTE.Value;
 end;
 
-procedure TFSelecionarCli.BitBtn1Click(Sender: TObject);
+procedure TFSelecionarCli.btCancelarClick(Sender: TObject);
 begin
   inherited;
   FId := 0;
   Close;
 end;
 
-procedure TFSelecionarCli.BitBtn2Click(Sender: TObject);
+procedure TFSelecionarCli.btOKClick(Sender: TObject);
 begin
   inherited;
   if qConsulta.RecordCount>0 then
     Close
   else
     Aviso('Registro não selecionado.');
+end;
+
+procedure TFSelecionarCli.grConsultaDBTableView1CellDblClick(
+  Sender: TcxCustomGridTableView;
+  ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
+  AShift: TShiftState; var AHandled: Boolean);
+begin
+  inherited;
+  btOK.Click;
 end;
 
 end.

@@ -9,7 +9,6 @@ inherited FCadClientes: TFCadClientes
   inherited pgCadastro: TPageControl
     Width = 724
     Height = 531
-    ActivePage = tsCadastro
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
         Width = 716
