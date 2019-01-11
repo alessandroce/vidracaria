@@ -8,10 +8,10 @@ inherited FCadVendas: TFCadVendas
   PixelsPerInch = 96
   TextHeight = 13
   inherited pgCadastro: TPageControl
-    Height = 531
+    Height = 532
     inherited tsConsulta: TTabSheet
       inherited grConsulta: TcxGrid
-        Height = 433
+        Height = 434
         inherited grConsultaDBTableView1: TcxGridDBTableView
           DataController.DataSource = dsConsulta
           object grConsultaDBTableView1CLIENTE: TcxGridDBColumn
@@ -51,7 +51,7 @@ inherited FCadVendas: TFCadVendas
         end
       end
       inherited sbBarraStatus: TStatusBar
-        Top = 483
+        Top = 484
       end
     end
     inherited tsCadastro: TTabSheet
@@ -59,7 +59,7 @@ inherited FCadVendas: TFCadVendas
         Left = 0
         Top = 52
         Width = 776
-        Height = 450
+        Height = 451
         ActivePage = tsVendaComissionada
         Align = alClient
         Images = ImageList1
@@ -303,41 +303,41 @@ inherited FCadVendas: TFCadVendas
             DataSource = dsOrcamento
             TabOrder = 13
           end
+          object BitBtn1: TBitBtn
+            Left = 552
+            Top = 21
+            Width = 22
+            Height = 20
+            Hint = 'Selecionar'
+            Caption = '+'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clGreen
+            Font.Height = -16
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 14
+            OnClick = BitBtn1Click
+          end
+          object BitBtn2: TBitBtn
+            Left = 576
+            Top = 21
+            Width = 22
+            Height = 20
+            Hint = 'Apagar'
+            Caption = 'x'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clRed
+            Font.Height = -16
+            Font.Name = 'Arial'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 15
+            OnClick = BitBtn2Click
+          end
         end
       end
     end
-  end
-  object BitBtn1: TBitBtn [2]
-    Left = 563
-    Top = 151
-    Width = 22
-    Height = 20
-    Hint = 'Selecionar'
-    Caption = '+'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clGreen
-    Font.Height = -16
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-    OnClick = BitBtn1Click
-  end
-  object BitBtn2: TBitBtn [3]
-    Left = 587
-    Top = 151
-    Width = 22
-    Height = 20
-    Hint = 'Apagar'
-    Caption = 'x'
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clRed
-    Font.Height = -16
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 3
-    OnClick = BitBtn2Click
   end
   inherited dsCadastro: TDataSource
     OnDataChange = dsCadastroDataChange
@@ -514,6 +514,8 @@ inherited FCadVendas: TFCadVendas
   object qCliente: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
     Left = 680
@@ -542,6 +544,8 @@ inherited FCadVendas: TFCadVendas
   object qVendedor: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select * from sp_cliente_portipo(:TipoCli)')
     Left = 680
@@ -570,6 +574,8 @@ inherited FCadVendas: TFCadVendas
   object qExisteFinanceiro: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     SQL.Strings = (
       'select count(*) encontrou'
       '  from pagarreceber'
@@ -604,6 +610,8 @@ inherited FCadVendas: TFCadVendas
   object qOrcamento: TIBQuery
     Database = DMConexao.IBConexao
     Transaction = DMConexao.IBTransacaoLeitura
+    BufferChunks = 1000
+    CachedUpdates = False
     DataSource = dsCadastro
     SQL.Strings = (
       'select *'

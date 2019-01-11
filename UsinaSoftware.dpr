@@ -86,7 +86,5 @@ begin
   Application.CreateForm(TFormPrincipal, FormPrincipal);
   Application.CreateForm(TFdesign, Fdesign);
   Application.CreateForm(TFimprel, Fimprel);
-  Application.CreateForm(TFCadOrcamentoVComiss, FCadOrcamentoVComiss);
-  Application.CreateForm(TFSelecionarOrcamentoVComiss, FSelecionarOrcamentoVComiss);
   Application.Run;
 end.

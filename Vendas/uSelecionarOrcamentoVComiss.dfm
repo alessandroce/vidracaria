@@ -61,11 +61,7 @@ inherited FSelecionarOrcamentoVComiss: TFSelecionarOrcamentoVComiss
         ' join clientes on (clientes.cli_id=vcomiss_orcamento.vcor_client' +
         'e_id)'
       ' where clientes.cli_id = :cli_id'
-      '   and not exists(select null'
-      '                    from venda_comissionada'
-      
-        '                   where venda_comissionada.vec_vcor_id=vcomiss_' +
-        'orcamento.vcor_id )')
+      '   and coalesce(vcomiss_orcamento.vcor_situacao,0)=0')
     ParamData = <
       item
         DataType = ftString

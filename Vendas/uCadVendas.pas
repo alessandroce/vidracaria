@@ -85,7 +85,6 @@ type
     cdsFinanceiro: TClientDataSet;
     cdsFinanceiroPAR_ID: TIntegerField;
     ibCadastroVEC_VCOR_ID: TIntegerField;
-    BitBtn1: TBitBtn;
     Label6: TLabel;
     qOrcamento: TIBQuery;
     dsOrcamento: TDataSource;
@@ -97,6 +96,7 @@ type
     qOrcamentoVCOR_CONDICAOPAGTO: TIBStringField;
     qOrcamentoVCOR_DH_CA: TDateTimeField;
     DBEdit2: TDBEdit;
+    BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
     procedure FormShow(Sender: TObject);
     procedure ibCadastroNewRecord(DataSet: TDataSet);
