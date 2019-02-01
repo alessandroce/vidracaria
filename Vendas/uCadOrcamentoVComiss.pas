@@ -19,7 +19,8 @@ uses
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   IBCustomDataSet, frxClass, frxIBXComponents, ActnList, ImgList, IBQuery,
   ExtCtrls, ComCtrls, Buttons, cxGridLevel, cxClasses, cxGridCustomView,
-  cxGrid;
+  cxGrid, frxDBSet, Provider, DBClient, cxContainer, cxTextEdit,
+  cxMaskEdit, cxDropDownEdit, cxImageComboBox;
 
 type
   TFCadOrcamentoVComiss = class(TFCadPadrao)
@@ -93,6 +94,33 @@ type
     edAmbiente: TEdit;
     edDiscriminacao: TEdit;
     edValorUnit: TEdit;
+    qConsultaVCOR_SITUACAO: TIntegerField;
+    qConsultaSITUACAO: TIBStringField;
+    grConsultaDBTableView1SITUACAO: TcxGridDBColumn;
+    grConsultaDBTableView1ID: TcxGridDBColumn;
+    grConsultaDBTableView1VCOR_SITUACAO: TcxGridDBColumn;
+    qExisteVenda: TIBQuery;
+    qExisteVendaENCONTROU: TIntegerField;
+    frxLista: TfrxDBDataset;
+    SpeedButton1: TSpeedButton;
+    Act_Btn_ImprimirOrcamento: TAction;
+    cxImageList1: TcxImageList;
+    Bevel6: TBevel;
+    Label9: TLabel;
+    cxImageComboBox2: TcxImageComboBox;
+    cdsConsultaVCOR_ID: TIntegerField;
+    cdsConsultaVCOR_CODIGO: TIntegerField;
+    cdsConsultaVCOR_DATAEMISSAO: TDateField;
+    cdsConsultaVCOR_CLIENTE_ID: TIntegerField;
+    cdsConsultaVCOR_VALORTOTAL: TBCDField;
+    cdsConsultaVCOR_CONDICAOPAGTO: TStringField;
+    cdsConsultaVCOR_DH_CA: TDateTimeField;
+    cdsConsultaCLI_CLIENTE: TStringField;
+    cdsConsultaID: TIntegerField;
+    cdsConsultaVCOR_SITUACAO: TIntegerField;
+    cdsConsultaSITUACAO: TStringField;
+    qConsultaFLAG: TIntegerField;
+    cdsConsultaFLAG: TIntegerField;
     procedure btCAItensClick(Sender: TObject);
     procedure btEXItensClick(Sender: TObject);
     procedure btCAClienteClick(Sender: TObject);
@@ -105,8 +133,17 @@ type
     procedure FormShow(Sender: TObject);
     procedure dsCadastroItemDataChange(Sender: TObject; Field: TField);
     procedure edValorUnitKeyPress(Sender: TObject; var Key: Char);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure ibCadastroBeforePost(DataSet: TDataSet);
+    procedure Act_Btn_ImprimirExecute(Sender: TObject);
+    procedure Act_Btn_ImprimirOrcamentoExecute(Sender: TObject);
+    procedure cxImageComboBox2PropertiesChange(Sender: TObject);
   private
     { Private declarations }
+    procedure CarregarConsultaCDSParametro;override;
+    procedure CarregarConsultaParam(AParam : String);
   public
     { Public declarations }
   end;
@@ -114,29 +151,59 @@ type
 var
   FCadOrcamentoVComiss: TFCadOrcamentoVComiss;
 
+const
+  SQL_CONSULTA =
+' select *                                                                                  '#13+
+'   from (select vcomiss_orcamento.vcor_id ID,                                              '#13+
+'                vcomiss_orcamento.*,                                                       '#13+
+'                clientes.cli_cliente,                                                      '#13+
+'                case                                                                       '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=0) then ''ABERTO''      '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=1) then ''FECHADO''     '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=2) then ''CANCELADO''   '#13+
+'                end situacao,                                                              '#13+
+'                case                                                                       '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=0) then 1               '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=1) then 2               '#13+
+'                  when(coalesce(vcomiss_orcamento.vcor_situacao,0)=2) then 3               '#13+
+'                end flag                                                                   '#13+
+'           from vcomiss_orcamento                                                          '#13+
+'          left join clientes on (clientes.cli_id=vcomiss_orcamento.vcor_cliente_id)        '#13+
+'          where vcor_id > -1 )                                                             '#13+
+'  where 1=1                                                                                '#13+
+'    and ((flag = %s) or (0 = %s))                                                          '#13+
+' order by vcor_id                                                                          ';
+
+
 implementation
 
-uses uSelecionarCliente, uDMConexao;
+uses uSelecionarCliente, uDMConexao, uClassAvisos, uFerramentas;
 
 {$R *.dfm}
 
 procedure TFCadOrcamentoVComiss.btCAItensClick(Sender: TObject);
 begin
   inherited;
-  if not(ibCadastroItem.State=dsInsert) then
-    ibCadastroItem.Append;
-  ibCadastroItemVCORI_AMBIENTE.Value      := edAmbiente.Text;
-  ibCadastroItemVCORI_DISCRIMINACAO.Value := edDiscriminacao.Text;
-  ibCadastroItemVCORI_VALORUNIT.Value     := StrToFloatDef(edValorUnit.Text,0);
-  ibCadastroItem.Post;
-  edAmbiente.SetFocus;
+  if ((edAmbiente.Text<>'') and (edDiscriminacao.Text<>'') and (edValorUnit.Text<>'')) then
+  begin
+    if not(ibCadastroItem.State=dsInsert) then
+      ibCadastroItem.Append;
+    ibCadastroItemVCORI_AMBIENTE.Value      := edAmbiente.Text;
+    ibCadastroItemVCORI_DISCRIMINACAO.Value := edDiscriminacao.Text;
+    ibCadastroItemVCORI_VALORUNIT.Value     := StrToFloatDef(edValorUnit.Text,0);
+    ibCadastroItem.Post;
+    edAmbiente.Clear;
+    edDiscriminacao.Clear;
+    edValorUnit.Clear;
+    edAmbiente.SetFocus;
+  end
+  else
+    Aviso('Informe os dados para inserir.');
 end;
 
 procedure TFCadOrcamentoVComiss.btEXItensClick(Sender: TObject);
 begin
   inherited;
-  if not(IbCadastroAtivo(ibCadastroItem)) then
-    Exit;
   ibCadastroItem.Delete;
 end;
 
@@ -200,13 +267,17 @@ begin
   DMConexao.qGeral.Open;
   ibCadastroVCOR_CODIGO.Value := DMConexao.qGeral.Fields.Fields[0].Value;
   ibCadastroVCOR_SITUACAO.Value := 0;
+  ibCadastroVCOR_DATAEMISSAO.Value := date;
 end;
 
 procedure TFCadOrcamentoVComiss.FormShow(Sender: TObject);
 begin
   inherited;
+  FCarregarConsultaCDSParametro := true;
   qConsulta.Close;
   qConsulta.Open;
+  cdsConsulta.Close;
+  cdsConsulta.Open;
 end;
 
 procedure TFCadOrcamentoVComiss.dsCadastroItemDataChange(Sender: TObject;
@@ -233,6 +304,104 @@ begin
   inherited;
   if not(key in ['0'..'9',#8,#44]) then
     key := #0;
+end;
+
+procedure TFCadOrcamentoVComiss.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+  if AViewInfo.GridRecord.Selected then
+    ACanvas.Brush.Color := clActiveCaption;
+
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1VCOR_SITUACAO.Index] = 1) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clGreen;
+  end
+  else
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1VCOR_SITUACAO.Index] = 2) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clRed;
+  end
+  else
+  begin
+    //ACanvas.Font.Style := [];
+    ACanvas.Font.Color := clBlack;
+  end;
+
+end;
+
+procedure TFCadOrcamentoVComiss.ibCadastroBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if (ibCadastroVCOR_SITUACAO.Value in [0,2]) then
+  begin
+    qExisteVenda.Close;
+    qExisteVenda.Open;
+    if qExisteVenda.Fields.Fields[0].Value>0 then
+    begin
+      Aviso('Existe Venda gerada para este Orçamento. Verifique.');
+      Abort;
+    end;
+  end;
+end;
+
+procedure TFCadOrcamentoVComiss.Act_Btn_ImprimirExecute(Sender: TObject);
+begin
+  inherited;
+  sRelatorio := 'VEN001_LISTA_ORCAMENTOS_VENDA_COMISSIONADA';
+  sDescricaoRelatorio := 'Relatorio de '+pnBarraForm.Caption;
+  if ImprimirModoDesign then
+  begin
+    if ChamaRelatorioDesign(frxReport1,'SISTEMA',sRelatorio) then
+    begin
+      getVariavelDesign('FILTORUSADO', QuotedStr('Situação: '+cxImageComboBox2.Text));
+      ImprimirAlterarRelatorio(0,sRelatorio,sDescricaoRelatorio);
+    end;
+  end
+  else
+    ChamaRelatorio(frxReport1,sRelatorio);
+
+end;
+
+procedure TFCadOrcamentoVComiss.CarregarConsultaCDSParametro;
+begin
+  inherited;
+  CarregarConsultaParam(VarToStr(cxImageComboBox2.EditValue));
+end;
+
+procedure TFCadOrcamentoVComiss.Act_Btn_ImprimirOrcamentoExecute(
+  Sender: TObject);
+begin
+  inherited;
+  sRelatorio := 'VEN002_ORCAMENTOS_VENDA_COMISSIONADA';
+  sDescricaoRelatorio := 'Relatorio de '+pnBarraForm.Caption;
+  if ImprimirModoDesign then
+  begin
+    if ChamaRelatorioDesign(frxReport1,'SISTEMA',sRelatorio) then
+      ImprimirAlterarRelatorio(0,sRelatorio,sDescricaoRelatorio);
+  end
+  else
+    ChamaRelatorio(frxReport1,sRelatorio);
+end;
+
+procedure TFCadOrcamentoVComiss.CarregarConsultaParam(AParam: String);
+begin
+  qConsulta.Close;
+  qConsulta.SQL.Clear;
+  qConsulta.SQL.Text := Format(SQL_CONSULTA,[AParam,AParam]);
+  qConsulta.Open;
+  cdsConsulta.Close;
+  cdsConsulta.Open;
+end;
+
+procedure TFCadOrcamentoVComiss.cxImageComboBox2PropertiesChange(
+  Sender: TObject);
+begin
+  inherited;
+  CarregarConsultaParam(VarToStr(cxImageComboBox2.EditValue));
 end;
 
 end.

@@ -44,6 +44,12 @@ type
     grConsultaDBTableView1VEC_VALOR: TcxGridDBColumn;
     qConsultaCLIENTE_ID: TIntegerField;
     cdsConsultaCLIENTE_ID: TIntegerField;
+    qConsultaCLI_ENDERECO: TIBStringField;
+    qConsultaFONES: TIBStringField;
+    qConsultaCLI_CPF: TIBStringField;
+    cdsConsultaCLI_ENDERECO: TStringField;
+    cdsConsultaFONES: TStringField;
+    cdsConsultaCLI_CPF: TStringField;
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
   private
     { Private declarations }
@@ -51,7 +57,12 @@ type
     { Public declarations }
     FNumDocumento : Integer;
     FIdCliente : Integer;
-  end;
+    FValor : Extended;
+    FNome : String;
+    FEndereco : String;
+    FFones : String;
+    FCPF : String;
+end;
 
 var
   FSelecionarVenda: TFSelecionarVenda;
@@ -66,6 +77,11 @@ begin
   inherited;
   FNumDocumento := cdsConsultaVEC_NUMDOCUMENTO.Value;
   FIdCliente := cdsConsultaCLIENTE_ID.Value;
+  FValor     := cdsConsultaVEC_VALOR.Value;
+  FNome      := cdsConsultaCLIENTE.Value;
+  FEndereco  := cdsConsultaCLI_ENDERECO.Value;
+  FFones     := cdsConsultaFONES.Value;
+  FCPF       := cdsConsultaCLI_CPF.Value;
 end;
 
 end.

@@ -41,6 +41,16 @@ inherited FSelecionarVenda: TFSelecionarVenda
       '       vend.cli_cliente vendedor,'
       '       cli.cli_id cliente_id,'
       '       cli.cli_cliente cliente,'
+      '       cli.cli_endereco,'
+      '       case'
+      '         when(coalesce(cli.cli_fone,'#39#39')<>'#39#39') then'
+      
+        '           coalesce(cli.cli_fone,'#39#39')||'#39' | '#39'||coalesce(cli.cli_ce' +
+        'lular,'#39#39')'
+      '         else'
+      '           coalesce(cli.cli_celular,'#39#39')'
+      '       end fones,'
+      '       cli.cli_cpf,'
       '       venda_comissionada.vec_numdocumento,'
       '       venda_comissionada.vec_data,'
       '       venda_comissionada.vec_valor'
@@ -100,6 +110,20 @@ inherited FSelecionarVenda: TFSelecionarVenda
       FieldName = 'CLIENTE_ID'
       Origin = 'CLIENTES.CLI_ID'
     end
+    object qConsultaCLI_ENDERECO: TIBStringField
+      FieldName = 'CLI_ENDERECO'
+      Origin = 'CLIENTES.CLI_ENDERECO'
+      Size = 100
+    end
+    object qConsultaFONES: TIBStringField
+      FieldName = 'FONES'
+      Size = 63
+    end
+    object qConsultaCLI_CPF: TIBStringField
+      FieldName = 'CLI_CPF'
+      Origin = 'CLIENTES.CLI_CPF'
+      Size = 30
+    end
   end
   inherited cdsConsulta: TClientDataSet
     object cdsConsultaID: TIntegerField
@@ -137,6 +161,18 @@ inherited FSelecionarVenda: TFSelecionarVenda
     end
     object cdsConsultaCLIENTE_ID: TIntegerField
       FieldName = 'CLIENTE_ID'
+    end
+    object cdsConsultaCLI_ENDERECO: TStringField
+      FieldName = 'CLI_ENDERECO'
+      Size = 100
+    end
+    object cdsConsultaFONES: TStringField
+      FieldName = 'FONES'
+      Size = 63
+    end
+    object cdsConsultaCLI_CPF: TStringField
+      FieldName = 'CLI_CPF'
+      Size = 30
     end
   end
 end

@@ -60,9 +60,14 @@ inherited FSelecionarOrcamentoVComiss: TFSelecionarOrcamentoVComiss
       
         ' join clientes on (clientes.cli_id=vcomiss_orcamento.vcor_client' +
         'e_id)'
-      ' where clientes.cli_id = :cli_id'
+      ' where ((clientes.cli_id = :cli_id) or (0 = :cli_id))'
       '   and coalesce(vcomiss_orcamento.vcor_situacao,0)=0')
     ParamData = <
+      item
+        DataType = ftString
+        Name = 'cli_id'
+        ParamType = ptUnknown
+      end
       item
         DataType = ftString
         Name = 'cli_id'

@@ -20,7 +20,7 @@ uses
   StdCtrls, Buttons, cxGridLevel, cxClasses, cxGridCustomView,
   cxGridCustomTableView, cxGridTableView, cxGridDBTableView, cxGrid,
   cxContainer, cxTextEdit, cxMaskEdit, cxDropDownEdit, cxCalendar,
-  cxDBEdit, DBCtrls, Mask, DBClient;
+  cxDBEdit, DBCtrls, Mask, DBClient, Provider, cxImageComboBox, frxDBSet;
 
 type
   TFCadVendas = class(TFCadPadrao)
@@ -98,6 +98,38 @@ type
     DBEdit2: TDBEdit;
     BitBtn1: TBitBtn;
     BitBtn2: TBitBtn;
+    qConsultaORCAMENTO: TIntegerField;
+    grConsultaDBTableView1ORCAMENTO: TcxGridDBColumn;
+    DBRadioGroup1: TDBRadioGroup;
+    ibCadastroVEC_SITUACAO: TIntegerField;
+    qConsultaVEC_VCOR_ID: TIntegerField;
+    qConsultaVEC_SITUACAO: TIntegerField;
+    qConsultaSITUACAO: TIBStringField;
+    grConsultaDBTableView1VEC_SITUACAO: TcxGridDBColumn;
+    grConsultaDBTableView1SITUACAO: TcxGridDBColumn;
+    Bevel6: TBevel;
+    Label9: TLabel;
+    cxImageComboBox2: TcxImageComboBox;
+    qConsultaFLAG: TIntegerField;
+    cdsConsultaID: TIntegerField;
+    cdsConsultaVEC_ID: TIntegerField;
+    cdsConsultaVEC_VENDEDOR_ID: TIntegerField;
+    cdsConsultaVEC_CLIENTE_ID: TIntegerField;
+    cdsConsultaVEC_NUMDOCUMENTO: TIntegerField;
+    cdsConsultaVEC_DATA: TDateField;
+    cdsConsultaVEC_VALOR: TBCDField;
+    cdsConsultaVEC_DH_CA: TDateTimeField;
+    cdsConsultaVENDEDOR: TStringField;
+    cdsConsultaCLIENTE: TStringField;
+    cdsConsultaVEC_OBSERVACAO: TStringField;
+    cdsConsultaORCAMENTO: TIntegerField;
+    cdsConsultaVEC_VCOR_ID: TIntegerField;
+    cdsConsultaVEC_SITUACAO: TIntegerField;
+    cdsConsultaSITUACAO: TStringField;
+    cdsConsultaFLAG: TIntegerField;
+    cxImageList1: TcxImageList;
+    Act_Btn_ImprimirVenda: TAction;
+    frxListaVendas: TfrxDBDataset;
     procedure FormShow(Sender: TObject);
     procedure ibCadastroNewRecord(DataSet: TDataSet);
     procedure btGerarFinanceiroClick(Sender: TObject);
@@ -112,11 +144,18 @@ type
     procedure BitBtn1Click(Sender: TObject);
     procedure dsCadastroDataChange(Sender: TObject; Field: TField);
     procedure BitBtn2Click(Sender: TObject);
+    procedure grConsultaDBTableView1CustomDrawCell(
+      Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+      AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure ibCadastroBeforePost(DataSet: TDataSet);
+    procedure cxImageComboBox2PropertiesChange(Sender: TObject);
   private
     { Private declarations }
     ListaFinancerioId : TStringList;
-    procedure ExisteFinanceiro(pId:Integer);
+    function ExisteFinanceiro(pId:Integer):Boolean;
     procedure EntrouAbaCadastro;override;
+    procedure CarregarConsultaCDSParametro;override;
+    procedure CarregarConsultaParam(AParam : String);
   public
     { Public declarations }
   end;
@@ -132,6 +171,32 @@ const
   cFuncionario = 3;
   cVendedor = 4;
 
+  SQL_CONSULTA =
+' select *                                                                                                                          '#13+
+'   from (select venda_comissionada.vec_id ID,                                                                                      '#13+
+'                (select clientes.cli_cliente from clientes where clientes.cli_id = venda_comissionada.vec_vendedor_id) vendedor,   '#13+
+'                (select clientes.cli_cliente from clientes where clientes.cli_id = venda_comissionada.vec_cliente_id) cliente,     '#13+
+'                venda_comissionada.*,                                                                                              '#13+
+'                vcomiss_orcamento.vcor_codigo orcamento,                                                                           '#13+
+'                case                                                                                                               '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=0) then ''ABERTO''                                              '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=1) then ''FECHADO''                                             '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=2) then ''CANCELADO''                                           '#13+
+'                end situacao,                                                                                                      '#13+
+'                case                                                                                                               '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=0) then 1                                                       '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=1) then 2                                                       '#13+
+'                  when(coalesce(venda_comissionada.vec_situacao,0)=2) then 3                                                       '#13+
+'                end flag                                                                                                           '#13+
+'           from venda_comissionada                                                                                                 '#13+
+'          left join vcomiss_orcamento on (vcomiss_orcamento.vcor_id=venda_comissionada.vec_vcor_id)                                '#13+
+'          order by venda_comissionada.vec_id)                                                                                      '#13+
+'  where 1=1                                                                                                                        '#13+
+'    and ((flag = %s) or (0 = %s))                                                                                                  ';
+
+
+
+
 implementation
 
 uses uSelecionarCliente, uCadPagarReceber, uClassAvisos, uDMConexao,
@@ -144,8 +209,8 @@ uses uSelecionarCliente, uCadPagarReceber, uClassAvisos, uDMConexao,
 procedure TFCadVendas.FormShow(Sender: TObject);
 begin
   inherited;
-  qConsulta.Close;
-  qConsulta.Open;
+  FCarregarConsultaCDSParametro := true;
+  CarregarConsultaParam('0');
 
   qCliente.Close;
   qCliente.ParamByName('TipoCli').Value := cCliente;
@@ -166,32 +231,13 @@ end;
 procedure TFCadVendas.ibCadastroNewRecord(DataSet: TDataSet);
 begin
   inherited;
-  ibCadastroVEC_DATA.AsDateTime := Now;
+  ibCadastroVEC_DATA.Value := Now;
+  ibCadastroVEC_SITUACAO.Value := 0;
 end;
 
 procedure TFCadVendas.btGerarFinanceiroClick(Sender: TObject);
 begin
   inherited;
-
-(*
-  //if DMConexao.IBTransacao.InTransaction then
-    DMConexao.IBTransacao.CommitRetaining;
-
-  FCadPagarReceber := TFCadPagarReceber.Create(nil);
-  FCadPagarReceber.FTipoPagRec := cReceber;
-
-  FCadPagarReceber.FVendedorId   := ibCadastroVEC_VENDEDOR_ID.Value;
-  FCadPagarReceber.FClienteId    := ibCadastroVEC_CLIENTE_ID.Value;
-  FCadPagarReceber.FValor        := ibCadastroVEC_VALOR.Value;
-  FCadPagarReceber.FNumDocumento := ibCadastroVEC_NUMDOCUMENTO.Value;
-  FCadPagarReceber.FObservacao   := ibCadastroVEC_OBSERVACAO.Value;
-  FCadPagarReceber.FCategoriaId  := 3;
-  FCadPagarReceber.FVendaComissionadaId := ibCadastroVEC_ID.Value;
-
-  FCadPagarReceber.ShowModal;
-  FCadPagarReceber.Free;
-*)
-
   //if DMConexao.IBTransacao.InTransaction then
     DMConexao.IBTransacao.CommitRetaining;
   FPagamentosDiversos               := TFPagamentosDiversos.Create(nil);
@@ -209,6 +255,7 @@ begin
     btGerarFinanceiro.Enabled := false;
     btCAFinanceiro.Enabled := true;
     btEXFinanceiro.Enabled := true;
+    ibCadastroVEC_SITUACAO.Value := 1;
   end;
   FPagamentosDiversos.Free;
 end;
@@ -254,27 +301,28 @@ begin
   end;
 end;
 
-procedure TFCadVendas.ExisteFinanceiro(pId:Integer);
-var bExiste : Boolean;
+function TFCadVendas.ExisteFinanceiro(pId:Integer):Boolean;
 begin
   qExisteFinanceiro.Close;
   qExisteFinanceiro.ParamByName('vendac_id').Value := pId;
   qExisteFinanceiro.Open;
-  bExiste := (qExisteFinanceiroENCONTROU.Value>0);
-  btCAFinanceiro.Enabled  := bExiste;
-  btEXFinanceiro.Enabled  := bExiste;
-  btGerarFinanceiro.Enabled := not(bExiste);
+  Result := (qExisteFinanceiroENCONTROU.Value>0);
 end;
 
 procedure TFCadVendas.EntrouAbaCadastro;
 var vId : Integer;
+    bExiste : Boolean;
 begin
   inherited;
   if (ibCadastro.State=dsEdit) then
     vId := qConsultaID.Value
   else
     vId := 0;
-  ExisteFinanceiro(vId);
+  bExiste := ExisteFinanceiro(vId);
+  btCAFinanceiro.Enabled    := bExiste;
+  btEXFinanceiro.Enabled    := bExiste;
+  btGerarFinanceiro.Enabled := not(bExiste);
+
 end;
 
 procedure TFCadVendas.FormCreate(Sender: TObject);
@@ -330,27 +378,34 @@ end;
 procedure TFCadVendas.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
   inherited;
-  NaoDesenvolvidoAinda;
+  sRelatorio := 'VEN003_LISTA_VENDA_COMISSIONADA';
+  sDescricaoRelatorio := 'Relatorio de '+pnBarraForm.Caption;
+  if ImprimirModoDesign then
+  begin
+    if ChamaRelatorioDesign(frxReport1,'SISTEMA',sRelatorio) then
+    begin
+      getVariavelDesign('FILTORUSADO', QuotedStr('Situação: '+cxImageComboBox2.Text));
+      ImprimirAlterarRelatorio(0,sRelatorio,sDescricaoRelatorio);
+    end;
+  end
+  else
+    ChamaRelatorio(frxReport1,sRelatorio);
 end;
 
 procedure TFCadVendas.BitBtn1Click(Sender: TObject);
 begin
   inherited;
-  if ibCadastroVEC_CLIENTE_ID.Value>0 then
+  FSelecionarOrcamentoVComiss := TFSelecionarOrcamentoVComiss.Create(nil);
+  FSelecionarOrcamentoVComiss.pnBarraForm.Caption := 'Selecionar Orçamento';
+  FSelecionarOrcamentoVComiss.vIdCliente := ibCadastroVEC_CLIENTE_ID.Value;
+  FSelecionarOrcamentoVComiss.ShowModal;
+  if FSelecionarOrcamentoVComiss.FId>0 then
   begin
-    FSelecionarOrcamentoVComiss := TFSelecionarOrcamentoVComiss.Create(nil);
-    FSelecionarOrcamentoVComiss.vIdCliente := ibCadastroVEC_CLIENTE_ID.Value;
-    FSelecionarOrcamentoVComiss.ShowModal;
-    if FSelecionarOrcamentoVComiss.FId>0 then
-    begin
-      //ibCadastroVEC_CLIENTE_ID.Value := FSelecionarOrcamentoVComiss.FIdCliente;
-      ibCadastroVEC_VALOR.Value := FSelecionarOrcamentoVComiss.FValor;
-      ibCadastroVEC_VCOR_ID.Value := FSelecionarOrcamentoVComiss.FId;
-    end;
-    FSelecionarOrcamentoVComiss.Free;
-  end
-  else
-    Aviso('Cliente não informado.');
+    ibCadastroVEC_CLIENTE_ID.Value := FSelecionarOrcamentoVComiss.FIdCliente;
+    ibCadastroVEC_VALOR.Value := FSelecionarOrcamentoVComiss.FValor;
+    ibCadastroVEC_VCOR_ID.Value := FSelecionarOrcamentoVComiss.FId;
+  end;
+  FSelecionarOrcamentoVComiss.Free;
 end;
 
 procedure TFCadVendas.dsCadastroDataChange(Sender: TObject; Field: TField);
@@ -364,6 +419,67 @@ procedure TFCadVendas.BitBtn2Click(Sender: TObject);
 begin
   inherited;
   ibCadastroVEC_VCOR_ID.Clear;
+end;
+
+procedure TFCadVendas.grConsultaDBTableView1CustomDrawCell(
+  Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
+  AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+begin
+  inherited;
+  if AViewInfo.GridRecord.Selected then
+    ACanvas.Brush.Color := clActiveCaption;
+
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1VEC_SITUACAO.Index] = 1) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clGreen;
+  end
+  else
+  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1VEC_SITUACAO.Index] = 2) then
+  begin
+    //ACanvas.Font.Style := [fsBold];
+    ACanvas.Font.Color := clRed;
+  end
+  else
+  begin
+    //ACanvas.Font.Style := [];
+    ACanvas.Font.Color := clBlack;
+  end;
+end;
+
+procedure TFCadVendas.ibCadastroBeforePost(DataSet: TDataSet);
+begin
+  inherited;
+  if (ibCadastroVEC_SITUACAO.Value in [0,2]) then
+  begin
+    if ExisteFinanceiro(ibCadastroVEC_ID.Value) then
+    begin
+      Aviso('Existe Venda gerada para este Orçamento. Verifique.');
+      Abort;
+    end;
+  end;
+end;
+
+procedure TFCadVendas.CarregarConsultaParam(AParam: String);
+begin
+  qConsulta.Close;
+  qConsulta.SQL.Clear;
+  qConsulta.SQL.Text := Format(SQL_CONSULTA,[AParam,AParam]);
+  qConsulta.Open;
+  cdsConsulta.Close;
+  cdsConsulta.Open;
+end;
+
+procedure TFCadVendas.cxImageComboBox2PropertiesChange(Sender: TObject);
+begin
+  inherited;
+  CarregarConsultaParam(VarToStr(cxImageComboBox2.EditValue));
+end;
+
+procedure TFCadVendas.CarregarConsultaCDSParametro;
+begin
+  inherited;
+  CarregarConsultaParam(VarToStr(cxImageComboBox2.EditValue));
 end;
 
 end.
