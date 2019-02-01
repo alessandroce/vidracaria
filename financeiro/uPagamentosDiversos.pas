@@ -292,6 +292,7 @@ end;
 procedure TFPagamentosDiversos.FormShow(Sender: TObject);
 begin
   inherited;
+  FOcorrencia := 1;
   cxDateEdit1.Date := FData;
   Edit2.Text := IntToStr(FNumDocumento);
   Edit3.Text := FormatFloat('0.00',FValor);

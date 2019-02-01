@@ -21,7 +21,7 @@ uses
   cxGridDBTableView, cxGrid, DBCtrls, Mask, cxContainer, cxTextEdit,
   cxMaskEdit, cxDropDownEdit, cxCalendar, cxDBEdit, StrUtils, frxClass,
   frxIBXComponents,uClassAvisos, DateUtils, uFerramentas, frxDBSet,
-  DBClient, Provider, wwdblook, Wwdbdlg;
+  DBClient, Provider, wwdblook, Wwdbdlg, cxImageComboBox;
 
 type
   TFCadPagarReceber = class(TFCadPadrao)
@@ -164,27 +164,6 @@ type
     qRelatorioREL_DESCRICAO: TIBStringField;
     qRelatorioREL_DH_CA: TDateTimeField;
     frxDBDataset1: TfrxDBDataset;
-    dspConsulta: TDataSetProvider;
-    cdsConsulta: TClientDataSet;
-    cdsConsultaID: TIntegerField;
-    cdsConsultaPAR_ID: TIntegerField;
-    cdsConsultaPAR_PAGREC: TIntegerField;
-    cdsConsultaPAR_DESCRICAO: TStringField;
-    cdsConsultaPAR_CAT_ID: TIntegerField;
-    cdsConsultaPAR_CONTA_ID: TIntegerField;
-    cdsConsultaPAR_DATACOMPETENCIA: TDateField;
-    cdsConsultaPAR_DATAVENCTO: TDateField;
-    cdsConsultaPAR_VALOR: TBCDField;
-    cdsConsultaPAR_CLI_ID: TIntegerField;
-    cdsConsultaPAR_CETROCUSTO: TStringField;
-    cdsConsultaPAR_OBSERVACAO: TStringField;
-    cdsConsultaPAR_ANEXO: TMemoField;
-    cdsConsultaPAR_PAGO: TStringField;
-    cdsConsultaPAR_DATAPGTO: TDateField;
-    cdsConsultaPAR_DESCONTOTAXA: TBCDField;
-    cdsConsultaPAR_JUROMULTA: TBCDField;
-    cdsConsultaPAR_VALORPAGO: TBCDField;
-    cdsConsultaPAR_DH_CA: TDateTimeField;
     cdsCheque: TClientDataSet;
     cdsConsultaSELECIONAR: TStringField;
     cdsConsultaCHQ_ID: TIntegerField;
@@ -235,7 +214,6 @@ type
     cxGrid1: TcxGrid;
     ibBaixado: TIBQuery;
     dsBaixado: TDataSource;
-    ibBaixadoTIPOBAIXA: TIBStringField;
     ibBaixadoBXP_DATAPAGTO: TDateField;
     ibBaixadoBXP_VALOR: TIBBCDField;
     ibBaixadoBXP_OBSERVACAO: TIBStringField;
@@ -245,8 +223,6 @@ type
     cxGrid1DBTableView1BXP_OBSERVACAO: TcxGridDBColumn;
     qConsultaPAR_BAIXADO: TIBStringField;
     qConsultaPAR_TIPOBAIXA: TIBStringField;
-    cdsConsultaPAR_BAIXADO: TStringField;
-    cdsConsultaPAR_TIPOBAIXA: TStringField;
     Label8: TLabel;
     Bevel5: TBevel;
     ibParcelaPAR_BAIXADO: TIBStringField;
@@ -266,6 +242,32 @@ type
     qConsultaPAR_VENDEDOR_ID: TIntegerField;
     qConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField;
     qConsultaBAIXADO: TIBStringField;
+    grConsultaDBTableView1BAIXADO: TcxGridDBColumn;
+    qConsultaCLI_CLIENTE: TIBStringField;
+    grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
+    grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
+    ibBaixadoTIPOBAIXA: TIBStringField;
+    cdsConsultaID: TIntegerField;
+    cdsConsultaPAR_ID: TIntegerField;
+    cdsConsultaPAR_PAGREC: TIntegerField;
+    cdsConsultaPAR_DESCRICAO: TStringField;
+    cdsConsultaPAR_CAT_ID: TIntegerField;
+    cdsConsultaPAR_CONTA_ID: TIntegerField;
+    cdsConsultaPAR_DATACOMPETENCIA: TDateField;
+    cdsConsultaPAR_DATAVENCTO: TDateField;
+    cdsConsultaPAR_VALOR: TBCDField;
+    cdsConsultaPAR_CLI_ID: TIntegerField;
+    cdsConsultaPAR_CETROCUSTO: TStringField;
+    cdsConsultaPAR_OBSERVACAO: TStringField;
+    cdsConsultaPAR_ANEXO: TMemoField;
+    cdsConsultaPAR_PAGO: TStringField;
+    cdsConsultaPAR_DATAPGTO: TDateField;
+    cdsConsultaPAR_DESCONTOTAXA: TBCDField;
+    cdsConsultaPAR_JUROMULTA: TBCDField;
+    cdsConsultaPAR_VALORPAGO: TBCDField;
+    cdsConsultaPAR_DH_CA: TDateTimeField;
+    cdsConsultaPAR_BAIXADO: TStringField;
+    cdsConsultaPAR_TIPOBAIXA: TStringField;
     cdsConsultaPAR_PARCELANUM: TIntegerField;
     cdsConsultaPAR_PARCELAMAX: TIntegerField;
     cdsConsultaPAR_PARCELAPAI: TIntegerField;
@@ -274,11 +276,14 @@ type
     cdsConsultaPAR_VENDEDOR_ID: TIntegerField;
     cdsConsultaPAR_VENDACOMISSIONADA_ID: TIntegerField;
     cdsConsultaBAIXADO: TStringField;
-    grConsultaDBTableView1BAIXADO: TcxGridDBColumn;
-    qConsultaCLI_CLIENTE: TIBStringField;
     cdsConsultaCLI_CLIENTE: TStringField;
-    grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
-    grConsultaDBTableView1PAR_TIPOBAIXA: TcxGridDBColumn;
+    grConsultaDBTableView1PAR_NUMDOC: TcxGridDBColumn;
+    cxImageList1: TcxImageList;
+    cxImageComboBox2: TcxImageComboBox;
+    Label9: TLabel;
+    Bevel6: TBevel;
+    qConsultaFLAG: TIntegerField;
+    cdsConsultaFLAG: TIntegerField;
     procedure FormShow(Sender: TObject);
     procedure chRepetirClick(Sender: TObject);
     procedure chPagoClick(Sender: TObject);
@@ -304,6 +309,7 @@ type
     procedure grConsultaDBTableView1CustomDrawCell(
       Sender: TcxCustomGridTableView; ACanvas: TcxCanvas;
       AViewInfo: TcxGridTableDataCellViewInfo; var ADone: Boolean);
+    procedure cxImageComboBox2PropertiesChange(Sender: TObject);
   private
     { Private declarations }
     GeradorID : Integer;
@@ -328,10 +334,33 @@ type
     FCategoriaId : Integer;
     function getIdConsulta:Integer;override;
     Procedure CarregarConsultaCDSParametro;override;
+    Procedure CarregarConsultaParam(AParam:String='');
   end;
 
 var
   FCadPagarReceber: TFCadPagarReceber;
+
+const
+  SQL_CONSULTA =
+' SELECT *                                                                                                                           '#13+
+'   FROM (select pagarreceber.par_id ID,                                                                                             '#13+
+'                pagarreceber.* ,                                                                                                    '#13+
+'                coalesce(pagarreceber.par_baixado,''N'') baixado,                                                                   '#13+
+'                clientes.cli_cliente,                                                                                               '#13+
+'                case                                                                                                                '#13+
+'                  when(((pagarreceber.PAR_DATAVENCTO=current_date) and (coalesce(pagarreceber.PAR_BAIXADO,''N'')=''N''))) then 1    '#13+
+'                  when(((pagarreceber.PAR_DATAVENCTO<current_date) and (coalesce(pagarreceber.PAR_BAIXADO,''N'')=''N''))) then 2    '#13+
+'                  when(((pagarreceber.PAR_TIPOBAIXA=''T'') and (coalesce(pagarreceber.PAR_BAIXADO,''N'')=''S''))) then 3            '#13+
+'                  else                                                                                                              '#13+
+'                  4                                                                                                                 '#13+
+'                end flag                                                                                                            '#13+
+'         from pagarreceber                                                                                                          '#13+
+'          left join clientes on (clientes.cli_id=pagarreceber.par_cli_id)                                                           '#13+
+'         where pagarreceber.PAR_PAGREC = %s )                                                                                       '#13+
+'  where 1=1                                                                                                                         '#13+
+'    and ((flag = %s) or (0 = %s))                                                                                                   '#13+
+' order by par_id                                                                                                                    ';
+
 
 implementation
 
@@ -655,7 +684,10 @@ begin
   if ImprimirModoDesign then
   begin
     if ChamaRelatorioDesign(frxReport1,'SISTEMA',sRelatorio) then
+    begin
+      getVariavelDesign('FILTORUSADO', QuotedStr(cxImageComboBox2.Text));
       ImprimirAlterarRelatorio(0,sRelatorio,sDescricaoRelatorio);
+    end;
   end
   else
     ChamaRelatorio(frxReport1,sRelatorio);
@@ -744,11 +776,7 @@ end;
 procedure TFCadPagarReceber.CarregarConsultaCDSParametro;
 begin
   inherited;
-  qConsulta.Close;
-  qConsulta.ParamByName('pagrec').AsInteger := FTipoPagRec;
-  qConsulta.Open;
-  cdsConsulta.Close;
-  cdsConsulta.Open;
+  CarregarConsultaParam('0');
 end;
 
 procedure TFCadPagarReceber.btCACategoraiClick(Sender: TObject);
@@ -808,39 +836,21 @@ begin
   if AViewInfo.GridRecord.Selected then
     ACanvas.Brush.Color := clActiveCaption;
 
-(*
-  if (AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'P') then
-  begin
-    //ACanvas.Font.Style := [fsBold];
-    ACanvas.Font.Color := clBlue;
-  end
-  else
-  if(AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') then
-  begin
-    //ACanvas.Font.Style := [fsBold];
-    ACanvas.Font.Color := clGreen;
-  end
-  else
-  begin
-    //ACanvas.Font.Style := [];
-    ACanvas.Font.Color := clBlack;
-  end;
-*)
-  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] = Now) and
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] = StrToDate(FormatDateTime('dd/mm/yyyy',Now))) and //vencendo hoje
      (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'N')) then
   begin
     //ACanvas.Font.Style := [fsBold];
     ACanvas.Font.Color := clBlue;
   end
   else
-  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] < Now) and
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_DATAVENCTO.Index] < StrToDate(FormatDateTime('dd/mm/yyyy',Now))) and // já vencida
      (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'N')) then
   begin
     //ACanvas.Font.Style := [fsBold];
     ACanvas.Font.Color := clRed;
   end
   else
-  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') and
+  if ((AViewInfo.GridRecord.Values[grConsultaDBTableView1PAR_TIPOBAIXA.Index] = 'T') and // baixado
      (AViewInfo.GridRecord.Values[grConsultaDBTableView1BAIXADO.Index] = 'S')) then
   begin
     //ACanvas.Font.Style := [fsBold];
@@ -849,9 +859,25 @@ begin
   else
   begin
     //ACanvas.Font.Style := [];
-    ACanvas.Font.Color := clBlack;
+    ACanvas.Font.Color := clBlack;                                                      //a vencer
   end;
 
+end;
+
+procedure TFCadPagarReceber.CarregarConsultaParam(AParam: String='');
+begin
+  qConsulta.Close;
+  qConsulta.SQL.Clear;
+  qConsulta.SQL.Text := Format(SQL_CONSULTA,[IntToStr(FTipoPagRec),AParam,AParam]);
+  qConsulta.Open;
+  cdsConsulta.Close;
+  cdsConsulta.Open;
+end;
+
+procedure TFCadPagarReceber.cxImageComboBox2PropertiesChange(Sender: TObject);
+begin
+  inherited;
+  CarregarConsultaParam(VarToStr(cxImageComboBox2.EditValue));
 end;
 
 end.

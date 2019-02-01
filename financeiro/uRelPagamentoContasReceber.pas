@@ -152,7 +152,12 @@ begin
   end;
 
   case ComboBox1.ItemIndex of
-    0 : sOrdenar := 'par_datavencto';
+    0 : begin
+      if RadioButton1.Checked then
+          sOrdenar := 'data_pagto'
+      else
+          sOrdenar := 'par_datavencto';
+        end;
     1 : sOrdenar := 'desc_cliente';
     2 : sOrdenar := 'par_descricao';
   end;
