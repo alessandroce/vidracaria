@@ -507,7 +507,7 @@ object FCadPadrao: TFCadPadrao
   end
   object dsConsulta: TDataSource
     DataSet = qConsulta
-    Left = 528
+    Left = 608
     Top = 8
   end
   object ibCadastro: TIBDataSet
@@ -1165,5 +1165,15 @@ object FCadPadrao: TFCadPadrao
     DefaultDatabase = DMConexao.IBConexao
     Left = 236
     Top = 7
+  end
+  object dspConsulta: TDataSetProvider
+    Left = 520
+    Top = 8
+  end
+  object cdsConsulta: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 560
+    Top = 8
   end
 end

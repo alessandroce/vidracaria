@@ -88,11 +88,13 @@ type
 
 
 var
-  _SERVIDORINI      : String;
-  _PATH_SERVIDORINI : String;
-  _PATH_IMAGEM      : String;
-  _PATH_SKIN        : String;
-  _SERVER_NAME      : String;
+  _SERVIDORINI       : String;
+  _PATH_SERVIDORINI  : String;
+  _PATH_IMAGEM       : String;
+  _PATH_SKIN         : String;
+  _SERVER_NAME       : String;
+  _PATH_IMAGEM_FUNDO : String;
+  _IMAGEM_FUNDO      : String;
 
 
 

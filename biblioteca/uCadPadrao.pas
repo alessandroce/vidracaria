@@ -18,7 +18,8 @@ uses
   cxFilter, cxData, cxDataStorage, cxEdit, cxDBData, StdCtrls, ExtCtrls,
   ComCtrls, cxGridCustomTableView, cxGridTableView, cxGridDBTableView,
   cxGridLevel, cxClasses, cxGridCustomView, cxGrid, Buttons, ToolWin,
-  ActnList, ImgList, DBCtrls, frxClass, frxIBXComponents;
+  ActnList, ImgList, DBCtrls, frxClass, frxIBXComponents, DBClient,
+  Provider;
 
 type
   TModoCarregarConsulta = (cSemParametro,cComParametro);
@@ -59,6 +60,8 @@ type
     frxReport1: TfrxReport;
     frxIBXComponents1: TfrxIBXComponents;
     Bevel1: TBevel;
+    dspConsulta: TDataSetProvider;
+    cdsConsulta: TClientDataSet;
     procedure Act_Btn_NovoExecute(Sender: TObject);
     procedure Act_Btn_AlterarExecute(Sender: TObject);
     procedure ibCadastroDeleteError(DataSet: TDataSet; E: EDatabaseError;
@@ -300,12 +303,26 @@ end;
 function TFCadPadrao.getIdConsulta: Integer;
 begin
   if FId>0 then
+  begin
     Result := FId
+  end
   else
-  if not(qConsulta.FieldByName('Id').IsNull) then
-    Result := qConsulta.FieldByName('Id').Value
-  else
-    Result := 0;
+  begin
+    if FCarregarConsultaCDSParametro then
+    begin
+      if not(cdsConsulta.FieldByName('Id').IsNull) then
+        Result := cdsConsulta.FieldByName('Id').Value
+      else
+        Result := 0;
+    end
+    else
+    begin
+      if not(qConsulta.FieldByName('Id').IsNull) then
+        Result := qConsulta.FieldByName('Id').Value
+      else
+        Result := 0;
+    end;
+  end;
 end;
 
 procedure TFCadPadrao.CarregarConsulta;
@@ -316,11 +333,16 @@ end;
 
 procedure TFCadPadrao.CarregarConsultaCDSParametro;
 begin
-//
+  qConsulta.Close;
+  qConsulta.Open;
+
+  cdsConsulta.Close;
+  cdsConsulta.Open;
 end;
 
 procedure TFCadPadrao.Act_Btn_ImprimirExecute(Sender: TObject);
 begin
+  FIdConsulta := getIdConsulta;
   if not(Continua(FIdConsulta>0,['I','Sem registros pra exibir.','Aviso'])) then
     Abort;
 end;
