@@ -44,12 +44,11 @@ uses
   uSelecionarCliente in 'cadastro\uSelecionarCliente.pas' {FSelecionarCli},
   uSelecionarBanco in 'financeiro\uSelecionarBanco.pas' {FSelecionarBanco},
   uRelatorioPadrao in 'biblioteca\uRelatorioPadrao.pas' {FRelatorioPadrao},
-  uRelPagamentoContasPagar in 'financeiro\uRelPagamentoContasPagar.pas' {FRelPagamentoContasPagar},
   uRelCaixaDiario in 'financeiro\uRelCaixaDiario.pas' {FRelCaixaDiario},
   uRelVencimentoContasPagar in 'financeiro\uRelVencimentoContasPagar.pas' {FRelVencimentoContasPagar},
   uRelVendasPeriodo in 'financeiro\uRelVendasPeriodo.pas' {FRelVendasPeriodo},
   uRelVencimentoContasReceber in 'financeiro\uRelVencimentoContasReceber.pas' {FRelVencimentoContasReceber},
-  uRelPagamentoContasReceber in 'financeiro\uRelPagamentoContasReceber.pas' {FRelPagamentoContasReceber},
+  uRelPagamentoContasPagar in 'financeiro\uRelPagamentoContasPagar.pas' {FRelPagamentoContasPagar},
   uSelecionarPlanoContas in 'financeiro\uSelecionarPlanoContas.pas' {FSelecionarPlanoContas},
   uSelecionarFormaPgto in 'financeiro\uSelecionarFormaPgto.pas' {FSelecionarFormaPgto},
   uCadCentroCusto in 'financeiro\uCadCentroCusto.pas' {FCadCentroCusto},
@@ -74,7 +73,9 @@ uses
   uCadVendaComissionada in 'Caixa\uCadVendaComissionada.pas' {FCadVendaComissionada},
   uPagamentosDiversos in 'financeiro\uPagamentosDiversos.pas' {FPagamentosDiversos},
   uCadOrcamentoVComiss in 'Vendas\uCadOrcamentoVComiss.pas' {FCadOrcamentoVComiss},
-  uSelecionarOrcamentoVComiss in 'Vendas\uSelecionarOrcamentoVComiss.pas' {FSelecionarOrcamentoVComiss};
+  uSelecionarOrcamentoVComiss in 'Vendas\uSelecionarOrcamentoVComiss.pas' {FSelecionarOrcamentoVComiss},
+  uCadContratoVComiss in 'Vendas\uCadContratoVComiss.pas' {FCadContratoVComiss},
+  uRelPagamentoContasReceber in 'financeiro\uRelPagamentoContasReceber.pas' {FRelPagamentoContasReceber};
 
 {$R *.res}
 

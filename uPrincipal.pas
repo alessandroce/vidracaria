@@ -130,7 +130,7 @@ type
     ImageList3: TImageList;
     ActionList3: TActionList;
     ata_Estoque: TAction;
-    ata_Financeiro: TAction;
+    ata_MovtoFinanceiro: TAction;
     ata_Cadastro: TAction;
     Fin_ContasPagar: TAction;
     Fin_ContasReceber: TAction;
@@ -221,6 +221,17 @@ type
     Ven_CadOrcamentoVComiss: TAction;
     Oramentos1: TMenuItem;
     N9: TMenuItem;
+    Ven_CadContratoVComiss: TAction;
+    Contratos1: TMenuItem;
+    SpeedButton6: TSpeedButton;
+    SpeedButton7: TSpeedButton;
+    ata_ContasPagar: TAction;
+    ata_ContasReceber: TAction;
+    ata_OrcamentoVComiss: TAction;
+    ata_VendasVComiss: TAction;
+    ata_ContratoVComiss: TAction;
+    SpeedButton8: TSpeedButton;
+    ata_Reletorio: TAction;
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure ApplicationEvents1Activate(Sender: TObject);
@@ -253,8 +264,6 @@ type
     procedure Est_CoresFerragemExecute(Sender: TObject);
     procedure Est_LinhaProdutoExecute(Sender: TObject);
     procedure ata_EstoqueExecute(Sender: TObject);
-    procedure ata_FinanceiroExecute(Sender: TObject);
-    procedure ata_CadastroExecute(Sender: TObject);
     procedure Fin_BancosExecute(Sender: TObject);
     procedure Fin_FormaPgtoExecute(Sender: TObject);
     procedure Fin_ContasPagarExecute(Sender: TObject);
@@ -284,6 +293,15 @@ type
     procedure Ven_SolicitacaoMaterialExecute(Sender: TObject);
     procedure Entregadematerial1Click(Sender: TObject);
     procedure Ven_CadOrcamentoVComissExecute(Sender: TObject);
+    procedure Ven_CadContratoVComissExecute(Sender: TObject);
+    procedure ata_CadastroExecute(Sender: TObject);
+    procedure ata_ContasPagarExecute(Sender: TObject);
+    procedure ata_ContasReceberExecute(Sender: TObject);
+    procedure ata_MovtoFinanceiroExecute(Sender: TObject);
+    procedure ata_OrcamentoVComissExecute(Sender: TObject);
+    procedure ata_VendasVComissExecute(Sender: TObject);
+    procedure ata_ContratoVComissExecute(Sender: TObject);
+    procedure ata_ReletorioExecute(Sender: TObject);
   private
     { Private declarations }
     CaminhoDasSkins : String;
@@ -326,7 +344,8 @@ uses
   uRelVencimentoContasReceber, uRelVendasPeriodo, uCadCentroCusto,
   uMovFinanceiro, uRelCaixaDiario, uVendaProjetos, uCadVendaComissionada,
   uAgendaConferenciaMedidas, uCadAgenda, uCadVendas, uCadConferenciaMedida,
-  uVincularVendaFinanceiro, uClassAvisos, uCadOrcamentoVComiss;
+  uVincularVendaFinanceiro, uClassAvisos, uCadOrcamentoVComiss,
+  uCadContratoVComiss;
 
 {$R *.dfm}
 
@@ -375,7 +394,7 @@ end;
 procedure TFormPrincipal.ApplicationEvents1Activate(Sender: TObject);
 begin
   StatusBar1.Panels[3].Text := ' '+Application.Hint;
-  Application.OnMessage := ProcessaMsg;
+  //Application.OnMessage := ProcessaMsg;
 end;
 
 procedure TFormPrincipal.Timer1Timer(Sender: TObject);
@@ -403,12 +422,14 @@ end;
 procedure TFormPrincipal.FormShow(Sender: TObject);
 var Ini : TServidorIni;
 begin
-  Ini               := TServidorIni.create(SkinData1);
-  _SERVIDORINI      := Ini.Ler_ArquivoIni('SERVIDORINI','ARQUIVO');
-  _PATH_SERVIDORINI := Ini.Ler_ArquivoIni('SERVIDORINI','CAMINHO');
-  _PATH_IMAGEM      := Ini.Ler_ArquivoIni('SERVIDORINI','IMAGEM');
-  _PATH_SKIN        := Ini.Ler_ArquivoIni('SERVIDORINI','SKIN');
-  _SERVER_NAME      := Ini.Ler_ArquivoIni('SERVIDORINI','BASE');
+  Ini                := TServidorIni.create(SkinData1);
+  _SERVIDORINI       := Ini.Ler_ArquivoIni('SERVIDORINI','ARQUIVO');
+  _PATH_SERVIDORINI  := Ini.Ler_ArquivoIni('SERVIDORINI','CAMINHO');
+  _PATH_IMAGEM       := Ini.Ler_ArquivoIni('SERVIDORINI','IMAGEM');
+  _PATH_SKIN         := Ini.Ler_ArquivoIni('SERVIDORINI','SKIN');
+  _SERVER_NAME       := Ini.Ler_ArquivoIni('SERVIDORINI','BASE');
+  _PATH_IMAGEM_FUNDO := Ini.Ler_ArquivoIni('SISTEMA','imagem_fundo')+'\';
+  _IMAGEM_FUNDO      := Ini.Ler_ArquivoIni('SISTEMA','nome_imagem_fundo')+'.jpg';
   ServidorIni.Relatorios := Ini.Ler_ArquivoIni('SISTEMA','Relatorios')+'\';
   ServidorIni.Skin       := Ini.Ler_ArquivoIni('SISTEMA','Skin');
 
@@ -427,7 +448,11 @@ begin
   end;
   StatusBar1.Panels[0].Text := FormatDateTime('  hh:nn:ss',Now);
   StatusBar1.Panels[1].Text := FormatDateTime('  dddd" , "dd" de "mmmmm" de "yyyyy',Now);
-  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 09/01/2019]';
+
+  Image1.Picture.LoadFromFile(_PATH_IMAGEM_FUNDO+_IMAGEM_FUNDO);
+
+  Caption := Caption+' [ Versão: '+VersaoExe( Application.ExeName )+' Atualização 16/01/2019]';
+
 end;
 
 procedure TFormPrincipal.ApplicationEvents2Message(var Msg: tagMSG;
@@ -651,16 +676,6 @@ begin
 end;
 
 procedure TFormPrincipal.ata_EstoqueExecute(Sender: TObject);
-begin
-//
-end;
-
-procedure TFormPrincipal.ata_FinanceiroExecute(Sender: TObject);
-begin
-//
-end;
-
-procedure TFormPrincipal.ata_CadastroExecute(Sender: TObject);
 begin
 //
 end;
@@ -904,62 +919,69 @@ begin
   FCadOrcamentoVComiss.Free;
 end;
 
+procedure TFormPrincipal.Ven_CadContratoVComissExecute(Sender: TObject);
+begin
+  FCadContratoVComiss := TFCadContratoVComiss.Create(nil);
+  FCadContratoVComiss.pnBarraForm.Caption := Ven_CadContratoVComiss.Hint;
+  FCadContratoVComiss.ShowModal;
+  FCadContratoVComiss.Free;
+end;
+
+procedure TFormPrincipal.ata_CadastroExecute(Sender: TObject);
+begin
+  FCadClientes := TFCadClientes.Create(nil);
+  //FCadClientes.FTipoCli := pTipo;
+  FCadClientes.ShowModal;
+  FCadClientes.Free;
+end;
+
+procedure TFormPrincipal.ata_ContasPagarExecute(Sender: TObject);
+begin
+  getContaPagarReceber(cContasPagar);
+end;
+
+procedure TFormPrincipal.ata_ContasReceberExecute(Sender: TObject);
+begin
+  getContaPagarReceber(cContasReceber);
+end;
+
+procedure TFormPrincipal.ata_MovtoFinanceiroExecute(Sender: TObject);
+begin
+  FMovFinanceiro := TFMovFinanceiro.Create(nil);
+  FMovFinanceiro.PnBarraFormCaption := Fin_MovtoFinanceiro.Hint;
+  FMovFinanceiro.ShowModal;
+  FMovFinanceiro.Free;
+end;
+
+procedure TFormPrincipal.ata_OrcamentoVComissExecute(Sender: TObject);
+begin
+  FCadOrcamentoVComiss := TFCadOrcamentoVComiss.Create(nil);
+  FCadOrcamentoVComiss.pnBarraForm.Caption := Ven_CadOrcamentoVComiss.Hint;
+  FCadOrcamentoVComiss.ShowModal;
+  FCadOrcamentoVComiss.Free;
+end;
+
+procedure TFormPrincipal.ata_VendasVComissExecute(Sender: TObject);
+begin
+  FCadVendas := TFCadVendas.Create(nil);
+  FCadVendas.pnBarraForm.Caption := Ven_CadVendas.Hint;
+  FCadVendas.ShowModal;
+  FCadVendas.Free;
+end;
+
+procedure TFormPrincipal.ata_ContratoVComissExecute(Sender: TObject);
+begin
+  FCadContratoVComiss := TFCadContratoVComiss.Create(nil);
+  FCadContratoVComiss.pnBarraForm.Caption := Ven_CadContratoVComiss.Hint;
+  FCadContratoVComiss.ShowModal;
+  FCadContratoVComiss.Free;
+end;
+
+procedure TFormPrincipal.ata_ReletorioExecute(Sender: TObject);
+begin
+  Naodesenvolvido;
+end;
+
 end.
 
 
-
-
-(*
-//////TESTE////////
-procedure TfrmModulos.btnExcluirClick(Sender: TObject);
-var  login,
-     aux: string;
-     erro: EConvertError;
-begin
-  if messagedlg ('ATENÇÃO! Você está prestes a excluir o módulo '+uppercase(dm.ibtModulosMODLOGIN.AsString)+'. Deseja prosseguir?', mtWarning, [mbYes, mbNo], 0) = mrYes then
-  begin
-    // Guarda o login do módulo para depois usar no log
-    login := dm.ibtModulosMODLOGIN.AsString;
-    try
-      if not dm.itrTransa.InTransaction then
-        dm.itrTransa.StartTransaction;
-
-
-      dm.ibtModulos.delete;
-
-
-      dedLogin.setfocus;
-      // LOG
-      insereLog ('Exclusão do módulo '+login);
-      dm.itrTransa.CommitRetaining;
-    except
-      on erro : EIBInterBaseError do
-      begin
-        // Violação de Chave Estrangeira
-        aux := copy(erro.Message,0,24);
-        if (aux = 'violation of FOREIGN KEY') then
-        begin
-          MessageDlg('Não é possível excluir o módulo '+login+
-          ' pois ele está ligado a outras informações do Banco de Dados.',mtWarning,[mbOK],0);
-        end;
-        // Perda de conexão com Banco de Dados
-        aux := copy(erro.Message,0,27);
-        if (aux = 'connection lost to database') then
-        begin
-          MessageDlg('Não foi possível excluir o módulo '+login+'.'+#13+
-          'O sistema perdeu a conexão com o Banco de Dados.'+#13+
-          'Por favor, tente excluir novamente ou, em último caso, reiniciar o programa.',mtWarning,[mbOK],0);
-          CriarLogErro(datadosistema, horadosistema, 'Sistema perdeu conexão com o banco de dados');
-        end;
-      end
-      else
-      begin
-        MessageDlg('ATENÇÃO!!! Ocorreu um erro na operação.'+#13+
-        'Comunique imediatamente o suporte técnico.'+#13#13+
-        'Será gravado um arquivo de log contendo maiores informações.',mtError,[mbOK],0);
-        CriarLogErro(datadosistema, horadosistema, 'Tentou excluir o módulo '+login);
-      end;
-    end;
-  end;
-end;
-*)
