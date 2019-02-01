@@ -1,5 +1,6 @@
 inherited FCadClientes: TFCadClientes
-  Left = 233
+  Left = 299
+  Top = 166
   Width = 740
   Height = 600
   Caption = 'FCadClientes'

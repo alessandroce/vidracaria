@@ -35,6 +35,10 @@ type
     qConsultaCLI_CLIENTE: TIBStringField;
     grConsultaDBTableView1CLI_ID: TcxGridDBColumn;
     grConsultaDBTableView1CLI_CLIENTE: TcxGridDBColumn;
+    btCadastrar: TBitBtn;
+    qConsultaENDERECO: TIBStringField;
+    qConsultaFONES: TIBStringField;
+    qConsultaCPF: TIBStringField;
     procedure FormShow(Sender: TObject);
     procedure dsConsultaDataChange(Sender: TObject; Field: TField);
     procedure btCancelarClick(Sender: TObject);
@@ -43,6 +47,7 @@ type
       Sender: TcxCustomGridTableView;
       ACellViewInfo: TcxGridTableDataCellViewInfo; AButton: TMouseButton;
       AShift: TShiftState; var AHandled: Boolean);
+    procedure btCadastrarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,6 +56,11 @@ type
     FId : Integer;
     FCodigo : Integer;
     FDescricao : String;
+    FPodeCadastrar : Boolean;
+    FNome : String;
+    FEndereco : String;
+    FFones : String;
+    FCPF : String;
   end;
 
 var
@@ -69,6 +79,7 @@ begin
   qConsulta.ParamByName('TipoCli').Value := FTipoCli;
   qConsulta.Open;
   pnBarraForm.Caption := ifthen(FTipoCli=1,'Selecionar Cliente','Selecionar Fornecedor');
+  btCadastrar.Visible := FPodeCadastrar;
 end;
 
 procedure TFSelecionarCli.dsConsultaDataChange(Sender: TObject;
@@ -78,6 +89,10 @@ begin
   FId        := qConsultaCLI_ID.Value;
   FCodigo    := qConsultaCLI_ID.Value;
   FDescricao := qConsultaCLI_CLIENTE.Value;
+  FNome      := qConsultaCLI_CLIENTE.asString;
+  FEndereco  := qConsultaENDERECO.asString;
+  FFones     := qConsultaFONES.asString;
+  FCPF       := qConsultaCPF.asString;
 end;
 
 procedure TFSelecionarCli.btCancelarClick(Sender: TObject);
@@ -103,6 +118,15 @@ procedure TFSelecionarCli.grConsultaDBTableView1CellDblClick(
 begin
   inherited;
   btOK.Click;
+end;
+
+procedure TFSelecionarCli.btCadastrarClick(Sender: TObject);
+begin
+  inherited;
+  //FCadClientes := TFCadClientes.Create(nil);
+  //FCadClientes.FTipoCli := FTipoCli;
+  //FCadClientes.ShowModal;
+  //FCadClientes.Free;
 end;
 
 end.

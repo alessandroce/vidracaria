@@ -34,7 +34,7 @@ type
     qConsultaSELECAO: TIBStringField;
     cdsConsultaSELECAO: TStringField;
     grConsultaDBTableView1SELECAO: TcxGridDBColumn;
-    procedure BitBtn2Click(Sender: TObject);
+    procedure btOKClick(Sender: TObject);
   private
     function Selecionado: Boolean;
     { Private declarations }
@@ -70,8 +70,7 @@ begin
     Aviso('Registro não selecionado.');
 end;
 
-procedure TFSelecionarTipoCliente.BitBtn2Click(Sender: TObject);
-var iCount : Integer;
+procedure TFSelecionarTipoCliente.btOKClick(Sender: TObject);
 begin
   if Selecionado then
     inherited;

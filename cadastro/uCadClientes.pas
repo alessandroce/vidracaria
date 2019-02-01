@@ -231,7 +231,7 @@ begin
       if FSelecionarTipoCliente.cdsConsultaSELECAO.AsString='S' then
       begin
         if not(cdsTipoCliente.State=dsInsert) then
-          cdsTipoCliente.Insert;
+          cdsTipoCliente.Append;
         cdsTipoClienteCTP_ID.asInteger       := FSelecionarTipoCliente.cdsConsultaID.Value;
         cdsTipoClienteCTP_DESCRICAO.asString := FSelecionarTipoCliente.cdsConsultaDESCRICAO.Value;
         cdsTipoCliente.Post;
